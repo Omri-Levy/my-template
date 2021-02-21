@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es6",
+    "module": "esnext",
+    "rootDir": "src",
+    "jsx": "react-jsx",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "exclude": ["cypress"],
+  "include": [
+    "src"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@my-template/shared",
+  "version": "1.0.0",
+  "description": "code shared between packages",
+  "repository": "git@github.com:Omri-Levy/my-template.git",
+  "keywords": [],
+  "author": "Omri-Levy <omri.levy0197@gmail.com>",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "build": "rd /s /q dist && tsc",
+    "start": "nodemon",
+    "format": "eslint --fix src",
+    "test": "jest test --verbose",
+    "ci": "cross-env CI=true jest test --findRelatedTests --verbose",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "babel-loader": "8.1.0"
+  },
+  "dependencies": {}
+}
