@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["node"],
     "strictPropertyInitialization": false,
     "sourceMap": true,
     "declaration": true,

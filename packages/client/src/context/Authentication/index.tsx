@@ -1,10 +1,10 @@
 import AuthenticationContext from './AuthenticationContext';
 import { FunctionComponent, useEffect, useState } from 'react';
 import fetchCurrentUser from '../../utils/fetchCurrentUser';
-import { User } from '../../utils/types';
+import { IterableUser } from '@my-template/shared';
 
 const AuthenticationProvider: FunctionComponent = ({children}) => {
-  const [currentUser, setCurrentUser] = useState<User>();
+  const [currentUser, setCurrentUser] = useState<IterableUser>();
   const authenticate = async () => setCurrentUser(await fetchCurrentUser());
 
   useEffect(() => {

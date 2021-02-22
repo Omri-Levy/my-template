@@ -1,7 +1,7 @@
-import { User } from '../../utils/types';
+import { IterableUser } from '@my-template/shared';
 
 interface AuthContextType {
- currentUser: User | undefined,
+ currentUser: IterableUser | undefined,
  authenticate: () => Promise<void>;
 }
 

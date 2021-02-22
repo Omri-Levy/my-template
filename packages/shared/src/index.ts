@@ -1,5 +1,5 @@
 import { isFullName, validPassword } from './utils/regex';
-import { Data, Endpoint, ObjectKey, RequestMethod } from './utils/types';
+import { Data, Endpoint, IterableUser, ObjectKey, RequestMethod, User } from './utils/types';
 import {
   emailAlreadyInUseMessage,
   invalidEmailMessage,
@@ -33,4 +33,4 @@ export {
   fetch,
 };
 
-export type { ObjectKey, Data, Endpoint, RequestMethod };
+export type { ObjectKey, Data, Endpoint, RequestMethod, User, IterableUser };

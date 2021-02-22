@@ -1,5 +1,5 @@
-import { User } from '../types';
+import { IterableUser } from '@my-template/shared';
 
-type FetchCurrentUser = () => Promise<User>;
+type FetchCurrentUser = () => Promise<IterableUser>;
 
 export {FetchCurrentUser};
