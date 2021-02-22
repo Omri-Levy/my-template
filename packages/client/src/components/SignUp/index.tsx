@@ -13,7 +13,7 @@ import useAuthentication from '../../hooks/useAuthentication';
 
 const SignUp: FunctionComponent = () => {
 	const schema = useMemo(() => signUpSchema, []);
-	const { errors, handleSubmit, register, formState, getValues } = useForm({
+	const { errors, setError, handleSubmit, register, formState, getValues } = useForm({
 		mode: `onChange`,
 		resolver: yupResolver(schema)
 	});
@@ -21,16 +21,19 @@ const SignUp: FunctionComponent = () => {
 	const {gRecaptchaResponse, setGRecaptchaResponse} = useGRecaptchaResponse();
 	const { disableSubmit } = useDisableSubmit(errors, getValues,
 		gRecaptchaResponse);
-	const { onSubmit } = useAuthentication(`signUp`);
+	const { onSubmit } = useAuthentication(`signUp`, setError);
 
-	if (isSubmitSuccessful) {
+	if (isSubmitSuccessful && !errors.responseError) {
 		return <Redirect to={{pathname: `/signIn`}} />;
 	}
 
 	return (
 		<Page title={`Sign Up`}>
 			<form onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}>
-				<SignUpFormFields errors={errors} register={register}/>
+				<SignUpFormFields
+					errors={errors}
+					register={register}
+				/>
 				<Recaptcha setGRecaptchaResponse={setGRecaptchaResponse} />
 				<Button
 					type={`submit`}

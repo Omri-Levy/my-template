@@ -8,7 +8,7 @@ import {
 import { Props } from './types';
 import { FaAt, FaLock } from 'react-icons/fa';
 
-const SignInFormFields: FunctionComponent<Props> = ({errors, register}) => (
+const SignInFormFields: FunctionComponent<Props> = ({errors, register }) => (
 		<>
 			<FormControl
 				isInvalid={!!errors.email}
@@ -56,6 +56,14 @@ const SignInFormFields: FunctionComponent<Props> = ({errors, register}) => (
 				</InputGroup>
 				<FormErrorMessage>
 					{errors?.password?.message}
+				</FormErrorMessage>
+			</FormControl>
+			<FormControl
+				isInvalid={!!errors.responseError}
+				mb={10}
+			>
+				<FormErrorMessage>
+					{errors?.responseError?.message}
 				</FormErrorMessage>
 			</FormControl>
 		</>

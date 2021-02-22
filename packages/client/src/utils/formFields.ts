@@ -23,6 +23,9 @@ const formFields = [
     type: `password`,
     maxLength: 128,
   },
+  {
+    name: `responseError`
+  }
 ];
 
 export default formFields;

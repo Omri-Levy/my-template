@@ -1,7 +1,7 @@
-import { FieldErrors, FieldValues, useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 
 interface Props {
-  errors: FieldErrors<FieldValues>;
+  errors: FieldErrors;
   register: useForm.register;
 }
 

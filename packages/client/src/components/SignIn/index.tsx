@@ -13,23 +13,28 @@ import useAuthentication from '../../hooks/useAuthentication';
 
 const SignIn: FunctionComponent = () => {
 	const schema = useMemo(() => validationSchema, []);
-	const { errors, handleSubmit, register, formState, getValues } = useForm({
+	const { errors, setError, handleSubmit, register, formState, getValues
+	} = useForm({
 		mode: `onChange`,
 		resolver: yupResolver(schema)
 	});
 	const {isSubmitting, isSubmitSuccessful} = formState;
 	const {gRecaptchaResponse, setGRecaptchaResponse} = useGRecaptchaResponse();
 	const { disableSubmit } = useDisableSubmit(errors, getValues, gRecaptchaResponse);
-	const { onSubmit } = useAuthentication(`signIn`);
+	const { onSubmit } = useAuthentication(`signIn`, setError);
+	const shouldRedirect = isSubmitSuccessful && !errors.responseError;
 
-	if (isSubmitSuccessful) {
+	if (shouldRedirect) {
 		return <Redirect to={{pathname: `/`}} />;
 	}
 
 	return (
 		<Page title={`Sign In`}>
 			<form onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}>
-				<SignInFormFields errors={errors} register={register}/>
+				<SignInFormFields
+					errors={errors}
+					register={register}
+				/>
 				<Recaptcha setGRecaptchaResponse={setGRecaptchaResponse} />
 				<Button
 					type={`submit`}

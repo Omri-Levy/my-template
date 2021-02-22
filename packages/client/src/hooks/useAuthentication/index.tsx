@@ -9,7 +9,8 @@ import AuthenticationContext
 * chooses the right types and endpoint behind the scenes and invokes the
 *  authenticate function.
 * */
-const useAuthentication: HookReturns = (endpoint) => {
+const useAuthentication: HookReturns = (endpoint, setError
+) => {
   const { authenticate } = useContext(AuthenticationContext);
 
   const fetchAndAuthenticate: FetchAndAuthenticate = async (data) => {
@@ -23,7 +24,15 @@ const useAuthentication: HookReturns = (endpoint) => {
     await authenticate();
   };
   const onSubmit: OnSubmit = (gRecaptchaResponse) => async (data) => {
+    try {
       await fetchAndAuthenticate({ ...data, gRecaptchaResponse });
+    } catch (err) {
+      console.error(err);
+
+      setError && setError(`responseError`, {
+        message: err.response.data.message
+      });
+    }
     };
   const onClick: OnClick = async () => {
     await fetchAndAuthenticate();

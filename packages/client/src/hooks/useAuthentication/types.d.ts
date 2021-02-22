@@ -1,7 +1,8 @@
-import { GRecaptchaResponse } from '../../utils/types';
+import { GRecaptchaResponse, SetState } from '../../utils/types';
 import { Data as DataType } from '@my-template/shared';
 import { SignUpFormFields } from '../../components/SignUp/types';
 import { SignInFormFields } from '../../components/SignIn/types';
+import { useForm } from 'react-hook-form';
 
 type Data = SignUpFormFields | SignInFormFields;
 interface FetchAndAuthenticateData extends DataType {
@@ -13,7 +14,7 @@ type OnSubmit = (gRecaptchaResponse: GRecaptchaResponse) =>
     (data: Data) =>  Promise<void>;
 type OnClick = () =>  Promise<void>;
 type Endpoint = `signUp` | `signIn` | `signOut`;
-type HookReturns = (endpoint: Endpoint) => {
+type HookReturns = (endpoint: Endpoint, setError?: useForm.setError) => {
   onSubmit: OnSubmit,
   onClick: OnClick,
 };

@@ -13,7 +13,7 @@ import { Props } from './types';
 import { FaUser, FaLock, FaAt } from 'react-icons/fa';
 import { invalidPasswordPolicyMessage } from '@my-template/shared';
 
-const SignUpFormFields: FunctionComponent<Props> = ({errors, register}) => (
+const SignUpFormFields: FunctionComponent<Props> = ({errors, register }) => (
 		<>
 			<FormControl
 				isInvalid={!!errors.fullName}
@@ -115,6 +115,14 @@ const SignUpFormFields: FunctionComponent<Props> = ({errors, register}) => (
 				</InputGroup>
 				<FormErrorMessage>
 					{errors?.passwordConfirmation?.message}
+				</FormErrorMessage>
+			</FormControl>
+			<FormControl
+				isInvalid={!!errors.responseError}
+				mb={10}
+			>
+				<FormErrorMessage>
+					{errors?.responseError?.message}
 				</FormErrorMessage>
 			</FormControl>
 		</>
