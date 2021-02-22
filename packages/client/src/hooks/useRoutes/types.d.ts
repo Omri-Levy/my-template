@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 interface Route {
   to: string | null;
   text: string;
-  component: FunctionComponent;
+  Component: FunctionComponent;
 }
 type Routes = Route[];
 

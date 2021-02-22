@@ -1,22 +1,22 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {v4} from 'uuid';
 import useRoutes from '../../hooks/useRoutes';
 
-const Routes: React.FunctionComponent = () => {
+const Routes: FunctionComponent = () => {
 	const routes = useRoutes();
 
 	return (
 		<Switch>
 			{routes.map((route) => {
-				const Component = route.component;
+				const { Component, to } = route;
 
-				if (!route.component || !route.to || route.to === `/signOut`) {
+				if (!Component || !to || to === `/signOut`) {
 					return null;
 				}
 
 				return (
-					<Route key={v4()} exact path={route.to}>
+					<Route key={v4()} exact path={to}>
 						<Component />
 					</Route>
 				);

@@ -1,10 +1,10 @@
 import { Flex, List, Stack } from '@chakra-ui/react';
-import React from 'react';
+import { FunctionComponent } from 'react';
 import NavLink from './NavLink';
 import useRoutes from '../../../hooks/useRoutes';
 import useAuthentication from '../../../hooks/useAuthentication';
 
-const Nav: React.FunctionComponent = () => {
+const Nav: FunctionComponent = () => {
 	const routes = useRoutes();
 	const { onClick } = useAuthentication(`signOut`);
 

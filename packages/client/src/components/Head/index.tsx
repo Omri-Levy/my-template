@@ -1,7 +1,7 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { FunctionComponent } from 'react';
 
-const Head: React.FunctionComponent = () => {
+const Head: FunctionComponent = () => {
 	return (
 		<Helmet>
 			<title>My Template</title>

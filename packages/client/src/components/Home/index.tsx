@@ -1,7 +1,7 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import Page from '../Page';
 
-const Home: React.FunctionComponent = () => {
+const Home: FunctionComponent = () => {
 	return (
 		<Page title={`Home`}>
 

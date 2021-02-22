@@ -13,22 +13,22 @@ const useRoutes: HookReturns = () => {
     {
       to: `/`,
       text: `Home`,
-      component: Home
+      Component: Home
     },
     {
       to: currentUser ? `/profile` : null,
       text: `Profile`,
-      component: Profile
+      Component: Profile
     },
     {
       to: currentUser ? `/signOut` : `/signIn`,
       text: currentUser ? `Sign Out` : `Sign In`,
-      component: SignIn
+      Component: SignIn
     },
     {
       to: currentUser ? null : `/signUp`,
       text: `Sign Up`,
-      component: SignUp
+      Component: SignUp
     },
   ], [currentUser]);
 };

@@ -1,11 +1,12 @@
-import React, { useContext, useMemo } from 'react';
+import { useContext, useMemo, FunctionComponent } from 'react';
 import Page from '../Page';
-import { List, ListIcon, ListItem } from '@chakra-ui/react';
-import { v4 } from 'uuid';
+import { List } from '@chakra-ui/react';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
 import currentUserDetails from './currentUserDetails';
+import CurrentUserDetail from './CurrentUserDetail';
+import { v4 } from 'uuid';
 
-const Profile: React.FunctionComponent = () => {
+const Profile: FunctionComponent = () => {
 	const { currentUser } = useContext(AuthenticationContext);
 	const memoizedDetails = useMemo(() => currentUserDetails, []);
 
@@ -13,16 +14,16 @@ const Profile: React.FunctionComponent = () => {
 		<Page title={`Profile`}>
 			<List variant={`filled`}>
 				{memoizedDetails.map((memoizedDetail) => {
-					const {icon, text, key} = memoizedDetail;
+					const {objectKey, icon, text} = memoizedDetail;
 
 					return (
-						<ListItem
+						<CurrentUserDetail
 							key={v4()}
-							textTransform={key === `role` ? `capitalize` : undefined}
-						>
-							<ListIcon as={icon} color={`gray.300`}/>
-							{text}: {currentUser && currentUser[key]}
-						</ListItem>
+							objectKey={objectKey}
+							icon={icon}
+							text={text}
+							currentUser={currentUser!}
+						/>
 					);
 
 				})}

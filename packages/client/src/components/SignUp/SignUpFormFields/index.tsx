@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import {
 	Icon,
 	FormControl,
@@ -13,7 +13,7 @@ import { Props } from './types';
 import { FaUser, FaLock, FaAt } from 'react-icons/fa';
 import { invalidPasswordPolicyMessage } from '@my-template/shared';
 
-const SignUpFormFields: React.FunctionComponent<Props> = ({errors, register}) => (
+const SignUpFormFields: FunctionComponent<Props> = ({errors, register}) => (
 		<>
 			<FormControl
 				isInvalid={!!errors.fullName}

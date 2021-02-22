@@ -1,8 +1,8 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { Spinner } from '@chakra-ui/react';
 import { useIsFetching } from 'react-query';
 
-const Loading: React.FunctionComponent = () => {
+const Loading: FunctionComponent = () => {
   const isFetching = useIsFetching();
 
   return (

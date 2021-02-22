@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 interface CurrentUserDetail {
-  key: string;
+  objectKey: string;
   text: string;
   icon: FunctionComponent;
 }

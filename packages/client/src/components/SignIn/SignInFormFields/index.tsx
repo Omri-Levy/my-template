@@ -1,4 +1,4 @@
-import React from 'react';
+import { FunctionComponent } from 'react';
 import {
 	FormControl,
 	FormErrorMessage,
@@ -8,7 +8,7 @@ import {
 import { Props } from './types';
 import { FaAt, FaLock } from 'react-icons/fa';
 
-const SignInFormFields: React.FunctionComponent<Props> = ({errors, register}) => (
+const SignInFormFields: FunctionComponent<Props> = ({errors, register}) => (
 		<>
 			<FormControl
 				isInvalid={!!errors.email}

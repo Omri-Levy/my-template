@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import { useRef, FunctionComponent } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { Props } from './types';
 import { GRecaptchaResponse } from '../../utils/types';
 
-const Recaptcha: React.FunctionComponent<Props> = ({setGRecaptchaResponse,
+const Recaptcha: FunctionComponent<Props> = ({setGRecaptchaResponse,
                                                      ...props}) => {
   const {REACT_APP_RECAPTCHA_SITE_KEY} = process.env;
   const recaptchaRef = useRef();

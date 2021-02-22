@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import React, { useMemo } from 'react';
+import { useMemo, FunctionComponent } from 'react';
 import Page from '../Page';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +11,7 @@ import Recaptcha from '../Recaptcha';
 import useGRecaptchaResponse from '../../hooks/useGRecaptchaResponse';
 import useAuthentication from '../../hooks/useAuthentication';
 
-const SignIn: React.FunctionComponent = () => {
+const SignIn: FunctionComponent = () => {
 	const schema = useMemo(() => validationSchema, []);
 	const { errors, handleSubmit, register, formState, getValues } = useForm({
 		mode: `onChange`,

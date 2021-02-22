@@ -3,22 +3,22 @@ import { CurrentUserDetails } from './types';
 
 const currentUserDetails: CurrentUserDetails = [
   {
-    key: `id`,
+    objectKey: `id`,
     text: `ID`,
     icon: FaIdCard,
   },
   {
-    key: `fullName`,
+    objectKey: `fullName`,
     text: `Full Name`,
     icon: FaSignature,
   },
   {
-    key: `email`,
+    objectKey: `email`,
     text: `Email`,
     icon: FaAt,
   },
   {
-    key: `role`,
+    objectKey: `role`,
     text: `Role`,
     icon: FaUserTag,
   },

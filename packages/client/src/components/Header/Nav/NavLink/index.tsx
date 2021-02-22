@@ -1,9 +1,9 @@
 import { Link, ListItem, Text } from '@chakra-ui/react';
 import {NavLink as ReactRouterNavLink} from 'react-router-dom';
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { Props } from './types';
 
-const NavLink: React.FunctionComponent<Props> = ({to, text, onClick}) => {
+const NavLink: FunctionComponent<Props> = ({to, text, onClick}) => {
 	const expandPseudoAfterWidth = {
 		transition: `width 240ms ease-in-out`,
 		width: `100%`,

@@ -1,5 +1,5 @@
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
-import React from 'react';
+import { FunctionComponent } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './theme';
 import { HelmetProvider } from 'react-helmet-async';
@@ -7,7 +7,7 @@ import { QueryClientProvider } from 'react-query';
 import queryClient from './queryClient';
 import AuthenticationProvider from '../../context/Authentication';
 
-const Providers: React.FunctionComponent = ({children}) =>  (
+const Providers: FunctionComponent = ({children}) =>  (
     <ChakraProvider theme={theme}>
       <CSSReset/>
       <Router>
