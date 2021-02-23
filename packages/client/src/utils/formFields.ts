@@ -1,9 +1,15 @@
 const formFields = [
   {
-    name: `fullName`,
-    text: `Full Name`,
-    type: `fullName`,
-    maxLength: 70,
+    name: `firstName`,
+    text: `First Name`,
+    type: `fname`,
+    maxLength: 35,
+  },
+  {
+    name: `lastName`,
+    text: `Last Name`,
+    type: `lname`,
+    maxLength: 35,
   },
   {
     name: `email`,

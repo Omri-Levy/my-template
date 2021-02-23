@@ -1,8 +1,8 @@
-const invalidFullNameMessage =
-  `Full name must begin with a minimum of 2 characters` +
-  `, a maximum of 34 characters, followed by a single space,` +
-  ` and end with a minimum of 2 characters, ` +
-  `and a maximum of 34 characters.`;
+const invalidNameMessage =
+  `name must include a minimum of 2 characters and` +
+  `, a maximum of 35 alphabetic characters and can include spaces and dashes.`;
+const invalidFirstNameMessage = `First ${invalidNameMessage}`;
+const invalidLastNameMessage = `Last ${invalidNameMessage}`;
 const invalidEmailMessage =
   `Email must include '@', a minimum of ` +
   `1 characters before '@', a minimum of 1 characters after '@,` +
@@ -20,9 +20,11 @@ const invalidIsRobotMessage =
   `Please verify you are not a robot and ` + `try again.`;
 const wrongCredentialsMessage = `Wrong credentials - please try again.`;
 const emailAlreadyInUseMessage = `Email already in use.`;
+const serverErrorMessage = `Something went wrong - please try again.`;
 
 export {
-  invalidFullNameMessage,
+  invalidFirstNameMessage,
+  invalidLastNameMessage,
   invalidEmailMessage,
   invalidPasswordPolicyMessage,
   passwordConfirmationIsRequiredMessage,
@@ -31,4 +33,5 @@ export {
   invalidIsRobotMessage,
   wrongCredentialsMessage,
   emailAlreadyInUseMessage,
+  serverErrorMessage,
 };

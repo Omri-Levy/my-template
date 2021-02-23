@@ -7,7 +7,8 @@ import db from '../../../db';
 describe(`getUsers`, () => {
   it(`creates a single new user`, async () => {
     const data = {
-      fullName: `test test`,
+      firstName: `test`,
+      lastName: `test`,
       email: `test@test.com`,
       password: `Createtest@1`,
     };
@@ -25,7 +26,8 @@ describe(`getUsers`, () => {
     const isSamePassword = await verify(newUser?.password, data.password);
 
     expect(newUser).toHaveProperty(`id`);
-    expect(newUser).toHaveProperty(`fullName`, data.fullName);
+    expect(newUser).toHaveProperty(`firstName`, data.firstName);
+    expect(newUser).toHaveProperty(`lastName`, data.lastName);
     expect(newUser).toHaveProperty(`email`, data.email);
     expect(isSamePassword).toBe(true);
   });

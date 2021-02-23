@@ -6,7 +6,13 @@ import User from '../../../models/User.model';
 
 const signUp = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { fullName, email, password, role } = req.body;
+    const {
+      fname: firstName,
+      lname: lastName,
+      email,
+      password,
+      role,
+    } = req.body;
     const hashedPassword = await hash(password);
 
     await signUpSchema.isValid(req.body);
@@ -21,7 +27,8 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
     }
 
     const newUser = new User({
-      fullName,
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
       role: role || `user`,

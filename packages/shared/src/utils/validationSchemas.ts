@@ -1,15 +1,27 @@
 import * as yup from 'yup';
-import { isFullName, validPassword } from './regex';
+import { isName, validPassword } from './regex';
 import {
   invalidEmailMessage,
-  invalidFullNameMessage,
+  invalidFirstNameMessage,
+  invalidLastNameMessage,
   invalidPasswordConfirmationMessage,
   invalidPasswordMessage,
   passwordConfirmationIsRequiredMessage,
 } from './validationMessages';
 
 const signUpSchema = yup.object().shape({
-  fullName: yup.string().matches(isFullName, invalidFullNameMessage).required(),
+  firstName: yup
+    .string()
+    .matches(isName, invalidFirstNameMessage)
+    .min(2)
+    .max(35)
+    .required(),
+  lastName: yup
+    .string()
+    .matches(isName, invalidLastNameMessage)
+    .min(2)
+    .max(35)
+    .required(),
   email: yup
     .string()
     .email(invalidEmailMessage)

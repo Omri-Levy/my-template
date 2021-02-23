@@ -1,4 +1,4 @@
-import { isFullName, validPassword } from './utils/regex';
+import { isName, validPassword } from './utils/regex';
 import {
   Data,
   Endpoint,
@@ -10,12 +10,14 @@ import {
 import {
   emailAlreadyInUseMessage,
   invalidEmailMessage,
-  invalidFullNameMessage,
+  invalidFirstNameMessage,
   invalidIsRobotMessage,
+  invalidLastNameMessage,
   invalidPasswordConfirmationMessage,
   invalidPasswordMessage,
   invalidPasswordPolicyMessage,
   passwordConfirmationIsRequiredMessage,
+  serverErrorMessage,
   wrongCredentialsMessage,
 } from './utils/validationMessages';
 import { signInSchema, signUpSchema } from './utils/validationSchemas';
@@ -24,9 +26,10 @@ import { apiUrl } from './utils/constants';
 
 export {
   apiUrl,
-  isFullName,
+  isName,
   validPassword,
-  invalidFullNameMessage,
+  invalidFirstNameMessage,
+  invalidLastNameMessage,
   invalidEmailMessage,
   invalidPasswordPolicyMessage,
   passwordConfirmationIsRequiredMessage,
@@ -35,6 +38,7 @@ export {
   invalidIsRobotMessage,
   wrongCredentialsMessage,
   emailAlreadyInUseMessage,
+  serverErrorMessage,
   signUpSchema,
   signInSchema,
   fetch,

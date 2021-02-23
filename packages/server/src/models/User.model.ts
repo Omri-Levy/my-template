@@ -1,6 +1,6 @@
 import { UUIDV4 } from 'sequelize';
 import { Table, Column, Model, DataType } from 'sequelize-typescript';
-import { isFullName } from '@my-template/shared';
+import { isName } from '@my-template/shared';
 
 const { STRING, UUID, CITEXT, ENUM } = DataType;
 
@@ -28,10 +28,19 @@ class User extends Model {
     type: STRING,
     allowNull: false,
     validate: {
-      is: isFullName,
+      is: isName,
     },
   })
-  fullName: string;
+  firstName: string;
+
+  @Column({
+    type: STRING,
+    allowNull: false,
+    validate: {
+      is: isName,
+    },
+  })
+  lastName: string;
 
   @Column({
     type: STRING,

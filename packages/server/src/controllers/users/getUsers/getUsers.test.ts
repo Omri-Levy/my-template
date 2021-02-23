@@ -6,7 +6,8 @@ import User from '../../../models/User.model';
 describe(`getUsers`, () => {
   it(`returns an array of all users`, async () => {
     const data = {
-      fullName: `test test`,
+      firstName: `test`,
+      lastName: `test`,
       email: ``,
       password: `Createtest@1`,
     };
@@ -15,7 +16,8 @@ describe(`getUsers`, () => {
       data.email = `test@test${i}.com`;
       // eslint-disable-next-line no-await-in-loop
       await User.create({
-        fullName: data.fullName,
+        firstName: data.firstName,
+        lastName: data.lastName,
         email: data.email,
         password: `Create!@`,
       });

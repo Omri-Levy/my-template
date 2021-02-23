@@ -9,7 +9,11 @@ const AuthenticationProvider: FunctionComponent = ({children}) => {
 
   useEffect(() => {
     (async () => {
-      await authenticate();
+      try {
+        await authenticate();
+      } catch(err) {
+        console.error(err);
+      }
     })();
   }, []);
 
