@@ -1,7 +1,7 @@
 import AuthenticationContext from './AuthenticationContext';
 import React, {
   FunctionComponent,
-  Suspense,
+  Suspense, useContext,
   useEffect,
   useMemo,
   useState
@@ -12,20 +12,30 @@ import { useLocation } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import authenticatedRoutes from './authenticatedRoutes';
 import unauthenticatedRoutes from './unauthenticatedRoutes';
+import LoadingContext from '../Loading/LoadingContext';
 
 const AuthenticationProvider: FunctionComponent = ({children}) => {
   const [currentUser, setCurrentUser] = useState<IterableUser>();
   const authenticate = async () => setCurrentUser(await fetchCurrentUser());
   const currentPage = useLocation().pathname;
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const protectedRoutes = useMemo(() => authenticatedRoutes, []);
   const unprotectedRoutes = useMemo(() => unauthenticatedRoutes, []);
+
 
   useEffect(() => {
     (async () => {
       try {
-        let redirectUrl;
         await authenticate();
+      } catch(err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+      try {
+        let redirectUrl;
 
         if (!currentUser) {
           redirectUrl = `/signIn`
@@ -56,18 +66,18 @@ const AuthenticationProvider: FunctionComponent = ({children}) => {
       }
 
       setIsLoading(false);
-    })();
-  }, [currentPage, currentUser, protectedRoutes, unprotectedRoutes]);
+  }, [currentPage, currentUser, protectedRoutes, setIsLoading,
+    unprotectedRoutes]);
 
   if (isLoading) {
     return (
-      <Loading isLoading={isLoading} />
+      <Loading/>
       );
   }
 
   return (
     <AuthenticationContext.Provider value={{currentUser, authenticate}}>
-      <Suspense fallback={<Loading isLoading={isLoading} />}>
+      <Suspense fallback={<Loading/>}>
     {children}
       </Suspense>
   </AuthenticationContext.Provider>

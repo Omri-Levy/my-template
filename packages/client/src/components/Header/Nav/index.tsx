@@ -6,7 +6,7 @@ import useAuthentication from '../../../hooks/useAuthentication';
 
 const Nav: FunctionComponent = () => {
 	const routes = useRoutes();
-	const { onClick } = useAuthentication(`signOut`);
+	const { signOut } = useAuthentication(`signOut`);
 
 	return (
 		<Flex as={`nav`}>
@@ -22,7 +22,7 @@ const Nav: FunctionComponent = () => {
 							to={route.to}
 							text={route.text}
 							onClick={route.to === `/signOut`
-								? onClick
+								? signOut
 								: undefined
 							}
 						/>

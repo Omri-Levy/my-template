@@ -6,6 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClientProvider } from 'react-query';
 import queryClient from './queryClient';
 import AuthenticationProvider from '../../context/Authentication';
+import LoadingProvider from '../../context/Loading';
 
 const Providers: FunctionComponent = ({children}) =>  (
     <ChakraProvider theme={theme}>
@@ -13,9 +14,11 @@ const Providers: FunctionComponent = ({children}) =>  (
       <Router>
         <HelmetProvider>
             <QueryClientProvider client={queryClient}>
+              <LoadingProvider>
               <AuthenticationProvider>
                 {children}
               </AuthenticationProvider>
+              </LoadingProvider>
             </QueryClientProvider>
         </HelmetProvider>
       </Router>
