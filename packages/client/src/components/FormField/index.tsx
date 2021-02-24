@@ -19,15 +19,17 @@ const FormField: FunctionComponent<Props> = ({
   register,
   maxLength,
   helperText,
+  onChange,
   ...props
                                       }) => {
 
   return (
     <FormControl
+      id={name}
       isInvalid={!!errors[name]}
       {...props}
     >
-      <FormLabel htmlFor={name}>
+      <FormLabel>
         {labelTitle}
       </FormLabel>
       <InputGroup>
@@ -36,6 +38,7 @@ const FormField: FunctionComponent<Props> = ({
           children={<Icon as={icon} color={color} />}
         />
         <Input
+          onChange={onChange ?? onChange}
           type={type}
           name={name}
           ref={register}

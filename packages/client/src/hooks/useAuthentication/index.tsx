@@ -19,6 +19,7 @@ const useAuthentication: HookReturns = (endpoint, setError
   const { authenticate } = useContext(AuthenticationContext);
 
   const fetchAndAuthenticate: FetchAndAuthenticate = async (data) => {
+
     await fetch(
       `POST`,
       undefined,
@@ -32,20 +33,31 @@ const useAuthentication: HookReturns = (endpoint, setError
     try {
       await fetchAndAuthenticate({ ...data, gRecaptchaResponse });
     } catch (err) {
-      const errorMessage = err.response.data.message;
+      let errorMessage = err.response?.data.message;
       const isExpectedErrorMessage = errorMessage === wrongCredentialsMessage ||
         errorMessage === emailAlreadyInUseMessage ;
+
+      if (!isExpectedErrorMessage) {
+        errorMessage = serverErrorMessage;
+      }
 
       console.error(err);
 
       setError && setError(`responseError`, {
-        message: errorMessage === isExpectedErrorMessage ? errorMessage :
-          serverErrorMessage
+        message: errorMessage,
       });
     }
     };
   const onClick: OnClick = async () => {
-    await fetchAndAuthenticate();
+    try {
+      await fetchAndAuthenticate();
+    } catch (err) {
+      console.error(err);
+    }
+
+    if (window.location.href) {
+      window.location.href = `signIn`
+    }
   };
 
   return {

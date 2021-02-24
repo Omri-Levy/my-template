@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
 import { Props } from './types';
-import { FaLock, FaAt, FaUser } from 'react-icons/fa';
+import { FaLock, FaAt, FaSignature } from 'react-icons/fa';
 import FormField from '../../FormField';
 import FormResponseError from '../../FormResponseError';
 import { invalidPasswordPolicyMessage } from '@my-template/shared';
 import generateHelperText from './generateHelperText';
+import clearResponseError from './clearResponseError';
 
-const FormFields: FunctionComponent<Props> = ({errors, register, formType }
+const FormFields: FunctionComponent<Props> = ({errors, clearErrors, register,
+																								formType }
 ) => {
 	const isSignUp = formType === `signUp`;
 	const helperText = generateHelperText(isSignUp);
@@ -23,7 +25,7 @@ const FormFields: FunctionComponent<Props> = ({errors, register, formType }
 					register={register}
 					type={`text`}
 					maxLength={35}
-					icon={FaUser}
+					icon={FaSignature}
 					color={`gray.300`}
 					helperText={helperText(`Example: John`)}
 				/>
@@ -35,13 +37,14 @@ const FormFields: FunctionComponent<Props> = ({errors, register, formType }
 					register={register}
 					type={`text`}
 					maxLength={35}
-					icon={FaUser}
+					icon={FaSignature}
 					color={`gray.300`}
 					helperText={helperText(`Example: Doe`)}
 				/>
 			</>
 			}
 			<FormField
+				onChange={clearResponseError(clearErrors)}
 				isRequired
 				labelTitle={`Email:`}
 				name={`email`}
@@ -54,13 +57,14 @@ const FormFields: FunctionComponent<Props> = ({errors, register, formType }
 				helperText={helperText(`Example: example@address.com`)}
 			/>
 			<FormField
+				onChange={clearResponseError(clearErrors)}
 				isRequired
 				labelTitle={`Password:`}
 				name={`password`}
 				errors={errors}
 				register={register}
 				type={`password`}
-				maxLength={70}
+				maxLength={128}
 				icon={FaLock}
 				color={`gray.300`}
 				helperText={helperText(invalidPasswordPolicyMessage)}
@@ -73,7 +77,7 @@ const FormFields: FunctionComponent<Props> = ({errors, register, formType }
 				errors={errors}
 				register={register}
 				type={`password`}
-				maxLength={70}
+				maxLength={128}
 				icon={FaLock}
 				color={`gray.300`}
 				mb={10}

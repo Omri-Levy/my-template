@@ -1,0 +1,28 @@
+0 silly argv {
+0 silly argv   _: [ 'run' ],
+0 silly argv   parallel: true,
+0 silly argv   stream: true,
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': 'node_modules\\lerna\\cli.js',
+0 silly argv   script: 'start'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath C:\my-template
+3 info versioning independent
+4 info Executing command in 3 packages: "yarn run start"
+5 silly npmRunScript.stream [ 'start', [], '@my-template/client' ]
+6 silly getExecOpts C:\my-template\packages\client undefined
+7 silly npmRunScript.stream [ 'start', [], '@my-template/server' ]
+8 silly getExecOpts C:\my-template\packages\server undefined
+9 silly npmRunScript.stream [ 'start', [], '@my-template/shared' ]
+10 silly getExecOpts C:\my-template\packages\shared undefined
+11 error MaxBufferError: stdout maxBuffer exceeded
+11 error     at PassThrough.<anonymous> (C:\my-template\node_modules\get-stream\index.js:41:19)
+11 error     at PassThrough.emit (node:events:388:22)
+11 error     at addChunk (node:internal/streams/readable:305:12)
+11 error     at readableAddChunk (node:internal/streams/readable:276:11)
+11 error     at PassThrough.Readable.push (node:internal/streams/readable:219:10)
+11 error     at node:internal/streams/transform:192:12
+11 error     at PassThrough._transform (node:internal/streams/passthrough:46:3)
+11 error     at PassThrough.Transform._write (node:internal/streams/transform:184:23)
+11 error     at writeOrBuffer (node:internal/streams/writable:388:12)

@@ -1,10 +1,10 @@
-import SignUp from "../../components/SignUp";
-import SignIn from '../../components/SignIn';
-import Home from '../../components/Home';
-import Profile from '../../components/Profile';
-import { useMemo, useContext } from 'react';
+import { useMemo, useContext, lazy } from 'react';
 import { HookReturns } from './types';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
+const SignIn = lazy(() => import('../../components/SignIn'));
+const Home = lazy(() => import('../../components/Home'));
+const Profile = lazy(() => import('../../components/Profile'));
+const SignUp = lazy(() => import("../../components/SignUp"));
 
 const useRoutes: HookReturns = () => {
   const { currentUser } = useContext(AuthenticationContext);

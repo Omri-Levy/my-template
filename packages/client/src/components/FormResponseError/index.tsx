@@ -12,6 +12,7 @@ const FormResponseError: FunctionComponent<Props> = ({
 
   return (
     <FormControl
+      on
       isInvalid={!!errors.responseError}
       isRequired
       {...props}

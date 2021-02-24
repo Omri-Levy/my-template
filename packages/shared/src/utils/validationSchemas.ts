@@ -10,13 +10,13 @@ import {
 } from './validationMessages';
 
 const signUpSchema = yup.object().shape({
-  firstName: yup
+  fname: yup
     .string()
     .matches(isName, invalidFirstNameMessage)
     .min(2)
     .max(35)
     .required(),
-  lastName: yup
+  lname: yup
     .string()
     .matches(isName, invalidLastNameMessage)
     .min(2)

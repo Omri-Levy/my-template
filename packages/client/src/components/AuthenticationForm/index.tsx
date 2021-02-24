@@ -14,10 +14,12 @@ import { Props } from './types';
 
 const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
 	const formTitle = formType === `signUp` ? `Sign Up` : `Sign In`;
+	const isSignUp = formType === `signUp`;
 	const schema = useMemo(() => (
-		formType === `signUp` ? signUpSchema : signInSchema
-	), [formType]);
-	const { errors, setError, handleSubmit, register, formState, getValues
+		isSignUp ? signUpSchema : signInSchema
+	), [isSignUp]);
+	const { errors, setError, clearErrors, handleSubmit, register, formState,
+		getValues
 	} = useForm({
 		mode: `onChange`,
 		resolver: yupResolver(schema)
@@ -29,10 +31,8 @@ const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
 	const { onSubmit } = useAuthentication(formType, setError);
 	const shouldRedirect = isSubmitSuccessful && !errors.responseError;
 
-	if (shouldRedirect) {
-		const pathname = formType === `signIn` ? `/` : `signIn`;
-
-		return <Redirect to={{pathname}} />;
+	if (shouldRedirect && isSignUp) {
+		return <Redirect to={{pathname: `signIn`}} />;
 	}
 
 	return (
@@ -40,10 +40,14 @@ const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
 			<form onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}>
 				<FormFields
 					errors={errors}
+					clearErrors={clearErrors}
 					register={register}
 					formType={formType}
 				/>
-				<Recaptcha setGRecaptchaResponse={setGRecaptchaResponse} />
+				<Recaptcha
+					setGRecaptchaResponse={setGRecaptchaResponse}
+					errors={errors}
+				/>
 				<Button
 					type={`submit`}
 					mt={4}

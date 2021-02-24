@@ -10,7 +10,7 @@ const fetchCurrentUser: FetchCurrentUser = async () => {
     );
 
 // @ts-ignore
-   return data?.user;
+   return data?.user || null;
 };
 
 export default fetchCurrentUser;

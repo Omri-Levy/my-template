@@ -1,8 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Spinner } from '@chakra-ui/react';
 import { useIsFetching } from 'react-query';
+import { Props } from './types';
 
-const Loading: FunctionComponent = () => {
+const Loading: FunctionComponent<Props> = ({ isLoading }) => {
   const isFetching = useIsFetching();
 
   return (
@@ -14,7 +15,7 @@ const Loading: FunctionComponent = () => {
       right={5}
       pointerEvents={`none`}
       transition={`240ms ease`}
-      opacity={isFetching ? 1 : 0}
+      opacity={isFetching || isLoading ? 1 : 0}
     />
   );
 };
