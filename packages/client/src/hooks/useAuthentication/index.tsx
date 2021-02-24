@@ -28,6 +28,10 @@ const useAuthentication: HookReturns = (endpoint, setError
     );
 
     await authenticate();
+
+    if (endpoint === `signOut`) {
+      window.location.href = `/signIn`;
+    }
   };
   const onSubmit: OnSubmit = (gRecaptchaResponse) => async (data) => {
     try {
@@ -53,10 +57,6 @@ const useAuthentication: HookReturns = (endpoint, setError
       await fetchAndAuthenticate();
     } catch (err) {
       console.error(err);
-    }
-
-    if (window.location.href) {
-      window.location.href = `signIn`
     }
   };
 

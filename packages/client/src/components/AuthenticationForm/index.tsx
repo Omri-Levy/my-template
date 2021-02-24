@@ -6,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema, signUpSchema } from '@my-template/shared';
 import FormFields from './FormFields';
 import useDisableSubmit from '../../hooks/useDisableSubmit';
-import { Redirect } from 'react-router-dom';
 import Recaptcha from '../Recaptcha';
 import useGRecaptchaResponse from '../../hooks/useGRecaptchaResponse';
 import useAuthentication from '../../hooks/useAuthentication';
@@ -24,16 +23,11 @@ const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
 		mode: `onChange`,
 		resolver: yupResolver(schema)
 	});
-	const {isSubmitting, isSubmitSuccessful} = formState;
+	const {isSubmitting} = formState;
 	const {gRecaptchaResponse, setGRecaptchaResponse} = useGRecaptchaResponse();
 	const { disableSubmit } = useDisableSubmit(errors, getValues,
 		gRecaptchaResponse);
 	const { onSubmit } = useAuthentication(formType, setError);
-	const shouldRedirect = isSubmitSuccessful && !errors.responseError;
-
-	if (shouldRedirect && isSignUp) {
-		return <Redirect to={{pathname: `signIn`}} />;
-	}
 
 	return (
 		<Page title={formTitle}>
