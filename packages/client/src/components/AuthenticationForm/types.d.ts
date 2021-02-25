@@ -3,4 +3,4 @@ interface Props {
   formType: FormType;
 }
 
-export {Props, FormType};
+export { Props, FormType };

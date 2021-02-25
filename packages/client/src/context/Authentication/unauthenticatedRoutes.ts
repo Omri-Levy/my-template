@@ -1,6 +1,3 @@
-const unauthenticatedRoutes = [
-  `/signUp`,
-  '/signIn',
-];
+const unauthenticatedRoutes = [`/signUp`, `/signIn`];
 
 export default unauthenticatedRoutes;

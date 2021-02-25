@@ -21,7 +21,7 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
     if (user) {
       console.error(emailAlreadyInUseMessage);
 
-      res.status(400).json({ message: emailAlreadyInUseMessage });
+      res.status(400).send({ message: emailAlreadyInUseMessage });
 
       return;
     }
@@ -38,11 +38,11 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
 
     console.log(`New user was added.`);
 
-    res.status(200).json({ status: `success` });
+    res.status(200).send({ status: `success` });
   } catch (err) {
     console.error(err);
 
-    res.status(500).json({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 

@@ -1,5 +1,5 @@
 describe(`useDisableSubmit`, () => {
-	it(`useDisableSubmit temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`useDisableSubmit temp`, () => {
+    expect(true).toBe(true);
+  });
 });

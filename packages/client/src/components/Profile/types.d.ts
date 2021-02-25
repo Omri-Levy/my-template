@@ -7,4 +7,4 @@ interface CurrentUserDetail {
 }
 type CurrentUserDetails = CurrentUserDetail[];
 
-export {CurrentUserDetails};
+export { CurrentUserDetails };

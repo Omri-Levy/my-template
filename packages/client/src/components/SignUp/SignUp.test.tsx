@@ -1,5 +1,5 @@
 describe(`SignUp`, () => {
-	it(`SignUp temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`SignUp temp`, () => {
+    expect(true).toBe(true);
+  });
 });

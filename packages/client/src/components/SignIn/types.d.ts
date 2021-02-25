@@ -3,4 +3,4 @@ interface SignInFormFields {
   password: string;
 }
 
-export {SignInFormFields};
+export { SignInFormFields };

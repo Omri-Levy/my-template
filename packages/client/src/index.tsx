@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react';
+import { StrictMode } from 'react';
 import { render } from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import App from './components/App';
@@ -9,7 +9,7 @@ render(
   <StrictMode>
     <Providers>
       <Layout>
-    <App />
+        <App />
       </Layout>
     </Providers>
   </StrictMode>,

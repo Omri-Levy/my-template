@@ -7,11 +7,11 @@ const signOut = async (_: Request, res: Response): Promise<void> => {
 
     console.log(`Sign out successful.`);
 
-    res.status(200).json({ status: `success` });
+    res.status(200).send({ status: `success` });
   } catch (err) {
     console.error(err);
 
-    res.status(500).json({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 

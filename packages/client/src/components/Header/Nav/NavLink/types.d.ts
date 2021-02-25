@@ -4,4 +4,4 @@ interface Props {
   onClick: MouseEvent<HTMLAnchorElement>;
 }
 
-export {Props};
+export { Props };

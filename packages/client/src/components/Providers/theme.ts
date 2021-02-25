@@ -8,8 +8,8 @@ const config = {
 };
 const styles = {
   global: {
-    "html, body, #root": {
-      height: `100%`
+    'html, body, #root': {
+      height: `100%`,
     },
   },
 };

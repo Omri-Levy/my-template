@@ -9,7 +9,7 @@ type HookReturns = (
   getValues: GetValues,
   gRecaptchaResponse: GRecaptchaResponse
 ) => {
-  disableSubmit: DisableSubmit
+  disableSubmit: DisableSubmit;
 };
 
-export {HookReturns};
+export { HookReturns };

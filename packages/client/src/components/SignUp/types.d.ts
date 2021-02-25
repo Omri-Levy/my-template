@@ -6,4 +6,4 @@ interface SignUpFormFields {
   passwordConfirm: string;
 }
 
-export {SignUpFormFields};
+export { SignUpFormFields };

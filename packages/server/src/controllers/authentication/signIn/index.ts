@@ -16,7 +16,7 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
     if (!user || !passwordMatches) {
       console.error(wrongCredentialsMessage);
 
-      res.status(401).json({ message: wrongCredentialsMessage });
+      res.status(401).send({ message: wrongCredentialsMessage });
 
       return;
     }
@@ -26,11 +26,11 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
 
     console.log(`Sign in successful.`);
 
-    res.status(200).json({ status: `success` });
+    res.status(200).send({ status: `success` });
   } catch (err) {
     console.error(err);
 
-    res.status(500).json({ error: err });
+    res.status(500).send({ error: err });
   }
 };
 

@@ -1,7 +1,3 @@
-const authenticatedRoutes = [
-  '/',
-  `/profile`,
-  `/signOut`,
-];
+const authenticatedRoutes = [`/`, `/profile`, `/signOut`];
 
 export default authenticatedRoutes;

@@ -30,8 +30,8 @@ const formFields = [
     maxLength: 128,
   },
   {
-    name: `responseError`
-  }
+    name: `responseError`,
+  },
 ];
 
 export default formFields;

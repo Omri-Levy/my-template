@@ -1,5 +1,5 @@
 import { IterableUser } from '@my-template/shared';
 
-type FetchCurrentUser = () => Promise<IterableUser>;
+type FetchCurrentUser = () => Promise<IterableUser | null>;
 
-export {FetchCurrentUser};
+export { FetchCurrentUser };

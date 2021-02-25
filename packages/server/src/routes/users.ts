@@ -1,10 +1,8 @@
 import { Router } from 'express';
 import { authenticate } from 'passport';
-import dotenv from 'dotenv-safe';
 import getUsers from '../controllers/users/getUsers';
 import getUser from '../controllers/users/getUser';
 
-dotenv.config();
 const users = Router();
 
 /**

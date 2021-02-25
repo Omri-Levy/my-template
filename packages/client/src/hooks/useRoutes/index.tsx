@@ -7,10 +7,10 @@ import unauthenticatedRoutes from './unAuthenticatedRoutes';
 const useRoutes: HookReturns = () => {
   const { currentUser } = useContext(AuthenticationContext);
 
-  return useMemo(() => (
-    currentUser ? authenticatedRoutes : unauthenticatedRoutes
-  ), [currentUser]);
+  return useMemo(
+    () => (currentUser ? authenticatedRoutes : unauthenticatedRoutes),
+    [currentUser]
+  );
 };
-
 
 export default useRoutes;

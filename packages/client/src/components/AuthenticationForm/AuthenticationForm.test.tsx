@@ -1,5 +1,5 @@
 describe(`AuthenticationForm`, () => {
-	it(`AuthenticationForm temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`AuthenticationForm temp`, () => {
+    expect(true).toBe(true);
+  });
 });

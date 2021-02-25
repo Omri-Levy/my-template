@@ -1,8 +1,8 @@
 import { SetState } from '../../utils/types';
 
 interface LoadingContextType {
- isLoading: boolean;
- setIsLoading: SetState<boolean>;
+  isLoading: boolean;
+  setIsLoading: SetState<boolean>;
 }
 
-export {LoadingContextType};
+export { LoadingContextType };

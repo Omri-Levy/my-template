@@ -1,13 +1,15 @@
 import { FunctionComponent } from 'react';
 import {
   FormControl,
-  FormErrorMessage, FormHelperText,
+  FormErrorMessage,
+  FormHelperText,
   FormLabel,
-  Icon, Input,
+  Icon,
+  Input,
   InputGroup,
-  InputLeftElement
+  InputLeftElement,
 } from '@chakra-ui/react';
-import {Props} from './types';
+import { Props } from './types';
 
 const FormField: FunctionComponent<Props> = ({
   errors,
@@ -21,40 +23,24 @@ const FormField: FunctionComponent<Props> = ({
   helperText,
   onChange,
   ...props
-                                      }) => {
-
-  return (
-    <FormControl
-      id={name}
-      isInvalid={!!errors[name]}
-      {...props}
-    >
-      <FormLabel>
-        {labelTitle}
-      </FormLabel>
-      <InputGroup>
-        <InputLeftElement
-          pointerEvents={`none`}
-          children={<Icon as={icon} color={color} />}
-        />
-        <Input
-          onChange={onChange ?? onChange}
-          type={type}
-          name={name}
-          ref={register}
-          maxLength={maxLength}
-        />
-      </InputGroup>
-      {helperText &&
-        <FormHelperText>
-          {helperText}
-        </FormHelperText>
-      }
-      <FormErrorMessage>
-        {errors?.[name]?.message}
-      </FormErrorMessage>
-    </FormControl>
-  );
-};
+}) => (
+  <FormControl id={name} isInvalid={!!errors[name]} {...props}>
+    <FormLabel>{labelTitle}</FormLabel>
+    <InputGroup>
+      <InputLeftElement pointerEvents='none'>
+        <Icon as={icon} color={color} />
+      </InputLeftElement>
+      <Input
+        onChange={onChange ?? onChange}
+        type={type}
+        name={name}
+        ref={register}
+        maxLength={maxLength}
+      />
+    </InputGroup>
+    {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    <FormErrorMessage>{errors?.[name]?.message}</FormErrorMessage>
+  </FormControl>
+);
 
 export default FormField;

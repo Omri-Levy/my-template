@@ -6,6 +6,6 @@ type FetchFunction = (
   url?: string,
   endpoint: Endpoint,
   data?: Data
-) => Promise<AxiosResponse<unknown>>;
+) => Promise<AxiosResponse<Data | unknown>>;
 
 export { FetchFunction };

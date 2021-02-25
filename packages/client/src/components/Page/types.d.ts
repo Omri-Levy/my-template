@@ -2,4 +2,4 @@ interface Props {
   title: string;
 }
 
-export {Props};
+export { Props };

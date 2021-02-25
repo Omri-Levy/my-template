@@ -1,5 +1,5 @@
 describe(`Logo`, () => {
-	it(`Logo temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`Logo temp`, () => {
+    expect(true).toBe(true);
+  });
 });

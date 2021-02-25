@@ -1,31 +1,23 @@
 import {
   emailAlreadyInUseMessage,
   fetch,
-  wrongCredentialsMessage
+  wrongCredentialsMessage,
+  serverErrorMessage,
 } from '@my-template/shared';
-import { FetchAndAuthenticate, HookReturns, SignOut, OnSubmit } from './types';
 import { useContext } from 'react';
-import AuthenticationContext
-  from '../../context/Authentication/AuthenticationContext';
-import { serverErrorMessage } from '@my-template/shared';
+import { FetchAndAuthenticate, HookReturns, SignOut, OnSubmit } from './types';
+import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
 
 /*
-* a hook to share functionality across the signIn and signUp page.
-* chooses the right types and endpoint behind the scenes and invokes the
-*  authenticate function.
-* */
-const useAuthentication: HookReturns = (endpoint, setError
-) => {
+ * a hook to share functionality across the signIn and signUp page.
+ * chooses the right types and endpoint behind the scenes and invokes the
+ *  authenticate function.
+ * */
+const useAuthentication: HookReturns = (endpoint, setError) => {
   const { authenticate } = useContext(AuthenticationContext);
 
   const fetchAndAuthenticate: FetchAndAuthenticate = async (data) => {
-
-    await fetch(
-      `POST`,
-      undefined,
-      endpoint,
-      data
-    );
+    await fetch(`POST`, undefined, endpoint, data);
 
     await authenticate();
   };
@@ -34,8 +26,9 @@ const useAuthentication: HookReturns = (endpoint, setError
       await fetchAndAuthenticate({ ...data, gRecaptchaResponse });
     } catch (err) {
       let errorMessage = err.response?.data.message;
-      const isExpectedErrorMessage = errorMessage === wrongCredentialsMessage ||
-        errorMessage === emailAlreadyInUseMessage ;
+      const isExpectedErrorMessage =
+        errorMessage === wrongCredentialsMessage ||
+        errorMessage === emailAlreadyInUseMessage;
 
       if (!isExpectedErrorMessage) {
         errorMessage = serverErrorMessage;
@@ -43,11 +36,13 @@ const useAuthentication: HookReturns = (endpoint, setError
 
       console.error(err);
 
-      setError && setError(`responseError`, {
-        message: errorMessage,
-      });
+      if (setError) {
+        setError(`responseError`, {
+          message: errorMessage,
+        });
+      }
     }
-    };
+  };
   const signOut: SignOut = async () => {
     try {
       await fetchAndAuthenticate();

@@ -5,5 +5,5 @@ interface Props {
   objectKey: string;
   icon: FunctionComponent;
   text: string;
-  currentUser: IterableUser;
+  currentUser: IterableUser | null;
 }

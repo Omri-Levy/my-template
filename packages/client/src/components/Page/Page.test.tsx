@@ -1,5 +1,5 @@
 describe(`Page`, () => {
-	it(`Page temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`Page temp`, () => {
+    expect(true).toBe(true);
+  });
 });

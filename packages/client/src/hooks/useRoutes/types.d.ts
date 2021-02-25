@@ -9,4 +9,4 @@ type Routes = Route[];
 
 type HookReturns = () => Routes;
 
-export {Route, Routes, HookReturns};
+export { Route, Routes, HookReturns };

@@ -3,11 +3,14 @@ import { GRecaptchaResponse } from '../../utils/types';
 import { HookReturns } from './types';
 
 const useGRecaptchaResponse: HookReturns = () => {
-  const [gRecaptchaResponse, setGRecaptchaResponse] = useState<GRecaptchaResponse>(``);
+  const [
+    gRecaptchaResponse,
+    setGRecaptchaResponse,
+  ] = useState<GRecaptchaResponse>(``);
 
   return {
     gRecaptchaResponse,
-    setGRecaptchaResponse
+    setGRecaptchaResponse,
   };
 };
 

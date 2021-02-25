@@ -1,5 +1,5 @@
 describe(`Nav`, () => {
-	it(`Nav temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`Nav temp`, () => {
+    expect(true).toBe(true);
+  });
 });

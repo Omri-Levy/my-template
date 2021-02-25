@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { FunctionComponent } from 'react';
-import {FormControlProps} from '@chakra-ui/react';
+import { FormControlProps } from '@chakra-ui/react';
 
 interface Props extends FormControlProps {
   errors: useForm.errors;
@@ -14,4 +14,4 @@ interface Props extends FormControlProps {
   helperText?: string;
 }
 
-export {Props};
+export { Props };

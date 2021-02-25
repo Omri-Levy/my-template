@@ -21,7 +21,7 @@ const validateRecaptcha = async (
   if (!isRobot.data.success) {
     console.error(invalidIsRobotMessage);
 
-    res.status(400).json({ message: invalidIsRobotMessage });
+    res.status(400).send({ message: invalidIsRobotMessage });
 
     return;
   }

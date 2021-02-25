@@ -14,6 +14,8 @@
     "@types/react-router-dom": "^5.1.7",
     "customize-cra": "^1.0.0",
     "cypress": "^6.4.0",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "react-app-rewired": "^2.1.8"
   },
   "dependencies": {
@@ -51,9 +53,23 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/prop-types": "off",
+      "no-use-before-define": "off",
+      "react/jsx-filename-extension": [
+        2,
+        {
+          "extensions": [
+            ".tsx"
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [

@@ -1,5 +1,5 @@
 describe(`Layout`, () => {
-	it(`Layout temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`Layout temp`, () => {
+    expect(true).toBe(true);
+  });
 });

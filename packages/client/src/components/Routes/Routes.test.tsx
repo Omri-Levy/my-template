@@ -1,5 +1,5 @@
 describe(`Routes`, () => {
-	it(`Routes temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`Routes temp`, () => {
+    expect(true).toBe(true);
+  });
 });

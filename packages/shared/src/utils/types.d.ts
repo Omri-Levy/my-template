@@ -1,5 +1,5 @@
 type ObjectKey = string | number | symbol;
-type Data = Record<ObjectKey, unknown>;
+type Data<T> = Record<ObjectKey, T>;
 type Endpoint = `signUp` | `signIn` | `signOut` | `getUser`;
 type RequestMethod = `GET` | `POST` | `PATCH` | `DELETE`;
 interface User {
@@ -9,6 +9,6 @@ interface User {
   email: string;
   role: string;
 }
-type IterableUser = { [key: string]: User };
+type IterableUser = { [key: string]: User } | null;
 
 export { ObjectKey, Data, Endpoint, RequestMethod, User, IterableUser };

@@ -1,3 +1,3 @@
 type Authenticate = () => Promise<void>;
 
-export {Authenticate};
+export { Authenticate };

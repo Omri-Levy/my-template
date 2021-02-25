@@ -1,5 +1,5 @@
 describe(`NavLink`, () => {
-	it(`NavLink temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`NavLink temp`, () => {
+    expect(true).toBe(true);
+  });
 });
