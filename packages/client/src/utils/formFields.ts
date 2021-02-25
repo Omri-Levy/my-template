@@ -1,3 +1,6 @@
+/**
+ * meant for mapping form fields.
+ */
 const formFields = [
   {
     name: `fname`,

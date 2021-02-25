@@ -8,11 +8,11 @@ import { useContext } from 'react';
 import { FetchAndAuthenticate, HookReturns, SignOut, OnSubmit } from './types';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
 
-/*
+/**
  * a hook to share functionality across the signIn and signUp page.
  * chooses the right types and endpoint behind the scenes and invokes the
- *  authenticate function.
- * */
+ * authenticate function.
+ */
 const useAuthentication: HookReturns = (endpoint, setError) => {
   const { authenticate } = useContext(AuthenticationContext);
 

@@ -11,6 +11,10 @@ import useGRecaptchaResponse from '../../hooks/useGRecaptchaResponse';
 import useAuthentication from '../../hooks/useAuthentication';
 import { Props } from './types';
 
+/**
+ * @description a form component for both sign up and sign in with all their
+ * shared logic with individual logic decided based on the formType prop
+ */
 const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
   const formTitle = formType === `signUp` ? `Sign Up` : `Sign In`;
   const isSignUp = formType === `signUp`;

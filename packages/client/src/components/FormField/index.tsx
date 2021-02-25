@@ -11,6 +11,11 @@ import {
 } from '@chakra-ui/react';
 import { Props } from './types';
 
+/**
+ * @description a single form field made of Chakra-UI's FormControl,
+ * FormLabel, InputGroup, InputLeftElement, Input, FormHelperText and,
+ * FormErrorMessage.
+ */
 const FormField: FunctionComponent<Props> = ({
   errors,
   labelTitle,

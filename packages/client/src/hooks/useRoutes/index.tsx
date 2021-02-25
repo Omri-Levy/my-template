@@ -4,6 +4,10 @@ import AuthenticationContext from '../../context/Authentication/AuthenticationCo
 import authenticatedRoutes from './authenticatedRoutes';
 import unauthenticatedRoutes from './unAuthenticatedRoutes';
 
+/**
+ * returns a memoized version of the app's routes array based on if the user
+ * is currently authenticated/signed in.
+ */
 const useRoutes: HookReturns = () => {
   const { currentUser } = useContext(AuthenticationContext);
 

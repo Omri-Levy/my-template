@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import formFields from '../../utils/formFields';
 import { HookReturns } from './types';
 
+/**
+ * a hook returning a boolean to decide if to disable form buttons based on
+ * form validation - disables the button if the form is invalid or
+ * incomplete(including recaptcha completion).
+ */
 const useDisableSubmit: HookReturns = (
   errors,
   getValues,

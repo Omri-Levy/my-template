@@ -43,18 +43,18 @@ const AuthenticationProvider: FunctionComponent = ({ children }) => {
         redirectUrl = `/`;
       }
 
-      /*
-        redirects if the current page does not exist.
-         */
+      /**
+       * redirects if the current page does not exist.
+       */
       const validRoute =
         protectedRoutes.includes(redirectUrl) ||
         unprotectedRoutes.includes(redirectUrl);
-      /*
-         avoids redirecting if the redirect url is the same as the current
-         page or if the route is unprotected. and then redirects as long
-         as window.location.href exists. not checking for existence of
-         window.location.href can throw errors in places such as build time.
-         */
+      /**
+       * avoids redirecting if the redirect url is the same as the current
+       * page or if the route is unprotected. and then redirects as long
+       * as window.location.href exists. not checking for existence of
+       * window.location.href can throw errors in places such as build time.
+       */
       const shouldRedirect =
         redirectUrl !== currentPage && !protectedRoutes.includes(currentPage);
 
