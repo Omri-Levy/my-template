@@ -16,7 +16,7 @@
     "test": "cross-env PGDATABASE=tests jest test --verbose",
     "ci": "cross-env CI=true PGDATABASE=tests jest test --findRelatedTests --verbose",
     "format": "eslint --fix src",
-    "precommit": "lint-staged"
+    "precommit": "yarn lint-staged"
   },
   "jest": {
     "modulePathIgnorePatterns": [

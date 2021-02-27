@@ -16,7 +16,7 @@
     "format": "eslint --fix src",
     "test": "jest test --verbose",
     "ci": "cross-env CI=true jest test --findRelatedTests --verbose",
-    "precommit": "lint-staged"
+    "precommit": "yarn lint-staged"
   },
   "devDependencies": {
     "babel-loader": "8.1.0"

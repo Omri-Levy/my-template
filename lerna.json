@@ -4,12 +4,5 @@
   ],
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "version": "independent",
-  "command": {
-    "bootstrap": {
-      "nohoist": [
-        "*react*"
-      ]
-    }
-  }
+  "version": "independent"
 }
