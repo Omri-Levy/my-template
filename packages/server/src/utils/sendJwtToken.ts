@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { apiUrl } from '@my-template/shared';
 import { JwtToken } from './types';
 
-const sendJwtToken = (res: Response, jwtToken: JwtToken) => {
+const sendJwtToken = (res: Response, jwtToken: JwtToken): void => {
   res.cookie(`qid`, jwtToken, {
     // 9 hours
     maxAge: 1000 * 60 * 60 * 9,

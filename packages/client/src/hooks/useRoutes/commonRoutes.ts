@@ -1,12 +1,14 @@
 import { lazy } from 'react';
 
-const Home = lazy(() => import(`../../components/Home`));
+const UnauthenticatedHome = lazy(
+  () => import(`../../components/UnauthenticatedHome`)
+);
 
 const commonRoutes = [
   {
     to: `/`,
     text: `Home`,
-    Component: Home,
+    Component: UnauthenticatedHome,
   },
 ];
 

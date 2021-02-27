@@ -9,8 +9,8 @@ const Nav: FunctionComponent = () => {
   const { signOut } = useAuthentication(`signOut`);
 
   return (
-    <Flex as='nav'>
-      <Stack direction='row' as={List} listStyleType='none'>
+    <Flex as={`nav`}>
+      <Stack direction={`row`} as={List} listStyleType={`none`}>
         {routes.map((route) => {
           if (!route.to) {
             return null;

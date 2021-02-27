@@ -4,7 +4,7 @@ import Nav from './Nav';
 import Logo from '../Logo';
 
 const Header: FunctionComponent = () => (
-  <Flex justifyContent='space-between' as='header' p={5}>
+  <Flex justifyContent={`space-between`} as={`header`} p={5}>
     <Logo />
     <Nav />
   </Flex>

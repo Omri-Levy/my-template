@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import { useMemo, FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema, signUpSchema } from '@my-template/shared';
@@ -56,7 +56,7 @@ const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
           errors={errors}
         />
         <Button
-          type='submit'
+          type={`submit`}
           mt={4}
           isLoading={isSubmitting}
           disabled={disableSubmit}

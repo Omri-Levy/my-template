@@ -11,8 +11,8 @@ const Profile: FunctionComponent = () => {
   const memoizedDetails = useMemo(() => currentUserDetails, []);
 
   return (
-    <Page title='Profile'>
-      <List variant='filled'>
+    <Page title={`Profile`}>
+      <List variant={`filled`}>
         {memoizedDetails.map((memoizedDetail) => {
           const { objectKey, icon, text } = memoizedDetail;
 

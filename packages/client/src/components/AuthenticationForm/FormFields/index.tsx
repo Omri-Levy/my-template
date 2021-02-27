@@ -22,26 +22,26 @@ const FormFields: FunctionComponent<Props> = ({
         <>
           <FormField
             isRequired
-            labelTitle='First Name:'
-            name='fname'
+            labelTitle={`First Name:`}
+            name={`fname`}
             errors={errors}
             register={register}
-            type='text'
+            type={`text`}
             maxLength={35}
             icon={FaSignature}
-            color='gray.300'
+            color={`gray.300`}
             helperText={helperText(`Example: John`)}
           />
           <FormField
             isRequired
-            labelTitle='Last Name:'
-            name='lname'
+            labelTitle={`Last Name:`}
+            name={`lname`}
             errors={errors}
             register={register}
-            type='text'
+            type={`text`}
             maxLength={35}
             icon={FaSignature}
-            color='gray.300'
+            color={`gray.300`}
             helperText={helperText(`Example: Doe`)}
           />
         </>
@@ -49,40 +49,40 @@ const FormFields: FunctionComponent<Props> = ({
       <FormField
         onChange={clearResponseError(clearErrors)}
         isRequired
-        labelTitle='Email:'
-        name='email'
+        labelTitle={`Email:`}
+        name={`email`}
         errors={errors}
         register={register}
-        type='email'
+        type={`email`}
         maxLength={320}
         icon={FaAt}
-        color='gray.300'
+        color={`gray.300`}
         helperText={helperText(`Example: example@address.com`)}
       />
       <FormField
         onChange={clearResponseError(clearErrors)}
         isRequired
-        labelTitle='Password:'
-        name='password'
+        labelTitle={`Password:`}
+        name={`password`}
         errors={errors}
         register={register}
-        type='password'
+        type={`password`}
         maxLength={128}
         icon={FaLock}
-        color='gray.300'
+        color={`gray.300`}
         helperText={helperText(invalidPasswordPolicyMessage)}
       />
       {isSignUp && (
         <FormField
           isRequired
-          labelTitle='Password Confirmation:'
-          name='passwordConfirmation'
+          labelTitle={`Password Confirmation:`}
+          name={`passwordConfirmation`}
           errors={errors}
           register={register}
-          type='password'
+          type={`password`}
           maxLength={128}
           icon={FaLock}
-          color='gray.300'
+          color={`gray.300`}
           mb={10}
         />
       )}

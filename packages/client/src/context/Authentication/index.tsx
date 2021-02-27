@@ -55,10 +55,12 @@ const AuthenticationProvider: FunctionComponent = ({ children }) => {
        * as window.location.href exists. not checking for existence of
        * window.location.href can throw errors in places such as build time.
        */
-      const shouldRedirect =
-        redirectUrl !== currentPage && !protectedRoutes.includes(currentPage);
+      const isUnauthorizedRoute =
+        !currentUser && protectedRoutes.includes(currentPage);
+      const shouldRedirect = redirectUrl !== currentPage && isUnauthorizedRoute;
 
       if ((shouldRedirect || !validRoute) && window.location.href) {
+        console.log(!validRoute);
         window.location.href = redirectUrl;
       }
     } catch (err) {

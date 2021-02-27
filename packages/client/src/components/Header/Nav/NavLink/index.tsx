@@ -3,7 +3,7 @@ import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
 
-const NavLink: FunctionComponent<Props> = ({ to, text, onClick }) => {
+const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
   const expandPseudoAfterWidth = {
     transition: `width 240ms ease-in-out`,
     width: `100%`,
@@ -19,7 +19,7 @@ const NavLink: FunctionComponent<Props> = ({ to, text, onClick }) => {
   };
 
   return (
-    <ListItem pl={5} _first={{ paddingLeft: 0 }}>
+    <ListItem pl={5} _first={{ paddingLeft: 0 }} {...props}>
       <Link
         exact
         _focus={{

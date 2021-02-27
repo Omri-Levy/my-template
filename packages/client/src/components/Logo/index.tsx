@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 
 const Logo: FunctionComponent = () => (
   <Box pr={5}>
-    <Heading as='h1' size='md'>
+    <Heading as={`h1`} size={`md`}>
       My Template
     </Heading>
   </Box>

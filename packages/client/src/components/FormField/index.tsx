@@ -32,7 +32,7 @@ const FormField: FunctionComponent<Props> = ({
   <FormControl id={name} isInvalid={!!errors[name]} {...props}>
     <FormLabel>{labelTitle}</FormLabel>
     <InputGroup>
-      <InputLeftElement pointerEvents='none'>
+      <InputLeftElement pointerEvents={`none`}>
         <Icon as={icon} color={color} />
       </InputLeftElement>
       <Input
