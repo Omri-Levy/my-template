@@ -1,11 +1,11 @@
 import {
   emailAlreadyInUseMessage,
   fetch,
-  wrongCredentialsMessage,
   serverErrorMessage,
+  wrongCredentialsMessage,
 } from '@my-template/shared';
 import { useContext } from 'react';
-import { FetchAndAuthenticate, HookReturns, SignOut, OnSubmit } from './types';
+import { FetchAndAuthenticate, HookReturns, OnSubmit, SignOut } from './types';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
 
 /**
@@ -44,11 +44,7 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
     }
   };
   const signOut: SignOut = async () => {
-    try {
-      await fetchAndAuthenticate();
-    } catch (err) {
-      console.error(err);
-    }
+    await fetchAndAuthenticate();
 
     if (window.location.href) {
       window.location.href = `/signIn`;

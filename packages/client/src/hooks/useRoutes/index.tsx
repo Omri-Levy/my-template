@@ -1,4 +1,4 @@
-import { useMemo, useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { HookReturns } from './types';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
 import authenticatedRoutes from './authenticatedRoutes';
@@ -10,10 +10,11 @@ import unauthenticatedRoutes from './unAuthenticatedRoutes';
  */
 const useRoutes: HookReturns = () => {
   const { currentUser } = useContext(AuthenticationContext);
+  const isAuthenticated = currentUser && currentUser !== `unauthenticated`;
 
   return useMemo(
-    () => (currentUser ? authenticatedRoutes : unauthenticatedRoutes),
-    [currentUser]
+    () => (isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes),
+    [isAuthenticated]
   );
 };
 

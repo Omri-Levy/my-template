@@ -1,4 +1,4 @@
-import { useContext, useMemo, FunctionComponent } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import { List } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import Page from '../Page';
@@ -22,7 +22,7 @@ const Profile: FunctionComponent = () => {
               objectKey={objectKey}
               icon={icon}
               text={text}
-              currentUser={currentUser || null}
+              currentUser={currentUser}
             />
           );
         })}

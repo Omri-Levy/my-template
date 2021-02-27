@@ -10,7 +10,9 @@ const CurrentUserDetail: FunctionComponent<Props> = ({
 }) => (
   <ListItem textTransform={objectKey === `role` ? `capitalize` : undefined}>
     <ListIcon as={icon} color={`gray.300`} />
-    {`${text}: ${currentUser && currentUser[objectKey]}`}
+    {`${text}: ${
+      currentUser && currentUser !== `unauthenticated` && currentUser[objectKey]
+    }`}
   </ListItem>
 );
 

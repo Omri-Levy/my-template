@@ -1,16 +1,23 @@
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
+import { CSSReset } from '@chakra-ui/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import App from './components/App';
 import Providers from './components/Providers';
 import Layout from './components/Layout';
+import RedirectHandler from './components/RedirectHandler';
 
 render(
   <StrictMode>
     <Providers>
-      <Layout>
-        <App />
-      </Layout>
+      <Router>
+        <RedirectHandler />
+        <CSSReset />
+        <Layout>
+          <App />
+        </Layout>
+      </Router>
     </Providers>
   </StrictMode>,
   document.getElementById(`root`)

@@ -15,7 +15,9 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "exclude": ["cypress"],
+  "exclude": [
+    "cypress"
+  ],
   "include": [
     "src"
   ]
