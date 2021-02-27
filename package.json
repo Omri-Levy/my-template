@@ -62,8 +62,8 @@
     ],
     "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
       "prettier --write",
-      "lerna run ci",
-      "lerna run cy:run"
+      "yarn ci",
+      "yarn cy:run"
     ]
   },
   "husky": {
@@ -79,6 +79,7 @@
     "release": "standard-version --parallel --stream",
     "build": "lerna run build --parallel --stream",
     "ci": "lerna run ci --parallel --stream",
+    "cy:run": "lerna run cy:run --stream",
     "test": "lerna run test --parallel --stream",
     "start": "lerna run start --parallel --stream",
     "format": "lerna run format --parallel --stream"

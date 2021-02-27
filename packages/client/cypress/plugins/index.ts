@@ -9,13 +9,14 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
-
 /**
+ // This function is called when a project is opened or re-opened (e.g. due to
+ // the project's config changing)
  * @type {Cypress.PluginConfig}
  */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default (on: any, config: any) => {
-	// `on` is used to hook into various events Cypress emits
-	// `config` is the resolved Cypress config
+  // `on` is used to hook into various events Cypress emits
+  // `config` is the resolved Cypress config
 };

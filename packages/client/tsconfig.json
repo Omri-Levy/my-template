@@ -12,7 +12,7 @@
       "esnext"
     ],
     "allowJs": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true
   },
   "exclude": [

@@ -1,4 +1,12 @@
 {
-	"extends": "../tsconfig.json",
-	"include": ["**/*.ts", "cypress"]
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": [
+      "cypress",
+      "@testing-library/cypress"
+    ]
+  },
+  "include": [
+    "**/*/*.ts"
+  ]
 }
