@@ -1,12 +1,12 @@
 import { ColorModeScript, CSSReset } from '@chakra-ui/react';
 import Providers from '../../src/components/globals/Providers';
-import { StoryFn } from './types';
+import { StoryFn } from '../../src/utils/storybookDecorators/types';
 import theme from '../../src/components/globals/Providers/theme';
 import DarkModeSwitch
   from '../../src/components/globals/Layout/Header/DarkModeSwitch';
 import React from 'react';
 
-const providersDecorator = (Story: StoryFn) => (
+const ProvidersDecorator = (Story: StoryFn) => (
   <Providers>
     <CSSReset />
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -15,4 +15,4 @@ const providersDecorator = (Story: StoryFn) => (
   </Providers>
 );
 
-export default providersDecorator;
+export default ProvidersDecorator;

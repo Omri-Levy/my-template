@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
 import NavBox from '.';
-import containerDecorator from '../../../.storybook/decorators/containerDecorator';
+import ContainerDecorator from '../../utils/storybookDecorators/ContainerDecorator';
 
 export default {
   title: `NavBox`,
@@ -19,4 +19,4 @@ NavBoxStory.args = {
   height: `300px`,
   mb: 300,
 };
-NavBoxStory.decorators = [containerDecorator];
+NavBoxStory.decorators = [ContainerDecorator];

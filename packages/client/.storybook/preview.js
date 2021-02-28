@@ -1,7 +1,7 @@
-import providersDecorator from './decorators/providersDecorator';
+import ProvidersDecorator from './globalDecorators/ProvidersDecorator';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' }
 };
 
-export const decorators = [providersDecorator];
+export const decorators = [ProvidersDecorator];

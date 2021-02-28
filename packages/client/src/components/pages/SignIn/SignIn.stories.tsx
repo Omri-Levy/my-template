@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
 
 import SignIn from './index';
-import containerDecorator from '../../../../.storybook/decorators/containerDecorator';
+import ContainerDecorator from '../../../utils/storybookDecorators/ContainerDecorator';
 
 export default {
   title: `SignIn`,
@@ -17,4 +17,4 @@ const Template: Story<ComponentProps<typeof SignIn>> = (args) => (
 export const SignInStory = Template.bind({});
 
 SignInStory.args = {};
-SignInStory.decorators = [containerDecorator];
+SignInStory.decorators = [ContainerDecorator];
