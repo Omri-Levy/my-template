@@ -1,6 +1,11 @@
 import { useColorMode } from '@chakra-ui/react';
 import { HookReturns } from './types';
 
+/**
+ * a hook returning various dark mode related reusable logic - such as
+ * colors to use, inverted colors and a boolean returning the current mode
+ * using Chakra-UI's colorMode/useColorMode.
+ */
 const useDarkMode: HookReturns = () => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === `dark`;
