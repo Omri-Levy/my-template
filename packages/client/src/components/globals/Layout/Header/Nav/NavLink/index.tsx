@@ -2,8 +2,10 @@ import { Link, ListItem, Text } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
+import useDarkMode from '../../../../../../hooks/useDarkMode';
 
 const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
+  const { darkModeColor } = useDarkMode();
   const expandPseudoAfterWidth = {
     transition: `width 240ms ease-in-out`,
     width: `100%`,
@@ -15,7 +17,7 @@ const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
     content: `""`,
     width: 0,
     height: 1,
-    backgroundColor: `gray.900`,
+    backgroundColor: darkModeColor,
   };
 
   return (
