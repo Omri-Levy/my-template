@@ -4,6 +4,10 @@ import authenticatedRoutes from './authenticatedRoutes';
 import unauthenticatedRoutes from './unauthenticatedRoutes';
 import AuthenticationContext from '../../../context/Authentication/AuthenticationContext';
 
+/**
+ * centralized redirect related logic making use of react hooks and
+ * context to ensure correct redirects.
+ */
 const RedirectHandler = (): null => {
   const { currentUser } = useContext(AuthenticationContext);
   const currentPage = useLocation().pathname;
