@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
 const UnauthenticatedHome = lazy(
-  () => import(`../../components/UnauthenticatedHome`)
+  () => import(`../../components/pages/Home/UnauthenticatedHome`)
 );
 
 const commonRoutes = [

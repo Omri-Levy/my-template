@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import commonRoutes from './commonRoutes';
 
-const Profile = lazy(() => import(`../../components/Profile`));
+const Profile = lazy(() => import(`../../components/pages/Profile`));
 
 const authenticatedRoutes = [
   ...commonRoutes,

@@ -1,5 +1,5 @@
 /**
- * meant for mapping form fields.
+ * meant for mapping forms fields.
  */
 const formFields = [
   {

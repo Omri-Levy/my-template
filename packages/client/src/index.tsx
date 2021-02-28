@@ -1,12 +1,13 @@
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
-import { CSSReset } from '@chakra-ui/react';
+import { ColorModeScript, CSSReset } from '@chakra-ui/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import App from './components/App';
-import Providers from './components/Providers';
-import Layout from './components/Layout';
-import RedirectHandler from './components/RedirectHandler';
+import Providers from './components/globals/Providers';
+import Layout from './components/globals/Layout';
+import RedirectHandler from './components/globals/RedirectHandler';
+import theme from './components/globals/Providers/theme';
 
 render(
   <StrictMode>
@@ -14,6 +15,7 @@ render(
       <Router>
         <RedirectHandler />
         <CSSReset />
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Layout>
           <App />
         </Layout>

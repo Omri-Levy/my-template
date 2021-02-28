@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 import commonRoutes from './commonRoutes';
 
-const SignUp = lazy(() => import(`../../components/SignUp`));
-const SignIn = lazy(() => import(`../../components/SignIn`));
+const SignUp = lazy(() => import(`../../components/pages/SignUp`));
+const SignIn = lazy(() => import(`../../components/pages/SignIn`));
 
 const unauthenticatedRoutes = [
   ...commonRoutes,

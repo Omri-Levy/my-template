@@ -1,10 +1,11 @@
 import { Data as DataType } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { GRecaptchaResponse } from '../../utils/types';
-import { SignUpFormFields } from '../../components/SignUp/types';
-import { SignInFormFields } from '../../components/SignIn/types';
+import { SignUpFormFields } from '../../components/pages/SignUp/types';
+import { SignInFormFields } from '../../components/pages/SignIn/types';
 
 type Data = SignUpFormFields | SignInFormFields;
+
 interface PostRequestData extends DataType {
   gRecaptchaResponse: GRecaptchaResponse;
 }

@@ -1,5 +1,5 @@
 import { FieldErrors, FieldValues, useForm } from 'react-hook-form';
-import { GRecaptchaResponse } from '../../components/SignIn/types';
+import { GRecaptchaResponse } from '../../components/pages/SignIn/types';
 
 type DisableSubmit = boolean;
 type Errors = FieldErrors<FieldValues>;

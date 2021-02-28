@@ -3,8 +3,8 @@ import formFields from '../../utils/formFields';
 import { HookReturns } from './types';
 
 /**
- * a hook returning a boolean to decide if to disable form buttons based on
- * form validation - disables the button if the form is invalid or
+ * a hook returning a boolean to decide if to disable forms buttons based on
+ * forms validation - disables the button if the forms is invalid or
  * incomplete(including recaptcha completion).
  */
 const useDisableSubmit: HookReturns = (

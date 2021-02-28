@@ -1,4 +1,5 @@
-const { override, babelInclude } = require('customize-cra')
+/* eslint-disable */
+const { override, babelInclude } = require('customize-cra');
 const path = require(`path`);
 
 module.exports = override(
