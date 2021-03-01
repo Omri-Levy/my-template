@@ -6,9 +6,9 @@ import DarkModeSwitch from './DarkModeSwitch';
 
 const Header: FunctionComponent = () => (
   <Flex justifyContent={`space-between`} as={`header`} p={5}>
-    <Flex alignItems={`center`}>
+    <Flex alignItems={`center`} mb={8}>
       <Logo text={`My Template`} />
-      <DarkModeSwitch />
+      <DarkModeSwitch mt={2} />
     </Flex>
     <Nav />
   </Flex>

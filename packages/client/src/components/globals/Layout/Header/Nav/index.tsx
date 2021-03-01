@@ -12,7 +12,7 @@ const Nav: FunctionComponent = () => {
   const { signOut } = useAuthentication(`signOut`);
 
   return (
-    <Flex as={`nav`}>
+    <Flex as={`nav`} alignItems={`center`}>
       <Stack direction={`row`} as={List} listStyleType={`none`}>
         {routes.map((route) => {
           const { to, text, icon } = route;

@@ -9,7 +9,7 @@ import { Props } from './types';
  * Icon and Switch components - toggles dark mode using Chakra-UI's
  * toggleColorMode/useColorMode in the onChange of the Switch.
  */
-const DarkModeSwitch: FunctionComponent<Props> = ({ props }) => {
+const DarkModeSwitch: FunctionComponent<Props> = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const icon = colorMode === `dark` ? FaMoon : FaSun;
   const { darkModeColor } = useDarkMode();
