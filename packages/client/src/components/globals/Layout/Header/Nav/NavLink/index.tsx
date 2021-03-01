@@ -4,6 +4,11 @@ import { FunctionComponent } from 'react';
 import { Props } from './types';
 import useDarkMode from '../../../../../../hooks/useDarkMode';
 
+/**
+ * @description a reusable navigation link component with active link styling
+ * made of Chakra-UI's ListItem, Link and, Text components with
+ * react-router-dom's NavLink component passed to the link's "as" prop.
+ */
 const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
   const { darkModeColor } = useDarkMode();
   const expandPseudoAfterWidth = {
