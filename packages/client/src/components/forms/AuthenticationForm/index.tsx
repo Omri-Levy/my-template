@@ -1,4 +1,4 @@
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Icon, Text } from '@chakra-ui/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -47,7 +47,7 @@ const AuthenticationForm: FunctionComponent<Props> = ({
   const { onSubmit } = useAuthentication(formType, setError);
 
   return (
-    <Page title={formTitle}>
+    <Page title={formTitle} icon={isSignUp ? FaUserPlus : FaSignInAlt}>
       <Box
         as={`form`}
         onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}
@@ -65,13 +65,13 @@ const AuthenticationForm: FunctionComponent<Props> = ({
           errors={errors}
         />
         <Button
-          rightIcon={isSignUp ? <FaUserPlus /> : <FaSignInAlt />}
+          rightIcon={<Icon as={isSignUp ? FaUserPlus : FaSignInAlt} mb={0.3} />}
           type={`submit`}
           mt={4}
           isLoading={isSubmitting}
           disabled={disableSubmit}
         >
-          <Text mb={1}>{formTitle}</Text>
+          <Text>{formTitle}</Text>
         </Button>
       </Box>
     </Page>

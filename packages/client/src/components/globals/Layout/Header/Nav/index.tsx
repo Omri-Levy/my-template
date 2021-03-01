@@ -17,7 +17,7 @@ const Nav: FunctionComponent = () => {
         {routes.map((route) => {
           const { to, text, icon } = route;
 
-          if (!to) {
+          if (!to || to === `/forgotPassword`) {
             return null;
           }
 

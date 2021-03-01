@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
 
@@ -8,9 +8,16 @@ import { Props } from './types';
  * component, with the "h1" html tag passed into the Heading "as" prop
  * giving a title to each route.
  */
-const Page: FunctionComponent<Props> = ({ title, children, ...props }) => (
+const Page: FunctionComponent<Props> = ({
+  title,
+  icon,
+  iconProps,
+  children,
+  ...props
+}) => (
   <Box as={`section`} {...props} height={`100%`}>
     <Heading as={`h1`} mb={10}>
+      {icon && <Icon as={icon} mr={5} mb={2} {...iconProps} />}
       {title}
     </Heading>
     {children}

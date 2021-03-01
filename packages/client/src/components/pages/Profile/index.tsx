@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import { List } from '@chakra-ui/react';
 import { v4 } from 'uuid';
+import { FaIdCard } from 'react-icons/fa';
 import Page from '../Page';
 import AuthenticationContext from '../../../context/Authentication/AuthenticationContext';
 import currentUserDetails from './currentUserDetails';
@@ -15,7 +16,7 @@ const Profile: FunctionComponent = () => {
   const memoizedDetails = useMemo(() => currentUserDetails, []);
 
   return (
-    <Page title={`Profile`}>
+    <Page title={`Profile`} icon={FaIdCard}>
       <List variant={`filled`}>
         {memoizedDetails.map((memoizedDetail) => {
           const { objectKey, icon, text } = memoizedDetail;

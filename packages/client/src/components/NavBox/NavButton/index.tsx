@@ -24,7 +24,7 @@ const NavButton: FunctionComponent<Props> = ({
       <Button colorScheme={darkModeScheme} as={NavLink} to={to} {...props}>
         <Flex>
           {text}
-          {icon && <Icon as={icon} ml={`0.5rem`} mt={0.5} {...iconProps} />}
+          {icon && <Icon as={icon} ml={3} mt={0.5} {...iconProps} />}
         </Flex>
       </Button>
     </ListItem>
