@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { ListIcon, ListItem, Text } from '@chakra-ui/react';
 import { Props } from './types';
+import conditionalText from './conditionalText';
 
 /**
  * a component to render a single field of the signed in user's details or
@@ -10,17 +11,15 @@ import { Props } from './types';
 const CurrentUserDetail: FunctionComponent<Props> = ({
   objectKey,
   icon,
+  iconColor,
   text,
   currentUser,
+  ...props
 }) => (
-  <ListItem textTransform={objectKey === `role` ? `capitalize` : undefined}>
-    <ListIcon as={icon} color={`gray.300`} />
-    <Text>
-      {`${text}: ${
-        currentUser &&
-        currentUser !== `unauthenticated` &&
-        currentUser[objectKey]
-      }`}
+  <ListItem mb={2} {...props}>
+    <ListIcon as={icon} color={iconColor} />
+    <Text display={`inline`}>
+      {conditionalText(currentUser, text, objectKey)}
     </Text>
   </ListItem>
 );
