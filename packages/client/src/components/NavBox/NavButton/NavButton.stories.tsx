@@ -1,9 +1,9 @@
 import { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
-import { Link } from '@storybook/router';
 import NavButton from '.';
 import ContainerDecorator from '../../../utils/storybookDecorators/ContainerDecorator';
 import NavBox from '../index';
+import RouterDecorator from '../../../utils/storybookDecorators/RouterDecorator';
 
 export default {
   title: `NavButton`,
@@ -12,7 +12,7 @@ export default {
 
 const Template: Story<ComponentProps<typeof NavButton>> = (args) => (
   <NavBox height={`300px`}>
-    <NavButton as={Link} {...args} />
+    <NavButton {...args} />
   </NavBox>
 );
 
@@ -22,4 +22,4 @@ NavButtonStory.args = {
   to: `/`,
   text: `Test`,
 };
-NavButtonStory.decorators = [ContainerDecorator];
+NavButtonStory.decorators = [ContainerDecorator, RouterDecorator];

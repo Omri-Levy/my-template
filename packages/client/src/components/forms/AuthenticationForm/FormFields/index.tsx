@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
-import { FaLock, FaAt, FaSignature } from 'react-icons/fa';
+import { FaAt, FaLock, FaSignature } from 'react-icons/fa';
 import { invalidPasswordPolicyMessage } from '@my-template/shared';
 import { Props } from './types';
 import FormField from '../../FormField';
 import FormResponseError from '../../FormResponseError';
 import generateHelperText from './generateHelperText';
 import clearResponseError from './clearResponseError';
+import ForgotPasswordLink from '../../../pages/SignIn/ForgotPasswordLink';
 
 const FormFields: FunctionComponent<Props> = ({
   errors,
@@ -71,7 +72,9 @@ const FormFields: FunctionComponent<Props> = ({
         icon={FaLock}
         color={`gray.300`}
         helperText={helperText(invalidPasswordPolicyMessage)}
+        mb={!isSignUp ? 1 : undefined}
       />
+      {!isSignUp && <ForgotPasswordLink />}
       {isSignUp && (
         <FormField
           isRequired

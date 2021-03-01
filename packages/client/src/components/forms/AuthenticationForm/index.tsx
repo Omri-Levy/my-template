@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,7 +15,10 @@ import { Props } from './types';
  * @description a forms component for both sign up and sign in with all their
  * shared logic with individual logic decided based on the formType prop
  */
-const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
+const AuthenticationForm: FunctionComponent<Props> = ({
+  formType,
+  ...props
+}) => {
   const formTitle = formType === `signUp` ? `Sign Up` : `Sign In`;
   const isSignUp = formType === `signUp`;
   const schema = useMemo(() => (isSignUp ? signUpSchema : signInSchema), [
@@ -44,7 +47,12 @@ const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
 
   return (
     <Page title={formTitle}>
-      <form onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}>
+      <Box
+        as={`form`}
+        onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}
+        width={`100%`}
+        {...props}
+      >
         <FormFields
           errors={errors}
           clearErrors={clearErrors}
@@ -63,7 +71,7 @@ const AuthenticationForm: FunctionComponent<Props> = ({ formType }) => {
         >
           {formTitle}
         </Button>
-      </form>
+      </Box>
     </Page>
   );
 };
