@@ -1,12 +1,22 @@
 import { Dispatch, FunctionComponent, ReactNode, SetStateAction } from 'react';
+import { IconType } from 'react-icons';
 
 type SetState<T> = Dispatch<SetStateAction<T>>;
 type GRecaptchaResponse = string | null;
 type Children = ReactNode | ReactNode[];
 type Icon = FunctionComponent;
 
+type IconProps = IconType;
+
 interface ChildrenProps {
   children: Children;
 }
 
-export { SetState, GRecaptchaResponse, Children, Icon, ChildrenProps };
+export {
+  SetState,
+  GRecaptchaResponse,
+  Children,
+  Icon,
+  IconProps,
+  ChildrenProps,
+};

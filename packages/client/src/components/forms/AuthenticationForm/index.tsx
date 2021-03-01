@@ -1,8 +1,9 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signInSchema, signUpSchema } from '@my-template/shared';
+import { FaSignInAlt, FaUserPlus } from 'react-icons/all';
 import Page from '../../pages/Page';
 import FormFields from './FormFields';
 import useDisableSubmit from '../../../hooks/useDisableSubmit';
@@ -64,12 +65,13 @@ const AuthenticationForm: FunctionComponent<Props> = ({
           errors={errors}
         />
         <Button
+          rightIcon={isSignUp ? <FaUserPlus /> : <FaSignInAlt />}
           type={`submit`}
           mt={4}
           isLoading={isSubmitting}
           disabled={disableSubmit}
         >
-          {formTitle}
+          <Text mb={1}>{formTitle}</Text>
         </Button>
       </Box>
     </Page>
