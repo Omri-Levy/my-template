@@ -1,4 +1,4 @@
-import { Link, ListItem } from '@chakra-ui/react';
+import { Icon, Link, ListItem } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
@@ -6,10 +6,16 @@ import useDarkMode from '../../../../../../hooks/useDarkMode';
 
 /**
  * @description a reusable navigation link component with active link styling
- * made of Chakra-UI's ListItem, Link and, Text components with
- * react-router-dom's NavLink component passed to the link's "as" prop.
+ * made of Chakra-UI's ListItem and  Link components and, an optional Icon -
+ * with react-router-dom's NavLink component passed to the link's "as" prop.
  */
-const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
+const NavLink: FunctionComponent<Props> = ({
+  to,
+  text,
+  onClick,
+  icon,
+  ...props
+}) => {
   const { darkModeColor } = useDarkMode();
   const expandPseudoAfterWidth = {
     transition: `width 240ms ease-in-out`,
@@ -24,6 +30,16 @@ const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
     height: 1,
     backgroundColor: darkModeColor,
   };
+  // styles to apply only when an icon is passed in.
+  let withIconStyles = {};
+
+  if (icon) {
+    withIconStyles = {
+      display: `flex`,
+      flexDirection: `column`,
+      alignItems: `center`,
+    };
+  }
 
   return (
     <ListItem pl={5} _first={{ paddingLeft: 0 }} {...props}>
@@ -53,7 +69,9 @@ const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
         }}
         onClick={onClick}
         fontWeight={700}
+        {...withIconStyles}
       >
+        {icon && <Icon display={`block`} as={icon} />}
         {text}
       </Link>
     </ListItem>

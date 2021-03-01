@@ -1,7 +1,12 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { Dispatch, FunctionComponent, ReactNode, SetStateAction } from 'react';
 
 type SetState<T> = Dispatch<SetStateAction<T>>;
 type GRecaptchaResponse = string | null;
 type Children = ReactNode | ReactNode[];
+type Icon = FunctionComponent;
 
-export { SetState, GRecaptchaResponse, Children };
+interface ChildrenProps {
+  children: Children;
+}
+
+export { SetState, GRecaptchaResponse, Children, Icon, ChildrenProps };

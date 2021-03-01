@@ -15,7 +15,9 @@ const Nav: FunctionComponent = () => {
     <Flex as={`nav`}>
       <Stack direction={`row`} as={List} listStyleType={`none`}>
         {routes.map((route) => {
-          if (!route.to) {
+          const { to, text, icon } = route;
+
+          if (!to) {
             return null;
           }
 
@@ -25,10 +27,11 @@ const Nav: FunctionComponent = () => {
 
           return (
             <NavLink
-              key={route.to}
-              to={route.to}
-              text={route.text}
-              onClick={route.to === `/signOut` ? signOut : undefined}
+              key={to}
+              to={to}
+              icon={icon || undefined}
+              text={text}
+              onClick={to === `/signOut` ? signOut : undefined}
             />
           );
         })}

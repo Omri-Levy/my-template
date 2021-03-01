@@ -4,6 +4,7 @@ import {
   Endpoint,
   IterableUser,
   ObjectKey,
+  ObjectType,
   RequestMethod,
   User,
 } from './utils/types';
@@ -44,4 +45,12 @@ export {
   fetch,
 };
 
-export type { ObjectKey, Data, Endpoint, RequestMethod, User, IterableUser };
+export type {
+  ObjectKey,
+  ObjectType,
+  Data,
+  Endpoint,
+  RequestMethod,
+  User,
+  IterableUser,
+};
