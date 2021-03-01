@@ -1,4 +1,4 @@
-import { Link, ListItem, Text } from '@chakra-ui/react';
+import { Link, ListItem } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
@@ -52,8 +52,9 @@ const NavLink: FunctionComponent<Props> = ({ to, text, onClick, ...props }) => {
           textDecoration: `none`,
         }}
         onClick={onClick}
+        fontWeight={700}
       >
-        <Text fontWeight={700}>{text}</Text>
+        {text}
       </Link>
     </ListItem>
   );
