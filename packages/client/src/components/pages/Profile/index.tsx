@@ -6,6 +6,10 @@ import AuthenticationContext from '../../../context/Authentication/Authenticatio
 import currentUserDetails from './currentUserDetails';
 import CurrentUserDetail from './CurrentUserDetail';
 
+/**
+ * a route wrapped with the Page component to display the currently
+ * authenticated user's details.
+ */
 const Profile: FunctionComponent = () => {
   const { currentUser } = useContext(AuthenticationContext);
   const memoizedDetails = useMemo(() => currentUserDetails, []);
