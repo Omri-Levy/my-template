@@ -4,8 +4,9 @@ import useDarkMode from '../../hooks/useDarkMode';
 
 /**
  * an alternative navigation component made using Chakra-UI's Box component
- * with the "nav" html tag passed into the "as" prop and Stack component -
- * expects NavButton for the children prop.
+ * with the "nav" html tag passed into the "as" prop and Stack component
+ * with Chakra-UI's List component passed to the "as" prop - expects
+ * NavButton for the children prop.
  */
 const NavBox: FunctionComponent<BoxProps> = ({ children, ...props }) => {
   const { darkModeColor } = useDarkMode();
