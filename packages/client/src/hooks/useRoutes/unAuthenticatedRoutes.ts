@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { FaSignInAlt, FaUserPlus } from 'react-icons/all';
+import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import commonRoutes from './commonRoutes';
 import ForgotPassword from '../../components/pages/ForgotPassword';
 

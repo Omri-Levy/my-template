@@ -1,7 +1,8 @@
 import { Spinner, useColorMode } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
+import { Props } from './types';
 
-const Loading: FunctionComponent = () => {
+const Loading: FunctionComponent<Props> = ({ isLoading }) => {
   const { colorMode } = useColorMode();
   const color = colorMode === `dark` ? `gray.900` : `gray.50`;
 
@@ -14,6 +15,7 @@ const Loading: FunctionComponent = () => {
       right={5}
       pointerEvents={`none`}
       transition={`240ms ease`}
+      opacity={isLoading ? 1 : 0}
     />
   );
 };

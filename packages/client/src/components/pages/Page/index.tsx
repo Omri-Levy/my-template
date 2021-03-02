@@ -15,7 +15,7 @@ const Page: FunctionComponent<Props> = ({
   children,
   ...props
 }) => (
-  <Box as={`section`} {...props} height={`100%`}>
+  <Box as={`section`} {...props}>
     <Heading as={`h1`} mb={10}>
       {icon && <Icon as={icon} mr={5} mb={2} {...iconProps} />}
       {title}

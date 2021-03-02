@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FaSignInAlt, FaUserPlus } from 'react-icons/all';
-import { FaHome } from 'react-icons/fa';
+import { FaHome, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import Page from '../../Page';
 import NavButton from '../../../NavBox/NavButton';
 import NavBox from '../../../NavBox';
@@ -17,7 +16,7 @@ const UnauthenticatedHome: FunctionComponent = () => {
 
   return (
     <Page title={`Home`} icon={FaHome} display={`grid`}>
-      <NavBox borderRadius={5} height={`300px`} mb={300}>
+      <NavBox borderRadius={5} height={`300px`} mt={`100px`}>
         <NavButton
           to={`/signUp`}
           text={`Sign Up`}

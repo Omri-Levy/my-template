@@ -21,7 +21,11 @@ import {
   serverErrorMessage,
   wrongCredentialsMessage,
 } from './utils/validationMessages';
-import { signInSchema, signUpSchema } from './utils/validationSchemas';
+import {
+  forgotPasswordSchema,
+  signInSchema,
+  signUpSchema,
+} from './utils/validationSchemas';
 import fetch from './utils/fetch';
 import { apiUrl } from './utils/constants';
 
@@ -42,6 +46,7 @@ export {
   serverErrorMessage,
   signUpSchema,
   signInSchema,
+  forgotPasswordSchema,
   fetch,
 };
 

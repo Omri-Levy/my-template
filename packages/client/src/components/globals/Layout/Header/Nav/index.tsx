@@ -3,7 +3,6 @@ import { FunctionComponent, useContext } from 'react';
 import NavLink from './NavLink';
 import useRoutes from '../../../../../hooks/useRoutes';
 import useAuthentication from '../../../../../hooks/useAuthentication';
-import Loading from '../../../Loading';
 import AuthenticationContext from '../../../../../context/Authentication/AuthenticationContext';
 
 const Nav: FunctionComponent = () => {
@@ -17,12 +16,8 @@ const Nav: FunctionComponent = () => {
         {routes.map((route) => {
           const { to, text, icon } = route;
 
-          if (!to || to === `/forgotPassword`) {
+          if (!to || to === `/forgotPassword` || !currentUser) {
             return null;
-          }
-
-          if (!currentUser) {
-            return <Loading />;
           }
 
           return (

@@ -4,12 +4,10 @@ import { ChildrenProps } from '../../../../utils/types';
 
 /**
  * a simple wrapper component using Chakra-UI's Container component with the
- * html "main" tag in the "as" prop and height 100%.
+ * html "main" tag in the "as" prop.
  */
 const Container: FunctionComponent<ChildrenProps> = ({ children }) => (
-  <MainContainer as={`main`} height={`100%`}>
-    {children}
-  </MainContainer>
+  <MainContainer as={`main`}>{children}</MainContainer>
 );
 
 export default Container;

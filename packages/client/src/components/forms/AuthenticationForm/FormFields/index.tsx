@@ -3,9 +3,8 @@ import { FaAt, FaLock, FaSignature } from 'react-icons/fa';
 import { invalidPasswordPolicyMessage } from '@my-template/shared';
 import { Props } from './types';
 import FormField from '../../FormField';
-import FormResponseError from '../../FormResponseError';
 import generateHelperText from './generateHelperText';
-import clearResponseError from './clearResponseError';
+import clearResponseError from '../../FormResponseError/clearResponseError';
 import ForgotPasswordLink from '../../../pages/SignIn/ForgotPasswordLink';
 
 const FormFields: FunctionComponent<Props> = ({
@@ -89,7 +88,6 @@ const FormFields: FunctionComponent<Props> = ({
           mb={10}
         />
       )}
-      <FormResponseError errors={errors} mb={10} />
     </>
   );
 };

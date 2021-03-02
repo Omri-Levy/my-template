@@ -38,7 +38,6 @@ const signUpSchema = yup.object().shape({
     .required(passwordConfirmationIsRequiredMessage),
   role: yup.string().nullable().oneOf([`user`, `admin`]),
 });
-
 const signInSchema = yup.object().shape({
   email: yup
     .string()
@@ -48,5 +47,13 @@ const signInSchema = yup.object().shape({
     .required(),
   password: yup.string().required(),
 });
+const forgotPasswordSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email(invalidEmailMessage)
+    .min(6, invalidEmailMessage)
+    .max(320, invalidEmailMessage)
+    .required(),
+});
 
-export { signUpSchema, signInSchema };
+export { signUpSchema, signInSchema, forgotPasswordSchema };

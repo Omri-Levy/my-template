@@ -12,7 +12,7 @@ import {
   InputRightElement,
   Text,
 } from '@chakra-ui/react';
-import { FaEye, FaEyeSlash } from 'react-icons/all';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Props } from './types';
 
 /**
@@ -46,7 +46,7 @@ const FormField: FunctionComponent<Props> = ({
     : `Hide Password`;
 
   return (
-    <FormControl id={name} isInvalid={!!errors[name]} {...props}>
+    <FormControl id={name} isInvalid={!!errors[name]} mb={5} {...props}>
       <FormLabel>{labelTitle}</FormLabel>
       <InputGroup>
         <InputLeftElement pointerEvents={`none`}>

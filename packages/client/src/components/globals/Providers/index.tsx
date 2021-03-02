@@ -5,12 +5,15 @@ import { QueryClientProvider } from 'react-query';
 import theme from './theme';
 import queryClient from './queryClient';
 import AuthenticationProvider from '../../../context/Authentication';
+import LoadingProvider from '../../../context/Loading';
 
 const Providers: FunctionComponent = ({ children }) => (
   <ChakraProvider theme={theme}>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthenticationProvider>{children}</AuthenticationProvider>
+        <AuthenticationProvider>
+          <LoadingProvider>{children}</LoadingProvider>
+        </AuthenticationProvider>
       </QueryClientProvider>
     </HelmetProvider>
   </ChakraProvider>

@@ -3,7 +3,7 @@ import Routes from '../globals/Routes';
 import Loading from '../globals/Loading';
 
 const App: FunctionComponent = () => (
-  <Suspense fallback={<Loading />}>
+  <Suspense fallback={<Loading isLoading />}>
     <Routes />
   </Suspense>
 );
