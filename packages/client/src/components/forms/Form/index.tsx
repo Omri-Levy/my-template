@@ -42,6 +42,7 @@ const Form: FunctionComponent<Props> = ({
         mt={4}
         isLoading={isSubmitting}
         disabled={disableSubmit}
+        float={`right`}
       >
         {submitButtonText}
       </Button>
