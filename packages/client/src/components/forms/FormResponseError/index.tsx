@@ -1,5 +1,10 @@
 import { FunctionComponent } from 'react';
-import { FormControl, FormErrorMessage } from '@chakra-ui/react';
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  FormControl,
+} from '@chakra-ui/react';
 import { Props } from './types';
 
 /**
@@ -7,8 +12,15 @@ import { Props } from './types';
  * display response/server sided errors.
  */
 const FormResponseError: FunctionComponent<Props> = ({ errors, ...props }) => (
-  <FormControl isInvalid={!!errors.responseError} isRequired {...props}>
-    <FormErrorMessage>{errors?.responseError?.message}</FormErrorMessage>
+  <FormControl mt={5} isInvalid={!!errors.responseError} isRequired {...props}>
+    {errors?.responseError && (
+      <Alert status={`error`}>
+        <AlertIcon />
+        <AlertDescription mr={2}>
+          {errors?.responseError?.message}
+        </AlertDescription>
+      </Alert>
+    )}
   </FormControl>
 );
 
