@@ -2,13 +2,13 @@ import { FunctionComponent, useMemo } from 'react';
 import { FaAt, FaRedoAlt } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { forgotPasswordSchema, serverErrorMessage } from '@my-template/shared';
+import { forgotPasswordSchema } from '@my-template/shared';
 import { Icon } from '@chakra-ui/react';
 import Page from '../Page';
 import FormField from '../../forms/FormField';
 import Form from '../../forms/Form';
 import clearResponseError from '../../forms/FormResponseError/clearResponseError';
-import { OnSubmit } from '../../../hooks/useAuthentication/types';
+import onSubmit from '../../forms/onSubmit';
 
 const ForgotPassword: FunctionComponent = () => {
   const schema = useMemo(() => forgotPasswordSchema, []);
@@ -25,28 +25,7 @@ const ForgotPassword: FunctionComponent = () => {
     resolver: yupResolver(schema),
   });
   const { isSubmitting } = formState;
-  const onSubmit: OnSubmit = (gRecaptchaResponse) => async (data) => {
-    try {
-      const newData = { ...data, gRecaptchaResponse };
-
-      console.log(newData);
-    } catch (err) {
-      let errorMessage = err.response?.data.message;
-      const isExpectedErrorMessage = errorMessage === `nothing`;
-
-      if (!isExpectedErrorMessage) {
-        errorMessage = serverErrorMessage;
-      }
-
-      console.error(err);
-
-      if (setError) {
-        setError(`responseError`, {
-          message: errorMessage,
-        });
-      }
-    }
-  };
+  const submitFn = onSubmit(`forgotPassword`, setError);
 
   return (
     <Page title={`Forgot Password`} icon={FaRedoAlt}>
@@ -55,7 +34,7 @@ const ForgotPassword: FunctionComponent = () => {
         getValues={getValues}
         icon={<Icon as={FaRedoAlt} />}
         handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
+        onSubmit={submitFn}
         isSubmitting={isSubmitting}
         submitButtonText={`Reset Password`}
       >

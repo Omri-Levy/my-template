@@ -1,5 +1,5 @@
 import { verify } from 'argon2';
-import { wrongCredentialsMessage, signInSchema } from '@my-template/shared';
+import { signInSchema, wrongCredentialsMessage } from '@my-template/shared';
 import { Request, Response } from 'express';
 import User from '../../../models/User.model';
 import generateJwtToken from '../signUp/generateJwtToken';
@@ -27,10 +27,10 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
     console.log(`Sign in successful.`);
 
     res.status(200).send({ status: `success` });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
 
-    res.status(500).send({ error: err });
+    res.status(500).send({ error });
   }
 };
 

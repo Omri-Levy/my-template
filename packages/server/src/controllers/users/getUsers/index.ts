@@ -6,10 +6,10 @@ const getUsers = async (res: Response): Promise<void> => {
     const users = await User.findAll();
 
     res.status(200).send({ status: `success`, users });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
 
-    res.status(500).send({ error: err });
+    res.status(500).send({ error });
   }
 };
 

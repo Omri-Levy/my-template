@@ -1,12 +1,12 @@
 import {
   emailAlreadyInUseMessage,
   fetch,
-  serverErrorMessage,
   wrongCredentialsMessage,
 } from '@my-template/shared';
 import { useContext } from 'react';
 import { FetchAndAuthenticate, HookReturns, OnSubmit, SignOut } from './types';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
+import setResponseError from '../../components/forms/FormResponseError/setResponseError';
 
 /**
  * a hook to share functionality across the signIn and signUp page.
@@ -24,23 +24,13 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
   const onSubmit: OnSubmit = (gRecaptchaResponse) => async (data) => {
     try {
       await fetchAndAuthenticate({ ...data, gRecaptchaResponse });
-    } catch (err) {
-      let errorMessage = err.response?.data.message;
-      const isExpectedErrorMessage =
-        errorMessage === wrongCredentialsMessage ||
-        errorMessage === emailAlreadyInUseMessage;
+    } catch (error) {
+      console.error(error);
 
-      if (!isExpectedErrorMessage) {
-        errorMessage = serverErrorMessage;
-      }
-
-      console.error(err);
-
-      if (setError) {
-        setError(`responseError`, {
-          message: errorMessage,
-        });
-      }
+      setResponseError(error, setError, [
+        wrongCredentialsMessage,
+        emailAlreadyInUseMessage,
+      ]);
     }
   };
   const signOut: SignOut = async () => {

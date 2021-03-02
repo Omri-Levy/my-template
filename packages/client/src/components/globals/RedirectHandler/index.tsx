@@ -39,8 +39,8 @@ const RedirectHandler = (): null => {
       if (shouldRedirect && !validRoute && window.location.href) {
         window.location.href = redirectUrl;
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
   }, [currentPage, currentUser, protectedRoutes, unprotectedRoutes]);
 

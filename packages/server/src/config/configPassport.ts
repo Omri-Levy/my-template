@@ -37,10 +37,10 @@ const configPassport = (): void => {
       }
 
       return done(null, user);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
 
-      return done(err);
+      return done(error);
     }
   });
 

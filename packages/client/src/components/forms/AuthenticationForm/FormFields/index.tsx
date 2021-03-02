@@ -1,6 +1,9 @@
 import { FunctionComponent } from 'react';
 import { FaAt, FaLock, FaSignature } from 'react-icons/fa';
-import { invalidPasswordPolicyMessage } from '@my-template/shared';
+import {
+  emailAlreadyInUseMessage,
+  invalidPasswordPolicyMessage,
+} from '@my-template/shared';
 import { Props } from './types';
 import FormField from '../../FormField';
 import generateHelperText from './generateHelperText';
@@ -15,6 +18,8 @@ const FormFields: FunctionComponent<Props> = ({
 }) => {
   const isSignUp = formType === `signUp`;
   const helperText = generateHelperText(isSignUp);
+  const isEmailAlreadyInUse =
+    errors.responseError?.message === emailAlreadyInUseMessage;
 
   return (
     <>
@@ -60,7 +65,9 @@ const FormFields: FunctionComponent<Props> = ({
         helperText={helperText(`Example: example@address.com`)}
       />
       <FormField
-        onChange={clearResponseError(clearErrors)}
+        onChange={
+          !isEmailAlreadyInUse ? clearResponseError(clearErrors) : undefined
+        }
         isRequired
         labelTitle={`Password:`}
         name={`password`}

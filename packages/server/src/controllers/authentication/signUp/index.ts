@@ -39,10 +39,10 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
     console.log(`New user was added.`);
 
     res.status(200).send({ status: `success` });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
 
-    res.status(500).send({ error: err });
+    res.status(500).send({ error });
   }
 };
 

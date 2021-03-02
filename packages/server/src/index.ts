@@ -12,7 +12,7 @@ const { PORT } = process.env;
     app.listen(PORT, () =>
       console.log(`listening at http://localhost:${PORT}`)
     );
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
   }
 })();

@@ -10,8 +10,8 @@ const AuthenticationProvider: FunctionComponent = ({ children }) => {
 
     try {
       user = await fetchCurrentUser();
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error(error);
     }
 
     setCurrentUser(user);
