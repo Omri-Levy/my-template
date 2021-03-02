@@ -20,17 +20,18 @@ import {
   passwordConfirmationIsRequiredMessage,
   serverErrorMessage,
   wrongCredentialsMessage,
-} from './utils/validationMessages';
+} from './utils/validation/validationMessages';
 import {
   forgotPasswordSchema,
   signInSchema,
   signUpSchema,
-} from './utils/validationSchemas';
+} from './utils/validation/validationSchemas';
 import fetch from './utils/fetch';
-import { apiUrl } from './utils/constants';
+import { apiUrl, securityQuestions } from './utils/constants';
 
 export {
   apiUrl,
+  securityQuestions,
   isName,
   validPassword,
   invalidFirstNameMessage,

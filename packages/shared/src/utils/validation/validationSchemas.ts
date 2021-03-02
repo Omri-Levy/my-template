@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { isName, validPassword } from './regex';
+import { isName, validPassword } from '../regex';
 import {
   invalidEmailMessage,
   invalidFirstNameMessage,
@@ -8,6 +8,8 @@ import {
   invalidPasswordMessage,
   passwordConfirmationIsRequiredMessage,
 } from './validationMessages';
+import { roles } from './validationReferences';
+import { securityQuestions } from '../constants';
 
 const signUpSchema = yup.object().shape({
   fname: yup
@@ -24,10 +26,11 @@ const signUpSchema = yup.object().shape({
     .required(),
   email: yup
     .string()
-    .email(invalidEmailMessage)
     .min(6, invalidEmailMessage)
     .max(320, invalidEmailMessage)
     .required(),
+  securityQuestion: yup.string().required().oneOf(securityQuestions),
+  securityAnswer: yup.string().min(2).max(70).required(),
   password: yup
     .string()
     .matches(validPassword, invalidPasswordMessage)
@@ -36,7 +39,7 @@ const signUpSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref(`password`)], invalidPasswordConfirmationMessage)
     .required(passwordConfirmationIsRequiredMessage),
-  role: yup.string().nullable().oneOf([`user`, `admin`]),
+  role: yup.string().nullable().oneOf(roles),
 });
 const signInSchema = yup.object().shape({
   email: yup
