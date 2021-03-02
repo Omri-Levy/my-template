@@ -5,7 +5,14 @@ import {
   invalidPasswordPolicyMessage,
   securityQuestions,
 } from '@my-template/shared';
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Icon,
+  InputGroup,
+  InputLeftElement,
+  Select,
+} from '@chakra-ui/react';
 import { Props } from './types';
 import FormField from '../../FormField';
 import generateHelperText from './generateHelperText';
@@ -71,16 +78,22 @@ const FormFields: FunctionComponent<Props> = ({
           <FormControl
             isRequired
             id={`securityQuestion`}
+            className={`selectWithIcon`}
             isInvalid={!!errors.securityQuestion}
           >
             <FormLabel>Security Question: </FormLabel>
-            <Select placeholder={`Select security question`} mb={5}>
-              {securityQuestions.map((securityQuestion) => (
-                <option key={securityQuestion} value={securityQuestion}>
-                  {securityQuestion}
-                </option>
-              ))}
-            </Select>
+            <InputGroup>
+              <InputLeftElement pointerEvents={`none`}>
+                <Icon as={FaShieldAlt} />
+              </InputLeftElement>
+              <Select placeholder={`Select security question`} mb={5}>
+                {securityQuestions.map((securityQuestion) => (
+                  <option key={securityQuestion} value={securityQuestion}>
+                    {securityQuestion}
+                  </option>
+                ))}
+              </Select>
+            </InputGroup>
           </FormControl>
           <FormField
             isRequired

@@ -11,6 +11,11 @@ const styles = {
     'html, body, #root': {
       height: `100%`,
     },
+    '.selectWithIcon': {
+      select: {
+        paddingLeft: `2rem`,
+      },
+    },
   },
 };
 const theme = extendTheme({ config, styles });
