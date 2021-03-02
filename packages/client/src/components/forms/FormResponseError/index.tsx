@@ -8,8 +8,8 @@ import {
 import { Props } from './types';
 
 /**
- * a single Chakra-UI's FormControl with FormErrorMessage in order to
- * display response/server sided errors.
+ * a single Chakra-UI's FormControl with Alert, AlertIcon and
+ * AlertDescription in order to display response/server sided errors.
  */
 const FormResponseError: FunctionComponent<Props> = ({ errors, ...props }) => (
   <FormControl mt={5} isInvalid={!!errors.responseError} isRequired {...props}>
