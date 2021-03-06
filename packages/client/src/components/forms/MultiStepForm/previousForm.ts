@@ -1,7 +1,8 @@
+import { setSignUpFormDetails } from '../../../redux/reducer';
 import { PreviousForm } from './types';
 
-const previousForm: PreviousForm = (actions, getValues, goBack) => () => {
-  actions.updateAction(getValues());
+const previousForm: PreviousForm = (dispatch, getValues, goBack) => () => {
+  dispatch(setSignUpFormDetails(getValues()));
   goBack();
 };
 

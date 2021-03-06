@@ -1,13 +1,12 @@
 import { Box, Button, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useStateMachine } from 'little-state-machine';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/all';
+import { useDispatch } from 'react-redux';
 import Recaptcha from '../Recaptcha';
 import useDisableSubmit from '../../../hooks/useDisableSubmit';
 import { Props } from './types';
 import useGRecaptchaResponse from '../../../hooks/useGRecaptchaResponse';
-import updateAction from '../../globals/Providers/updateAction';
 import FormResponseError from '../FormResponseError';
 import Breadcrumbs from '../../Breadcrumbs';
 import nextForm from './nextForm';
@@ -39,9 +38,9 @@ const MultiStepForm: FunctionComponent<Props> = ({
     recaptchaDisablesSubmit
   );
   const { goBack, push } = useHistory();
-  const { actions } = useStateMachine({ updateAction });
-  const nextFormFn = nextForm(actions, getValues, nextFormPath, push);
-  const previousFormFn = previousForm(actions, getValues, goBack);
+  const dispatch = useDispatch();
+  const nextFormFn = nextForm(dispatch, getValues, nextFormPath, push);
+  const previousFormFn = previousForm(dispatch, getValues, goBack);
 
   return (
     <>

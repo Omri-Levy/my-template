@@ -1,7 +1,8 @@
+import { setSignUpFormDetails } from '../../../redux/reducer';
 import { NextForm } from './types';
 
-const nextForm: NextForm = (actions, getValues, nextFormPath, push) => () => {
-  actions.updateAction(getValues());
+const nextForm: NextForm = (dispatch, getValues, nextFormPath, push) => () => {
+  dispatch(setSignUpFormDetails(getValues()));
 
   if (nextFormPath) {
     push(nextFormPath);

@@ -4,13 +4,15 @@ import {
   wrongCredentialsMessage,
 } from '@my-template/shared';
 import { useContext } from 'react';
-import { useStateMachine } from 'little-state-machine';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { FetchAndAuthenticate, HookReturns, OnSubmit, SignOut } from './types';
 import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
 import setResponseError from '../../components/forms/FormResponseError/setResponseError';
-import updateAction from '../../components/globals/Providers/updateAction';
-import initialState from '../../components/globals/Providers/initialState';
+import {
+  resetSignUpFormDetails,
+  setSignUpFormDetails,
+} from '../../redux/reducer';
 
 /**
  * a hook to share functionality across the signIn and signUp page.
@@ -19,7 +21,8 @@ import initialState from '../../components/globals/Providers/initialState';
  */
 const useAuthentication: HookReturns = (endpoint, setError) => {
   const { authenticate } = useContext(AuthenticationContext);
-  const { state, actions } = useStateMachine({ updateAction });
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state);
   const { push, replace } = useHistory();
 
   const fetchAndAuthenticate: FetchAndAuthenticate = async (data) => {
@@ -28,7 +31,7 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
     await authenticate();
 
     if (endpoint === `signUp`) {
-      actions.updateAction(initialState);
+      dispatch(resetSignUpFormDetails());
 
       push(`/signIn`);
     }
@@ -38,9 +41,10 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
       let dataOrState = data;
 
       if (endpoint === `signUp`) {
-        actions.updateAction(data);
+        dispatch(setSignUpFormDetails(data));
+
         dataOrState = {
-          ...state,
+          ...store,
         };
       }
 

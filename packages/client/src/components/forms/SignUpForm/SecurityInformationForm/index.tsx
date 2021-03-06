@@ -3,10 +3,9 @@ import { FaUserPlus } from 'react-icons/fa';
 import { securityInformationSchema } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useStateMachine } from 'little-state-machine';
+import { useSelector } from 'react-redux';
 import FormFields from '../../FormFields';
 import MultiStepForm from '../../MultiStepForm';
-import updateAction from '../../../globals/Providers/updateAction';
 import useAuthentication from '../../../../hooks/useAuthentication';
 import { Props } from './types';
 
@@ -15,8 +14,7 @@ import { Props } from './types';
  */
 const SecurityInformationForm: FunctionComponent<Props> = ({ breadcrumbs }) => {
   const schema = useMemo(() => securityInformationSchema, []);
-  const { state } = useStateMachine({ updateAction });
-  const defaultValues = state;
+  const defaultValues = useSelector((state) => state);
   const {
     errors,
     clearErrors,

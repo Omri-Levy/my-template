@@ -1,23 +1,3 @@
-// import { FunctionComponent } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import PersonalInformationForm from './PersonalInformationForm';
-// import SecurityInformationForm from './SecurityInformationForm';
-//
-// /**
-//  * TODO: update description
-//  */
-// const SignUpForm: FunctionComponent = () => {
-//   const { pathname } = useLocation();
-//
-//   if (pathname === `/signUp`) {
-//     return <PersonalInformationForm />;
-//   }
-//
-//   return <SecurityInformationForm />;
-// };
-//
-// export default SignUpForm;
-
 import { FunctionComponent } from 'react';
 import PersonalInformationForm from './PersonalInformationForm';
 import SecurityInformationForm from './SecurityInformationForm';

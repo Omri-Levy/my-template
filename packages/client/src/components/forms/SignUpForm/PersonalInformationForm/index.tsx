@@ -2,11 +2,10 @@ import { FunctionComponent, useMemo } from 'react';
 import { personalInformationSchema } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useStateMachine } from 'little-state-machine';
+import { useSelector } from 'react-redux';
 import FormFields from '../../FormFields';
 import MultiStepForm from '../../MultiStepForm';
 import { Props } from './types';
-import updateAction from '../../../globals/Providers/updateAction';
 
 /**
  * TODO: update description
@@ -17,8 +16,7 @@ const PersonalInformationForm: FunctionComponent<Props> = ({
   nextFormPath,
 }) => {
   const schema = useMemo(() => personalInformationSchema, []);
-  const { state } = useStateMachine({ updateAction });
-  const defaultValues = state;
+  const defaultValues = useSelector((state) => state);
   const {
     errors,
     clearErrors,

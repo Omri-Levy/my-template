@@ -9,6 +9,7 @@ const Nav: FunctionComponent = () => {
   const { routes } = useRoutes();
   const { currentUser } = useContext(AuthenticationContext);
   const { signOut } = useAuthentication(`signOut`);
+  const linksBlacklist = [`/forgotPassword`];
 
   return (
     <Flex as={`nav`} alignItems={`center`}>
@@ -17,7 +18,7 @@ const Nav: FunctionComponent = () => {
           const { to, text, icon, exact } = route;
           const path = Array.isArray(to) ? to[0] : to;
 
-          if (!to || to === `/forgotPassword` || !currentUser) {
+          if (!to || linksBlacklist.includes(to) || !currentUser) {
             return null;
           }
 
