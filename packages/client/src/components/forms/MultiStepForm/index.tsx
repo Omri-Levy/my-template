@@ -1,16 +1,13 @@
 import { Box, Button, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/all';
-import { useDispatch } from 'react-redux';
 import Recaptcha from '../Recaptcha';
 import useDisableSubmit from '../../../hooks/useDisableSubmit';
 import { Props } from './types';
 import useGRecaptchaResponse from '../../../hooks/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 import Breadcrumbs from '../../Breadcrumbs';
-import nextForm from './nextForm';
-import previousForm from './previousForm';
+import useFormNavigation from './hooks/useFormNavigation';
 
 /**
  * TODO: update description
@@ -37,10 +34,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
     getValues,
     recaptchaDisablesSubmit
   );
-  const { goBack, push } = useHistory();
-  const dispatch = useDispatch();
-  const nextFormFn = nextForm(dispatch, getValues, nextFormPath, push);
-  const previousFormFn = previousForm(dispatch, getValues, goBack);
+  const { previousForm, nextForm } = useFormNavigation(getValues, nextFormPath);
 
   return (
     <>
@@ -48,7 +42,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
       <Box
         as={`form`}
         onSubmit={
-          onSubmit ? handleSubmit(onSubmit(gRecaptchaResponse)) : nextFormFn
+          onSubmit ? handleSubmit(onSubmit(gRecaptchaResponse)) : nextForm
         }
         {...props}
       >
@@ -62,7 +56,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
         )}
         {!isFirstForm && (
           <Button
-            onClick={previousFormFn}
+            onClick={previousForm}
             leftIcon={icons ? <Icon as={FaCaretLeft} mr={0.3} /> : undefined}
             type={`button`}
             mt={4}

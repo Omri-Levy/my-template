@@ -1,8 +1,6 @@
 import { FieldErrors, useForm } from 'react-hook-form';
 import { BoxProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { useHistory } from 'react-router-dom';
-import { MouseEventHandler } from 'react';
 import { Dispatch } from 'react-redux';
 import { Children, GetValues } from '../../../utils/types';
 import { OnSubmit } from '../../../hooks/useAuthentication/types';
@@ -23,18 +21,16 @@ interface Props extends BoxProps {
   children: Children;
 }
 
+type PreviousForm = () => void;
+type NextForm = () => void;
 type NextFormPath = string | undefined;
 
-type PreviousForm = (
-  dispatch: Dispatch,
+type HookReturns = (
   getValues: GetValues,
-  goBack: typeof useHistory.goBack
-) => MouseEventHandler<HTMLButtonElement> | undefined;
-type NextForm = (
-  dispatch: Dispatch,
-  getValues: GetValues,
-  nextFormPath: NextFormPath,
-  push: typeof useHistory.push
-) => void;
+  nextFormPath: NextFormPath
+) => {
+  previousForm: PreviousForm;
+  nextForm: NextForm;
+};
 
-export { Props, PreviousForm, NextForm };
+export { Props, PreviousForm, NextForm, HookReturns };
