@@ -6,6 +6,7 @@ interface Props extends ListItemProps {
   text: string;
   onClick?: MouseEvent<HTMLAnchorElement>;
   icon?: Icon;
+  exact: boolean;
 }
 
 export { Props };

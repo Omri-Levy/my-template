@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { QueryClientProvider } from 'react-query';
+import { StateMachineProvider } from 'little-state-machine';
 import theme from './theme';
 import queryClient from './queryClient';
 import AuthenticationProvider from '../../../context/Authentication';
@@ -11,9 +12,11 @@ const Providers: FunctionComponent = ({ children }) => (
   <ChakraProvider theme={theme}>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthenticationProvider>
-          <LoadingProvider>{children}</LoadingProvider>
-        </AuthenticationProvider>
+        <StateMachineProvider>
+          <AuthenticationProvider>
+            <LoadingProvider>{children}</LoadingProvider>
+          </AuthenticationProvider>
+        </StateMachineProvider>
       </QueryClientProvider>
     </HelmetProvider>
   </ChakraProvider>

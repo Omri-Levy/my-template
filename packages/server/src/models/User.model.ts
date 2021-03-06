@@ -1,6 +1,6 @@
 import { UUIDV4 } from 'sequelize';
-import { Table, Column, Model, DataType } from 'sequelize-typescript';
-import { isName } from '@my-template/shared';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import { emailMax, emailMin, isName } from '@my-template/shared';
 
 const { STRING, UUID, CITEXT, ENUM } = DataType;
 
@@ -18,11 +18,30 @@ class User extends Model {
     unique: true,
     validate: {
       isEmail: true,
-      min: 6,
-      max: 320,
+      min: emailMin,
+      max: emailMax,
     },
   })
   email: string;
+
+  @Column({
+    type: STRING,
+    allowNull: false,
+    validate: {
+      min: 64,
+      max: 255,
+    },
+  })
+  securityQuestion: string;
+
+  @Column({
+    type: STRING,
+    validate: {
+      min: 64,
+      max: 255,
+    },
+  })
+  securityAnswer: string;
 
   @Column({
     type: STRING,

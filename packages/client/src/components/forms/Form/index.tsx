@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import Recaptcha from '../Recaptcha';
 import useDisableSubmit from '../../../hooks/useDisableSubmit';
@@ -6,14 +6,18 @@ import { Props } from './types';
 import useGRecaptchaResponse from '../../../hooks/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 
+/**
+ * TODO: update description
+ */
 const Form: FunctionComponent<Props> = ({
   errors,
   getValues,
-  icon,
   handleSubmit,
   onSubmit,
   isSubmitting,
   submitButtonText,
+  icons = true,
+  submitButtonIcon,
   children,
   ...props
 }) => {
@@ -37,7 +41,7 @@ const Form: FunctionComponent<Props> = ({
         errors={errors}
       />
       <Button
-        rightIcon={icon || undefined}
+        rightIcon={icons ? <Icon as={submitButtonIcon} mb={0.3} /> : undefined}
         type={`submit`}
         mt={4}
         isLoading={isSubmitting}

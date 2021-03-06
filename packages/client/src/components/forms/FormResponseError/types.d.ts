@@ -1,5 +1,6 @@
-import { FieldErrors, useForm } from 'react-hook-form';
+import { FieldErrors } from 'react-hook-form';
 import { FormControlProps } from '@chakra-ui/react';
+import { ClearErrors, SetError } from '../../../utils/types';
 
 interface Props extends FormControlProps {
   errors: FieldErrors;
@@ -7,8 +8,9 @@ interface Props extends FormControlProps {
 
 type SetResponseError = (
   error: any,
-  setError: useForm.setError,
+  setError: SetError,
   expectedErrorMessages?: string[]
 ) => void;
+type ClearResponseError = (clearErrors: ClearErrors) => () => ClearErrors;
 
-export { Props, SetResponseError };
+export { Props, SetResponseError, ClearResponseError };

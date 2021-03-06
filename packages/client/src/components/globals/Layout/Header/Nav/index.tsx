@@ -6,7 +6,7 @@ import useAuthentication from '../../../../../hooks/useAuthentication';
 import AuthenticationContext from '../../../../../context/Authentication/AuthenticationContext';
 
 const Nav: FunctionComponent = () => {
-  const routes = useRoutes();
+  const { routes } = useRoutes();
   const { currentUser } = useContext(AuthenticationContext);
   const { signOut } = useAuthentication(`signOut`);
 
@@ -14,7 +14,8 @@ const Nav: FunctionComponent = () => {
     <Flex as={`nav`} alignItems={`center`}>
       <Stack direction={`row`} as={List} listStyleType={`none`}>
         {routes.map((route) => {
-          const { to, text, icon } = route;
+          const { to, text, icon, exact } = route;
+          const path = Array.isArray(to) ? to[0] : to;
 
           if (!to || to === `/forgotPassword` || !currentUser) {
             return null;
@@ -22,8 +23,9 @@ const Nav: FunctionComponent = () => {
 
           return (
             <NavLink
-              key={to}
-              to={to}
+              exact={exact}
+              key={path}
+              to={path}
               icon={icon || undefined}
               text={text}
               onClick={to === `/signOut` ? signOut : undefined}
@@ -34,4 +36,5 @@ const Nav: FunctionComponent = () => {
     </Flex>
   );
 };
+
 export default Nav;

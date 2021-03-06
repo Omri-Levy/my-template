@@ -10,12 +10,18 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
       fname: firstName,
       lname: lastName,
       email,
+      securityQuestion,
+      securityAnswer,
       password,
       role,
     } = req.body;
-    const hashedPassword = await hash(password);
-
+    console.log(req.body);
     await signUpSchema.isValid(req.body);
+
+    const hashedPassword = await hash(password);
+    const hashedSecurityQuestion = await hash(securityQuestion);
+    const hashedSecurityAnswer = await hash(securityAnswer);
+
     const user = await User.findOne({ where: { email } });
 
     if (user) {
@@ -30,6 +36,8 @@ const signUp = async (req: Request, res: Response): Promise<void> => {
       firstName,
       lastName,
       email,
+      securityQuestion: hashedSecurityQuestion,
+      securityAnswer: hashedSecurityAnswer,
       password: hashedPassword,
       role: role || `user`,
     });

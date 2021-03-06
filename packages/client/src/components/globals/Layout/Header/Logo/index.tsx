@@ -5,7 +5,7 @@ import { Props } from './types';
 /**
  * a simple brand component to be used in places such as header - made of
  * Chakra-UI's Box and Heading components, with the "h1" html tag passed to
- * the Heading's "as" prop and, an optional icon.
+ * the Heading's "as" prop and an optional icon.
  */
 const Logo: FunctionComponent<Props> = ({
   text,

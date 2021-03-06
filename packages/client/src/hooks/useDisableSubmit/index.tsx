@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import formFields from '../../utils/formFields';
 import { HookReturns } from './types';
+import formHasEmptyFields from './formHasEmptyFields';
+import formHasErrors from './formHasErrors';
+import formHasInvalidRecaptcha from './formHasInvalidRecaptcha';
 
 /**
  * a hook returning a boolean to decide if to disable forms buttons based on
@@ -18,21 +20,11 @@ const useDisableSubmit: HookReturns = (
   const formKeys = Object.keys(formValues);
 
   useEffect(() => {
-    let invalidFields = false;
+    const invalidForm =
+      formHasEmptyFields(formKeys, formValues) || formHasErrors(errors);
+    const invalidRecaptcha = formHasInvalidRecaptcha(gRecaptchaResponse);
 
-    formKeys.forEach((formKey) => {
-      if (formValues[formKey].length === 0) {
-        invalidFields = true;
-      }
-    });
-
-    formFields.forEach((formField) => {
-      if (errors[formField.name]) {
-        invalidFields = true;
-      }
-    });
-
-    if (invalidFields || !gRecaptchaResponse) {
+    if (invalidForm || invalidRecaptcha) {
       setDisableSubmit(true);
     } else {
       setDisableSubmit(false);

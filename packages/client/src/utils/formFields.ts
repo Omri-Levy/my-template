@@ -21,6 +21,17 @@ const formFields = [
     maxLength: 320,
   },
   {
+    name: `securityQuestion`,
+    text: `Security Question`,
+    type: `text`,
+  },
+  {
+    name: `securityAnswer`,
+    text: `Security Answer`,
+    type: `text`,
+    maxLength: 70,
+  },
+  {
     name: `password`,
     text: `Password`,
     type: `password`,

@@ -1,8 +1,12 @@
 import { FunctionComponent } from 'react';
-import AuthenticationForm from '../../forms/AuthenticationForm';
+import { FaUserPlus } from 'react-icons/fa';
+import SignUpForm from '../../forms/SignUpForm';
+import Page from '../Page';
 
 const SignUp: FunctionComponent = () => (
-  <AuthenticationForm formType={`signUp`} />
+  <Page title={`Sign Up`} icon={FaUserPlus}>
+    <SignUpForm />
+  </Page>
 );
 
 export default SignUp;

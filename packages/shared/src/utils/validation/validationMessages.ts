@@ -1,32 +1,92 @@
-const invalidNameMessage =
-  `name must include a minimum of 2 characters and` +
-  `, a maximum of 35 alphabetic characters and can include spaces and dashes.`;
-const invalidFirstNameMessage = `First ${invalidNameMessage}`;
-const invalidLastNameMessage = `Last ${invalidNameMessage}`;
+import {
+  firstNameMax,
+  firstNameMin,
+  lastNameMax,
+  lastNameMin,
+  passwordLowercaseCharacters,
+  passwordMax,
+  passwordMin,
+  passwordNumbers,
+  passwordSpecialCharacters,
+  passwordUppercaseCharacters,
+  securityAnswerMax,
+  securityAnswerMin,
+} from './validationConstants';
+
+// field names
+const name = `name`;
+const firstName = `First ${name}`;
+const lastName = `Last ${name}`;
+const email = `Email`;
+const security = `Security`;
+const securityQuestion = `${security} question`;
+const securityAnswer = `${security} answer`;
+const password = `Password`;
+const passwordConfirmation = `${password} confirmation`;
+
+const requiredFieldMessage = `is a required field.`;
+const invalidNameMessage = (type: `firstName` | `lastName`) => {
+  let min = 0;
+  let max = 0;
+
+  if (type === `firstName`) {
+    min = firstNameMin;
+    max = firstNameMax;
+  }
+
+  if (type === `lastName`) {
+    min = lastNameMin;
+    max = lastNameMax;
+  }
+
+  const message =
+    ` must include a minimum of ${min} characters and` +
+    `, a maximum of ${max} alphabetic characters and can include ` +
+    `spaces and dashes.`;
+
+  return message;
+};
+const invalidFirstNameMessage = `${firstName} ${invalidNameMessage(
+  `firstName`
+)}`;
+const invalidLastNameMessage = `${lastName} ${invalidNameMessage(`lastName`)}`;
 const invalidEmailMessage =
-  `Email must include '@', a minimum of ` +
-  `1 characters before '@', a minimum of 1 characters after '@,` +
+  `${email} must include '@', a minimum of ` +
+  `1 character before '@', a minimum of 1 character after '@,` +
   ` and end with a valid domain i.e '.com'.`;
 const invalidPasswordPolicyMessage =
-  `Password must include a minimum of ` +
-  `eight characters, one uppercase character, one lowercase ` +
-  `character, one number and one special character.`;
-const invalidPasswordMessage = `Password must match password policy.`;
+  `${password} must include a minimum of ` +
+  `${passwordMin} characters, a maximum of ${passwordMax} characters, ` +
+  `${passwordUppercaseCharacters} uppercase characters, ` +
+  `${passwordLowercaseCharacters} lowercase ` +
+  `characters, ${passwordNumbers} number ` +
+  `and ${passwordSpecialCharacters} special characters.`;
+const invalidPasswordMessage = `${password} must match password policy.`;
+const passwordIsRequiredMessage = `${password} ` + `${requiredFieldMessage}`;
 const passwordConfirmationIsRequiredMessage =
-  `Password confirmation ` + `is a required field.`;
+  `${passwordConfirmation} ` + `${requiredFieldMessage}`;
 const invalidPasswordConfirmationMessage =
-  `Password confirmation must ` + `match the inserted password.`;
+  `${passwordConfirmation} must ` + `match the inserted password.`;
 const invalidIsRobotMessage =
   `Please verify you are not a robot and ` + `try again.`;
 const wrongCredentialsMessage = `Wrong credentials - please try again.`;
-const emailAlreadyInUseMessage = `Email already in use.`;
+const emailAlreadyInUseMessage = `${email} already in use.`;
 const serverErrorMessage = `Something went wrong - please try again.`;
+const securityQuestionOneOfMessage =
+  `Please select a ` + `${securityQuestion.toLowerCase()}.`;
+const invalidSecurityAnswerMessage =
+  `${securityAnswer} must ` +
+  `include a minimum of ${securityAnswerMin} characters and a maximum of ` +
+  `${securityAnswerMax} characters.`;
+const securityAnswerRequiredMessage =
+  `${securityAnswer} ` + `${requiredFieldMessage}`;
 
 export {
   invalidFirstNameMessage,
   invalidLastNameMessage,
   invalidEmailMessage,
   invalidPasswordPolicyMessage,
+  passwordIsRequiredMessage,
   passwordConfirmationIsRequiredMessage,
   invalidPasswordConfirmationMessage,
   invalidPasswordMessage,
@@ -34,4 +94,7 @@ export {
   wrongCredentialsMessage,
   emailAlreadyInUseMessage,
   serverErrorMessage,
+  securityQuestionOneOfMessage,
+  invalidSecurityAnswerMessage,
+  securityAnswerRequiredMessage,
 };

@@ -1,48 +1,44 @@
-import { useContext, useEffect, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
-import authenticatedRoutes from './authenticatedRoutes';
-import unauthenticatedRoutes from './unauthenticatedRoutes';
+import { useContext, useEffect, useState } from 'react';
+import { Redirect, useLocation } from 'react-router-dom';
 import AuthenticationContext from '../../../context/Authentication/AuthenticationContext';
+import useRoutes from '../../../hooks/useRoutes';
 
 /**
  * centralized redirect related logic making use of react hooks and
  * context to ensure correct redirects.
  */
-const RedirectHandler = (): null => {
+const RedirectHandler = (): JSX.Element | null => {
+  // current page
+  const { pathname } = useLocation();
+  const redirectUrl = `/`;
+  const [validRoute, setValidRoute] = useState(true);
+  /**
+   * avoids redirecting if the redirect url is the same as the current
+   * page.
+   */
+  const shouldRedirect = redirectUrl !== pathname;
   const { currentUser } = useContext(AuthenticationContext);
-  const currentPage = useLocation().pathname;
-  const protectedRoutes = useMemo(() => authenticatedRoutes, []);
-  const unprotectedRoutes = useMemo(() => unauthenticatedRoutes, []);
+  const { unprotectedEndpoints, protectedEndpoints } = useRoutes();
 
   useEffect(() => {
     try {
-      const redirectUrl = `/`;
       /**
        * redirects if the current page does not exist or should not render
        * based on if the user is authenticated or not.
        */
-      let validRoute;
-
       if (currentUser && currentUser !== `unauthenticated`) {
-        validRoute = protectedRoutes.includes(currentPage);
+        setValidRoute(protectedEndpoints.includes(pathname));
       } else {
-        validRoute = unprotectedRoutes.includes(currentPage);
-      }
-      /**
-       * avoids redirecting if the redirect url is the same as the current
-       * page. and then redirects as long as window.location.href exists.
-       * not checking for existence of window.location.href can throw errors
-       * in places such as build time.
-       */
-      const shouldRedirect = redirectUrl !== currentPage;
-
-      if (shouldRedirect && !validRoute && window.location.href) {
-        window.location.href = redirectUrl;
+        setValidRoute(unprotectedEndpoints.includes(pathname));
       }
     } catch (error) {
       console.error(error);
     }
-  }, [currentPage, currentUser, protectedRoutes, unprotectedRoutes]);
+  }, [pathname, currentUser, protectedEndpoints, unprotectedEndpoints]);
+
+  if (shouldRedirect && !validRoute) {
+    return <Redirect to={redirectUrl} />;
+  }
 
   return null;
 };

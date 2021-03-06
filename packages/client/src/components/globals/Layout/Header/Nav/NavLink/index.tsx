@@ -6,7 +6,7 @@ import useDarkMode from '../../../../../../hooks/useDarkMode';
 
 /**
  * @description a reusable navigation link component with active link styling
- * made of Chakra-UI's ListItem and  Link components and, an optional Icon -
+ * made of Chakra-UI's ListItem and  Link components and an optional Icon -
  * with react-router-dom's NavLink component passed to the link's "as" prop.
  */
 const NavLink: FunctionComponent<Props> = ({
@@ -14,6 +14,7 @@ const NavLink: FunctionComponent<Props> = ({
   text,
   onClick,
   icon,
+  exact,
   ...props
 }) => {
   const { darkModeColor } = useDarkMode();
@@ -44,7 +45,8 @@ const NavLink: FunctionComponent<Props> = ({
   return (
     <ListItem pl={5} _first={{ paddingLeft: 0 }} {...props}>
       <Link
-        exact
+        display={`flex`}
+        exact={exact}
         _focus={{
           outline: `none`,
         }}

@@ -13,11 +13,13 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { ErrorMessage } from '@hookform/error-message';
 import { Props } from './types';
+import Select from '../../Select';
 
 /**
  * @description a single forms field made of Chakra-UI's FormControl,
- * FormLabel, InputGroup, InputLeftElement, Input, FormHelperText and,
+ * FormLabel, InputGroup, InputLeftElement, Input/Select, FormHelperText and
  * FormErrorMessage - also uses InputRightElement, Checkbox and Text for
  * fields of type password with the ability to show and hide the password
  * using the checkbox.
@@ -28,11 +30,14 @@ const FormField: FunctionComponent<Props> = ({
   type,
   name,
   icon,
-  color,
+  iconColor,
   register,
   maxLength,
   helperText,
   onChange,
+  isSelectField,
+  selectPlaceholder,
+  selectOptions,
   ...props
 }) => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -46,22 +51,39 @@ const FormField: FunctionComponent<Props> = ({
     : `Hide Password`;
 
   return (
-    <FormControl id={name} isInvalid={!!errors[name]} mb={5} {...props}>
+    <FormControl
+      id={name}
+      isInvalid={!!errors[name]}
+      mb={5}
+      className={isSelectField ? `selectWithIcon` : undefined}
+      {...props}
+    >
       <FormLabel>{labelTitle}</FormLabel>
       <InputGroup>
-        <InputLeftElement pointerEvents={`none`}>
-          <Icon as={icon} color={color} />
-        </InputLeftElement>
-        <Input
-          onChange={onChange ?? onChange}
-          type={inputType}
-          name={name}
-          ref={register}
-          maxLength={maxLength}
-        />
-        {isPasswordField && (
+        {icon && (
+          <InputLeftElement pointerEvents={`none`}>
+            <Icon as={icon} color={iconColor} />
+          </InputLeftElement>
+        )}
+        {isSelectField ? (
+          <Select
+            options={selectOptions}
+            name={name}
+            register={register}
+            placeholder={selectPlaceholder}
+          />
+        ) : (
+          <Input
+            onChange={onChange ?? onChange}
+            type={inputType}
+            name={name}
+            ref={register}
+            maxLength={maxLength}
+          />
+        )}
+        {isPasswordField && icon && (
           <InputRightElement>
-            <Icon as={hidePassword ? FaEye : FaEyeSlash} color={color} />
+            <Icon as={hidePassword ? FaEye : FaEyeSlash} color={iconColor} />
           </InputRightElement>
         )}
       </InputGroup>
@@ -75,7 +97,7 @@ const FormField: FunctionComponent<Props> = ({
         </Checkbox>
       )}
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
-      <FormErrorMessage>{errors?.[name]?.message}</FormErrorMessage>
+      <ErrorMessage errors={errors} name={name} as={FormErrorMessage} />
     </FormControl>
   );
 };

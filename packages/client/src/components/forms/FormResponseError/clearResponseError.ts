@@ -1,10 +1,6 @@
-import {
-  ClearErrors,
-  ClearResponseError,
-} from '../AuthenticationForm/FormFields/types';
+import { ClearResponseError } from './types';
 
-const clearResponseError: ClearResponseError = (
-  clearErrors: ClearErrors
-) => () => clearErrors(`responseError`);
+const clearResponseError: ClearResponseError = (clearErrors) => () =>
+  clearErrors(`responseError`);
 
 export default clearResponseError;

@@ -1,8 +1,12 @@
 import { FunctionComponent } from 'react';
-import AuthenticationForm from '../../forms/AuthenticationForm';
+import { FaSignInAlt } from 'react-icons/fa';
+import SignInForm from '../../forms/SignInForm';
+import Page from '../Page';
 
 const SignIn: FunctionComponent = () => (
-  <AuthenticationForm formType={`signIn`} />
+  <Page title={`Sign In`} icon={FaSignInAlt}>
+    <SignInForm />
+  </Page>
 );
 
 export default SignIn;
