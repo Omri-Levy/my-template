@@ -8,9 +8,9 @@ const FormWizard: FunctionComponent<Props> = ({ forms }) => {
   let breadcrumbs: Breadcrumbs = [];
 
   forms.forEach((form) => {
-    const { to, text } = form;
+    const { to, text, icon } = form;
 
-    breadcrumbs = [...breadcrumbs, { to, text, disabled: false }];
+    breadcrumbs = [...breadcrumbs, { to, text, icon, disabled: false }];
   });
 
   return (

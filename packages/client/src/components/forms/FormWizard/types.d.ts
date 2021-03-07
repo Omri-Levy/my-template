@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { IconType } from 'react-icons';
 import Form from '../Form';
 import { Breadcrumbs } from '../MultiStepForm/Breadcrumbs/types';
 
@@ -12,6 +13,7 @@ interface Form {
   to: string;
   Component: ComponentType;
   text: string;
+  icon?: IconType;
 }
 
 type Forms = Form[];
@@ -23,9 +25,8 @@ interface Props {
 type GenerateFormStep = (
   to: string,
   Component: ComponentType,
-  text: string
+  text: string,
+  icon?: IconType
 ) => Form;
 
-type GenerateForms = (...args) => Forms;
-
-export { Props, GenerateFormStep, GenerateForms };
+export { Props, Form, Forms, GenerateFormStep };

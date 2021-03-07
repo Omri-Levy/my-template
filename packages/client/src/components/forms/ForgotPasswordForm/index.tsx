@@ -1,11 +1,16 @@
 import { FunctionComponent, useMemo } from 'react';
 import { FaRedoAlt } from 'react-icons/fa';
-import { forgotPasswordSchema } from '@my-template/shared';
+import {
+  forgotPasswordMessage,
+  forgotPasswordSchema,
+} from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDisclosure } from '@chakra-ui/react';
 import FormFields from '../FormFields';
 import Form from '../Form';
 import onSubmit from '../onSubmit';
+import Alert from '../../Alert';
 
 /**
  * TODO: update description
@@ -25,7 +30,12 @@ const ForgotPasswordForm: FunctionComponent = () => {
     resolver: yupResolver(schema),
   });
   const { isSubmitting } = formState;
-  const submitFn = onSubmit(`forgotPassword`, setError);
+  const disclosure = useDisclosure();
+  const { onOpen } = disclosure;
+  const callback = () => {
+    onOpen();
+  };
+  const submitFn = onSubmit(`forgotPassword`, setError, undefined, callback);
 
   return (
     <Form
@@ -42,6 +52,12 @@ const ForgotPasswordForm: FunctionComponent = () => {
         clearErrors={clearErrors}
         register={register}
         formType={`forgotPassword`}
+      />
+      <Alert
+        status={`info`}
+        message={forgotPasswordMessage}
+        closeable
+        disclosure={disclosure}
       />
     </Form>
   );

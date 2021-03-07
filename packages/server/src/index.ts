@@ -9,7 +9,7 @@ const { PORT } = process.env;
     await db.authenticate();
     console.log(`connected to db.`);
     configPassport();
-    app.listen(PORT, () =>
+    app.listen(Number(PORT), () =>
       console.log(`listening at http://localhost:${PORT}`)
     );
   } catch (error) {

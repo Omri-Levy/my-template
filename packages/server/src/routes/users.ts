@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authenticate } from 'passport';
 import getUsers from '../controllers/users/getUsers';
 import getUser from '../controllers/users/getUser';
+import forgotPassword from '../controllers/users/forgotPassword';
 
 const users = Router();
 
@@ -100,5 +101,7 @@ users.get(
   }),
   getUser
 );
+
+users.post(`/forgotPassword`, forgotPassword);
 
 export default users;

@@ -4,7 +4,8 @@ import { GRecaptchaResponse, SetError } from '../../utils/types';
 type OnSubmit = (
   endpoint: Endpoint,
   setError: SetError,
-  expectedErrorMessages?: string[]
+  expectedErrorMessages?: string[],
+  callback?: (args?: unknown) => unknown
 ) => (gRecaptchaResponse: GRecaptchaResponse) => (data: Data) => Promise<void>;
 
 export { OnSubmit };

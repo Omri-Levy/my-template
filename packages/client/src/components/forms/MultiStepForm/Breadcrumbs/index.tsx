@@ -13,6 +13,7 @@ import handleDisableLinks from './handleDisableLinks';
 const Breadcrumbs: FunctionComponent<Props> = ({
   breadcrumbs,
   disableSubmit,
+  icons = true,
   ...props
 }) => {
   const { pathname } = useLocation();
@@ -53,6 +54,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({
             key={to}
             {...disabledLinkStyles}
           >
+            {icons && <Icon as={breadcrumb.icon} color={`gray. 300`} mr={3} />}
             <BreadcrumbLink
               pointerEvents={disableLink || isCurrentPage ? `none` : undefined}
               _activeLink={{

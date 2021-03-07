@@ -19,9 +19,11 @@ describe(`signIn`, () => {
     const newUser = await User.findOne({
       where: { email: data.email },
     });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const isSamePassword = await verify(newUser?.password, data.password);
+    let isSamePassword;
+
+    if (newUser?.password) {
+      isSamePassword = await verify(newUser?.password, data.password);
+    }
 
     expect(newUser).toHaveProperty(`id`);
     expect(newUser).toHaveProperty(`email`, data.email);

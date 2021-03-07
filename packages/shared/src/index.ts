@@ -10,6 +10,7 @@ import {
 } from './utils/types';
 import {
   emailAlreadyInUseMessage,
+  forgotPasswordMessage,
   invalidEmailMessage,
   invalidFirstNameMessage,
   invalidIsRobotMessage,
@@ -83,6 +84,7 @@ export {
   serverErrorMessage,
   invalidSecurityAnswerMessage,
   securityAnswerRequiredMessage,
+  forgotPasswordMessage,
   personalInformationSchema,
   securityInformationSchema,
   signUpSchema,
