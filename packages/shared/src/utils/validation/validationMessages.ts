@@ -40,9 +40,9 @@ const invalidNameMessage = (type: `firstName` | `lastName`) => {
   }
 
   const message =
-    ` must include a minimum of ${min} characters and` +
-    `, a maximum of ${max} alphabetic characters and can include ` +
-    `spaces and dashes.`;
+    ` must include a minimum of ${min} alphabetic characters and` +
+    `, a maximum of ${max} alphabetic characters and may not include ` +
+    `spaces or dashes.`;
 
   return message;
 };

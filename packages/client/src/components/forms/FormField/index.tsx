@@ -53,7 +53,7 @@ const FormField: FunctionComponent<Props> = ({
   return (
     <FormControl
       id={name}
-      isInvalid={!!errors[name]}
+      isInvalid={!!errors[name]?.message}
       mb={5}
       className={isSelectField ? `selectWithIcon` : undefined}
       {...props}

@@ -6,7 +6,7 @@ import useDisableSubmit from '../../../hooks/useDisableSubmit';
 import { Props } from './types';
 import useGRecaptchaResponse from '../../../hooks/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
-import Breadcrumbs from '../../Breadcrumbs';
+import Breadcrumbs from './Breadcrumbs';
 import useFormNavigation from './hooks/useFormNavigation';
 
 /**
@@ -38,8 +38,9 @@ const MultiStepForm: FunctionComponent<Props> = ({
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} disableSubmit={disableSubmit} />
       <Box
+        noValidate
         as={`form`}
         onSubmit={
           onSubmit ? handleSubmit(onSubmit(gRecaptchaResponse)) : nextForm

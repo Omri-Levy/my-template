@@ -18,7 +18,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
   register,
 }) => {
   const isEmailAlreadyInUse =
-    errors.responseError?.message === emailAlreadyInUseMessage;
+    errors?.responseError?.message === emailAlreadyInUseMessage;
 
   return (
     <>

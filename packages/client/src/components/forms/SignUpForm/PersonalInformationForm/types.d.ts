@@ -1,4 +1,4 @@
-import { Breadcrumbs } from '../../../Breadcrumbs/types';
+import { Breadcrumbs } from '../../MultiStepForm/Breadcrumbs/types';
 
 interface PersonalInformationFormFields {
   firstName: string;

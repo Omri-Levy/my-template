@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import Form from '../Form';
-import { Breadcrumbs } from '../../Breadcrumbs/types';
+import { Breadcrumbs } from '../MultiStepForm/Breadcrumbs/types';
 
 type ComponentType = FunctionComponent<{
   breadcrumbs: Breadcrumbs;

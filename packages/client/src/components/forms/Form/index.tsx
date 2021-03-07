@@ -30,6 +30,7 @@ const Form: FunctionComponent<Props> = ({
 
   return (
     <Box
+      noValidate
       as={`form`}
       onSubmit={handleSubmit(onSubmit(gRecaptchaResponse))}
       {...props}

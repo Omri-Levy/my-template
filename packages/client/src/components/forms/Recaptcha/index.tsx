@@ -19,11 +19,11 @@ const Recaptcha: FunctionComponent<Props> = ({
     setGRecaptchaResponse(gRecaptchaResponse);
 
   useEffect(() => {
-    if (errors.responseError) {
+    if (errors?.responseError) {
       recaptchaRef.current?.reset();
       setGRecaptchaResponse(``);
     }
-  }, [errors.responseError, setGRecaptchaResponse]);
+  }, [errors?.responseError, setGRecaptchaResponse]);
 
   return (
     <ReCAPTCHA

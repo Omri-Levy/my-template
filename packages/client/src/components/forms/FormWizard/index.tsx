@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Props } from './types';
-import { Breadcrumbs } from '../../Breadcrumbs/types';
+import { Breadcrumbs } from '../MultiStepForm/Breadcrumbs/types';
 
 const FormWizard: FunctionComponent<Props> = ({ forms }) => {
   const { pathname } = useLocation();
@@ -10,7 +10,7 @@ const FormWizard: FunctionComponent<Props> = ({ forms }) => {
   forms.forEach((form) => {
     const { to, text } = form;
 
-    breadcrumbs = [...breadcrumbs, { to, text }];
+    breadcrumbs = [...breadcrumbs, { to, text, disabled: false }];
   });
 
   return (
@@ -24,15 +24,6 @@ const FormWizard: FunctionComponent<Props> = ({ forms }) => {
         if (pathname !== to) {
           return null;
         }
-
-        breadcrumbs.forEach((breadcrumb, idx) => {
-          if (breadcrumb.to === to) {
-            breadcrumbs[idx] = {
-              ...breadcrumb,
-              isCurrentPage: true,
-            };
-          }
-        });
 
         return (
           <Component

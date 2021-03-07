@@ -1,5 +1,5 @@
 import { FieldErrors } from 'react-hook-form';
-import { ClearErrors, Register } from '../SignInForm/FormFields/types';
+import { ClearErrors, Register } from '../../../utils/types';
 
 type FormType =
   | `personalInformation`

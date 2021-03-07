@@ -12,8 +12,13 @@ import { Props } from './types';
  * AlertDescription in order to display response/server sided errors.
  */
 const FormResponseError: FunctionComponent<Props> = ({ errors, ...props }) => (
-  <FormControl mt={5} isInvalid={!!errors.responseError} isRequired {...props}>
-    {errors?.responseError && (
+  <FormControl
+    mt={5}
+    isInvalid={!!errors?.responseError?.message}
+    isRequired
+    {...props}
+  >
+    {errors?.responseError?.message && (
       <Alert status={`error`}>
         <AlertIcon />
         <AlertDescription mr={2}>

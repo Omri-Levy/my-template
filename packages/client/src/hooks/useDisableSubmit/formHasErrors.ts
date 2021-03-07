@@ -4,7 +4,7 @@ import { FormHasErrors } from './types';
 
 const formHasErrors: FormHasErrors = (errors) => {
   let invalidForm = false;
-  const isServerError = errors.responseError?.message === serverErrorMessage;
+  const isServerError = errors?.responseError?.message === serverErrorMessage;
 
   formFields.forEach((formField) => {
     if (errors[formField.name]?.message && !isServerError) {

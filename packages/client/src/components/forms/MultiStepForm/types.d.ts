@@ -1,10 +1,9 @@
 import { FieldErrors, useForm } from 'react-hook-form';
 import { BoxProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { Dispatch } from 'react-redux';
 import { Children, GetValues } from '../../../utils/types';
 import { OnSubmit } from '../../../hooks/useAuthentication/types';
-import { Breadcrumbs } from '../../Breadcrumbs/types';
+import { Breadcrumbs } from './Breadcrumbs/types';
 
 interface Props extends BoxProps {
   breadcrumbs: Breadcrumbs;
