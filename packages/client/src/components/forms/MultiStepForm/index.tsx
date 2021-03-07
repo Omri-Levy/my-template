@@ -10,6 +10,10 @@ import Breadcrumbs from './Breadcrumbs';
 import useFormNavigation from './hooks/useFormNavigation';
 
 /**
+ * NOTE: navigation to disabled breadcrumb links changing the browser's url is
+ * still possible - mostly affects UX and unlikely to happen.
+ */
+/**
  * TODO: update description
  */
 const MultiStepForm: FunctionComponent<Props> = ({
