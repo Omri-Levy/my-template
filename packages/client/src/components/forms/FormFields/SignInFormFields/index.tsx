@@ -3,6 +3,7 @@ import { FaAt, FaLock } from 'react-icons/fa';
 import FormField from '../../FormField';
 import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
+import ForgotPasswordLink from '../../../pages/SignIn/ForgotPasswordLink';
 
 /**
  * TODO: update description
@@ -38,6 +39,7 @@ const SignInFormFields: FunctionComponent<Props> = ({
       iconColor={`gray.300`}
       mb={1}
     />
+    <ForgotPasswordLink />
   </>
 );
 
