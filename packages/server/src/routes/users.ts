@@ -3,6 +3,9 @@ import { authenticate } from 'passport';
 import getUsers from '../controllers/users/getUsers';
 import getUser from '../controllers/users/getUser';
 import forgotPassword from '../controllers/users/forgotPassword';
+import resetPassword from '../controllers/users/resetPassword';
+import validateResetPasswordToken from '../middleware/validateResetPasswordToken';
+import validateResetPasswordTokenController from '../controllers/users/validateResetPasswordToken';
 
 const users = Router();
 
@@ -103,5 +106,13 @@ users.get(
 );
 
 users.post(`/forgotPassword`, forgotPassword);
+
+users.post(`/resetPassword/:token`, validateResetPasswordToken, resetPassword);
+
+users.get(
+  `/validateResetPasswordToken/:token`,
+  validateResetPasswordToken,
+  validateResetPasswordTokenController
+);
 
 export default users;

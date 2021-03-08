@@ -8,6 +8,7 @@ import {
 import FormField from '../../../FormField';
 import clearResponseError from '../../../FormResponseError/clearResponseError';
 import { Props } from '../../types';
+import { securityQuestionPlaceholder } from '../../../../../utils/constants';
 
 /**
  * TODO: update description
@@ -25,7 +26,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
       <FormField
         isSelectField
         selectOptions={securityQuestions}
-        selectPlaceholder={`Select a security question`}
+        selectPlaceholder={securityQuestionPlaceholder}
         isRequired
         labelTitle={`Security Question:`}
         name={`securityQuestion`}

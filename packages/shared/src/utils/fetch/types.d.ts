@@ -5,7 +5,8 @@ type FetchFunction = (
   method: RequestMethod,
   url?: string,
   endpoint: Endpoint,
-  data?: Data
+  data?: Data,
+  params?: string
 ) => Promise<AxiosResponse<Data | unknown>>;
 
 export { FetchFunction };

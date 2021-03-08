@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
 import { hash } from 'argon2';
 import { emailAlreadyInUseMessage, signUpSchema } from '@my-template/shared';
 
 import User from '../../../models/User.model';
+import { Route } from '../../../utils/types';
 
-const signUp = async (req: Request, res: Response): Promise<void> => {
+const signUp: Route = async (req, res) => {
   try {
     const {
       fname: firstName,

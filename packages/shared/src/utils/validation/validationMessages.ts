@@ -84,6 +84,9 @@ const forgotPasswordMessage =
   `If the email belongs to an existing account ` +
   `- you will receive an email with the next steps in order to ` +
   `reset your password shortly.`;
+const invalidTokenMessage = `Invalid token.`;
+const invalidSecurityInformationMessage =
+  `Wrong security question or ` + `security answer - please try again.`;
 
 export {
   invalidFirstNameMessage,
@@ -102,4 +105,6 @@ export {
   invalidSecurityAnswerMessage,
   securityAnswerRequiredMessage,
   forgotPasswordMessage,
+  invalidTokenMessage,
+  invalidSecurityInformationMessage,
 };

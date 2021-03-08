@@ -15,13 +15,14 @@ const ForgotPasswordFormFields: FunctionComponent<Props> = ({
   <FormField
     onChange={clearResponseError(clearErrors)}
     isRequired
-    errors={errors}
     labelTitle={`Email:`}
-    type={`email`}
     name={`email`}
+    errors={errors}
+    register={register}
+    type={`email`}
+    maxLength={320}
     icon={FaAt}
     iconColor={`gray.300`}
-    register={register}
   />
 );
 

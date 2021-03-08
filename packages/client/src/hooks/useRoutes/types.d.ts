@@ -3,6 +3,8 @@ import { Icon } from '../../utils/types';
 
 interface Route {
   to: string;
+  regex?: RegExp;
+  formSteps?: string[];
   text: string;
   icon?: Icon | null;
   Component: FunctionComponent | null;
@@ -14,9 +16,9 @@ type Routes = Route[];
 interface RoutesObject {
   routes: Routes;
   unprotectedRoutes: Routes;
-  unprotectedEndpoints: string[];
+  unprotectedEndpoints: (string | RegExp)[];
   protectedRoutes: Routes;
-  protectedEndpoints: string[];
+  protectedEndpoints: (string | RegExp)[];
 }
 
 type HookReturns = () => RoutesObject;

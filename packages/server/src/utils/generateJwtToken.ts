@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
-import User from '../../../models/User.model';
+import { GenerateToken } from '../controllers/authentication/signUp/types';
 
-const generateToken = (user: User): string => {
+const generateToken: GenerateToken = (user, expiresIn): string => {
   const { JWT_SECRET } = process.env;
   const { id, tokenVersion } = user;
 
@@ -11,7 +11,7 @@ const generateToken = (user: User): string => {
       tokenVersion,
     },
     JWT_SECRET as string,
-    { expiresIn: `9h` }
+    { expiresIn }
   );
 };
 

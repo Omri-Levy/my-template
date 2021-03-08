@@ -32,6 +32,16 @@ const sharedFields = {
     .min(emailMin, invalidEmailMessage)
     .max(emailMax, invalidEmailMessage)
     .required(),
+  password: yup
+    .string()
+    .matches(validPassword, invalidPasswordMessage)
+    .min(passwordMin)
+    .max(passwordMax)
+    .required(passwordIsRequiredMessage),
+  securityQuestion: yup
+    .string()
+    .oneOf(securityQuestions, securityQuestionOneOfMessage)
+    .required(),
 };
 const personalInformationFields = {
   fname: yup
@@ -49,21 +59,13 @@ const personalInformationFields = {
   email: sharedFields.email,
 };
 const securityInformationFields = {
-  securityQuestion: yup
-    .string()
-    .oneOf(securityQuestions, securityQuestionOneOfMessage)
-    .required(),
+  securityQuestion: sharedFields.securityQuestion,
   securityAnswer: yup
     .string()
     .min(securityAnswerMin, invalidSecurityAnswerMessage)
     .max(securityAnswerMax, invalidSecurityAnswerMessage)
     .required(),
-  password: yup
-    .string()
-    .matches(validPassword, invalidPasswordMessage)
-    .min(passwordMin)
-    .max(passwordMax)
-    .required(passwordIsRequiredMessage),
+  password: sharedFields.password,
   passwordConfirmation: yup
     .string()
     .oneOf([yup.ref(`password`)], invalidPasswordConfirmationMessage)
@@ -76,6 +78,15 @@ const signInFields = {
 const forgotPasswordFields = {
   email: sharedFields.email,
 };
+const resetPasswordFields = {
+  securityQuestion: sharedFields.securityQuestion,
+  securityAnswer: yup.string().required(),
+  newPassword: sharedFields.password,
+  newPasswordConfirmation: yup
+    .string()
+    .oneOf([yup.ref(`newPassword`)], invalidPasswordConfirmationMessage)
+    .required(passwordConfirmationIsRequiredMessage),
+};
 
 export {
   sharedFields,
@@ -83,4 +94,5 @@ export {
   securityInformationFields,
   signInFields,
   forgotPasswordFields,
+  resetPasswordFields,
 };

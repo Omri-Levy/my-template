@@ -1,38 +1,27 @@
 import passportJwt from 'passport-jwt';
-import { Request } from 'express';
 import passport from 'passport';
 import dotenv from 'dotenv-safe';
 import User from '../models/User.model';
-import { JwtToken } from '../utils/types';
+import jwtTokenExtractor from '../utils/jwtTokenExtractor';
 
 const configPassport = (): void => {
   dotenv.config();
   const JwtStrategy = passportJwt.Strategy;
   const { JWT_SECRET } = process.env;
-  const cookieExtractor = (req: Request) => {
-    let jwtToken: JwtToken = null;
-
-    if (req && req.headers.cookie) {
-      const { cookie } = req.headers;
-      jwtToken = cookie?.split(`qid=`)[1];
-    }
-
-    return jwtToken;
-  };
   const options = {
-    jwtFromRequest: cookieExtractor,
+    jwtFromRequest: jwtTokenExtractor,
     secretOrKey: JWT_SECRET,
   };
   const strategy = new JwtStrategy(options, async (jwtPayload, done) => {
     try {
       const user = await User.findOne({
         attributes: {
-          exclude: [`password`, `createdAt`, `updatedAt`, `tokenVersion`],
+          exclude: [`password`, `createdAt`, `updatedAt`],
         },
         where: { id: jwtPayload.id },
       });
 
-      if (!user) {
+      if (!user || user?.tokenVersion !== jwtPayload.tokenVersion) {
         return done(null);
       }
 

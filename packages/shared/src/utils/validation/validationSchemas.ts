@@ -2,6 +2,7 @@ import * as yup from 'yup';
 import {
   forgotPasswordFields,
   personalInformationFields,
+  resetPasswordFields,
   securityInformationFields,
   signInFields,
 } from './validationFields';
@@ -16,6 +17,7 @@ const signUpSchema = yup.object().shape({
 });
 const signInSchema = yup.object().shape(signInFields);
 const forgotPasswordSchema = yup.object().shape(forgotPasswordFields);
+const resetPasswordSchema = yup.object().shape(resetPasswordFields);
 
 export {
   personalInformationSchema,
@@ -23,4 +25,5 @@ export {
   signUpSchema,
   signInSchema,
   forgotPasswordSchema,
+  resetPasswordSchema,
 };

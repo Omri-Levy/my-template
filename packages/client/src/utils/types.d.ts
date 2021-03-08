@@ -19,6 +19,8 @@ interface ChildrenProps {
 }
 
 type Payload = SignUpFormFields | Record<null, null>;
+type Callback = (args?: unknown) => Promise<unknown>;
+type AsyncUseEffect = (callback: Callback) => Promise<unknown>;
 
 export {
   SetState,
@@ -32,4 +34,5 @@ export {
   ClearErrors,
   GetValues,
   Payload,
+  AsyncUseEffect,
 };

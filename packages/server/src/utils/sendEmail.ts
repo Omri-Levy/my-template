@@ -1,7 +1,7 @@
 import { createTransport } from 'nodemailer';
 import { SendEmail } from './types';
 
-const sendEmail: SendEmail = async (from, to, subject, text, html) => {
+const sendEmail: SendEmail = (from, to, subject, text, html) => {
   const { EMAIL_USER, EMAIL_PASS } = process.env;
 
   const transporter = createTransport({
@@ -13,7 +13,7 @@ const sendEmail: SendEmail = async (from, to, subject, text, html) => {
     },
   });
 
-  await transporter.sendMail(
+  transporter.sendMail(
     {
       from,
       to,

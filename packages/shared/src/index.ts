@@ -19,6 +19,8 @@ import {
   invalidPasswordMessage,
   invalidPasswordPolicyMessage,
   invalidSecurityAnswerMessage,
+  invalidSecurityInformationMessage,
+  invalidTokenMessage,
   passwordConfirmationIsRequiredMessage,
   passwordIsRequiredMessage,
   securityAnswerRequiredMessage,
@@ -30,6 +32,7 @@ import { apiUrl, securityQuestions } from './utils/constants';
 import {
   forgotPasswordSchema,
   personalInformationSchema,
+  resetPasswordSchema,
   securityInformationSchema,
   signInSchema,
   signUpSchema,
@@ -85,11 +88,14 @@ export {
   invalidSecurityAnswerMessage,
   securityAnswerRequiredMessage,
   forgotPasswordMessage,
+  invalidTokenMessage,
+  invalidSecurityInformationMessage,
   personalInformationSchema,
   securityInformationSchema,
   signUpSchema,
   signInSchema,
   forgotPasswordSchema,
+  resetPasswordSchema,
   fetch,
 };
 

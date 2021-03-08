@@ -6,10 +6,20 @@ const onSubmit: OnSubmit = (
   endpoint,
   setError,
   expectedErrorMessages,
-  callback
+  callback,
+  params
 ) => (gRecaptchaResponse) => async (data) => {
   try {
-    await fetch(`POST`, undefined, endpoint, { ...data, gRecaptchaResponse });
+    await fetch(
+      `POST`,
+      undefined,
+      endpoint,
+      {
+        ...data,
+        gRecaptchaResponse,
+      },
+      params
+    );
 
     if (callback) {
       callback();

@@ -5,7 +5,8 @@ type OnSubmit = (
   endpoint: Endpoint,
   setError: SetError,
   expectedErrorMessages?: string[],
-  callback?: (args?: unknown) => unknown
+  callback?: (args?: unknown) => unknown,
+  params?: string
 ) => (gRecaptchaResponse: GRecaptchaResponse) => (data: Data) => Promise<void>;
 
 export { OnSubmit };

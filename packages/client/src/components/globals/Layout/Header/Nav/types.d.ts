@@ -1,3 +1,6 @@
-type Authenticate = () => Promise<void>;
+import { IterableUser } from '@my-template/shared';
 
-export { Authenticate };
+type Authenticate = () => Promise<void>;
+type ShouldSkipLink = (to: string, currentUser: IterableUser) => boolean;
+
+export { Authenticate, ShouldSkipLink };

@@ -1,12 +1,8 @@
 import axios from 'axios';
-import { NextFunction, Request, Response } from 'express';
 import { invalidIsRobotMessage } from '@my-template/shared';
+import { Middleware } from '../../utils/types';
 
-const validateRecaptcha = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
+const validateRecaptcha: Middleware = async (req, res, next) => {
   const { RECAPTCHA_SECRET_KEY } = process.env;
   const { gRecaptchaResponse } = req.body;
   const verifyRecaptchaUrl =

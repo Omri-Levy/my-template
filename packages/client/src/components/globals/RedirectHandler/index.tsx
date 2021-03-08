@@ -27,9 +27,27 @@ const RedirectHandler = (): JSX.Element | null => {
        * based on if the user is authenticated or not.
        */
       if (currentUser && currentUser !== `unauthenticated`) {
-        setValidRoute(protectedEndpoints.includes(pathname));
+        const isValidRoute = protectedEndpoints.some((protectedEndpoint) => {
+          if (typeof protectedEndpoint !== `string`) {
+            return protectedEndpoint.test(pathname);
+          }
+
+          return protectedEndpoint.includes(pathname);
+        });
+
+        setValidRoute(isValidRoute);
       } else {
-        setValidRoute(unprotectedEndpoints.includes(pathname));
+        const isValidRoute = unprotectedEndpoints.some(
+          (unprotectedEndpoint) => {
+            if (typeof unprotectedEndpoint !== `string`) {
+              return unprotectedEndpoint.test(pathname);
+            }
+
+            return unprotectedEndpoint.includes(pathname);
+          }
+        );
+
+        setValidRoute(isValidRoute);
       }
     } catch (error) {
       console.error(error);

@@ -5,7 +5,8 @@ type FormType =
   | `personalInformation`
   | `securityInformation`
   | `signIn`
-  | `forgotPassword`;
+  | `forgotPassword`
+  | `resetPassword`;
 
 interface Props {
   errors: FieldErrors;

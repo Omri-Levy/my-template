@@ -1,7 +1,8 @@
 import { lazy } from 'react';
 import { FaRedoAlt, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
-import { commonEndpoints, commonRoutes } from './commonRoutes';
+import { commonRoutes } from './commonRoutes';
 import ForgotPassword from '../../components/pages/ForgotPassword';
+import ResetPassword from '../../components/pages/ResetPassword';
 
 const SignUp = lazy(() => import(`../../components/pages/SignUp`));
 const SignIn = lazy(() => import(`../../components/pages/SignIn`));
@@ -15,6 +16,7 @@ const signIn = {
 };
 const signUp = {
   to: `/signUp`,
+  formSteps: [`/signUp/securityInformation`],
   text: `Sign Up`,
   icon: FaUserPlus,
   Component: SignUp,
@@ -27,14 +29,28 @@ const forgotPassword = {
   Component: ForgotPassword,
   exact: true,
 };
+const resetPassword = {
+  to: `/resetPassword/:token`,
+  regex: /\/resetPassword\/*/,
+  text: `Reset Password`,
+  icon: FaRedoAlt,
+  Component: ResetPassword,
+  exact: false,
+};
 
-const unauthenticatedRoutes = [...commonRoutes, signIn, signUp, forgotPassword];
+const unauthenticatedRoutes = [
+  ...commonRoutes,
+  signIn,
+  signUp,
+  forgotPassword,
+  resetPassword,
+];
 const unauthenticatedEndpoints = [
-  ...commonEndpoints,
-  signIn.to,
   signUp.to,
-  `/signUp/securityInformation`,
+  ...signUp.formSteps,
+  signIn.to,
   forgotPassword.to,
+  resetPassword.regex,
 ];
 
 export { unauthenticatedRoutes, unauthenticatedEndpoints };

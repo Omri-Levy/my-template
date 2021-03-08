@@ -1,17 +1,18 @@
-import { verify } from 'argon2';
 import { signInSchema, wrongCredentialsMessage } from '@my-template/shared';
-import { Request, Response } from 'express';
 import User from '../../../models/User.model';
-import generateJwtToken from '../signUp/generateJwtToken';
+import generateJwtToken from '../../../utils/generateJwtToken';
 import sendJwtToken from '../../../utils/sendJwtToken';
+import { Route } from '../../../utils/types';
+import verifyIfVerifiable from '../../../utils/verifyIfVerifiable';
 
-const signIn = async (req: Request, res: Response): Promise<void> => {
+const signIn: Route = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     await signInSchema.isValid(req.body);
     const user = await User.findOne({ where: { email } });
-    const passwordMatches = user ? await verify(user.password, password) : null;
+    const verify = verifyIfVerifiable(user);
+    const passwordMatches = await verify(user?.password, password);
 
     if (!user || !passwordMatches) {
       console.error(wrongCredentialsMessage);
@@ -21,7 +22,7 @@ const signIn = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const jwtToken = generateJwtToken(user);
+    const jwtToken = generateJwtToken(user, `9h`);
     await sendJwtToken(res, jwtToken);
 
     console.log(`Sign in successful.`);

@@ -1,8 +1,15 @@
 type ObjectKey = string | number | symbol;
 type ObjectType = Record<ObjectKey, unknown>;
 type Data<T> = Record<ObjectKey, T>;
-type Endpoint = `signUp` | `signIn` | `signOut` | `getUser` | `forgotPassword`;
 type RequestMethod = `GET` | `POST` | `PATCH` | `DELETE`;
+type Endpoint =
+  | `signUp`
+  | `signIn`
+  | `signOut`
+  | `getUser`
+  | `forgotPassword`
+  | `resetPassword`
+  | `validateResetPasswordToken`;
 
 interface User {
   id: string;

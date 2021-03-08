@@ -4,6 +4,7 @@ import SecurityInformationFormFields from './SignUpFormFields/SecurityInformatio
 import PersonalInformationFormFields from './SignUpFormFields/PersonalInformationFormFields';
 import SignInFormFields from './SignInFormFields';
 import ForgotPasswordFormFields from './ForgotPasswordFormFields';
+import ResetPasswordFormFields from './ResetPasswordFormFields';
 
 /**
  * TODO: update description
@@ -42,6 +43,14 @@ const FormFields: FunctionComponent<PropsPlusFormType> = ({
     case `forgotPassword`:
       return (
         <ForgotPasswordFormFields
+          errors={errors}
+          clearErrors={clearErrors}
+          register={register}
+        />
+      );
+    case `resetPassword`:
+      return (
+        <ResetPasswordFormFields
           errors={errors}
           clearErrors={clearErrors}
           register={register}

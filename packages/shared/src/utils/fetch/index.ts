@@ -2,12 +2,15 @@ import axios from 'axios';
 import { FetchFunction } from './types';
 import { apiUrl } from '../constants';
 
-const fetch: FetchFunction = async (method, url, endpoint, data) =>
-  await axios({
+const fetch: FetchFunction = async (method, url, endpoint, data, params) => {
+  const conditionalUrl = url || `${apiUrl}/${endpoint}`;
+
+  return axios({
     method,
-    url: url || `${apiUrl}/${endpoint}`,
+    url: params ? `${conditionalUrl}/${params}` : conditionalUrl,
     withCredentials: true,
-    data: data ?? data,
+    data,
   });
+};
 
 export default fetch;

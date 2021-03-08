@@ -3,6 +3,11 @@ import { FaAt, FaSignature } from 'react-icons/fa';
 import FormField from '../../../FormField';
 import clearResponseError from '../../../FormResponseError/clearResponseError';
 import { Props } from '../../types';
+import {
+  emailHelperText,
+  firstNameHelperText,
+  lastNameHelperText,
+} from '../../../../../utils/constants';
 
 /**
  * TODO: update description
@@ -23,7 +28,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
       maxLength={35}
       icon={FaSignature}
       iconColor={`gray.300`}
-      helperText={`Example: John`}
+      helperText={firstNameHelperText}
     />
     <FormField
       isRequired
@@ -35,7 +40,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
       maxLength={35}
       icon={FaSignature}
       iconColor={`gray.300`}
-      helperText={`Example: Doe`}
+      helperText={lastNameHelperText}
     />
     <FormField
       onChange={clearResponseError(clearErrors)}
@@ -48,7 +53,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
       maxLength={320}
       icon={FaAt}
       iconColor={`gray.300`}
-      helperText={`Example: example@address.com`}
+      helperText={emailHelperText}
     />
   </>
 );

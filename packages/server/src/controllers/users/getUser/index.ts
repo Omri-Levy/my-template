@@ -1,8 +1,10 @@
-import { Request, Response } from 'express';
+import { Route } from '../../../utils/types';
 
-const getUser = async (req: Request, res: Response): Promise<void> => {
+const getUser: Route = async (req, res) => {
   try {
-    res.status(200).send({ status: `success`, user: req.user });
+    const { user } = req;
+
+    res.status(200).send({ status: `success`, user });
   } catch (error) {
     console.error(error);
 
