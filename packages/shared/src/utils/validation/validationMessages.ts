@@ -78,7 +78,7 @@ const invalidSecurityAnswerMessage =
   `${securityAnswer} must ` +
   `include a minimum of ${securityAnswerMin} characters and a maximum of ` +
   `${securityAnswerMax} characters.`;
-const securityAnswerRequiredMessage =
+const securityAnswerIsRequiredMessage =
   `${securityAnswer} ` + `${requiredFieldMessage}`;
 const forgotPasswordMessage =
   `If the email belongs to an existing account ` +
@@ -103,7 +103,7 @@ export {
   serverErrorMessage,
   securityQuestionOneOfMessage,
   invalidSecurityAnswerMessage,
-  securityAnswerRequiredMessage,
+  securityAnswerIsRequiredMessage,
   forgotPasswordMessage,
   invalidTokenMessage,
   invalidSecurityInformationMessage,

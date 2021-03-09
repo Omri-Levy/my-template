@@ -6,11 +6,12 @@ import {
 } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import FormFields from '../FormFields';
 import Form from '../Form';
 import onSubmit from '../onSubmit';
 import { Params } from '../../pages/ResetPassword/types';
+import useToast from '../../../hooks/useToast';
 
 /**
  * TODO: update description
@@ -32,11 +33,26 @@ const ResetPasswordForm: FunctionComponent = () => {
   const { isSubmitting } = formState;
   const params: Params = useParams();
   const { token } = params;
+  const toast = useToast();
+  const { push } = useHistory();
+  const callback = () => {
+    push(`/signIn`, {
+      toast: toast({
+        status: `success`,
+        title: `Success`,
+        description: `Your password has been updated.`,
+        isClosable: true,
+        duration: null,
+        position: `top`,
+        variant: `subtle`,
+      }),
+    });
+  };
   const submitFn = onSubmit(
     `resetPassword`,
     setError,
     [invalidSecurityInformationMessage],
-    undefined,
+    callback,
     token
   );
 

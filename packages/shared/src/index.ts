@@ -23,7 +23,7 @@ import {
   invalidTokenMessage,
   passwordConfirmationIsRequiredMessage,
   passwordIsRequiredMessage,
-  securityAnswerRequiredMessage,
+  securityAnswerIsRequiredMessage,
   serverErrorMessage,
   wrongCredentialsMessage,
 } from './utils/validation/validationMessages';
@@ -86,7 +86,7 @@ export {
   emailAlreadyInUseMessage,
   serverErrorMessage,
   invalidSecurityAnswerMessage,
-  securityAnswerRequiredMessage,
+  securityAnswerIsRequiredMessage,
   forgotPasswordMessage,
   invalidTokenMessage,
   invalidSecurityInformationMessage,

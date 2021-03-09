@@ -45,7 +45,7 @@ const validateResetPasswordToken: Middleware = async (req, res, next) => {
     return;
   }
 
-  if (user?.tokenVersion !== tokenVersion) {
+  if (user.tokenVersion !== tokenVersion) {
     console.error(invalidTokenMessage);
 
     res.status(400).send({ message: invalidTokenMessage });

@@ -5,11 +5,10 @@ import NavButton from '../../../NavBox/NavButton';
 import NavBox from '../../../NavBox';
 
 const UnauthenticatedHome: FunctionComponent = () => {
-  const buttonWidth = 60;
   const navLinksProps = {
     px: 1,
     borderRadius: 5,
-    width: buttonWidth,
+    width: 60,
     display: `grid`,
     placeContent: `center`,
   };

@@ -55,7 +55,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "story": "start-storybook",
+    "story": "start-storybook -p 9009",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",

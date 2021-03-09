@@ -11,6 +11,8 @@ const ResetPassword: FunctionComponent = () => {
   const params: Params = useParams();
   const [status, setStatus] = useState<number>();
   const isMounted = useRef(true);
+  const isSuccess = status === 200;
+  const title = isSuccess ? `Reset Password` : `Temporary link expired`;
 
   useEffect(() => {
     if (isMounted) {
@@ -29,8 +31,8 @@ const ResetPassword: FunctionComponent = () => {
   }, [params]);
 
   return (
-    <Page title={`Reset Password`} icon={FaRedoAlt}>
-      {status !== 200 ? <TemporaryLinkExpired /> : <ResetPasswordForm />}
+    <Page title={title} icon={FaRedoAlt}>
+      {isSuccess ? <ResetPasswordForm /> : <TemporaryLinkExpired />}
     </Page>
   );
 };

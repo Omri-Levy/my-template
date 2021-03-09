@@ -13,6 +13,7 @@ import {
   resetSignUpFormDetails,
   setSignUpFormDetails,
 } from '../../redux/reducer';
+import useToast from '../useToast';
 
 /**
  * a hook to share functionality across the signIn and signUp page.
@@ -24,6 +25,7 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
   const { push, replace } = useHistory();
+  const toast = useToast();
 
   const fetchAndAuthenticate: FetchAndAuthenticate = async (data) => {
     await fetch(`POST`, undefined, endpoint, data);
@@ -33,7 +35,17 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
     if (endpoint === `signUp`) {
       dispatch(resetSignUpFormDetails());
 
-      push(`/signIn`);
+      push(`/signIn`, {
+        toast: toast({
+          status: `success`,
+          title: `Success`,
+          description: `A new account has been made.`,
+          isClosable: true,
+          duration: null,
+          position: `top`,
+          variant: `subtle`,
+        }),
+      });
     }
   };
   const onSubmit: OnSubmit = (gRecaptchaResponse) => async (data) => {
