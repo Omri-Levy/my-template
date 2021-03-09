@@ -13,7 +13,7 @@ import {
   resetSignUpFormDetails,
   setSignUpFormDetails,
 } from '../../redux/reducer';
-import useToast from '../useToast';
+import useSuccessToast from '../useSuccessToast';
 
 /**
  * a hook to share functionality across the signIn and signUp page.
@@ -25,7 +25,14 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
   const { push, replace } = useHistory();
-  const toast = useToast();
+  const {
+    toast: signUpToast,
+    toastOptions: signUpToastOptions,
+  } = useSuccessToast(`A new account has been made.`);
+  const {
+    toast: signOutToast,
+    toastOptions: signOutToastOptions,
+  } = useSuccessToast(`Signed out successfully.`);
 
   const fetchAndAuthenticate: FetchAndAuthenticate = async (data) => {
     await fetch(`POST`, undefined, endpoint, data);
@@ -36,15 +43,7 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
       dispatch(resetSignUpFormDetails());
 
       push(`/signIn`, {
-        toast: toast({
-          status: `success`,
-          title: `Success`,
-          description: `A new account has been made.`,
-          isClosable: true,
-          duration: null,
-          position: `top`,
-          variant: `subtle`,
-        }),
+        toast: signUpToast(signUpToastOptions),
       });
     }
   };
@@ -76,7 +75,9 @@ const useAuthentication: HookReturns = (endpoint, setError) => {
   const signOut: SignOut = async () => {
     await fetchAndAuthenticate();
 
-    replace(`/signIn`);
+    replace(`/signIn`, {
+      toast: signOutToast(signOutToastOptions),
+    });
   };
 
   return {

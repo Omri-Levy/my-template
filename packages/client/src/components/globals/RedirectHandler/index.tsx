@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import AuthenticationContext from '../../../context/Authentication/AuthenticationContext';
 import useRoutes from '../../../hooks/useRoutes';
+import useSuccessToast from '../../../hooks/useSuccessToast';
 
 /**
  * centralized redirect related logic making use of react hooks and
  * context to ensure correct redirects.
  */
 const RedirectHandler = (): JSX.Element | null => {
+  const { toast, toastOptions } = useSuccessToast(`Signed in successfully.`);
+
   // current page
   const { pathname } = useLocation();
   const redirectUrl = `/`;
@@ -55,7 +58,16 @@ const RedirectHandler = (): JSX.Element | null => {
   }, [pathname, currentUser, protectedEndpoints, unprotectedEndpoints]);
 
   if (shouldRedirect && !validRoute) {
-    return <Redirect to={redirectUrl} />;
+    return (
+      <Redirect
+        to={{
+          pathname: redirectUrl,
+          state: {
+            toast: pathname === `/signIn` && toast(toastOptions),
+          },
+        }}
+      />
+    );
   }
 
   return null;
