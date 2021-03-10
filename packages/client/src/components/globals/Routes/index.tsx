@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { v4 } from 'uuid';
 import useRoutes from '../../../hooks/ui/useRoutes';
@@ -25,4 +25,4 @@ const Routes: FunctionComponent = () => {
   );
 };
 
-export default Routes;
+export default memo(Routes);

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { HStack, Icon, Switch, useColorMode } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import useDarkMode from '../../../../../hooks/ui/useDarkMode';
@@ -22,4 +22,4 @@ const DarkModeSwitch: FunctionComponent<Props> = (props) => {
   );
 };
 
-export default DarkModeSwitch;
+export default memo(DarkModeSwitch);

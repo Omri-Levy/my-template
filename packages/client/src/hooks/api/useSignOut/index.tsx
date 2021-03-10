@@ -20,11 +20,11 @@ const useSignOut: HookReturns = () => {
   const signOut: SignOut = async () => {
     await fetch(`POST`, undefined, `signOut`);
 
+    await authenticate();
+
     replace(`/signIn`, {
       toast: signOutToast(signOutToastOptions),
     });
-
-    await authenticate();
   };
 
   return signOut;

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { Container as MainContainer } from '@chakra-ui/react';
 import { ChildrenProps } from '../../../../utils/types';
 
@@ -10,4 +10,4 @@ const Container: FunctionComponent<ChildrenProps> = ({ children }) => (
   <MainContainer as={`main`}>{children}</MainContainer>
 );
 
-export default Container;
+export default memo(Container);

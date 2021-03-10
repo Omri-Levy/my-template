@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import useRoutes from '../../../hooks/ui/useRoutes';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
@@ -8,7 +8,6 @@ import AuthenticationContext from '../../../context/AuthenticationContext/Authen
  * context to ensure correct redirects.
  */
 const RedirectHandler = (): JSX.Element | null => {
-  const { currentUser } = useContext(AuthenticationContext);
   // current page
   const { pathname } = useLocation();
   const redirectUrl = `/`;
@@ -19,7 +18,7 @@ const RedirectHandler = (): JSX.Element | null => {
    */
   const shouldRedirect = redirectUrl !== pathname;
   const { unprotectedEndpoints, protectedEndpoints } = useRoutes();
-  const isProtectedEndpoint = useCallback(
+  const isProtectedEndpoint = useMemo(
     () =>
       protectedEndpoints.some((protectedEndpoint) => {
         if (typeof protectedEndpoint !== `string`) {
@@ -30,7 +29,7 @@ const RedirectHandler = (): JSX.Element | null => {
       }),
     [pathname, protectedEndpoints]
   );
-  const isUnprotectedEndpoint = useCallback(
+  const isUnprotectedEndpoint = useMemo(
     () =>
       unprotectedEndpoints.some((unprotectedEndpoint) => {
         if (typeof unprotectedEndpoint !== `string`) {
@@ -41,6 +40,7 @@ const RedirectHandler = (): JSX.Element | null => {
       }),
     [pathname, unprotectedEndpoints]
   );
+  const { currentUser } = useContext(AuthenticationContext);
   const handleRedirect = useCallback(async () => {
     try {
       /**
@@ -50,9 +50,9 @@ const RedirectHandler = (): JSX.Element | null => {
       let isValidRoute;
 
       if (currentUser && currentUser !== `unauthenticated`) {
-        isValidRoute = isProtectedEndpoint();
+        isValidRoute = isProtectedEndpoint;
       } else {
-        isValidRoute = isUnprotectedEndpoint();
+        isValidRoute = isUnprotectedEndpoint;
       }
 
       setValidRoute(isValidRoute);

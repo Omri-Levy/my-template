@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 
 /**
  * a wrapper component for react-helmet-async Helmet component.
@@ -9,4 +9,4 @@ const Head: FunctionComponent = () => (
     <title>My Template</title>
   </Helmet>
 );
-export default Head;
+export default memo(Head);

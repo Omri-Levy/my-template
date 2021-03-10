@@ -1,5 +1,5 @@
 import { Flex, List, Stack } from '@chakra-ui/react';
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent, memo, useContext } from 'react';
 import NavLink from './NavLink';
 import useRoutes from '../../../../../hooks/ui/useRoutes';
 import shouldSkipLink from './shouldSkipLink';
@@ -38,4 +38,4 @@ const Nav: FunctionComponent = () => {
   );
 };
 
-export default Nav;
+export default memo(Nav);

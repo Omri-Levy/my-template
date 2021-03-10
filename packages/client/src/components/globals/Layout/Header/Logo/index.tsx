@@ -1,5 +1,5 @@
 import { Box, Heading, Icon } from '@chakra-ui/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { Props } from './types';
 
 /**
@@ -21,4 +21,4 @@ const Logo: FunctionComponent<Props> = ({
   </Box>
 );
 
-export default Logo;
+export default memo(Logo);

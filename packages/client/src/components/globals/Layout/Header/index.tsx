@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { Flex } from '@chakra-ui/react';
 import Nav from './Nav';
 import Logo from './Logo';
@@ -18,4 +18,4 @@ const Header: FunctionComponent = () => (
     <Nav />
   </Flex>
 );
-export default Header;
+export default memo(Header);
