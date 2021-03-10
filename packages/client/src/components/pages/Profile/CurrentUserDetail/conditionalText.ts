@@ -6,11 +6,15 @@ import { ConditionalText } from './types';
  * iteration and returns an empty string if the user is not authenticated.
  */
 const conditionalText: ConditionalText = (currentUser, text, objectKey) => {
+  const emptyField = `${text}: `;
+
   if (currentUser && currentUser !== `unauthenticated`) {
-    return `${text}: ${currentUser[objectKey]}`;
+    const userDetail = currentUser[objectKey];
+
+    return userDetail ? `${emptyField}${userDetail}` : emptyField;
   }
 
-  return `${text}: `;
+  return emptyField;
 };
 
 export default conditionalText;
