@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
+import useRoutes from '../../../hooks/ui/useRoutes';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
-import useRoutes from '../../../hooks/useRoutes';
 
 /**
  * centralized redirect related logic making use of react hooks and
  * context to ensure correct redirects.
  */
 const RedirectHandler = (): JSX.Element | null => {
+  const { currentUser } = useContext(AuthenticationContext);
   // current page
   const { pathname } = useLocation();
   const redirectUrl = `/`;
@@ -17,42 +18,55 @@ const RedirectHandler = (): JSX.Element | null => {
    * page.
    */
   const shouldRedirect = redirectUrl !== pathname;
-  const { currentUser } = useContext(AuthenticationContext);
   const { unprotectedEndpoints, protectedEndpoints } = useRoutes();
+  const isProtectedEndpoint = useCallback(
+    () =>
+      protectedEndpoints.some((protectedEndpoint) => {
+        if (typeof protectedEndpoint !== `string`) {
+          return protectedEndpoint.test(pathname);
+        }
 
-  useEffect(() => {
+        return protectedEndpoint.includes(pathname);
+      }),
+    [pathname, protectedEndpoints]
+  );
+  const isUnprotectedEndpoint = useCallback(
+    () =>
+      unprotectedEndpoints.some((unprotectedEndpoint) => {
+        if (typeof unprotectedEndpoint !== `string`) {
+          return unprotectedEndpoint.test(pathname);
+        }
+
+        return unprotectedEndpoint.includes(pathname);
+      }),
+    [pathname, unprotectedEndpoints]
+  );
+  const handleRedirect = useCallback(async () => {
     try {
       /**
        * redirects if the current page does not exist or should not render
        * based on if the user is authenticated or not.
        */
-      if (currentUser && currentUser !== `unauthenticated`) {
-        const isValidRoute = protectedEndpoints.some((protectedEndpoint) => {
-          if (typeof protectedEndpoint !== `string`) {
-            return protectedEndpoint.test(pathname);
-          }
 
-          return protectedEndpoint.includes(pathname);
-        });
+      if (currentUser && currentUser !== `unauthenticated`) {
+        const isValidRoute = isProtectedEndpoint();
 
         setValidRoute(isValidRoute);
       } else {
-        const isValidRoute = unprotectedEndpoints.some(
-          (unprotectedEndpoint) => {
-            if (typeof unprotectedEndpoint !== `string`) {
-              return unprotectedEndpoint.test(pathname);
-            }
-
-            return unprotectedEndpoint.includes(pathname);
-          }
-        );
+        const isValidRoute = isUnprotectedEndpoint();
 
         setValidRoute(isValidRoute);
       }
     } catch (error) {
       console.error(error);
     }
-  }, [pathname, currentUser, protectedEndpoints, unprotectedEndpoints]);
+  }, [isProtectedEndpoint, isUnprotectedEndpoint, currentUser]);
+
+  useEffect(() => {
+    (async () => {
+      await handleRedirect();
+    })();
+  }, [handleRedirect]);
 
   if (shouldRedirect && !validRoute) {
     return <Redirect to={redirectUrl} />;

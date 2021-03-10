@@ -1,6 +1,5 @@
 import { useContext, useMemo } from 'react';
 import { HookReturns } from './types';
-import AuthenticationContext from '../../context/AuthenticationContext/AuthenticationContext';
 import {
   authenticatedEndpoints,
   authenticatedRoutes,
@@ -9,6 +8,7 @@ import {
   unauthenticatedEndpoints,
   unauthenticatedRoutes,
 } from './unauthenticatedRoutes';
+import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 
 /**
  * returns a memoized version of the app's routes array based on if the user

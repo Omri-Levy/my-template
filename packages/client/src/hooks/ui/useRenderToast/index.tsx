@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { State } from '../../components/pages/SignIn/types';
+import { State } from '../../../components/pages/SignIn/types';
 import { HookReturns } from './types';
 
 const useRenderToast: HookReturns = (toastRef) => {

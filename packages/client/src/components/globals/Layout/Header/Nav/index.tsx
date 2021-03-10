@@ -1,14 +1,12 @@
 import { Flex, List, Stack } from '@chakra-ui/react';
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent } from 'react';
 import NavLink from './NavLink';
-import useRoutes from '../../../../../hooks/useRoutes';
-import AuthenticationContext from '../../../../../context/AuthenticationContext/AuthenticationContext';
+import useRoutes from '../../../../../hooks/ui/useRoutes';
 import shouldSkipLink from './shouldSkipLink';
-import useSignOut from '../../../../../hooks/useSignOut';
+import useSignOut from '../../../../../hooks/api/useSignOut';
 
 const Nav: FunctionComponent = () => {
   const { routes } = useRoutes();
-  const { currentUser } = useContext(AuthenticationContext);
   const signOut = useSignOut();
 
   return (
@@ -18,7 +16,7 @@ const Nav: FunctionComponent = () => {
           const { to, text, icon, exact } = route;
           const path = Array.isArray(to) ? to[0] : to;
 
-          if (shouldSkipLink(to, currentUser)) {
+          if (shouldSkipLink(to, `unauthenticated`)) {
             return null;
           }
 

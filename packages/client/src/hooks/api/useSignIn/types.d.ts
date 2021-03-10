@@ -1,5 +1,5 @@
-import { SignInFormFields } from '../../components/pages/SignIn/types';
-import { GRecaptchaResponse, SetError } from '../../utils/types';
+import { SignInFormFields } from '../../../components/pages/SignIn/types';
+import { GRecaptchaResponse, SetError } from '../../../utils/types';
 
 type SignIn = (
   gRecaptchaResponse: GRecaptchaResponse

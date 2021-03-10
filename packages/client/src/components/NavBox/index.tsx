@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Box, BoxProps, List, Stack } from '@chakra-ui/react';
-import useDarkMode from '../../hooks/useDarkMode';
+import useDarkMode from '../../hooks/ui/useDarkMode';
 
 /**
  * an alternative navigation component made using Chakra-UI's Box component

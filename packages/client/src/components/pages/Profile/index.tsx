@@ -3,17 +3,17 @@ import { List } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { FaIdCard } from 'react-icons/fa';
 import Page from '../Page';
-import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import currentUserDetails from './currentUserDetails';
 import CurrentUserDetail from './CurrentUserDetail';
+import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 
 /**
  * a route wrapped with the Page component to display the currently
  * authenticated user's details.
  */
 const Profile: FunctionComponent = () => {
-  const { currentUser } = useContext(AuthenticationContext);
   const memoizedDetails = useMemo(() => currentUserDetails, []);
+  const { currentUser } = useContext(AuthenticationContext);
 
   return (
     <Page title={`Profile`} icon={FaIdCard}>

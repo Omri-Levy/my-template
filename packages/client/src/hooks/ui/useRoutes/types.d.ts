@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Icon } from '../../utils/types';
+import { Icon } from '../../../utils/types';
 
 interface Route {
   to: string;

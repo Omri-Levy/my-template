@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { v4 } from 'uuid';
-import useRoutes from '../../../hooks/useRoutes';
+import useRoutes from '../../../hooks/ui/useRoutes';
 
 const Routes: FunctionComponent = () => {
   const { routes } = useRoutes();

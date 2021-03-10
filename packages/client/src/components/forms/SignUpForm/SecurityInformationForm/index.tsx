@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import FormFields from '../../FormFields';
 import MultiStepForm from '../../MultiStepForm';
 import { Props } from './types';
-import useSignUp from '../../../../hooks/useSignUp';
+import useSignUp from '../../../../hooks/api/useSignUp';
 
 /**
  * TODO: update description

@@ -1,11 +1,11 @@
 import { lazy } from 'react';
 import { FaRedoAlt, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import { commonRoutes } from './commonRoutes';
-import ForgotPassword from '../../components/pages/ForgotPassword';
-import ResetPassword from '../../components/pages/ResetPassword';
+import ForgotPassword from '../../../components/pages/ForgotPassword';
+import ResetPassword from '../../../components/pages/ResetPassword';
 
-const SignUp = lazy(() => import(`../../components/pages/SignUp`));
-const SignIn = lazy(() => import(`../../components/pages/SignIn`));
+const SignUp = lazy(() => import(`../../../components/pages/SignUp`));
+const SignIn = lazy(() => import(`../../../components/pages/SignIn`));
 
 const signIn = {
   to: `/signIn`,

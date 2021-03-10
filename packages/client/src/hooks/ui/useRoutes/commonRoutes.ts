@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { FaHome } from 'react-icons/fa';
 
 const UnauthenticatedHome = lazy(
-  () => import(`../../components/pages/Home/UnauthenticatedHome`)
+  () => import(`../../../components/pages/Home/UnauthenticatedHome`)
 );
 const home = {
   to: `/`,

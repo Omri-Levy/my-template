@@ -11,7 +11,7 @@ import FormFields from '../FormFields';
 import Form from '../Form';
 import onSubmit from '../onSubmit';
 import { Params } from '../../pages/ResetPassword/types';
-import useSuccessToast from '../../../hooks/useSuccessToast';
+import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 
 /**
  * TODO: update description

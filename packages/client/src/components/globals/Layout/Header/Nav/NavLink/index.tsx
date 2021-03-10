@@ -2,7 +2,7 @@ import { Icon, Link, ListItem } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
-import useDarkMode from '../../../../../../hooks/useDarkMode';
+import useDarkMode from '../../../../../../hooks/ui/useDarkMode';
 
 /**
  * @description a reusable navigation link component with active link styling

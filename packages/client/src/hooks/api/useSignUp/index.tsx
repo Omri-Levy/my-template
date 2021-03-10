@@ -2,12 +2,12 @@ import { emailAlreadyInUseMessage, fetch } from '@my-template/shared';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { HookReturns, SignUp } from './types';
-import setResponseError from '../../components/forms/FormResponseError/setResponseError';
+import setResponseError from '../../../components/forms/FormResponseError/setResponseError';
 import {
   resetSignUpFormDetails,
   setSignUpFormDetails,
-} from '../../redux/reducer';
-import useSuccessToast from '../useSuccessToast';
+} from '../../../redux/reducer';
+import useSuccessToast from '../../ui/useSuccessToast';
 
 /**
  * a hook that takes all the steps required in order to sign up,
@@ -20,7 +20,7 @@ const useSignUp: HookReturns = (setError) => {
   const {
     toast: signUpToast,
     toastOptions: signUpToastOptions,
-  } = useSuccessToast(`A new account has been made.`);
+  } = useSuccessToast(`Your new account has been created successfully.`);
 
   const signUp: SignUp = (gRecaptchaResponse) => async (data) => {
     try {

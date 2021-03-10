@@ -1,5 +1,5 @@
 import { serverErrorMessage } from '@my-template/shared';
-import formFields from '../../utils/formFields';
+import formFields from '../../../utils/formFields';
 import { FormHasErrors } from './types';
 
 const formHasErrors: FormHasErrors = (errors) => {

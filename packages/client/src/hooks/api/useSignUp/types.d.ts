@@ -1,5 +1,5 @@
-import { SignUpFormFields } from '../../components/pages/SignUp/types';
-import { GRecaptchaResponse, SetError } from '../../utils/types';
+import { SignUpFormFields } from '../../../components/pages/SignUp/types';
+import { GRecaptchaResponse, SetError } from '../../../utils/types';
 
 type SignUp = (
   gRecaptchaResponse: GRecaptchaResponse

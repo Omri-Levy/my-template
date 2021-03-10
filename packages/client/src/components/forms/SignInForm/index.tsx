@@ -6,7 +6,7 @@ import { FaSignInAlt } from 'react-icons/fa';
 import { BoxProps } from '@chakra-ui/react';
 import Form from '../Form';
 import FormFields from '../FormFields';
-import useSignIn from '../../../hooks/useSignIn';
+import useSignIn from '../../../hooks/api/useSignIn';
 
 /**
  * TODO: update description

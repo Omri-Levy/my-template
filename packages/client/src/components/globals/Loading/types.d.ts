@@ -1,5 +1,5 @@
 interface Props {
-  isLoading: boolean;
+  suspense?: boolean;
 }
 
 export { Props };

@@ -1,10 +1,12 @@
 import { Spinner, useColorMode } from '@chakra-ui/react';
 import { FunctionComponent, memo } from 'react';
+import { useIsFetching } from 'react-query';
 import { Props } from './types';
 
-const Loading: FunctionComponent<Props> = ({ isLoading }) => {
+const Loading: FunctionComponent<Props> = ({ suspense }) => {
   const { colorMode } = useColorMode();
-  const color = colorMode === `dark` ? `gray.900` : `gray.50`;
+  const color = colorMode === `dark` ? `gray.50` : `gray.900`;
+  const isFetching = useIsFetching();
 
   return (
     <Spinner
@@ -15,7 +17,7 @@ const Loading: FunctionComponent<Props> = ({ isLoading }) => {
       right={5}
       pointerEvents={`none`}
       transition={`240ms ease`}
-      opacity={isLoading ? 1 : 0}
+      opacity={isFetching || suspense ? 1 : 0}
     />
   );
 };

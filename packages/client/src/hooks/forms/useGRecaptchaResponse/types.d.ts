@@ -1,4 +1,4 @@
-import { GRecaptchaResponse, SetState } from '../../utils/types';
+import { GRecaptchaResponse, SetState } from '../../../utils/types';
 
 type HookReturns = () => {
   gRecaptchaResponse: GRecaptchaResponse;

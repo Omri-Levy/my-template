@@ -3,7 +3,7 @@ import { FaHome, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import Page from '../../Page';
 import NavButton from '../../../NavBox/NavButton';
 import NavBox from '../../../NavBox';
-import useRenderToast from '../../../../hooks/useRenderToast';
+import useRenderToast from '../../../../hooks/ui/useRenderToast';
 
 const UnauthenticatedHome: FunctionComponent = () => {
   const toastRef = useRef();

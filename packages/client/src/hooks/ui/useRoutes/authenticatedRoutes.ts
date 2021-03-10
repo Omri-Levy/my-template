@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { FaIdCard, FaSignOutAlt } from 'react-icons/fa';
 import { commonEndpoints, commonRoutes } from './commonRoutes';
 
-const Profile = lazy(() => import(`../../components/pages/Profile`));
+const Profile = lazy(() => import(`../../../components/pages/Profile`));
 const profile = {
   to: `/profile`,
   text: `Profile`,

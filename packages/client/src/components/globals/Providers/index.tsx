@@ -6,10 +6,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import theme from './theme';
 import queryClient from './queryClient';
-import AuthenticationProvider from '../../../context/AuthenticationContext';
-import LoadingProvider from '../../../context/LoadingContext';
 import { persistedStore, store } from '../../../redux/store';
 import Loading from '../Loading';
+import AuthenticationProvider from '../../../context/AuthenticationContext';
 
 const Providers: FunctionComponent = ({ children }) => (
   <ChakraProvider theme={theme}>
@@ -17,12 +16,10 @@ const Providers: FunctionComponent = ({ children }) => (
       <QueryClientProvider client={queryClient}>
         <ReduxProvider store={store}>
           <PersistGate
-            loading={<Loading isLoading />}
+            loading={<Loading suspense />}
             persistor={persistedStore}
           >
-            <AuthenticationProvider>
-              <LoadingProvider>{children}</LoadingProvider>
-            </AuthenticationProvider>
+            <AuthenticationProvider>{children}</AuthenticationProvider>
           </PersistGate>
         </ReduxProvider>
       </QueryClientProvider>

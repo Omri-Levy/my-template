@@ -1,9 +1,9 @@
 import { Box, Button, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import Recaptcha from '../Recaptcha';
-import useDisableSubmit from '../../../hooks/useDisableSubmit';
+import useDisableSubmit from '../../../hooks/forms/useDisableSubmit';
 import { Props } from './types';
-import useGRecaptchaResponse from '../../../hooks/useGRecaptchaResponse';
+import useGRecaptchaResponse from '../../../hooks/forms/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 
 /**

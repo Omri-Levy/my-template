@@ -2,7 +2,7 @@ import { FunctionComponent, useRef } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import SignInForm from '../../forms/SignInForm';
 import Page from '../Page';
-import useRenderToast from '../../../hooks/useRenderToast';
+import useRenderToast from '../../../hooks/ui/useRenderToast';
 
 const SignIn: FunctionComponent = () => {
   const toastRef = useRef();

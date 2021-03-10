@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GRecaptchaResponse } from '../../utils/types';
+import { GRecaptchaResponse } from '../../../utils/types';
 import { HookReturns } from './types';
 
 const useGRecaptchaResponse: HookReturns = () => {
