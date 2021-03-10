@@ -3,7 +3,7 @@ import { List } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { FaIdCard } from 'react-icons/fa';
 import Page from '../Page';
-import AuthenticationContext from '../../../context/Authentication/AuthenticationContext';
+import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import currentUserDetails from './currentUserDetails';
 import CurrentUserDetail from './CurrentUserDetail';
 

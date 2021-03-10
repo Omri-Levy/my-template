@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 import { HookReturns } from './types';
-import AuthenticationContext from '../../context/Authentication/AuthenticationContext';
+import AuthenticationContext from '../../context/AuthenticationContext/AuthenticationContext';
 import {
   authenticatedEndpoints,
   authenticatedRoutes,

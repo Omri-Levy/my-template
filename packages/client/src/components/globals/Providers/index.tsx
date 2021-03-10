@@ -6,8 +6,8 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import theme from './theme';
 import queryClient from './queryClient';
-import AuthenticationProvider from '../../../context/Authentication';
-import LoadingProvider from '../../../context/Loading';
+import AuthenticationProvider from '../../../context/AuthenticationContext';
+import LoadingProvider from '../../../context/LoadingContext';
 import { persistedStore, store } from '../../../redux/store';
 import Loading from '../Loading';
 

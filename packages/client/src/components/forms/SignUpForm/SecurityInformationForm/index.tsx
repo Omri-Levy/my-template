@@ -6,8 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector } from 'react-redux';
 import FormFields from '../../FormFields';
 import MultiStepForm from '../../MultiStepForm';
-import useAuthentication from '../../../../hooks/useAuthentication';
 import { Props } from './types';
+import useSignUp from '../../../../hooks/useSignUp';
 
 /**
  * TODO: update description
@@ -29,7 +29,7 @@ const SecurityInformationForm: FunctionComponent<Props> = ({ breadcrumbs }) => {
     defaultValues,
   });
   const { isSubmitting } = formState;
-  const { onSubmit } = useAuthentication(`signUp`, setError);
+  const signUp = useSignUp(setError);
 
   return (
     <MultiStepForm
@@ -37,7 +37,7 @@ const SecurityInformationForm: FunctionComponent<Props> = ({ breadcrumbs }) => {
       errors={errors}
       getValues={getValues}
       handleSubmit={handleSubmit}
-      onSubmit={onSubmit}
+      onSubmit={signUp}
       isSubmitting={isSubmitting}
       submitButtonText={`Sign Up`}
       submitButtonIcon={FaUserPlus}

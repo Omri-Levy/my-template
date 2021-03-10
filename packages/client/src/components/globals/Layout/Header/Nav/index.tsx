@@ -2,14 +2,14 @@ import { Flex, List, Stack } from '@chakra-ui/react';
 import { FunctionComponent, useContext } from 'react';
 import NavLink from './NavLink';
 import useRoutes from '../../../../../hooks/useRoutes';
-import useAuthentication from '../../../../../hooks/useAuthentication';
-import AuthenticationContext from '../../../../../context/Authentication/AuthenticationContext';
+import AuthenticationContext from '../../../../../context/AuthenticationContext/AuthenticationContext';
 import shouldSkipLink from './shouldSkipLink';
+import useSignOut from '../../../../../hooks/useSignOut';
 
 const Nav: FunctionComponent = () => {
   const { routes } = useRoutes();
   const { currentUser } = useContext(AuthenticationContext);
-  const { signOut } = useAuthentication(`signOut`);
+  const signOut = useSignOut();
 
   return (
     <Flex as={`nav`} alignItems={`center`}>

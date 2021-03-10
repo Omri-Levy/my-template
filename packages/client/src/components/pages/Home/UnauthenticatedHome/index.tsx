@@ -1,10 +1,13 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo, useRef } from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import Page from '../../Page';
 import NavButton from '../../../NavBox/NavButton';
 import NavBox from '../../../NavBox';
+import useRenderToast from '../../../../hooks/useRenderToast';
 
 const UnauthenticatedHome: FunctionComponent = () => {
+  const toastRef = useRef();
+  toastRef.current = useRenderToast(toastRef);
   const navLinksProps = {
     px: 1,
     borderRadius: 5,
@@ -15,6 +18,7 @@ const UnauthenticatedHome: FunctionComponent = () => {
 
   return (
     <Page title={`Home`} icon={FaHome} display={`grid`}>
+      {toastRef.current}
       <NavBox borderRadius={5} height={`300px`} mt={`100px`}>
         <NavButton
           to={`/signUp`}
@@ -33,4 +37,4 @@ const UnauthenticatedHome: FunctionComponent = () => {
   );
 };
 
-export default UnauthenticatedHome;
+export default memo(UnauthenticatedHome);

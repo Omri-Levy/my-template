@@ -17,7 +17,7 @@ const useRenderToast: HookReturns = (toastRef) => {
     return () => {
       isMounted.current = false;
     };
-  }, [pathname, replace, state.toast, toastRef]);
+  }, [pathname, replace, state?.toast, toastRef]);
 
   return state?.toast;
 };

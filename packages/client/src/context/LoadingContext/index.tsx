@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useEffect, useState } from 'react';
 import LoadingContext from './LoadingContext';
-import AuthenticationContext from '../Authentication/AuthenticationContext';
+import AuthenticationContext from '../AuthenticationContext/AuthenticationContext';
 import Loading from '../../components/globals/Loading';
 
 const LoadingProvider: FunctionComponent = ({ children }) => {

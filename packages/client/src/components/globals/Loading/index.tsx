@@ -1,5 +1,5 @@
 import { Spinner, useColorMode } from '@chakra-ui/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { Props } from './types';
 
 const Loading: FunctionComponent<Props> = ({ isLoading }) => {
@@ -20,4 +20,4 @@ const Loading: FunctionComponent<Props> = ({ isLoading }) => {
   );
 };
 
-export default Loading;
+export default memo(Loading);
