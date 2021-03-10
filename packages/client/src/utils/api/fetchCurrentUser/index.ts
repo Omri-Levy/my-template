@@ -4,7 +4,7 @@ import { FetchCurrentUser } from './types';
 const fetchCurrentUser: FetchCurrentUser = async () => {
   const { data } = await fetch(`GET`, undefined, `getUser`, undefined);
 
-  return data;
+  return data?.user;
 };
 
 export default fetchCurrentUser;

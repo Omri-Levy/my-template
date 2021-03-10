@@ -14,6 +14,7 @@ import AuthenticationContext from '../../../context/AuthenticationContext/Authen
 const Profile: FunctionComponent = () => {
   const memoizedDetails = useMemo(() => currentUserDetails, []);
   const { currentUser } = useContext(AuthenticationContext);
+  console.log(currentUser);
 
   return (
     <Page title={`Profile`} icon={FaIdCard}>
