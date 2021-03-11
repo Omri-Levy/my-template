@@ -67,6 +67,7 @@ const FormField: FunctionComponent<Props> = ({
         )}
         {isSelectField ? (
           <Select
+            variant={`filled`}
             options={selectOptions}
             name={name}
             register={register}
