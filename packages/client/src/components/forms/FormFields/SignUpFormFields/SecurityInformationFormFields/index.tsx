@@ -34,7 +34,6 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`text`}
         icon={FaShieldAlt}
-        iconColor={`gray.300`}
       />
       <FormField
         isRequired
@@ -45,7 +44,6 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         type={`text`}
         maxLength={70}
         icon={FaShieldAlt}
-        iconColor={`gray.300`}
       />
       <FormField
         onChange={
@@ -59,7 +57,6 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         type={`password`}
         maxLength={128}
         icon={FaLock}
-        iconColor={`gray.300`}
         helperText={invalidPasswordPolicyMessage}
       />
       <FormField
@@ -71,7 +68,6 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         type={`password`}
         maxLength={128}
         icon={FaLock}
-        iconColor={`gray.300`}
         mb={10}
       />
     </>

@@ -27,7 +27,6 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
       type={`text`}
       maxLength={35}
       icon={FaSignature}
-      iconColor={`gray.300`}
       helperText={firstNameHelperText}
     />
     <FormField
@@ -39,7 +38,6 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
       type={`text`}
       maxLength={35}
       icon={FaSignature}
-      iconColor={`gray.300`}
       helperText={lastNameHelperText}
     />
     <FormField
@@ -52,7 +50,6 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
       type={`email`}
       maxLength={320}
       icon={FaAt}
-      iconColor={`gray.300`}
       helperText={emailHelperText}
     />
   </>

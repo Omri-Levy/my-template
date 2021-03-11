@@ -74,6 +74,7 @@ const FormField: FunctionComponent<Props> = ({
           />
         ) : (
           <Input
+            variant={`filled`}
             onChange={onChange ?? onChange}
             type={inputType}
             name={name}
@@ -83,7 +84,10 @@ const FormField: FunctionComponent<Props> = ({
         )}
         {isPasswordField && icon && (
           <InputRightElement>
-            <Icon as={hidePassword ? FaEye : FaEyeSlash} color={iconColor} />
+            <Icon
+              as={hidePassword ? FaEye : FaEyeSlash}
+              color={iconColor || undefined}
+            />
           </InputRightElement>
         )}
       </InputGroup>

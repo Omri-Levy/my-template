@@ -24,7 +24,6 @@ const SignInFormFields: FunctionComponent<Props> = ({
       type={`email`}
       maxLength={320}
       icon={FaAt}
-      iconColor={`gray.300`}
     />
     <FormField
       onChange={clearResponseError(clearErrors)}
@@ -36,7 +35,6 @@ const SignInFormFields: FunctionComponent<Props> = ({
       type={`password`}
       maxLength={128}
       icon={FaLock}
-      iconColor={`gray.300`}
       mb={1}
     />
     <ForgotPasswordLink />

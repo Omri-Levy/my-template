@@ -22,7 +22,6 @@ const ForgotPasswordFormFields: FunctionComponent<Props> = ({
     type={`email`}
     maxLength={320}
     icon={FaAt}
-    iconColor={`gray.300`}
   />
 );
 

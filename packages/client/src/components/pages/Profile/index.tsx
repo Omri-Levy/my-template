@@ -27,7 +27,6 @@ const Profile: FunctionComponent = () => {
               key={v4()}
               objectKey={objectKey}
               icon={icon}
-              iconColor={`gray.300`}
               text={text}
               currentUser={currentUser}
               textTransform={objectKey === `role` ? `capitalize` : undefined}

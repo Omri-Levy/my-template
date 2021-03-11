@@ -37,7 +37,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({
 
         if (disableLink) {
           disabledLinkStyles = {
-            color: `gray.300`,
+            color: `gray.500`,
             title:
               `Please fill the form and make sure its ` +
               `valid before moving to the next step.`,
@@ -54,7 +54,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({
             key={to}
             {...disabledLinkStyles}
           >
-            {icons && <Icon as={breadcrumb.icon} color={`gray. 300`} mr={3} />}
+            {icons && <Icon as={breadcrumb.icon} mr={3} />}
             <BreadcrumbLink
               pointerEvents={disableLink || isCurrentPage ? `none` : undefined}
               _activeLink={{

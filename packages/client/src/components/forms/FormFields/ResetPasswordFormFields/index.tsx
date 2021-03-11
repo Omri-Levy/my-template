@@ -29,7 +29,6 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
       type={`text`}
       name={`securityQuestion`}
       icon={FaShieldAlt}
-      iconColor={`gray.300`}
       register={register}
     />
     <FormField
@@ -40,7 +39,6 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
       type={`text`}
       name={`securityAnswer`}
       icon={FaShieldAlt}
-      iconColor={`gray.300`}
       register={register}
     />
     <FormField
@@ -51,7 +49,6 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
       type={`password`}
       name={`newPassword`}
       icon={FaLock}
-      iconColor={`gray.300`}
       register={register}
       helperText={invalidPasswordPolicyMessage}
     />
@@ -63,7 +60,6 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
       type={`password`}
       name={`newPasswordConfirmation`}
       icon={FaLock}
-      iconColor={`gray.300`}
       register={register}
     />
   </>

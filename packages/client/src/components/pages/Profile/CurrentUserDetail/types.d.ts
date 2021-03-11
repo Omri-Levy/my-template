@@ -5,7 +5,7 @@ import { ListItemProps } from '@chakra-ui/react';
 interface Props extends ListItemProps {
   objectKey: string;
   icon: FunctionComponent;
-  iconColor: string;
+  iconColor?: string;
   text: string;
   currentUser: IterableUser | null;
 }
