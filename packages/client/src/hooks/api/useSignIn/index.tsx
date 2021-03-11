@@ -33,7 +33,9 @@ const useSignIn: HookReturns = (setError) => {
     } catch (error) {
       console.error(error);
 
-      setResponseError(error, setError, [wrongCredentialsMessage]);
+      setResponseError(error, setError, [
+        wrongCredentialsMessage(error.response?.data.attemptsLeft),
+      ]);
     }
   };
 

@@ -4,6 +4,7 @@ import users from './users';
 import signIn from '../controllers/authentication/signIn';
 import validateRecaptcha from '../middleware/validateRecaptcha';
 import signOut from '../controllers/authentication/signOut';
+import bruteForce from '../expressBrute';
 
 const authentication = Router();
 
@@ -36,7 +37,7 @@ const authentication = Router();
  */
 users.post(`/signUp`, validateRecaptcha, signUp);
 
-users.post(`/signIn`, validateRecaptcha, signIn);
+users.post(`/signIn`, bruteForce.prevent, validateRecaptcha, signIn);
 
 users.post(`/signOut`, signOut);
 

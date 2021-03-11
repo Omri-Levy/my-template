@@ -1,6 +1,6 @@
 import { Route } from '../../../utils/types';
 
-const validateResetPasswordToken: Route = (_, res) => {
+const validateResetPasswordToken: Route = (_req, res) => {
   try {
     res.status(200).send({ status: `success` });
   } catch (error) {

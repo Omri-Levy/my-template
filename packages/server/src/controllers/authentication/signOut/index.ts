@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
 import sendJwtToken from '../../../utils/sendJwtToken';
+import { Route } from '../../../utils/types';
 
-const signOut = async (_: Request, res: Response): Promise<void> => {
+const signOut: Route = async (_req, res): Promise<void> => {
   try {
     await sendJwtToken(res, ``);
 

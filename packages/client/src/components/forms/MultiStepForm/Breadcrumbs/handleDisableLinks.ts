@@ -4,7 +4,7 @@ const handleDisableLinks: HandleDisableLinks = (breadcrumbs, disableSubmit) => {
   const disabledBreadcrumbs = [...breadcrumbs];
   let previousIndex = 0;
 
-  disabledBreadcrumbs.forEach((_, index) => {
+  disabledBreadcrumbs.forEach((_breadcrumb, index) => {
     const lastIndex = index === disabledBreadcrumbs.length - 1;
 
     if (previousIndex !== 0) {

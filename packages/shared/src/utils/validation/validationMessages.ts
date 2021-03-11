@@ -74,7 +74,10 @@ const securityAnswerIsRequiredMessage =
   `${securityAnswer} ` + `${requiredFieldMessage}`;
 
 // sign in
-const wrongCredentialsMessage = `Wrong credentials - please try again.`;
+const wrongCredentialsMessage = (attempsLeft: string) =>
+  `Wrong credentials - please try again. ${attempsLeft}`;
+const lockoutMessage =
+  `You've made too many failed sign in attempts - ` + `please try again`;
 
 // shared
 const invalidEmailMessage =
@@ -126,4 +129,5 @@ export {
   securityQuestionIsRequiredMessage,
   firstNameIsRequiredMessage,
   lastNameIsRequiredMessage,
+  lockoutMessage,
 };

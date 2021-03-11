@@ -24,6 +24,7 @@ import {
   invalidSecurityInformationMessage,
   invalidTokenMessage,
   lastNameIsRequiredMessage,
+  lockoutMessage,
   passwordConfirmationIsRequiredMessage,
   passwordIsRequiredMessage,
   securityAnswerIsRequiredMessage,
@@ -57,6 +58,11 @@ import {
   securityAnswerMax,
   securityAnswerMin,
 } from './utils/validation/validationConstants';
+import {
+  calculateHours,
+  calculateMinutes,
+  secondsToHours,
+} from './utils/functions';
 
 export {
   apiUrl,
@@ -96,6 +102,7 @@ export {
   invalidSecurityInformationMessage,
   emailIsRequiredMessage,
   securityQuestionIsRequiredMessage,
+  lockoutMessage,
   firstNameIsRequiredMessage,
   lastNameIsRequiredMessage,
   personalInformationSchema,
@@ -105,6 +112,9 @@ export {
   forgotPasswordSchema,
   resetPasswordSchema,
   fetch,
+  calculateMinutes,
+  calculateHours,
+  secondsToHours,
 };
 
 export type {

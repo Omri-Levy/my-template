@@ -103,6 +103,7 @@
     "@types/axios": "^0.14.0",
     "@types/dotenv-safe": "^8.1.1",
     "@types/jest": "^26.0.20",
+    "@types/luxon": "^1.26.2",
     "@types/node": "^14.14.26",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
@@ -134,6 +135,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv-safe": "^8.2.0",
+    "luxon": "^1.26.0",
     "uuid": "^8.3.2",
     "yup": "^0.32.8"
   }

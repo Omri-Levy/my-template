@@ -14,7 +14,7 @@ type Middleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => Promise<void>;
+) => Promise<void> | void;
 type JwtTokenExtractor = (req: Request) => JwtToken;
 
 interface JwtTokenPayload {

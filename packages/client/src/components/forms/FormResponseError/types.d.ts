@@ -7,7 +7,7 @@ interface Props extends FormControlProps {
 }
 
 type SetResponseError = (
-  error: { response: { data: { message } } },
+  error: { response: { status: number; data: { message } } },
   setError: SetError,
   expectedErrorMessages?: string[]
 ) => void;

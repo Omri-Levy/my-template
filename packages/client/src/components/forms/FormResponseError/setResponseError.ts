@@ -10,8 +10,12 @@ const setResponseError: SetResponseError = (
   const isExpectedErrorMessage = expectedErrorMessages?.includes(errorMessage);
   const isExpectingErrorMessage =
     expectedErrorMessages && expectedErrorMessages.length > 0;
+  const isStatus429 = error.response?.status === 429;
 
-  if ((isExpectingErrorMessage && !isExpectedErrorMessage) || !errorMessage) {
+  if (
+    (isExpectingErrorMessage && !isExpectedErrorMessage && !isStatus429) ||
+    !errorMessage
+  ) {
     errorMessage = serverErrorMessage;
   }
 
