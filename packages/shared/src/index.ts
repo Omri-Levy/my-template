@@ -10,6 +10,8 @@ import {
 } from './utils/types';
 import {
   emailAlreadyInUseMessage,
+  emailIsRequiredMessage,
+  firstNameIsRequiredMessage,
   forgotPasswordMessage,
   invalidEmailMessage,
   invalidFirstNameMessage,
@@ -21,9 +23,11 @@ import {
   invalidSecurityAnswerMessage,
   invalidSecurityInformationMessage,
   invalidTokenMessage,
+  lastNameIsRequiredMessage,
   passwordConfirmationIsRequiredMessage,
   passwordIsRequiredMessage,
   securityAnswerIsRequiredMessage,
+  securityQuestionIsRequiredMessage,
   serverErrorMessage,
   wrongCredentialsMessage,
 } from './utils/validation/validationMessages';
@@ -90,6 +94,10 @@ export {
   forgotPasswordMessage,
   invalidTokenMessage,
   invalidSecurityInformationMessage,
+  emailIsRequiredMessage,
+  securityQuestionIsRequiredMessage,
+  firstNameIsRequiredMessage,
+  lastNameIsRequiredMessage,
   personalInformationSchema,
   securityInformationSchema,
   signUpSchema,

@@ -4,14 +4,19 @@
 import * as yup from 'yup';
 import { isName, validPassword } from '../regex';
 import {
+  emailIsRequiredMessage,
+  firstNameIsRequiredMessage,
   invalidEmailMessage,
   invalidFirstNameMessage,
   invalidLastNameMessage,
   invalidPasswordConfirmationMessage,
   invalidPasswordMessage,
   invalidSecurityAnswerMessage,
+  lastNameIsRequiredMessage,
   passwordConfirmationIsRequiredMessage,
   passwordIsRequiredMessage,
+  securityAnswerIsRequiredMessage,
+  securityQuestionIsRequiredMessage,
   securityQuestionOneOfMessage,
 } from './validationMessages';
 import {
@@ -34,7 +39,7 @@ const sharedFields = {
     .email(invalidEmailMessage)
     .min(emailMin, invalidEmailMessage)
     .max(emailMax, invalidEmailMessage)
-    .required(),
+    .required(emailIsRequiredMessage),
   password: yup
     .string()
     .matches(validPassword, invalidPasswordMessage)
@@ -44,7 +49,7 @@ const sharedFields = {
   securityQuestion: yup
     .string()
     .oneOf(securityQuestions, securityQuestionOneOfMessage)
-    .required(),
+    .required(securityQuestionIsRequiredMessage),
 };
 const personalInformationFields = {
   fname: yup
@@ -52,13 +57,13 @@ const personalInformationFields = {
     .matches(isName, invalidFirstNameMessage)
     .min(firstNameMin)
     .max(firstNameMax)
-    .required(),
+    .required(firstNameIsRequiredMessage),
   lname: yup
     .string()
     .matches(isName, invalidLastNameMessage)
     .min(lastNameMin)
     .max(lastNameMax)
-    .required(),
+    .required(lastNameIsRequiredMessage),
   email: sharedFields.email,
 };
 const securityInformationFields = {
@@ -67,7 +72,7 @@ const securityInformationFields = {
     .string()
     .min(securityAnswerMin, invalidSecurityAnswerMessage)
     .max(securityAnswerMax, invalidSecurityAnswerMessage)
-    .required(),
+    .required(securityAnswerIsRequiredMessage),
   password: sharedFields.password,
   passwordConfirmation: yup
     .string()
@@ -83,7 +88,7 @@ const forgotPasswordFields = {
 };
 const resetPasswordFields = {
   securityQuestion: sharedFields.securityQuestion,
-  securityAnswer: yup.string().required(),
+  securityAnswer: yup.string().required(securityAnswerIsRequiredMessage),
   newPassword: sharedFields.password,
   newPasswordConfirmation: yup
     .string()

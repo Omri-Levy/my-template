@@ -39,21 +39,17 @@ const invalidNameMessage = (type: `firstName` | `lastName`) => {
     max = lastNameMax;
   }
 
-  const message =
+  return (
     ` must include a minimum of ${min} alphabetic characters and` +
     `, a maximum of ${max} alphabetic characters and may not include ` +
-    `spaces or dashes.`;
-
-  return message;
+    `spaces or dashes.`
+  );
 };
+// sign up
 const invalidFirstNameMessage = `${firstName} ${invalidNameMessage(
   `firstName`
 )}`;
 const invalidLastNameMessage = `${lastName} ${invalidNameMessage(`lastName`)}`;
-const invalidEmailMessage =
-  `${email} must include '@', a minimum of ` +
-  `1 character before '@', a minimum of 1 character after '@,` +
-  ` and end with a valid domain i.e '.com'.`;
 const invalidPasswordPolicyMessage =
   `${password} must include a minimum of ` +
   `${passwordMin} characters, a maximum of ${passwordMax} characters, ` +
@@ -62,31 +58,50 @@ const invalidPasswordPolicyMessage =
   `characters, ${passwordNumbers} number ` +
   `and ${passwordSpecialCharacters} special characters.`;
 const invalidPasswordMessage = `${password} must match password policy.`;
-const passwordIsRequiredMessage = `${password} ` + `${requiredFieldMessage}`;
-const passwordConfirmationIsRequiredMessage =
-  `${passwordConfirmation} ` + `${requiredFieldMessage}`;
-const invalidPasswordConfirmationMessage =
-  `${passwordConfirmation} must ` + `match the inserted password.`;
-const invalidIsRobotMessage =
-  `Please verify you are not a robot and ` + `try again.`;
-const wrongCredentialsMessage = `Wrong credentials - please try again.`;
-const emailAlreadyInUseMessage = `${email} already in use.`;
-const serverErrorMessage = `Something went wrong - please try again.`;
-const securityQuestionOneOfMessage =
-  `Please select a ` + `${securityQuestion.toLowerCase()}.`;
 const invalidSecurityAnswerMessage =
   `${securityAnswer} must ` +
   `include a minimum of ${securityAnswerMin} characters and a maximum of ` +
   `${securityAnswerMax} characters.`;
+const invalidPasswordConfirmationMessage =
+  `${passwordConfirmation} must ` + `match the inserted password.`;
+
+const passwordConfirmationIsRequiredMessage =
+  `${passwordConfirmation} ` + `${requiredFieldMessage}`;
+const firstNameIsRequiredMessage = `${firstName} ${requiredFieldMessage}`;
+const lastNameIsRequiredMessage = `${lastName} ${requiredFieldMessage}`;
+const emailAlreadyInUseMessage = `${email} already in use.`;
 const securityAnswerIsRequiredMessage =
   `${securityAnswer} ` + `${requiredFieldMessage}`;
+
+// sign in
+const wrongCredentialsMessage = `Wrong credentials - please try again.`;
+
+// shared
+const invalidEmailMessage =
+  `${email} must include '@', a minimum of ` +
+  `1 character before '@', a minimum of 1 character after '@,` +
+  ` and end with a valid domain i.e '.com'.`;
+const invalidIsRobotMessage =
+  `Please verify you are not a robot and ` + `try again.`;
+
+const passwordIsRequiredMessage = `${password} ` + `${requiredFieldMessage}`;
+const emailIsRequiredMessage = `${email} ` + `${requiredFieldMessage}`;
+const securityQuestionIsRequiredMessage =
+  `${securityQuestion} ` + `${requiredFieldMessage}`;
+
+const serverErrorMessage = `Something went wrong - please try again.`;
+const securityQuestionOneOfMessage =
+  `Please select a ` + `${securityQuestion.toLowerCase()}.`;
+
+// forgot password
+const invalidSecurityInformationMessage =
+  `Wrong security question or ` + `security answer - please try again.`;
+const invalidTokenMessage = `Invalid token.`;
+
 const forgotPasswordMessage =
   `If the email belongs to an existing account ` +
   `- you will receive an email with the next steps in order to ` +
   `reset your password shortly.`;
-const invalidTokenMessage = `Invalid token.`;
-const invalidSecurityInformationMessage =
-  `Wrong security question or ` + `security answer - please try again.`;
 
 export {
   invalidFirstNameMessage,
@@ -107,4 +122,8 @@ export {
   forgotPasswordMessage,
   invalidTokenMessage,
   invalidSecurityInformationMessage,
+  emailIsRequiredMessage,
+  securityQuestionIsRequiredMessage,
+  firstNameIsRequiredMessage,
+  lastNameIsRequiredMessage,
 };
