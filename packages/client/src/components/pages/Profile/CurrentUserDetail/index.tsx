@@ -17,7 +17,7 @@ const CurrentUserDetail: FunctionComponent<Props> = ({
   ...props
 }) => (
   <ListItem mb={2} {...props}>
-    <ListIcon as={icon} color={iconColor || undefined} />
+    <ListIcon as={icon} color={iconColor} />
     {conditionalText(currentUser, text, objectKey)}
   </ListItem>
 );

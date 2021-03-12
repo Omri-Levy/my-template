@@ -8,8 +8,8 @@ import {
   Icon,
   Input,
   InputGroup,
-  InputLeftElement,
-  InputRightElement,
+  InputLeftAddon,
+  InputRightAddon,
   Text,
 } from '@chakra-ui/react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -19,8 +19,8 @@ import Select from '../../Select';
 
 /**
  * @description a single forms field made of Chakra-UI's FormControl,
- * FormLabel, InputGroup, InputLeftElement, Input/Select, FormHelperText and
- * FormErrorMessage - also uses InputRightElement, Checkbox and Text for
+ * FormLabel, InputGroup, InputLeftAddon, Input/Select, FormHelperText and
+ * FormErrorMessage - also uses InputRightAddon, Checkbox and Text for
  * fields of type password with the ability to show and hide the password
  * using the checkbox.
  */
@@ -55,15 +55,14 @@ const FormField: FunctionComponent<Props> = ({
       id={name}
       isInvalid={!!errors[name]?.message}
       mb={5}
-      className={isSelectField ? `selectWithIcon` : undefined}
       {...props}
     >
       <FormLabel>{labelTitle}</FormLabel>
       <InputGroup>
         {icon && (
-          <InputLeftElement pointerEvents={`none`}>
+          <InputLeftAddon pointerEvents={`none`}>
             <Icon as={icon} color={iconColor} />
-          </InputLeftElement>
+          </InputLeftAddon>
         )}
         {isSelectField ? (
           <Select
@@ -75,6 +74,7 @@ const FormField: FunctionComponent<Props> = ({
           />
         ) : (
           <Input
+            placeholder={`Type here...`}
             variant={`filled`}
             onChange={onChange ?? onChange}
             type={inputType}
@@ -84,12 +84,9 @@ const FormField: FunctionComponent<Props> = ({
           />
         )}
         {isPasswordField && icon && (
-          <InputRightElement>
-            <Icon
-              as={hidePassword ? FaEye : FaEyeSlash}
-              color={iconColor || undefined}
-            />
-          </InputRightElement>
+          <InputRightAddon>
+            <Icon as={hidePassword ? FaEye : FaEyeSlash} color={iconColor} />
+          </InputRightAddon>
         )}
       </InputGroup>
       {isPasswordField && (
