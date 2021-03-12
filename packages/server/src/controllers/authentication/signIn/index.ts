@@ -12,7 +12,10 @@ const signIn: Route = async (req, res) => {
     const { email, password } = req.body;
 
     await signInSchema.isValid(req.body);
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({
+      where: { email },
+      attributes: [`id`, `tokenVersion`, `password`],
+    });
     const verify = verifyIfVerifiable(user);
     const passwordMatches = await verify(user?.password, password);
     await setnxAsync(`retriesLeft`, `5`);

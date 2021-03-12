@@ -1,12 +1,7 @@
-import { FaAt, FaIdCard, FaSignature, FaUserTag } from 'react-icons/fa';
+import { FaAt, FaSignature, FaUserTag } from 'react-icons/fa';
 import { CurrentUserDetails } from './types';
 
 const currentUserDetails: CurrentUserDetails = [
-  {
-    objectKey: `id`,
-    text: `ID`,
-    icon: FaIdCard,
-  },
   {
     objectKey: `firstName`,
     text: `First Name`,

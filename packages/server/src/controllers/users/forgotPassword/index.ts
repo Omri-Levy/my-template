@@ -9,7 +9,10 @@ const forgotPassword: Route = async (req, res) => {
     const { email } = req.body;
     const { EMAIL_USER } = process.env;
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({
+      where: { email },
+      attributes: [`id`, `tokenVersion`],
+    });
 
     if (user) {
       const jwtToken = generateJwtToken(user, `5m`);

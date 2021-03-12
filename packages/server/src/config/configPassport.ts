@@ -15,7 +15,7 @@ const configPassport = (): void => {
   const strategy = new JwtStrategy(options, async (jwtPayload, done) => {
     try {
       const user = await User.findOne({
-        attributes: [`email`, `firstName`, `lastName`, `role`],
+        attributes: [`email`, `firstName`, `lastName`, `role`, `tokenVersion`],
         where: { id: jwtPayload.id },
       });
 

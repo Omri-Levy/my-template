@@ -35,7 +35,10 @@ const validateResetPasswordToken: Middleware = async (req, res, next) => {
   }
 
   const { id, tokenVersion } = verifiedToken as JwtTokenPayload;
-  const user = await User.findOne({ where: { id } });
+  const user = await User.findOne({
+    where: { id },
+    attributes: [`tokenVersion`, `securityQuestion`, `securityAnswer`],
+  });
 
   if (!user) {
     console.error(serverErrorMessage);
