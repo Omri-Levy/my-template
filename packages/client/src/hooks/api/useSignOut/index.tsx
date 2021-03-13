@@ -1,6 +1,6 @@
-import { fetch } from '@my-template/shared';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
+import { axiosRequest } from '@my-template/shared';
 import { HookReturns, SignOut } from './types';
 import useSuccessToast from '../../ui/useSuccessToast';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
@@ -18,15 +18,20 @@ const useSignOut: HookReturns = () => {
   } = useSuccessToast(`Signed out successfully.`);
 
   const signOut: SignOut = async () => {
-    await fetch(`POST`, undefined, `signOut`);
+    try {
+      await axiosRequest(`POST`, undefined, `signOut`);
 
-    await authenticate();
+      await authenticate();
 
-    replace(`/signIn`, {
-      toast: signOutToast(signOutToastOptions),
-    });
+      replace(`/signIn`, {
+        toast: signOutToast(signOutToastOptions),
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return signOut;
 };
+
 export default useSignOut;

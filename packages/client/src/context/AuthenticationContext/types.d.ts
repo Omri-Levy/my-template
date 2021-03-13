@@ -1,8 +1,8 @@
 import { IterableUser } from '@my-template/shared';
 
-interface AuthContextType {
+interface AuthenticationContextType {
   currentUser: IterableUser | null;
   authenticate: () => Promise<void>;
 }
 
-export { AuthContextType };
+export { AuthenticationContextType };

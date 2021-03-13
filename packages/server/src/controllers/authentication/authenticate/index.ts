@@ -1,6 +1,6 @@
 import { Route } from '../../../utils/types';
 
-const getUser: Route = async (req, res) => {
+const authenticate: Route = async (req, res) => {
   try {
     const { user } = req;
 
@@ -12,4 +12,4 @@ const getUser: Route = async (req, res) => {
   }
 };
 
-export default getUser;
+export default authenticate;

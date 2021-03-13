@@ -1,7 +1,7 @@
 import { createContext } from 'react';
-import { AuthContextType } from './types';
+import { AuthenticationContextType } from './types';
 
-const AuthenticationContext = createContext<AuthContextType>({
+const AuthenticationContext = createContext<AuthenticationContextType>({
   currentUser: null,
   authenticate: () => Promise.resolve(),
 });

@@ -1,8 +1,8 @@
 import db from '../../../db';
 import User from '../../../models/User.model';
 
-describe(`getUser temp`, () => {
-  it(`getUser temp`, async () => {
+describe(`authenticate temp`, () => {
+  it(`authenticate temp`, async () => {
     expect(true).toBe(true);
   });
 

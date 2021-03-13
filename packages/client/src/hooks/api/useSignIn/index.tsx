@@ -1,4 +1,4 @@
-import { fetch, wrongCredentialsMessage } from '@my-template/shared';
+import { axiosRequest, wrongCredentialsMessage } from '@my-template/shared';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import { HookReturns, SignIn } from './types';
@@ -20,16 +20,16 @@ const useSignIn: HookReturns = (setError) => {
 
   const signIn: SignIn = (gRecaptchaResponse) => async (data) => {
     try {
-      await fetch(`POST`, undefined, `signIn`, {
+      await axiosRequest(`POST`, undefined, `signIn`, {
         ...data,
         gRecaptchaResponse,
       });
 
+      await authenticate();
+
       replace(`/`, {
         toast: signInToast(signInToastOptions),
       });
-
-      await authenticate();
     } catch (error) {
       console.error(error);
 
@@ -41,4 +41,5 @@ const useSignIn: HookReturns = (setError) => {
 
   return signIn;
 };
+
 export default useSignIn;

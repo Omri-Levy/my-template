@@ -1,4 +1,4 @@
-import { emailAlreadyInUseMessage, fetch } from '@my-template/shared';
+import { axiosRequest, emailAlreadyInUseMessage } from '@my-template/shared';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { HookReturns, SignUp } from './types';
@@ -26,7 +26,7 @@ const useSignUp: HookReturns = (setError) => {
     try {
       dispatch(setSignUpFormDetails(data));
 
-      await fetch(`POST`, undefined, `signUp`, {
+      await axiosRequest(`POST`, undefined, `signUp`, {
         ...store,
         gRecaptchaResponse,
       });
@@ -45,4 +45,5 @@ const useSignUp: HookReturns = (setError) => {
 
   return signUp;
 };
+
 export default useSignUp;

@@ -1,7 +1,5 @@
 import { Router } from 'express';
-import { authenticate } from 'passport';
 import getUsers from '../controllers/users/getUsers';
-import getUser from '../controllers/users/getUser';
 import forgotPassword from '../controllers/users/forgotPassword';
 import resetPassword from '../controllers/users/resetPassword';
 import validateResetPasswordToken from '../middleware/validateResetPasswordToken';
@@ -96,14 +94,6 @@ const users = Router();
  *
  */
 users.get(`/getUsers`, getUsers);
-
-users.get(
-  `/getUser`,
-  authenticate(`jwt`, {
-    session: false,
-  }),
-  getUser
-);
 
 users.post(`/forgotPassword`, forgotPassword);
 

@@ -1,4 +1,4 @@
-import { fetch } from '@my-template/shared';
+import { axiosRequest } from '@my-template/shared';
 import { OnSubmit } from './types';
 import setResponseError from './FormResponseError/setResponseError';
 
@@ -10,7 +10,7 @@ const onSubmit: OnSubmit = (
   params
 ) => (gRecaptchaResponse) => async (data) => {
   try {
-    await fetch(
+    await axiosRequest(
       `POST`,
       undefined,
       endpoint,

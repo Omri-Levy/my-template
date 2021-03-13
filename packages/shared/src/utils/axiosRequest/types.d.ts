@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { Data, Endpoint, RequestMethod } from '@my-template/shared';
 
-type FetchFunction = (
+type AxiosRequest = (
   method: RequestMethod,
   url?: string,
   endpoint: Endpoint,
@@ -9,4 +9,4 @@ type FetchFunction = (
   params?: string
 ) => Promise<AxiosResponse<Data | unknown>>;
 
-export { FetchFunction };
+export { AxiosRequest };

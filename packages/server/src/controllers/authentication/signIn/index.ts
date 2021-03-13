@@ -8,7 +8,6 @@ import { decrAsync, getAsync, setAsync, setnxAsync } from '../../../redis';
 
 const signIn: Route = async (req, res) => {
   try {
-    console.log(await getAsync(`7YxzCWFaSF9cAcy3sdWILna8AEcUq0WoI7sKSwM59Ic=`));
     const { email, password } = req.body;
 
     await signInSchema.isValid(req.body);
@@ -45,7 +44,7 @@ const signIn: Route = async (req, res) => {
     }
 
     const jwtToken = generateJwtToken(user, `9h`);
-    await sendJwtToken(res, jwtToken);
+    sendJwtToken(res, jwtToken);
 
     console.log(`Sign in successful.`);
 

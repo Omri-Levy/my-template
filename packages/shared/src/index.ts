@@ -32,7 +32,7 @@ import {
   serverErrorMessage,
   wrongCredentialsMessage,
 } from './utils/validation/validationMessages';
-import fetch from './utils/fetch';
+import axiosRequest from './utils/axiosRequest';
 import { apiUrl, securityQuestions } from './utils/constants';
 import {
   forgotPasswordSchema,
@@ -111,7 +111,7 @@ export {
   signInSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
-  fetch,
+  axiosRequest,
   calculateMinutes,
   calculateHours,
   secondsToHours,

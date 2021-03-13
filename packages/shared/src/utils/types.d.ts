@@ -6,6 +6,8 @@ type Endpoint =
   | `signUp`
   | `signIn`
   | `signOut`
+  | `authenticate`
+  | `authorize`
   | `getUser`
   | `forgotPassword`
   | `resetPassword`

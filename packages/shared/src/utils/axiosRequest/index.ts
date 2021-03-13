@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { FetchFunction } from './types';
+import { AxiosRequest } from './types';
 import { apiUrl } from '../constants';
 
-const fetch: FetchFunction = async (method, url, endpoint, data, params) => {
+const axiosRequest: AxiosRequest = async (
+  method,
+  url,
+  endpoint,
+  data,
+  params
+) => {
   const conditionalUrl = url || `${apiUrl}/${endpoint}`;
 
   return axios({
@@ -13,4 +19,4 @@ const fetch: FetchFunction = async (method, url, endpoint, data, params) => {
   });
 };
 
-export default fetch;
+export default axiosRequest;

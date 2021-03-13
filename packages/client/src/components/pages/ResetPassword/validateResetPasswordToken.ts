@@ -1,9 +1,15 @@
-import { fetch } from '@my-template/shared';
+import { axiosRequest } from '@my-template/shared';
 import { ValidateResetPasswordToken } from './types';
 
 const validateResetPasswordToken: ValidateResetPasswordToken = (
   token
 ) => async () =>
-  await fetch(`GET`, undefined, `validateResetPasswordToken`, undefined, token);
+  await axiosRequest(
+    `GET`,
+    undefined,
+    `validateResetPasswordToken`,
+    undefined,
+    token
+  );
 
 export default validateResetPasswordToken;
