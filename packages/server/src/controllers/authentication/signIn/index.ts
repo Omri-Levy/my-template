@@ -66,7 +66,7 @@ const signIn: Route = async (req, res) => {
     if (name === `validationError`) {
       console.error(errors);
 
-      res.status(500).send({ message: errors });
+      res.status(400).send({ message: errors });
     }
 
     console.error(error);
