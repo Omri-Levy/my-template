@@ -2,14 +2,20 @@ import { axiosRequest } from '@my-template/shared';
 import { FetchAuthenticate } from './types';
 
 const fetchAuthenticate: FetchAuthenticate = async () => {
-  const { data } = await axiosRequest(
-    `GET`,
-    undefined,
-    `authenticate`,
-    undefined
-  );
+  try {
+    const { data } = await axiosRequest(
+      `GET`,
+      undefined,
+      `authenticate`,
+      undefined
+    );
 
-  return data?.user;
+    return data?.user;
+  } catch (error) {
+    console.error(error);
+
+    return `unauthenticated`;
+  }
 };
 
 export default fetchAuthenticate;

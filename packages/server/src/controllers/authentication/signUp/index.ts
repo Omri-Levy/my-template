@@ -16,11 +16,23 @@ const signUp: Route = async (req, res) => {
       role,
     } = req.body;
     console.log(req.body);
-    await signUpSchema.isValid(req.body);
+
+    await signUpSchema.validate(req.body, {
+      abortEarly: false,
+    });
 
     const hashedPassword = await hash(password);
     const hashedSecurityQuestion = await hash(securityQuestion);
     const hashedSecurityAnswer = await hash(securityAnswer);
+
+    const isFirstUser = (await User.count()) === 0;
+    const noAdmins = (await User.count({ where: { role: `admin` } })) === 0;
+
+    let requiredRole = role || `user`;
+
+    if (isFirstUser || noAdmins) {
+      requiredRole = `admin`;
+    }
 
     const user = await User.findOne({ where: { email } });
 
@@ -39,7 +51,7 @@ const signUp: Route = async (req, res) => {
       securityQuestion: hashedSecurityQuestion,
       securityAnswer: hashedSecurityAnswer,
       password: hashedPassword,
-      role: role || `user`,
+      role: requiredRole,
     });
 
     await newUser.save();
@@ -48,6 +60,16 @@ const signUp: Route = async (req, res) => {
 
     res.status(200).send({ status: `success` });
   } catch (error) {
+    const { name, errors } = error;
+
+    if (name === `ValidationError`) {
+      console.error(errors);
+
+      res.status(500).send({ message: errors });
+
+      return;
+    }
+
     console.error(error);
 
     res.status(500).send({ error });

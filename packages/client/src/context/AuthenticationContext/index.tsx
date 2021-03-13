@@ -13,13 +13,7 @@ const AuthenticationProvider: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        await authenticate();
-      } catch (error) {
-        console.error(error);
-
-        setCurrentUser(`unauthenticated`);
-      }
+      await authenticate();
     })();
   }, [authenticate]);
 

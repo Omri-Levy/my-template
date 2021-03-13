@@ -10,7 +10,10 @@ const signIn: Route = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    await signInSchema.isValid(req.body);
+    await signInSchema.validate(req.body, {
+      abortEarly: false,
+    });
+
     const user = await User.findOne({
       where: { email },
       attributes: [`id`, `tokenVersion`, `password`],
@@ -58,6 +61,14 @@ const signIn: Route = async (req, res) => {
 
     res.status(200).send({ status: `success` });
   } catch (error) {
+    const { name, errors } = error;
+
+    if (name === `validationError`) {
+      console.error(errors);
+
+      res.status(500).send({ message: errors });
+    }
+
     console.error(error);
 
     res.status(500).send({ error });

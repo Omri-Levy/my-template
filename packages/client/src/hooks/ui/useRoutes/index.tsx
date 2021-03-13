@@ -17,7 +17,7 @@ import AuthenticationContext from '../../../context/AuthenticationContext/Authen
  */
 const useRoutes: HookReturns = () => {
   const { currentUser } = useContext(AuthenticationContext);
-  const isAuthenticated = currentUser && currentUser !== `unauthenticated`;
+  const isAuthenticated = currentUser !== `unauthenticated`;
   const unprotectedRoutes = useMemo(() => unauthenticatedRoutes, []);
   const unprotectedEndpoints = useMemo(() => unauthenticatedEndpoints, []);
   const protectedRoutes = useMemo(() => authenticatedRoutes, []);

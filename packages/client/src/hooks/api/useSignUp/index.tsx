@@ -28,6 +28,7 @@ const useSignUp: HookReturns = (setError) => {
 
       await axiosRequest(`POST`, undefined, `signUp`, {
         ...store,
+        ...data,
         gRecaptchaResponse,
       });
 

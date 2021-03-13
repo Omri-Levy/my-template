@@ -14,9 +14,11 @@ class User extends Model {
   id: string;
 
   @Column({
+    allowNull: false,
     type: CITEXT,
     unique: true,
     validate: {
+      notEmpty: true,
       isEmail: true,
       min: emailMin,
       max: emailMax,
@@ -25,9 +27,10 @@ class User extends Model {
   email: string;
 
   @Column({
-    type: STRING,
     allowNull: false,
+    type: STRING,
     validate: {
+      notEmpty: true,
       min: 64,
       max: 255,
     },
@@ -35,8 +38,10 @@ class User extends Model {
   securityQuestion: string;
 
   @Column({
+    allowNull: false,
     type: STRING,
     validate: {
+      notEmpty: true,
       min: 64,
       max: 255,
     },
@@ -44,27 +49,30 @@ class User extends Model {
   securityAnswer: string;
 
   @Column({
-    type: STRING,
     allowNull: false,
+    type: STRING,
     validate: {
+      notEmpty: true,
       is: isName,
     },
   })
   firstName: string;
 
   @Column({
-    type: STRING,
     allowNull: false,
+    type: STRING,
     validate: {
+      notEmpty: true,
       is: isName,
     },
   })
   lastName: string;
 
   @Column({
-    type: STRING,
     allowNull: false,
+    type: STRING,
     validate: {
+      notEmpty: true,
       min: 64,
       max: 255,
     },

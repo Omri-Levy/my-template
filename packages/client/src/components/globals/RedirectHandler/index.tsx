@@ -47,9 +47,6 @@ const RedirectHandler = (): JSX.Element | null => {
        * redirects if the current page does not exist or should not render
        * based on if the user is authenticated or not.
        */
-      if (!currentUser) {
-        return;
-      }
 
       let isValidRoute;
       const isAuthenticated = currentUser !== `unauthenticated`;
