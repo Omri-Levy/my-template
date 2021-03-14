@@ -13,7 +13,7 @@ const TemporaryLinkExpired: FunctionComponent = () => {
   };
 
   return (
-    <NavBox borderRadius={5} height={`300px`} mt={`100px`}>
+    <NavBox height={`300px`} mt={`100px`}>
       <NavButton to={`/`} text={`Home`} {...navLinksProps} />
       <NavButton
         to={`/forgotPassword`}

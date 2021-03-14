@@ -19,7 +19,7 @@ const UnauthenticatedHome: FunctionComponent = () => {
   return (
     <Page title={`Home`} icon={FaHome} display={`grid`}>
       {toastRef.current}
-      <NavBox borderRadius={5} height={`300px`} mt={`100px`}>
+      <NavBox height={`300px`} mt={`100px`}>
         <NavButton
           to={`/signUp`}
           text={`Sign Up`}
