@@ -1,3 +1,6 @@
+/**
+ * TODO: update description
+ */
 import { lazy } from 'react';
 import { FaHome } from 'react-icons/fa';
 

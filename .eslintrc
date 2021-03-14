@@ -1,0 +1,45 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
+  ],
+  "plugins": [
+    "prettier",
+    "@typescript-eslint"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".d.ts",
+          ".tsx"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "no-return-await": "off",
+    "import/prefer-default-export": "off",
+    "no-useless-concat": "off",
+    "no-console": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "prettier/prettier": [
+      "error"
+    ],
+    "quotes": [
+      "error",
+      "backtick"
+    ]
+  },
+  "ignorePatterns": [
+    "node_modules"
+  ]
+}

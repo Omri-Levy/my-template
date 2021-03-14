@@ -5,10 +5,12 @@ import fetchAuthenticate from '../../utils/api/fetchAuthenticate';
 
 const AuthenticationProvider: FunctionComponent = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<IterableUser>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const authenticate = useCallback(async () => {
     const user = await fetchAuthenticate();
 
     setCurrentUser(user);
+    setIsAuthenticated(!!user && user !== `unauthenticated`);
   }, []);
 
   useEffect(() => {
@@ -18,7 +20,9 @@ const AuthenticationProvider: FunctionComponent = ({ children }) => {
   }, [authenticate]);
 
   return (
-    <AuthenticationContext.Provider value={{ currentUser, authenticate }}>
+    <AuthenticationContext.Provider
+      value={{ currentUser, authenticate, isAuthenticated }}
+    >
       {children}
     </AuthenticationContext.Provider>
   );

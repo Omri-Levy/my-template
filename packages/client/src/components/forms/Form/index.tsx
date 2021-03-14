@@ -47,6 +47,9 @@ const Form: FunctionComponent<Props> = ({
         mt={4}
         isLoading={isSubmitting}
         disabled={disableSubmit}
+        /**
+         * TODO: remove float
+         */
         float={`right`}
       >
         {submitButtonText}

@@ -1,6 +1,9 @@
+/**
+ * TODO: update description
+ */
 import { lazy } from 'react';
 import { FaRedoAlt, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
-import { commonRoutes } from './commonRoutes';
+import { commonEndpoints, commonRoutes } from './commonRoutes';
 import ForgotPassword from '../../../components/pages/ForgotPassword';
 import ResetPassword from '../../../components/pages/ResetPassword';
 
@@ -46,6 +49,7 @@ const unauthenticatedRoutes = [
   resetPassword,
 ];
 const unauthenticatedEndpoints = [
+  ...commonEndpoints,
   signUp.to,
   ...signUp.formSteps,
   signIn.to,

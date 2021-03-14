@@ -7,7 +7,7 @@ interface Props extends ListItemProps {
   icon: FunctionComponent;
   iconColor?: string;
   text: string;
-  currentUser: IterableUser | null;
+  currentUser: IterableUser;
 }
 
 type ConditionalText = (

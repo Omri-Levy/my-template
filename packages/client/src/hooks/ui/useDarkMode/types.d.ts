@@ -1,9 +1,9 @@
 type HookReturns = () => {
   isDarkMode: boolean;
-  darkModeColor: `gray.50` | `gray.900`;
-  darkModeColorInverted: `gray.900` | `gray.50`;
-  darkModeColorOrDefault: `gray.50` | undefined;
-  darkModeColorOrDefaultInverted: `gray.900` | undefined;
+  darkModeColor: `white` | `gray.800`;
+  darkModeColorInverted: `gray.800` | `white`;
+  darkModeColorOrDefault: `white` | undefined;
+  darkModeColorOrDefaultInverted: `gray.800` | undefined;
   darkModeScheme: `whiteAlpha` | `blackAlpha`;
 };
 

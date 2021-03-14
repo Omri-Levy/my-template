@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Redirect, useLocation } from 'react-router-dom';
 import useRoutes from '../../../hooks/ui/useRoutes';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
+import useIsAdmin from '../../../hooks/useIsAdmin';
 
 /**
  * centralized redirect related logic making use of react hooks and
@@ -17,30 +18,48 @@ const RedirectHandler = (): JSX.Element | null => {
    * page.
    */
   const shouldRedirect = redirectUrl !== pathname;
-  const { unprotectedEndpoints, protectedEndpoints } = useRoutes();
+  const {
+    memoizedUnauthenticatedEndpoints,
+    memoizedAuthenticatedEndpoints,
+    memoizedAdminEndpoints,
+  } = useRoutes();
   const isProtectedEndpoint = useMemo(
     () =>
-      protectedEndpoints.some((protectedEndpoint) => {
-        if (typeof protectedEndpoint !== `string`) {
-          return protectedEndpoint.test(pathname);
+      memoizedAuthenticatedEndpoints.some((memoizedAuthenticatedEndpoint) => {
+        if (typeof memoizedAuthenticatedEndpoint !== `string`) {
+          return memoizedAuthenticatedEndpoint.test(pathname);
         }
 
-        return protectedEndpoint.includes(pathname);
+        return memoizedAuthenticatedEndpoint.includes(pathname);
       }),
-    [pathname, protectedEndpoints]
+    [pathname, memoizedAuthenticatedEndpoints]
   );
   const isUnprotectedEndpoint = useMemo(
     () =>
-      unprotectedEndpoints.some((unprotectedEndpoint) => {
-        if (typeof unprotectedEndpoint !== `string`) {
-          return unprotectedEndpoint.test(pathname);
+      memoizedUnauthenticatedEndpoints.some(
+        (memoizedUnauthenticatedEndpoint) => {
+          if (typeof memoizedUnauthenticatedEndpoint !== `string`) {
+            return memoizedUnauthenticatedEndpoint.test(pathname);
+          }
+
+          return memoizedUnauthenticatedEndpoint.includes(pathname);
+        }
+      ),
+    [pathname, memoizedUnauthenticatedEndpoints]
+  );
+  const isAdminEndpoint = useMemo(
+    () =>
+      memoizedAdminEndpoints.some((memoizedAdminEndpoint) => {
+        if (typeof memoizedAdminEndpoint !== `string`) {
+          return memoizedAdminEndpoint.test(pathname);
         }
 
-        return unprotectedEndpoint.includes(pathname);
+        return memoizedAdminEndpoint.includes(pathname);
       }),
-    [pathname, unprotectedEndpoints]
+    [memoizedAdminEndpoints, pathname]
   );
-  const { currentUser } = useContext(AuthenticationContext);
+  const { isAuthenticated } = useContext(AuthenticationContext);
+  const isAdmin = useIsAdmin();
   const handleRedirect = useCallback(async () => {
     try {
       /**
@@ -49,9 +68,10 @@ const RedirectHandler = (): JSX.Element | null => {
        */
 
       let isValidRoute;
-      const isAuthenticated = currentUser !== `unauthenticated`;
 
-      if (isAuthenticated) {
+      if (isAdmin) {
+        isValidRoute = isAdminEndpoint;
+      } else if (isAuthenticated) {
         isValidRoute = isProtectedEndpoint;
       } else {
         isValidRoute = isUnprotectedEndpoint;
@@ -61,7 +81,13 @@ const RedirectHandler = (): JSX.Element | null => {
     } catch (error) {
       console.error(error);
     }
-  }, [isProtectedEndpoint, isUnprotectedEndpoint, currentUser]);
+  }, [
+    isAdmin,
+    isAdminEndpoint,
+    isAuthenticated,
+    isProtectedEndpoint,
+    isUnprotectedEndpoint,
+  ]);
 
   useEffect(() => {
     (async () => {

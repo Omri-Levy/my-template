@@ -74,8 +74,8 @@ const securityAnswerIsRequiredMessage =
   `${securityAnswer} ` + `${requiredFieldMessage}`;
 
 // sign in
-const wrongCredentialsMessage = (attempsLeft: string) =>
-  `Wrong credentials - please try again. ${attempsLeft}`;
+const wrongCredentialsMessage = (attemptsLeft: string): string =>
+  `Wrong credentials - please try again. ${attemptsLeft}`;
 const lockoutMessage =
   `You've made too many failed sign in attempts - ` + `please try again`;
 

@@ -5,7 +5,7 @@ import { Props } from './types';
 
 const Loading: FunctionComponent<Props> = ({ suspense }) => {
   const { colorMode } = useColorMode();
-  const color = colorMode === `dark` ? `gray.50` : `gray.900`;
+  const color = colorMode === `dark` ? `white` : `gray.800`;
   const isFetching = useIsFetching();
 
   return (

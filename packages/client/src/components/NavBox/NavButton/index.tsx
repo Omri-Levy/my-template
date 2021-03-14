@@ -17,11 +17,27 @@ const NavButton: FunctionComponent<Props> = ({
   iconProps,
   ...props
 }) => {
-  const { darkModeScheme } = useDarkMode();
+  const { isDarkMode, darkModeColor, darkModeColorInverted } = useDarkMode();
+  let darkModeStyles = {};
+
+  if (isDarkMode) {
+    darkModeStyles = {
+      _hover: {
+        backgroundColor: isDarkMode && `rgba(0, 0, 0, 0.16)`,
+      },
+    };
+  }
 
   return (
     <ListItem>
-      <Button colorScheme={darkModeScheme} as={NavLink} to={to} {...props}>
+      <Button
+        backgroundColor={darkModeColorInverted}
+        color={darkModeColor}
+        as={NavLink}
+        to={to}
+        {...darkModeStyles}
+        {...props}
+      >
         <Flex>
           {text}
           {icon && <Icon as={icon} ml={3} mt={0.5} {...iconProps} />}

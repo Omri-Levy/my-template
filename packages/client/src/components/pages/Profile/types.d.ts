@@ -5,6 +5,7 @@ interface CurrentUserDetail {
   text: string;
   icon: FunctionComponent;
 }
+
 type CurrentUserDetails = CurrentUserDetail[];
 
 export { CurrentUserDetails };

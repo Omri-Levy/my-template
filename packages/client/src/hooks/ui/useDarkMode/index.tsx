@@ -1,4 +1,4 @@
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 import { HookReturns } from './types';
 
 /**
@@ -9,11 +9,14 @@ import { HookReturns } from './types';
 const useDarkMode: HookReturns = () => {
   const { colorMode } = useColorMode();
   const isDarkMode = colorMode === `dark`;
-  const darkModeColor = isDarkMode ? `gray.50` : `gray.900`;
-  const darkModeColorInverted = isDarkMode ? `gray.900` : `gray.50`;
-  const darkModeColorOrDefault = isDarkMode ? `gray.50` : undefined;
-  const darkModeColorOrDefaultInverted = isDarkMode ? `gray.900` : undefined;
-  const darkModeScheme = isDarkMode ? `blackAlpha` : `whiteAlpha`;
+  const darkModeColor = useColorModeValue(`gray.800`, `white`);
+  const darkModeColorInverted = useColorModeValue(`white`, `gray.800`);
+  const darkModeColorOrDefault = useColorModeValue(undefined, `white`);
+  const darkModeColorOrDefaultInverted = useColorModeValue(
+    `gray.800`,
+    undefined
+  );
+  const darkModeScheme = useColorModeValue(`whiteAlpha`, `blackAlpha`);
 
   return {
     isDarkMode,

@@ -9,6 +9,7 @@ import queryClient from './queryClient';
 import { persistedStore, store } from '../../../redux/store';
 import Loading from '../Loading';
 import AuthenticationProvider from '../../../context/AuthenticationContext';
+import AuthorizationProvider from '../../../context/AuthorizationContext';
 
 const Providers: FunctionComponent = ({ children }) => (
   <ChakraProvider theme={theme}>
@@ -19,7 +20,9 @@ const Providers: FunctionComponent = ({ children }) => (
             loading={<Loading suspense />}
             persistor={persistedStore}
           >
-            <AuthenticationProvider>{children}</AuthenticationProvider>
+            <AuthenticationProvider>
+              <AuthorizationProvider>{children}</AuthorizationProvider>
+            </AuthenticationProvider>
           </PersistGate>
         </ReduxProvider>
       </QueryClientProvider>

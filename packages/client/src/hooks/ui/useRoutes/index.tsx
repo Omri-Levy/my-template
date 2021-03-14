@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react';
-import { HookReturns } from './types';
+import { HookReturns, Routes } from './types';
 import {
   authenticatedEndpoints,
   authenticatedRoutes,
@@ -9,6 +9,8 @@ import {
   unauthenticatedRoutes,
 } from './unauthenticatedRoutes';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
+import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
+import { adminEndpoints, adminRoutes } from './adminRoutes';
 
 /**
  * returns a memoized version of the app's routes array based on if the user
@@ -16,23 +18,43 @@ import AuthenticationContext from '../../../context/AuthenticationContext/Authen
  * unauthenticated and authenticated routes endpoints.
  */
 const useRoutes: HookReturns = () => {
-  const { currentUser } = useContext(AuthenticationContext);
-  const isAuthenticated = currentUser !== `unauthenticated`;
-  const unprotectedRoutes = useMemo(() => unauthenticatedRoutes, []);
-  const unprotectedEndpoints = useMemo(() => unauthenticatedEndpoints, []);
-  const protectedRoutes = useMemo(() => authenticatedRoutes, []);
-  const protectedEndpoints = useMemo(() => authenticatedEndpoints, []);
-  const routes = useMemo(
-    () => (isAuthenticated ? authenticatedRoutes : unauthenticatedRoutes),
-    [isAuthenticated]
+  const { isAuthenticated } = useContext(AuthenticationContext);
+  const { isAuthorized } = useContext(AuthorizationContext);
+  const memoizedUnauthenticatedRoutes = useMemo(
+    () => unauthenticatedRoutes,
+    []
   );
+  const memoizedAuthenticatedRoutes = useMemo(() => authenticatedRoutes, []);
+  const memoizedAdminRoutes = useMemo(() => adminRoutes, []);
+  const memoizedUnauthenticatedEndpoints = useMemo(
+    () => unauthenticatedEndpoints,
+    []
+  );
+  const memoizedAuthenticatedEndpoints = useMemo(
+    () => authenticatedEndpoints,
+    []
+  );
+  const memoizedAdminEndpoints = useMemo(() => adminEndpoints, []);
+  let memoizedRoutes: Routes = memoizedUnauthenticatedRoutes;
+
+  if (isAuthenticated && isAuthorized) {
+    memoizedRoutes = memoizedAdminRoutes;
+  } else if (isAuthenticated && !isAuthorized) {
+    memoizedRoutes = memoizedAuthenticatedRoutes;
+  } else {
+    memoizedRoutes = memoizedUnauthenticatedRoutes;
+  }
+
+  const routes = useMemo(() => memoizedRoutes, [memoizedRoutes]);
 
   return {
     routes,
-    unprotectedRoutes,
-    unprotectedEndpoints,
-    protectedRoutes,
-    protectedEndpoints,
+    memoizedUnauthenticatedRoutes,
+    memoizedUnauthenticatedEndpoints,
+    memoizedAuthenticatedRoutes,
+    memoizedAuthenticatedEndpoints,
+    memoizedAdminRoutes,
+    memoizedAdminEndpoints,
   };
 };
 

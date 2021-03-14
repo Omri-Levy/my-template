@@ -1,3 +1,6 @@
+/**
+ * TODO: update description
+ */
 import { lazy } from 'react';
 import { FaIdCard, FaSignOutAlt } from 'react-icons/fa';
 import { commonEndpoints, commonRoutes } from './commonRoutes';
