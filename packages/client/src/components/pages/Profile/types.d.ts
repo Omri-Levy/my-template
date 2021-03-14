@@ -6,6 +6,4 @@ interface CurrentUserDetail {
   icon: FunctionComponent;
 }
 
-type CurrentUserDetails = CurrentUserDetail[];
-
-export { CurrentUserDetails };
+export { CurrentUserDetail };
