@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Props } from './types';
 import { Breadcrumbs } from '../MultiStepForm/Breadcrumbs/types';
+import Card from '../../Card';
 
 const FormWizard: FunctionComponent<Props> = ({ forms }) => {
   const { pathname } = useLocation();
@@ -14,7 +15,7 @@ const FormWizard: FunctionComponent<Props> = ({ forms }) => {
   });
 
   return (
-    <>
+    <Card color={`unset`} backgroundColor={`unset`}>
       {forms.map((form, index) => {
         const { to, Component } = form;
         const isLastForm = index === forms.length + 1;
@@ -34,7 +35,7 @@ const FormWizard: FunctionComponent<Props> = ({ forms }) => {
           />
         );
       })}
-    </>
+    </Card>
   );
 };
 

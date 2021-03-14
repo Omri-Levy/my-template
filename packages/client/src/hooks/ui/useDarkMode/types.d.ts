@@ -4,7 +4,8 @@ type HookReturns = () => {
   darkModeColorInverted: `gray.800` | `white`;
   darkModeColorOrDefault: `white` | undefined;
   darkModeColorOrDefaultInverted: `gray.800` | undefined;
-  darkModeScheme: `whiteAlpha` | `blackAlpha`;
+  staticDarkColor: `gray.800`;
+  staticLightColor: `white`;
 };
 
 export { HookReturns };

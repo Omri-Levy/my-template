@@ -1,4 +1,4 @@
-import { Box, Button, Icon } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/all';
 import Recaptcha from '../Recaptcha';
@@ -59,33 +59,36 @@ const MultiStepForm: FunctionComponent<Props> = ({
             errors={errors}
           />
         )}
-        {!isFirstForm && (
+        <Flex justifyContent={!isFirstForm ? `space-between` : `flex-end`}>
+          {!isFirstForm && (
+            <Button
+              onClick={previousForm}
+              leftIcon={icons ? <Icon as={FaCaretLeft} mr={0.3} /> : undefined}
+              type={`button`}
+              mt={4}
+              isLoading={isSubmitting}
+              disabled={isSubmitting}
+            >
+              Previous
+            </Button>
+          )}
           <Button
-            onClick={previousForm}
-            leftIcon={icons ? <Icon as={FaCaretLeft} mr={0.3} /> : undefined}
-            type={`button`}
+            rightIcon={
+              icons ? (
+                <Icon
+                  as={!onSubmit ? FaCaretRight : submitButtonIcon}
+                  mb={0.3}
+                />
+              ) : undefined
+            }
+            type={`submit`}
             mt={4}
             isLoading={isSubmitting}
-            disabled={isSubmitting}
-            float={`left`}
+            disabled={disableSubmit}
           >
-            Previous
+            {onSubmit ? submitButtonText : `Next`}
           </Button>
-        )}
-        <Button
-          rightIcon={
-            icons ? (
-              <Icon as={!onSubmit ? FaCaretRight : submitButtonIcon} mb={0.3} />
-            ) : undefined
-          }
-          type={`submit`}
-          mt={4}
-          isLoading={isSubmitting}
-          disabled={disableSubmit}
-          float={`right`}
-        >
-          {onSubmit ? submitButtonText : `Next`}
-        </Button>
+        </Flex>
       </Box>
     </>
   );

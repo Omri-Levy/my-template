@@ -16,7 +16,8 @@ const useDarkMode: HookReturns = () => {
     `gray.800`,
     undefined
   );
-  const darkModeScheme = useColorModeValue(`whiteAlpha`, `blackAlpha`);
+  const staticDarkColor = `gray.800`;
+  const staticLightColor = `white`;
 
   return {
     isDarkMode,
@@ -24,7 +25,8 @@ const useDarkMode: HookReturns = () => {
     darkModeColorInverted,
     darkModeColorOrDefault,
     darkModeColorOrDefaultInverted,
-    darkModeScheme,
+    staticDarkColor,
+    staticLightColor,
   };
 };
 

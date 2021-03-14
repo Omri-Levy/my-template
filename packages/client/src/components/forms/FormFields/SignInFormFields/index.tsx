@@ -12,6 +12,7 @@ const SignInFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
+  ...props
 }) => (
   <>
     <FormField
@@ -24,6 +25,7 @@ const SignInFormFields: FunctionComponent<Props> = ({
       type={`email`}
       maxLength={320}
       icon={FaAt}
+      {...props}
     />
     <FormField
       onChange={clearResponseError(clearErrors)}
@@ -36,6 +38,7 @@ const SignInFormFields: FunctionComponent<Props> = ({
       maxLength={128}
       icon={FaLock}
       mb={1}
+      {...props}
     />
     <ForgotPasswordLink />
   </>

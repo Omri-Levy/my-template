@@ -1,4 +1,5 @@
 import { FieldErrors } from 'react-hook-form';
+import { FormControlProps } from '@chakra-ui/react';
 import { ClearErrors, Register } from '../../../utils/types';
 
 type FormType =
@@ -8,7 +9,7 @@ type FormType =
   | `forgotPassword`
   | `resetPassword`;
 
-interface Props {
+interface Props extends FormControlProps {
   errors: FieldErrors;
   clearErrors: ClearErrors;
   register: Register;
