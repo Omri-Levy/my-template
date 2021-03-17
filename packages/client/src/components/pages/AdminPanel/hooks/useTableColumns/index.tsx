@@ -18,31 +18,26 @@ const useTableColumns: HookReturns = () =>
         Header: `ID`,
         accessor: `col1`,
         sortType: `basic`,
-        filter: `fuzzyText`
       },
       {
         Header: `Email`,
         accessor: `col2`,
         sortType: `basic`,
-        filter: `fuzzyText`
       },
       {
         Header: `First Name`,
         accessor: `col3`,
         sortType: `basic`,
-        filter: `fuzzyText`
       },
       {
         Header: `Last Name`,
         accessor: `col4`,
         sortType: `basic`,
-        filter: `fuzzyText`
       },
       {
         Header: `Role`,
         accessor: `col5`,
         sortType: `basic`,
-        filter: `fuzzyText`
       }
     ],
     []

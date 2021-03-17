@@ -1,10 +1,10 @@
-import { FilterValue, HeaderGroup, IdType } from 'react-table';
+import { HeaderGroup } from 'react-table';
 import { ColumnType } from '../types';
 
 interface Props {
   footerGroups: HeaderGroup<ColumnType>[];
-  setFilter: <D>(columnId: IdType<D>, updater: (((filterValue: FilterValue
-  ) => FilterValue) | FilterValue)) => void;
+  globalFilter: string;
+  setGlobalFilter: (value: string) => void;
 }
 
 export { Props };

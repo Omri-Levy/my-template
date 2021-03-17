@@ -37,7 +37,8 @@
     "cy:run": "lerna run cy:run --stream",
     "test": "lerna run test --parallel --stream",
     "start": "lerna run start --parallel --stream",
-    "format": "lerna run format --parallel --stream"
+    "format": "lerna run format --parallel --stream",
+    "prepare": "husky install"
   },
   "commitlint": {
     "extends": [

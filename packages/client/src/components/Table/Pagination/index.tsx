@@ -175,3 +175,4 @@ const Pagination: FunctionComponent<Props> = ({
 };
 
 export default Pagination;
+

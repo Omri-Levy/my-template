@@ -21,7 +21,7 @@ const AdminPanel: FunctionComponent = () => {
     <Page title={`Admin Panel`} icon={FaUserCog}>
       <Flex flexDirection={`column`} alignItems={`center`}>
         <Table
-          minWidth={815}
+          minWidth={`80vw`}
           caption={`Manage Users`}
           data={data}
           columns={columns}

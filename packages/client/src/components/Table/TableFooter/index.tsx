@@ -2,11 +2,11 @@ import { FunctionComponent, memo } from 'react';
 import { Tfoot, Th, Tr } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { Props } from './types';
-import FilterInput from '../FilterInput';
+import GlobalFilter from '../GlobalFilter';
 
 const TableFooter: FunctionComponent<Props> = ({
                                                  footerGroups,
-                                                 setFilter
+globalFilter, setGlobalFilter,
                                                }) => (
   <Tfoot>
     {footerGroups?.map((group) => (
@@ -18,11 +18,9 @@ const TableFooter: FunctionComponent<Props> = ({
         ))}
       </Tr>
     ))}
-    <FilterInput setFilter={setFilter} />
+    <GlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
   </Tfoot>
 );
 
 export default memo(TableFooter);
-
-
 

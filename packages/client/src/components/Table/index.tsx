@@ -1,11 +1,15 @@
 import { FunctionComponent, memo, useMemo } from 'react';
-import { useFilters, usePagination, useSortBy, useTable } from 'react-table';
+import {
+  useGlobalFilter,
+  usePagination,
+  useSortBy,
+  useTable
+} from 'react-table';
 import {
   Table as ChakraTable,
   TableCaption,
   useBreakpointValue
 } from '@chakra-ui/react';
-import { ObjectKey } from '@my-template/shared';
 import { Props } from './types';
 import TableHead from './TableHead';
 import Card from '../Card';
@@ -22,16 +26,6 @@ const Table: FunctionComponent<Props> = ({
                                          }) => {
   const filterTypes = useMemo(() => ({
     fuzzyText: fuzzyTextFilter,
-    text: (rows: Record<ObjectKey,
-      { [key: string]: string }>[], id: string, filterValue: string) => (
-      rows.filter((row) => {
-        const rowValue = row.values[id];
-        return rowValue !== undefined ? String(rowValue)
-          .toLowerCase()
-          .startsWith(String(filterValue).toLowerCase()) : true;
-      })
-    )
-
   }), []);
   const size = useBreakpointValue({ sm: `sm` });
   const tableInstance = useTable(
@@ -51,7 +45,7 @@ const Table: FunctionComponent<Props> = ({
       },
       disableSortRemove: true
     },
-    useFilters,
+    useGlobalFilter,
     useSortBy,
     usePagination
   );
@@ -70,7 +64,8 @@ const Table: FunctionComponent<Props> = ({
     nextPage,
     previousPage,
     setPageSize,
-    setFilter,
+    globalFilter,
+    setGlobalFilter,
     state: { pageIndex, pageSize }
   } = tableInstance;
   const rowsLength = data.length + 1;
@@ -100,7 +95,8 @@ const Table: FunctionComponent<Props> = ({
         />
         <TableFooter
           footerGroups={footerGroups}
-          setFilter={setFilter}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
         />
       </ChakraTable>
       <Pagination {...pagination} />

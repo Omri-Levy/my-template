@@ -29,3 +29,5 @@ app.use(`/api/signIn`, cookieParser());
 app.use(`/api-docs`, docs);
 
 export default app;
+
+
