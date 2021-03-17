@@ -2,7 +2,13 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "react-hooks"
   ],
   "rules": {
     "react/jsx-curly-brace-presence": [
@@ -11,6 +17,7 @@
         "props": "always"
       }
     ],
+    "no-nested-ternary": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",

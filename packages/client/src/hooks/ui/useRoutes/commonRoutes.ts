@@ -4,14 +4,14 @@
 import { lazy } from 'react';
 import { FaHome } from 'react-icons/fa';
 
-const UnauthenticatedHome = lazy(
-  () => import(`../../../components/pages/Home/UnauthenticatedHome`)
+const AuthenticatedHome = lazy(
+  () => import(`../../../components/pages/Home/AuthenticatedHome`)
 );
 const home = {
   to: `/`,
   text: `Home`,
   icon: FaHome,
-  Component: UnauthenticatedHome,
+  Component: AuthenticatedHome,
   exact: true,
 };
 const commonRoutes = [home];

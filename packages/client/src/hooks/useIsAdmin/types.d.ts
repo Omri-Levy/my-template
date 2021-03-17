@@ -1,3 +1,3 @@
-type HookReturns = () => boolean;
+type HookReturns = () => boolean | undefined;
 
 export { HookReturns };

@@ -1,7 +1,7 @@
-import { Response } from 'express';
 import User from '../../../models/User.model';
+import { Route } from '../../../utils/types';
 
-const getUsers = async (res: Response): Promise<void> => {
+const getUsers: Route = async (_req, res) => {
   try {
     const users = await User.findAll();
 

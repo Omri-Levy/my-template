@@ -7,6 +7,7 @@ import {
   ObjectType,
   RequestMethod,
   User,
+  Users,
 } from './utils/types';
 import {
   emailAlreadyInUseMessage,
@@ -58,11 +59,10 @@ import {
   securityAnswerMax,
   securityAnswerMin,
 } from './utils/validation/validationConstants';
-import {
-  calculateHours,
-  calculateMinutes,
-  secondsToHours,
-} from './utils/functions';
+import calculateHours from './utils/functions/calculateHours';
+import calculateMinutes from './utils/functions/calculateMinutes';
+import secondsToHours from './utils/functions/secondsToHours';
+import capitalize from './utils/functions/capitalize';
 
 export {
   apiUrl,
@@ -115,6 +115,7 @@ export {
   calculateMinutes,
   calculateHours,
   secondsToHours,
+  capitalize,
 };
 
 export type {
@@ -124,5 +125,6 @@ export type {
   Endpoint,
   RequestMethod,
   User,
+  Users,
   IterableUser,
 };

@@ -8,6 +8,7 @@ interface Route {
   text: string;
   icon?: Icon | null;
   Component: FunctionComponent | null;
+  AlternativeComponent?: FunctionComponent | null;
   exact: boolean;
 }
 

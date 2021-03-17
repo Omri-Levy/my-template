@@ -1,5 +1,5 @@
-describe(`Home`, () => {
-  it(`Home temp`, () => {
+describe(`UnauthenticatedHome`, () => {
+  it(`temp`, () => {
     expect(true).toBe(true);
   });
 });

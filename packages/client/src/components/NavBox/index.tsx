@@ -9,7 +9,7 @@ import Card from '../Card';
  * NavButton for the children prop.
  */
 const NavBox: FunctionComponent<BoxProps> = ({ children, ...props }) => (
-  <Card as={`nav`} {...props}>
+  <Card color={`unset`} backgroundColor={`unset`} as={`nav`} {...props}>
     <Stack as={List} display={`grid`} placeContent={`center`} height={`100%`}>
       {children}
     </Stack>

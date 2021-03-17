@@ -11,7 +11,7 @@ const Card: FunctionComponent<BoxProps> = ({ children, ...props }) => {
       color={darkModeColorInverted}
       borderRadius={5}
       border={`1px solid darken(0.3, ${darkModeColor})`}
-      boxShadow={`-2px 2px 1.5rem rgba(0, 0, 0, 0.3)`}
+      boxShadow={`-1px 1px 0.5rem rgba(0, 0, 0, 0.3)`}
       padding={5}
       {...props}
     >

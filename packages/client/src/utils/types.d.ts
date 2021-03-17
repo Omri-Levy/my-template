@@ -21,6 +21,8 @@ interface ChildrenProps {
 type Payload = SignUpFormFields | Record<null, null>;
 type Callback = (args?: unknown) => Promise<unknown>;
 type AsyncUseEffect = (callback: Callback) => Promise<unknown>;
+type GenericArray<T> = T[];
+type Generic<T> = T;
 
 export {
   SetState,
@@ -35,4 +37,6 @@ export {
   GetValues,
   Payload,
   AsyncUseEffect,
+  GenericArray,
+  Generic,
 };

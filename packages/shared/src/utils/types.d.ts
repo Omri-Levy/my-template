@@ -9,6 +9,7 @@ type Endpoint =
   | `authenticate`
   | `authorize`
   | `getUser`
+  | `getUsers`
   | `forgotPassword`
   | `resetPassword`
   | `validateResetPasswordToken`;
@@ -21,6 +22,8 @@ interface User {
   role: string;
 }
 
+type Users = User[];
+
 type IterableUser = { [key: string]: User } | `unauthenticated` | null;
 
 export {
@@ -30,5 +33,6 @@ export {
   Endpoint,
   RequestMethod,
   User,
+  Users,
   IterableUser,
 };

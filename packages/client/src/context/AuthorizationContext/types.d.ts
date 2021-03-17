@@ -1,5 +1,5 @@
 interface AuthorizationContextType {
-  isAuthorized: boolean;
+  isAuthorized: boolean | undefined;
   authorize: () => Promise<void>;
 }
 

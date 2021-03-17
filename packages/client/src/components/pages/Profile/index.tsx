@@ -10,7 +10,7 @@ import CurrentUserDetails from './CurrentUserDetails';
  */
 const Profile: FunctionComponent = () => (
   <Page title={`Profile`} icon={FaIdCard}>
-    <Card mt={100}>
+    <Card color={`unset`} backgroundColor={`unset`} mt={100}>
       <CurrentUserDetails />
     </Card>
   </Page>
