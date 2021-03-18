@@ -20,8 +20,9 @@ const App: FunctionComponent = () => {
 
   return (
     <Suspense fallback={<Loading suspense />}>
+      <RedirectHandler>
       <Routes />
-      <RedirectHandler />
+      </RedirectHandler>
     </Suspense>
   );
 };
