@@ -5,7 +5,9 @@ import {
   Icon,
   Input,
   InputGroup,
-  InputLeftAddon
+  InputLeftAddon,
+  Td,
+  Tr
 } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 import { useAsyncDebounce } from 'react-table';
@@ -17,6 +19,7 @@ import { Props } from './types';
 const GlobalFilter: FunctionComponent<Props> = ({
     globalFilter,
     setGlobalFilter,
+  colSpan,
   }) => {
   const [filterValue, setFilterValue] = useState(globalFilter);
   const globalFilterFn = useAsyncDebounce((value) => (
@@ -31,8 +34,10 @@ const GlobalFilter: FunctionComponent<Props> = ({
   };
 
   return (
+    <Tr>
+      <Td colSpan={colSpan}>
     <FormControl>
-      <FormLabel>Filter: </FormLabel>
+      <FormLabel>Filter:</FormLabel>
       <InputGroup>
         <InputLeftAddon pointerEvents={`none`}>
           <Icon as={FaSearch} />
@@ -47,6 +52,8 @@ const GlobalFilter: FunctionComponent<Props> = ({
         />
       </InputGroup>
     </FormControl>
+      </Td>
+    </Tr>
   );
 };
 

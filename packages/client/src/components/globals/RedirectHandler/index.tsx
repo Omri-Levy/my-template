@@ -4,8 +4,6 @@ import useRoutes from '../../../hooks/ui/useRoutes';
 import AuthenticationContext
   from '../../../context/AuthenticationContext/AuthenticationContext';
 import useIsAdmin from '../../../hooks/useIsAdmin';
-import AuthorizationContext
-  from '../../../context/AuthorizationContext/AuthorizationContext';
 
 /**
  * centralized redirect related logic making use of react hooks and
@@ -62,7 +60,6 @@ const RedirectHandler = (): JSX.Element | null => {
     [memoizedAdminEndpoints, pathname]
   );
   const { isAuthenticated } = useContext(AuthenticationContext);
-  const { isAuthorized } = useContext(AuthorizationContext);
   const isAdmin = useIsAdmin();
   const handleRedirect = useCallback(async () => {
     try {
@@ -70,10 +67,6 @@ const RedirectHandler = (): JSX.Element | null => {
        * redirects if the current page does not exist or should not render
        * based on if the user is authenticated or not.
        */
-      if (isAuthorized === undefined) {
-        return;
-      }
-
       let isValidRoute;
 
       if (isAdmin) {
@@ -103,7 +96,9 @@ const RedirectHandler = (): JSX.Element | null => {
   }, [handleRedirect]);
 
   if (shouldRedirect && !validRoute) {
-    return <Redirect to={redirectUrl} />;
+    return (
+        <Redirect to={redirectUrl} />
+    );
   }
 
   return null;

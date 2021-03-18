@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { FaLock, FaShieldAlt } from 'react-icons/fa';
 import {
   invalidPasswordPolicyMessage,
-  securityQuestions,
+  securityQuestions
 } from '@my-template/shared';
 import FormField from '../../FormField';
 import clearResponseError from '../../FormResponseError/clearResponseError';

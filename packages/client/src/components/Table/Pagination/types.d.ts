@@ -1,16 +1,17 @@
 import { BoxProps } from '@chakra-ui/react';
 
 interface PaginationObject extends BoxProps {
+  rowsLength: number;
+  pageCount: number;
+  pageIndex: number;
+  gotoPage: (number: number) => void;
   canPreviousPage: boolean;
   canNextPage: boolean;
-  gotoPage: (number: number) => void;
   previousPage: () => void;
   nextPage: () => void;
-  pageCount: number;
   pageSize: number;
-  setPageSize: (pageSize: number) => void;
-  pageIndex: number;
-  rowsLength: number;
+  setPageSize: (number: number) => void;
+  colSpan?: number;
 }
 
 type Props = PaginationObject;

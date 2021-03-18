@@ -16,7 +16,6 @@ const Template: Story<ComponentProps<typeof Pagination>> = (args) => (
 export const PaginationStory = Template.bind({});
 
 PaginationStory.args = {
-  canPreviousPage: true,
-  canNextPage: true
+  rowsLength: 10,
 };
 PaginationStory.decorators = [ContainerDecorator];

@@ -1,6 +1,6 @@
 import { FieldErrors } from 'react-hook-form';
-import { FunctionComponent } from 'react';
 import { FormControlProps } from '@chakra-ui/react';
+import { IconType } from 'react-icons';
 import { Register } from '../../../utils/types';
 
 interface Props extends FormControlProps {
@@ -8,7 +8,7 @@ interface Props extends FormControlProps {
   labelTitle: string;
   type: string;
   name: string;
-  icon?: FunctionComponent;
+  icon?: IconType;
   iconColor?: string;
   register: Register;
   maxLength?: number;

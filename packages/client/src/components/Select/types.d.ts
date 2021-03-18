@@ -1,8 +1,10 @@
-import { SelectProps } from '@chakra-ui/react';
+import { SelectProps as ChakraSelectProps } from '@chakra-ui/select/dist/types/select';
 import { GenericArray, Register } from '../../utils/types';
 
-interface Props extends SelectProps {
+interface SelectProps extends ChakraSelectProps {
   register?: Register;
+};
+interface Props extends SelectProps {
   options: GenericArray | undefined;
 }
 

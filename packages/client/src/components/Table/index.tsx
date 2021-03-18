@@ -1,21 +1,20 @@
-import { FunctionComponent, memo, useMemo } from 'react';
+import { FunctionComponent, memo, useEffect, useMemo } from 'react';
+import {
+  Table as ChakraTable,
+  TableCaption,
+  useBreakpointValue
+} from '@chakra-ui/react';
 import {
   useGlobalFilter,
   usePagination,
   useSortBy,
   useTable
 } from 'react-table';
-import {
-  Table as ChakraTable,
-  TableCaption,
-  useBreakpointValue
-} from '@chakra-ui/react';
 import { Props } from './types';
 import TableHead from './TableHead';
 import Card from '../Card';
 import TableFooter from './TableFooter';
 import TableBody from './TableBody';
-import Pagination from './Pagination';
 import fuzzyTextFilter from './functions/fuzzyTextFilter';
 
 const Table: FunctionComponent<Props> = ({
@@ -27,21 +26,20 @@ const Table: FunctionComponent<Props> = ({
   const filterTypes = useMemo(() => ({
     fuzzyText: fuzzyTextFilter,
   }), []);
-  const size = useBreakpointValue({ sm: `sm` });
+  const cachedPageSize = Number(localStorage.getItem(`pageSize`)) || 10;
   const tableInstance = useTable(
     {
       data,
       columns,
       filterTypes,
       initialState: {
-        // eslint-disable-next-line
-        // @ts-ignore
         sortBy: [
           {
             id: `col1`,
             desc: true
           }
-        ]
+        ],
+        pageSize: cachedPageSize
       },
       disableSortRemove: true
     },
@@ -51,43 +49,34 @@ const Table: FunctionComponent<Props> = ({
   );
   const {
     getTableProps,
-    getTableBodyProps,
     headerGroups,
+    getTableBodyProps,
+    page,
     prepareRow,
     footerGroups,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
     globalFilter,
     setGlobalFilter,
+    pageCount,
+    gotoPage,
+    canPreviousPage,
+    canNextPage,
+    previousPage,
+    nextPage,
+    setPageSize,
     state: { pageIndex, pageSize }
   } = tableInstance;
   const rowsLength = data.length + 1;
-  const pagination = {
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
-    pageIndex,
-    pageSize,
-    rowsLength
-  };
+  const size = useBreakpointValue({ sm: `sm` });
+
+  useEffect(() => {
+    localStorage.setItem(`pageSize`, JSON.stringify(pageSize));
+  }, [pageSize])
 
   return (
     <Card color={`unset`} backgroundColor={`unset`}>
       <ChakraTable size={size} {...getTableProps()} {...props}>
         <TableCaption>{caption}</TableCaption>
-        <TableHead headerGroups={headerGroups} />
+        <TableHead headerGroups={headerGroups}  />
         <TableBody
           getTableBodyProps={getTableBodyProps}
           page={page}
@@ -97,9 +86,18 @@ const Table: FunctionComponent<Props> = ({
           footerGroups={footerGroups}
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
+          pageIndex={pageIndex}
+          pageCount={pageCount}
+          rowsLength={rowsLength}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          gotoPage={gotoPage}
+          previousPage={previousPage}
+          nextPage={nextPage}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
         />
       </ChakraTable>
-      <Pagination {...pagination} />
     </Card>
   );
 };
