@@ -1,5 +1,5 @@
 import { Row, TableBodyPropGetter, TableBodyProps } from 'react-table';
-import { ColumnType } from '../types';
+import { CheckCheckbox, ColumnType } from '../types';
 
 interface Props {
   getTableBodyProps: (
@@ -7,6 +7,8 @@ interface Props {
   ) => TableBodyProps;
   page: Row<ColumnType>[];
   prepareRow: (row: Row<ColumnType>) => void;
+  checkCheckbox: CheckCheckbox;
+  checkedItems: boolean[];
 }
 
 export { Props };

@@ -7,9 +7,11 @@ const SelectGroup: FunctionComponent<Props> = ({
 																								 icon,
 																								 iconColor,
 	selectOptions,
+	register,
 						selectProps,
 	...props
 																							 }) => {
+
 	return (
 		<InputGroup {...props}>
 			{icon && (
@@ -17,7 +19,11 @@ const SelectGroup: FunctionComponent<Props> = ({
 					<Icon as={icon} color={iconColor} />
 				</InputLeftAddon>
 			)}
-			<Select options={selectOptions} {...selectProps} />
+			<Select
+  options={selectOptions}
+  register={register}
+  {...selectProps}
+			/>
 		</InputGroup>
 	);
 };

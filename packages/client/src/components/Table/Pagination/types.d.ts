@@ -9,7 +9,6 @@ interface PaginationObject extends BoxProps {
   canNextPage: boolean;
   previousPage: () => void;
   nextPage: () => void;
-  pageSize: number;
   setPageSize: (number: number) => void;
   colSpan?: number;
 }

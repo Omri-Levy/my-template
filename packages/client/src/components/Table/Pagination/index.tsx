@@ -16,7 +16,6 @@ const Pagination: FunctionComponent<Props> = ({
                                                 canNextPage,
                                                 previousPage,
                                                 nextPage,
-  pageSize,
   setPageSize,
                                                 colSpan,
                                                 ...props

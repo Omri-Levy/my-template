@@ -1,10 +1,15 @@
 import { FunctionComponent } from 'react';
-import { Box, Th, Thead, Tr } from '@chakra-ui/react';
+import { Flex, Th, Thead, Tr } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { Props } from './types';
 
-const TableHead: FunctionComponent<Props> = ({ headerGroups }) => (
+const TableHead: FunctionComponent<Props> = ({ headerGroups }) => {
+  const iconStyles = {
+    marginLeft: 10,
+  };
+
+  return (
     <Thead>
       {headerGroups.map((headerGroup) => (
         <Tr {...headerGroup?.getHeaderGroupProps()} key={v4()}>
@@ -13,24 +18,28 @@ const TableHead: FunctionComponent<Props> = ({ headerGroups }) => (
               {...column?.getHeaderProps(column?.getSortByToggleProps())}
               key={v4()}
             >
-              {column?.render(`Header`)}
-              <Box as={`span`} pl={`4`}>
+              <Flex>
+                {column?.render(`Header`)}
                 {column?.isSorted ? (
                   column?.isSortedDesc ? (
-                    <FaChevronDown aria-label={`sorted descending`} />
+                    <FaChevronDown style={iconStyles} aria-label={`sorted descending`} />
                   ) : (
-                    <FaChevronUp aria-label={`sorted ascending`} />
+                    <FaChevronUp style={iconStyles} aria-label={`sorted ascending`} />
                   )
                 ) : (
-                  <FaChevronDown aria-label={`sorted descending`} />
+                  <FaChevronDown style={iconStyles} aria-label={`sorted descending`} />
                 )}
-              </Box>
+              </Flex>
             </Th>
           ))}
+          <Th>
+            Select
+          </Th>
         </Tr>
       ))}
     </Thead>
   );
+}
 
 export default TableHead;
 

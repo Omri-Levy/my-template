@@ -35,10 +35,10 @@ const FormField: FunctionComponent<Props> = ({
                                              }) => {
   const selectProps = {
     variant: `filled`,
-    options: selectOptions,
-    name,
-    ref: register,
     placeholder: selectPlaceholder,
+    options: selectOptions,
+    type,
+    name,
   };
   const inputProps = {
     variant: `filled`,
@@ -61,11 +61,13 @@ const FormField: FunctionComponent<Props> = ({
       {isSelectField ? (
         <SelectGroup
           icon={icon}
+          iconColor={iconColor}
           selectOptions={selectOptions}
+          register={register}
           selectProps={selectProps}
         />
       ) : (
-        <InputGroup icon={icon} inputProps={inputProps} />
+        <InputGroup icon={icon} iconColor={iconColor} inputProps={inputProps} />
       )}
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       <ErrorMessage errors={errors} name={name} as={FormErrorMessage} />
@@ -74,3 +76,4 @@ const FormField: FunctionComponent<Props> = ({
 };
 
 export default FormField;
+

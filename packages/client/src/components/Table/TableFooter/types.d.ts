@@ -1,5 +1,5 @@
 import { HeaderGroup } from 'react-table';
-import { ColumnType } from '../types';
+import { CheckAllCheckboxes, ColumnType } from '../types';
 
 interface Props {
   footerGroups: HeaderGroup<ColumnType>[];
@@ -13,8 +13,13 @@ interface Props {
   canNextPage: boolean;
   previousPage: () => void;
   nextPage: () => void;
-  pageSize: number;
   setPageSize: (number: number) => void;
+  colSpan: number;
+  userIds: string[];
+  checkAllCheckboxes: CheckAllCheckboxes;
+  checkedItems: boolean[];
 }
+type DeleteUser = (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
 
-export { Props };
+export { Props, DeleteUser };
+
