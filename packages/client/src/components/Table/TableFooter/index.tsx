@@ -7,7 +7,7 @@ import {
   Td,
   Text,
   Tfoot,
-  Tr
+  Tr,
 } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { DeleteUser, Props } from './types';
@@ -23,20 +23,19 @@ const TableFooter: FunctionComponent<Props> = ({
   rowsLength,
   pageIndex,
   pageCount,
-                                                 gotoPage,
-                                                 canPreviousPage,
-                                                 canNextPage,
-                                                 previousPage,
-                                                 nextPage,
+  gotoPage,
+  canPreviousPage,
+  canNextPage,
+  previousPage,
+  nextPage,
   setPageSize,
   colSpan,
   userIds,
-                                                 checkAllCheckboxes,
-  checkedItems
-                                               }) =>  {
-  const {isDarkMode} = useDarkMode();
-  const borderColor = isDarkMode ? `#2D3748` :
-    `#EDF2F7`;
+  checkAllCheckboxes,
+  checkedItems,
+}) => {
+  const { isDarkMode } = useDarkMode();
+  const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
   const deleteUser: DeleteUser = async () => {
     await fetchDeleteUser(userIds);
   };
@@ -61,47 +60,36 @@ const TableFooter: FunctionComponent<Props> = ({
           </Td>
         </Tr>
       ))}
-        <Tr>
-          <GlobalFilter
-            globalFilter={globalFilter}
-            setGlobalFilter={setGlobalFilter}
-          />
-          <Td
-            borderLeft={`1px solid ${borderColor}`}
-            colSpan={colSpan}
-          >
-            <Flex justifyContent={`flex-end`}>
+      <Tr>
+        <GlobalFilter
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
+        <Td borderLeft={`1px solid ${borderColor}`} colSpan={colSpan}>
+          <Flex justifyContent={`flex-end`}>
             <ButtonGroup spacing={5}>
-          <Button onClick={userIds.length > 0
-            ? deleteUser
-            : undefined}
-          >
-            Delete
-          </Button>
-          <Button
-            onClick={() => alert(`YEET`)}
-          >
-            Delete All
-          </Button>
+              <Button onClick={userIds.length > 0 ? deleteUser : undefined}>
+                Delete
+              </Button>
+              <Button onClick={() => alert(`YEET`)}>Delete All</Button>
             </ButtonGroup>
-            </Flex>
-          </Td>
-        </Tr>
-          <Pagination
-            colSpan={colSpan}
-            pageIndex={pageIndex}
-            pageCount={pageCount}
-            rowsLength={rowsLength}
-            gotoPage={gotoPage}
-            canPreviousPage={canPreviousPage}
-            canNextPage={canNextPage}
-            previousPage={previousPage}
-            nextPage={nextPage}
-            setPageSize={setPageSize}
-          />
+          </Flex>
+        </Td>
+      </Tr>
+      <Pagination
+        colSpan={colSpan}
+        pageIndex={pageIndex}
+        pageCount={pageCount}
+        rowsLength={rowsLength}
+        gotoPage={gotoPage}
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        previousPage={previousPage}
+        nextPage={nextPage}
+        setPageSize={setPageSize}
+      />
     </Tfoot>
   );
-}
+};
 
 export default memo(TableFooter);
-

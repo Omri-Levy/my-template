@@ -4,11 +4,11 @@ import { v4 } from 'uuid';
 import useRoutes from '../../../hooks/ui/useRoutes';
 
 const Routes: FunctionComponent = () => {
-  const { routes } = useRoutes();
+  const { memoizedRoutes } = useRoutes();
 
   return (
     <Switch>
-      {routes.map((route) => {
+      {memoizedRoutes.map((route) => {
         const { Component, to, exact } = route;
 
         if (!Component || !to || to === `/signOut`) {

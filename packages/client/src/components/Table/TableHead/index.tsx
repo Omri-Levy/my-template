@@ -22,24 +22,30 @@ const TableHead: FunctionComponent<Props> = ({ headerGroups }) => {
                 {column?.render(`Header`)}
                 {column?.isSorted ? (
                   column?.isSortedDesc ? (
-                    <FaChevronDown style={iconStyles} aria-label={`sorted descending`} />
+                    <FaChevronDown
+                      style={iconStyles}
+                      aria-label={`sorted descending`}
+                    />
                   ) : (
-                    <FaChevronUp style={iconStyles} aria-label={`sorted ascending`} />
+                    <FaChevronUp
+                      style={iconStyles}
+                      aria-label={`sorted ascending`}
+                    />
                   )
                 ) : (
-                  <FaChevronDown style={iconStyles} aria-label={`sorted descending`} />
+                  <FaChevronDown
+                    style={iconStyles}
+                    aria-label={`sorted descending`}
+                  />
                 )}
               </Flex>
             </Th>
           ))}
-          <Th>
-            Select
-          </Th>
+          <Th>Select</Th>
         </Tr>
       ))}
     </Thead>
   );
-}
+};
 
 export default TableHead;
-

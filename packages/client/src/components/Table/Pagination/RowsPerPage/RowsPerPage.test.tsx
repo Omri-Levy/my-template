@@ -1,5 +1,5 @@
 describe(`RowsPerPage`, () => {
-	it(`RowsPerPage temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`RowsPerPage temp`, () => {
+    expect(true).toBe(true);
+  });
 });

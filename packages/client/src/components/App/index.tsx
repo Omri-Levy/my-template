@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { resetSignUpFormDetails } from '../../redux/reducer';
 import Routes from '../globals/Routes';
-import RedirectHandler from '../globals/RedirectHandler';
 import Loading from '../globals/Loading';
 
 const App: FunctionComponent = () => {
@@ -20,9 +19,7 @@ const App: FunctionComponent = () => {
 
   return (
     <Suspense fallback={<Loading suspense />}>
-      <RedirectHandler>
       <Routes />
-      </RedirectHandler>
     </Suspense>
   );
 };

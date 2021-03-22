@@ -1,5 +1,5 @@
 describe(`GoToPage`, () => {
-	it(`GoToPage temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`GoToPage temp`, () => {
+    expect(true).toBe(true);
+  });
 });

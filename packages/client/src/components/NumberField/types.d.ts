@@ -1,7 +1,7 @@
 import {
   FormControlProps,
   FormLabelProps,
-  NumberInputProps
+  NumberInputProps,
 } from '@chakra-ui/react';
 
 interface Props extends FormControlProps {

@@ -3,7 +3,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormHelperText,
-  FormLabel
+  FormLabel,
 } from '@chakra-ui/react';
 import { ErrorMessage } from '@hookform/error-message';
 import { Props } from './types';
@@ -18,21 +18,21 @@ import InputGroup from '../../InputGroup';
  * using the checkbox.
  */
 const FormField: FunctionComponent<Props> = ({
-                                               errors,
-                                               labelTitle,
-                                               type,
-                                               name,
-                                               icon,
-                                               iconColor,
-                                               register,
-                                               maxLength,
-                                               helperText,
-                                               onChange,
-                                               isSelectField,
-                                               selectPlaceholder,
-                                               selectOptions,
-                                               ...props
-                                             }) => {
+  errors,
+  labelTitle,
+  type,
+  name,
+  icon,
+  iconColor,
+  register,
+  maxLength,
+  helperText,
+  onChange,
+  isSelectField,
+  selectPlaceholder,
+  selectOptions,
+  ...props
+}) => {
   const selectProps = {
     variant: `filled`,
     placeholder: selectPlaceholder,
@@ -76,4 +76,3 @@ const FormField: FunctionComponent<Props> = ({
 };
 
 export default FormField;
-

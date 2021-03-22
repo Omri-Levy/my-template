@@ -5,9 +5,6 @@ interface Props extends InputGroupProps {
   icon?: IconType;
   iconColor?: string;
   inputProps: InputProps;
-};
+}
 
 export { Props };
-
-
-

@@ -4,17 +4,17 @@ import { Props } from './types';
 import NumberInput from '../NumberInput';
 
 const NumberField: FunctionComponent<Props> = ({
-																								 labelTitle,
-																								 labelProps,
-																								 inputProps,
-																								 ...props
+  labelTitle,
+  labelProps,
+  inputProps,
+  ...props
 }) => {
-	return (
-		<FormControl {...props}>
-			<FormLabel {...labelProps}>{labelTitle}</FormLabel>
-			<NumberInput {...inputProps} />
-		</FormControl>
-	);
+  return (
+    <FormControl {...props}>
+      <FormLabel {...labelProps}>{labelTitle}</FormLabel>
+      <NumberInput {...inputProps} />
+    </FormControl>
+  );
 };
 
 export default NumberField;

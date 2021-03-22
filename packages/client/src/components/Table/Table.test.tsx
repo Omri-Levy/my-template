@@ -1,5 +1,5 @@
 describe(`Table`, () => {
-	it(`Table temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`Table temp`, () => {
+    expect(true).toBe(true);
+  });
 });

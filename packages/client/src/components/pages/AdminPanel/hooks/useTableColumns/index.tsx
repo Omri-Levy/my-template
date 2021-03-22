@@ -6,13 +6,15 @@ import { HookReturns } from './types';
  * TODO: update description
  */
 const useTableColumns: HookReturns = () =>
-  useMemo<Column<{
-    col1: string;
-    col2: string;
-    col3: string;
-    col4: string;
-    col5: string;
-  }>[]>(
+  useMemo<
+    Column<{
+      col1: string;
+      col2: string;
+      col3: string;
+      col4: string;
+      col5: string;
+    }>[]
+  >(
     () => [
       {
         Header: `ID`,
@@ -38,7 +40,7 @@ const useTableColumns: HookReturns = () =>
         Header: `Role`,
         accessor: `col5`,
         sortType: `basic`,
-      }
+      },
     ],
     []
   );

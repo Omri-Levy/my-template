@@ -3,13 +3,13 @@ import {
   Flex,
   Table as ChakraTable,
   TableCaption,
-  useBreakpointValue
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import {
   useGlobalFilter,
   usePagination,
   useSortBy,
-  useTable
+  useTable,
 } from 'react-table';
 import { CheckAllCheckboxes, CheckCheckbox, Props } from './types';
 import TableHead from './TableHead';
@@ -22,20 +22,23 @@ import fuzzyTextFilter from './functions/fuzzyTextFilter';
  * refactor to smaller abstractions
  */
 const Table: FunctionComponent<Props> = ({
-                                           caption,
-                                           data,
-                                           columns,
-                                           ...props
-                                         }) => {
-  const [checkedItems, setCheckedItems] = useState(() => (
-    JSON.parse(localStorage.getItem(`checkedItems`) as string) || [false]
-  ));
-  const [userIds, setUserIds] = useState<string[]>(() => (
-    JSON.parse(localStorage.getItem(`userIds`) as string) || []
-  ));
-  const filterTypes = useMemo(() => ({
-    fuzzyText: fuzzyTextFilter,
-  }), []);
+  caption,
+  data,
+  columns,
+  ...props
+}) => {
+  const [checkedItems, setCheckedItems] = useState(
+    () => JSON.parse(localStorage.getItem(`checkedItems`) as string) || [false]
+  );
+  const [userIds, setUserIds] = useState<string[]>(
+    () => JSON.parse(localStorage.getItem(`userIds`) as string) || []
+  );
+  const filterTypes = useMemo(
+    () => ({
+      fuzzyText: fuzzyTextFilter,
+    }),
+    []
+  );
   const cachedPageSize = Number(localStorage.getItem(`pageSize`)) || 10;
   const tableInstance = useTable(
     {
@@ -46,12 +49,12 @@ const Table: FunctionComponent<Props> = ({
         sortBy: [
           {
             id: `col1`,
-            desc: true
-          }
+            desc: true,
+          },
         ],
-        pageSize: cachedPageSize
+        pageSize: cachedPageSize,
       },
-      disableSortRemove: true
+      disableSortRemove: true,
     },
     useGlobalFilter,
     useSortBy,
@@ -73,7 +76,7 @@ const Table: FunctionComponent<Props> = ({
     previousPage,
     nextPage,
     setPageSize,
-    state: { pageIndex, pageSize }
+    state: { pageIndex, pageSize },
   } = tableInstance;
   const rowsLength = data.length + 1;
   const size = useBreakpointValue({ sm: `sm` });
@@ -90,7 +93,7 @@ const Table: FunctionComponent<Props> = ({
     } else {
       setUserIds([...userIds, id]);
     }
-  }
+  };
   const checkAllCheckboxes: CheckAllCheckboxes = () => {
     let newState: boolean[] = [];
 
@@ -106,34 +109,29 @@ const Table: FunctionComponent<Props> = ({
       let newUserIds: string[] = [];
 
       data.forEach((item) => {
-        newUserIds = [...newUserIds, item.col1]
+        newUserIds = [...newUserIds, item.col1];
       });
 
       setUserIds(newUserIds);
     }
-  }
+  };
 
   useEffect(() => {
     localStorage.setItem(`pageSize`, JSON.stringify(pageSize));
-  }, [pageSize])
+  }, [pageSize]);
   useEffect(() => {
-    localStorage.setItem(`checkedItems`,
-      JSON.stringify(checkedItems));
-  }, [checkedItems])
+    localStorage.setItem(`checkedItems`, JSON.stringify(checkedItems));
+  }, [checkedItems]);
   useEffect(() => {
-    localStorage.setItem(`userIds`,
-      JSON.stringify(userIds));
-  }, [userIds])
+    localStorage.setItem(`userIds`, JSON.stringify(userIds));
+  }, [userIds]);
 
   return (
     <Flex flexDirection={`column`} alignItems={`center`}>
-      <Card
-        color={`unset`}
-        backgroundColor={`unset`}
-      >
+      <Card color={`unset`} backgroundColor={`unset`}>
         <ChakraTable size={size} {...getTableProps()} {...props}>
           <TableCaption>{caption}</TableCaption>
-          <TableHead headerGroups={headerGroups}  />
+          <TableHead headerGroups={headerGroups} />
           <TableBody
             getTableBodyProps={getTableBodyProps}
             page={page}
@@ -166,4 +164,3 @@ const Table: FunctionComponent<Props> = ({
 };
 
 export default memo(Table);
-

@@ -1,5 +1,5 @@
 describe(`SelectGroup`, () => {
-	it(`SelectGroup temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`SelectGroup temp`, () => {
+    expect(true).toBe(true);
+  });
 });

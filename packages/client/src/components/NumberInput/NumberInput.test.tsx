@@ -1,5 +1,5 @@
 describe(`NumberInput`, () => {
-	it(`NumberInput temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`NumberInput temp`, () => {
+    expect(true).toBe(true);
+  });
 });

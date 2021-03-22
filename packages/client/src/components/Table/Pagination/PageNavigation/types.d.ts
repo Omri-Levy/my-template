@@ -5,6 +5,6 @@ interface Props {
   canNextPage: boolean;
   previousPage: () => void;
   nextPage: () => void;
-};
+}
 
 export { Props };

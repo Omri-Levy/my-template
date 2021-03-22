@@ -3,11 +3,10 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useState
+  useState,
 } from 'react';
 import AuthorizationContext from './AuthorizationContext';
-import AuthenticationContext
-  from '../AuthenticationContext/AuthenticationContext';
+import AuthenticationContext from '../AuthenticationContext/AuthenticationContext';
 import fetchAuthorize from '../../utils/api/fetchAuthorize';
 
 const AuthorizationProvider: FunctionComponent = ({ children }) => {

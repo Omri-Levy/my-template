@@ -11,4 +11,3 @@ interface Props extends InputGroupProps {
 }
 
 export { Props };
-

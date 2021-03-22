@@ -1,8 +1,11 @@
 import { matchSorter } from 'match-sorter';
 import { ObjectKey } from '@my-template/shared';
 
-const fuzzyTextFilter: any = (rows: Record<ObjectKey,
-  { [key: string]: string }>[], id: string, filterValue: string) => {
+const fuzzyTextFilter: any = (
+  rows: Record<ObjectKey, { [key: string]: string }>[],
+  id: string,
+  filterValue: string
+) => {
   return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
 };
 

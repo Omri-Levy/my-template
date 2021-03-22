@@ -7,6 +7,6 @@ interface Props {
   canNextPage: boolean;
   previousPage: () => void;
   nextPage: () => void;
-};
+}
 
 export { ButtonType, Props };

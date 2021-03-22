@@ -22,4 +22,3 @@ interface Props {
 type DeleteUser = (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
 
 export { Props, DeleteUser };
-

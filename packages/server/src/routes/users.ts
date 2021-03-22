@@ -2,10 +2,8 @@ import { Router } from 'express';
 import getUsers from '../controllers/users/getUsers';
 import forgotPassword from '../controllers/users/forgotPassword';
 import resetPassword from '../controllers/users/resetPassword';
-import validateResetPasswordToken
-  from '../middleware/validateResetPasswordToken';
-import validateResetPasswordTokenController
-  from '../controllers/users/validateResetPasswordToken';
+import validateResetPasswordToken from '../middleware/validateResetPasswordToken';
+import validateResetPasswordTokenController from '../controllers/users/validateResetPasswordToken';
 import deleteUser from '../controllers/users/deleteUser';
 
 const users = Router();

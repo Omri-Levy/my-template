@@ -17,7 +17,10 @@ interface Props extends TableProps {
   data: Columns;
   columns: Column<ColumnType>[];
 }
-type CheckCheckbox = (id: string, index: number) => (event: ChangeEvent<HTMLInputElement>) => void;
+type CheckCheckbox = (
+  id: string,
+  index: number
+) => (event: ChangeEvent<HTMLInputElement>) => void;
 type CheckAllCheckboxes = (event: ChangeEvent<HTMLInputElement>) => void;
 
 export { ColumnType, Props, CheckCheckbox, CheckAllCheckboxes };

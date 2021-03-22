@@ -5,7 +5,7 @@ import queryClient from '../../../components/globals/Providers/queryClient';
 const fetchDeleteUser: FetchDeleteUser = async (userIds) => {
   try {
     const data = {
-      userIds
+      userIds,
     };
     await axiosRequest(`DELETE`, undefined, `deleteUser`, data);
 

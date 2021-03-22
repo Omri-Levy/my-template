@@ -3,7 +3,7 @@ import { FaLock, FaShieldAlt } from 'react-icons/fa';
 import {
   emailAlreadyInUseMessage,
   invalidPasswordPolicyMessage,
-  securityQuestions
+  securityQuestions,
 } from '@my-template/shared';
 import FormField from '../../../FormField';
 import clearResponseError from '../../../FormResponseError/clearResponseError';

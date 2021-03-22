@@ -21,9 +21,7 @@ const Providers: FunctionComponent = ({ children }) => (
             persistor={persistedStore}
           >
             <AuthenticationProvider>
-              <AuthorizationProvider>
-                {children}
-              </AuthorizationProvider>
+              <AuthorizationProvider>{children}</AuthorizationProvider>
             </AuthenticationProvider>
           </PersistGate>
         </ReduxProvider>

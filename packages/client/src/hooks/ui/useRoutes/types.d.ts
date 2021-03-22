@@ -13,16 +13,9 @@ interface Route {
 }
 
 type Routes = Route[];
-type RoutesEndpoints = (string | RegExp)[];
 
 interface RoutesObject {
-  routes: Routes;
-  memoizedUnauthenticatedRoutes: Routes;
-  memoizedUnauthenticatedEndpoints: RoutesEndpoints;
-  memoizedAuthenticatedRoutes: Routes;
-  memoizedAuthenticatedEndpoints: RoutesEndpoints;
-  memoizedAdminRoutes: Routes;
-  memoizedAdminEndpoints: RoutesEndpoints;
+  memoizedRoutes: Routes;
 }
 
 type HookReturns = () => RoutesObject;

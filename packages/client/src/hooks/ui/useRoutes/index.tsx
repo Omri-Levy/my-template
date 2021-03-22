@@ -1,16 +1,10 @@
 import { useContext, useMemo } from 'react';
 import { HookReturns, Routes } from './types';
-import {
-  authenticatedEndpoints,
-  authenticatedRoutes,
-} from './authenticatedRoutes';
-import {
-  unauthenticatedEndpoints,
-  unauthenticatedRoutes,
-} from './unauthenticatedRoutes';
+import { authenticatedRoutes } from './authenticatedRoutes';
+import { unauthenticatedRoutes } from './unauthenticatedRoutes';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
-import { adminEndpoints, adminRoutes } from './adminRoutes';
+import { adminRoutes } from './adminRoutes';
 
 /**
  * returns a memoized version of the app's routes array based on if the user
@@ -26,15 +20,6 @@ const useRoutes: HookReturns = () => {
   );
   const memoizedAuthenticatedRoutes = useMemo(() => authenticatedRoutes, []);
   const memoizedAdminRoutes = useMemo(() => adminRoutes, []);
-  const memoizedUnauthenticatedEndpoints = useMemo(
-    () => unauthenticatedEndpoints,
-    []
-  );
-  const memoizedAuthenticatedEndpoints = useMemo(
-    () => authenticatedEndpoints,
-    []
-  );
-  const memoizedAdminEndpoints = useMemo(() => adminEndpoints, []);
   let memoizedRoutes: Routes = memoizedUnauthenticatedRoutes;
 
   if (isAuthenticated && isAuthorized) {
@@ -45,16 +30,8 @@ const useRoutes: HookReturns = () => {
     memoizedRoutes = memoizedUnauthenticatedRoutes;
   }
 
-  const routes = useMemo(() => memoizedRoutes, [memoizedRoutes]);
-
   return {
-    routes,
-    memoizedUnauthenticatedRoutes,
-    memoizedUnauthenticatedEndpoints,
-    memoizedAuthenticatedRoutes,
-    memoizedAuthenticatedEndpoints,
-    memoizedAdminRoutes,
-    memoizedAdminEndpoints,
+    memoizedRoutes,
   };
 };
 

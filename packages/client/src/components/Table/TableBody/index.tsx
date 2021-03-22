@@ -4,14 +4,12 @@ import { Checkbox, Tbody, Td, Tr } from '@chakra-ui/react';
 import { Props } from './types';
 
 const TableBody: FunctionComponent<Props> = ({
-                                               getTableBodyProps,
-                                               page,
-                                               prepareRow,
+  getTableBodyProps,
+  page,
+  prepareRow,
   checkedItems,
-                                               checkCheckbox,
-
-                                             }) => {
-
+  checkCheckbox,
+}) => {
   return (
     <Tbody {...getTableBodyProps()}>
       {page?.map((row, index) => {
@@ -20,12 +18,11 @@ const TableBody: FunctionComponent<Props> = ({
         return (
           <Tr {...row?.getRowProps()} key={v4()}>
             {row?.cells?.map((cell) => {
-
               return (
                 <Td {...cell?.getCellProps()} key={v4()}>
                   {cell?.render(`Cell`)}
                 </Td>
-              )
+              );
             })}
             <Td>
               <Checkbox
@@ -38,6 +35,6 @@ const TableBody: FunctionComponent<Props> = ({
       })}
     </Tbody>
   );
-}
+};
 
 export default memo(TableBody);

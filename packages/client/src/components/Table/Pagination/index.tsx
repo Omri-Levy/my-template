@@ -8,18 +8,18 @@ import PageCounter from './PageCounter';
 import RowsPerPage from './RowsPerPage';
 
 const Pagination: FunctionComponent<Props> = ({
-                                                pageCount,
-                                                pageIndex,
+  pageCount,
+  pageIndex,
   rowsLength,
-                                                gotoPage,
-                                                canPreviousPage,
-                                                canNextPage,
-                                                previousPage,
-                                                nextPage,
+  gotoPage,
+  canPreviousPage,
+  canNextPage,
+  previousPage,
+  nextPage,
   setPageSize,
-                                                colSpan,
-                                                ...props
-                                              }) => {
+  colSpan,
+  ...props
+}) => {
   const displayPagination = pageCount > 1;
 
   /**
@@ -28,52 +28,51 @@ const Pagination: FunctionComponent<Props> = ({
   return (
     <Tr>
       <Td colSpan={colSpan}>
-      <PageCounter pageCount={pageCount} pageIndex={pageIndex} />
-      <Card
-        display={`flex`}
-        justifyContent={`center`}
-        color={`unset`}
-        backgroundColor={`unset`}
-        as={`nav`}
-        {...props}
-      >
-        {displayPagination && (
-          <>
-            <PageNavigation
-              gotoPage={gotoPage}
-              pageCount={pageCount}
-              canPreviousPage={canPreviousPage}
-              canNextPage={canNextPage}
-              previousPage={previousPage}
-              nextPage={nextPage}
-            />
-            <Flex>
-              <Divider orientation={`vertical`} mr={10} />
-            </Flex>
-          </>
-        )}
-        <RowsPerPage
-          setPageSize={setPageSize}
-          displayPagination={displayPagination}
-          rowsLength={rowsLength}
-        />
-        {displayPagination && (
-          <>
-            <Flex>
-              <Divider orientation={`vertical`} mr={10} />
-            </Flex>
-            <GoToPage
-              pageCount={pageCount}
-              pageIndex={pageIndex}
-              gotoPage={gotoPage}
-            />
-          </>
-        )}
-      </Card>
+        <PageCounter pageCount={pageCount} pageIndex={pageIndex} />
+        <Card
+          display={`flex`}
+          justifyContent={`center`}
+          color={`unset`}
+          backgroundColor={`unset`}
+          as={`nav`}
+          {...props}
+        >
+          {displayPagination && (
+            <>
+              <PageNavigation
+                gotoPage={gotoPage}
+                pageCount={pageCount}
+                canPreviousPage={canPreviousPage}
+                canNextPage={canNextPage}
+                previousPage={previousPage}
+                nextPage={nextPage}
+              />
+              <Flex>
+                <Divider orientation={`vertical`} mr={10} />
+              </Flex>
+            </>
+          )}
+          <RowsPerPage
+            setPageSize={setPageSize}
+            displayPagination={displayPagination}
+            rowsLength={rowsLength}
+          />
+          {displayPagination && (
+            <>
+              <Flex>
+                <Divider orientation={`vertical`} mr={10} />
+              </Flex>
+              <GoToPage
+                pageCount={pageCount}
+                pageIndex={pageIndex}
+                gotoPage={gotoPage}
+              />
+            </>
+          )}
+        </Card>
       </Td>
     </Tr>
   );
 };
 
 export default memo(Pagination);
-

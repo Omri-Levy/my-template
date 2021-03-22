@@ -14,4 +14,3 @@ const db = new Sequelize(options);
 })();
 
 export default db;
-
