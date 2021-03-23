@@ -1,10 +1,13 @@
 import { Router } from 'express';
+import { authenticate } from 'passport';
 import getUsers from '../controllers/users/getUsers';
 import forgotPassword from '../controllers/users/forgotPassword';
 import resetPassword from '../controllers/users/resetPassword';
 import validateResetPasswordToken from '../middleware/validateResetPasswordToken';
 import validateResetPasswordTokenController from '../controllers/users/validateResetPasswordToken';
 import deleteUser from '../controllers/users/deleteUser';
+import deleteUsers from '../controllers/users/deleteUsers';
+import isAuthorized from '../middleware/isAuthorized';
 
 const users = Router();
 
@@ -94,7 +97,14 @@ const users = Router();
  *         $ref: '#/components/responses/ServerError'
  *
  */
-users.get(`/getUsers`, getUsers);
+users.get(
+  `/getUsers`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  isAuthorized(`admin`),
+  getUsers
+);
 
 users.post(`/forgotPassword`, forgotPassword);
 
@@ -106,6 +116,22 @@ users.get(
   validateResetPasswordTokenController
 );
 
-users.delete(`/deleteUser`, deleteUser);
+users.delete(
+  `/deleteUser`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  isAuthorized(`admin`),
+  deleteUser
+);
+
+users.delete(
+  `/deleteUsers`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  isAuthorized(`admin`),
+  deleteUsers
+);
 
 export default users;

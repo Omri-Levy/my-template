@@ -4,17 +4,22 @@ import {
   ButtonGroup,
   Checkbox,
   Flex,
+  Icon,
   Td,
   Text,
   Tfoot,
   Tr,
 } from '@chakra-ui/react';
 import { v4 } from 'uuid';
+import { FaTrashAlt } from 'react-icons/all';
+import { Users } from '@my-template/shared';
 import { DeleteUser, Props } from './types';
 import GlobalFilter from '../GlobalFilter';
 import Pagination from '../Pagination';
 import useDarkMode from '../../../hooks/ui/useDarkMode';
 import fetchDeleteUser from '../../../utils/api/fetchDeleteUser';
+import DeleteAllUsersModal from './DeleteAllUsersModal';
+import queryClient from '../../globals/Providers/queryClient';
 
 const TableFooter: FunctionComponent<Props> = ({
   footerGroups,
@@ -39,6 +44,7 @@ const TableFooter: FunctionComponent<Props> = ({
   const deleteUser: DeleteUser = async () => {
     await fetchDeleteUser(userIds);
   };
+  const users = queryClient.getQueryData(`users`) as Users;
 
   return (
     <Tfoot>
@@ -49,15 +55,17 @@ const TableFooter: FunctionComponent<Props> = ({
               {column?.render(`Footer`)}
             </Td>
           ))}
-          <Td>
-            <Checkbox
-              mb={1}
-              isChecked={checkedItems.every(Boolean)}
-              onChange={checkAllCheckboxes}
-            >
-              <Text mt={1}>Select All</Text>
-            </Checkbox>
-          </Td>
+          {users?.length > 1 && (
+            <Td>
+              <Checkbox
+                mb={1}
+                isChecked={checkedItems.every(Boolean)}
+                onChange={checkAllCheckboxes}
+              >
+                <Text mt={1}>Select All</Text>
+              </Checkbox>
+            </Td>
+          )}
         </Tr>
       ))}
       <Tr>
@@ -68,10 +76,13 @@ const TableFooter: FunctionComponent<Props> = ({
         <Td borderLeft={`1px solid ${borderColor}`} colSpan={colSpan}>
           <Flex justifyContent={`flex-end`}>
             <ButtonGroup spacing={5}>
-              <Button onClick={userIds.length > 0 ? deleteUser : undefined}>
+              <Button
+                leftIcon={<Icon as={FaTrashAlt} />}
+                onClick={userIds.length > 0 ? deleteUser : undefined}
+              >
                 Delete
               </Button>
-              <Button onClick={() => alert(`YEET`)}>Delete All</Button>
+              {users?.length > 1 && <DeleteAllUsersModal />}
             </ButtonGroup>
           </Flex>
         </Td>

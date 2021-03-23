@@ -11,6 +11,7 @@ type Endpoint =
   | `getUser`
   | `getUsers`
   | `deleteUser`
+  | `deleteUsers`
   | `forgotPassword`
   | `resetPassword`
   | `validateResetPasswordToken`;

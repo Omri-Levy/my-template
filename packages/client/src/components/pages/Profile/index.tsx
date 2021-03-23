@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext } from 'react';
 import { FaIdCard } from 'react-icons/fa';
 import { Redirect } from 'react-router-dom';
+import { Button, Flex } from '@chakra-ui/react';
 import Page from '../Page';
 import Card from '../../Card';
 import CurrentUserDetails from './CurrentUserDetails';
@@ -21,6 +22,9 @@ const Profile: FunctionComponent = () => {
     <Page title={`Profile`} icon={FaIdCard}>
       <Card color={`unset`} backgroundColor={`unset`} mt={100}>
         <CurrentUserDetails />
+        <Flex justifyContent={`flex-end`} mt={5}>
+          <Button>Terminate account</Button>
+        </Flex>
       </Card>
     </Page>
   );

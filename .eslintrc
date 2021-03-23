@@ -28,7 +28,6 @@
   },
   "rules": {
     "react/jsx-indent": "off",
-    "prettier/prettier": "off",
     "no-return-await": "off",
     "import/prefer-default-export": "off",
     "no-useless-concat": "off",
