@@ -66,7 +66,6 @@ const MultiStepForm: FunctionComponent<Props> = ({
               leftIcon={icons ? <Icon as={FaCaretLeft} mr={0.3} /> : undefined}
               type={`button`}
               mt={4}
-              isLoading={isSubmitting}
               disabled={isSubmitting}
             >
               Previous
