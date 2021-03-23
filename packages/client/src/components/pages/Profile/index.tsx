@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext, useState } from 'react';
 import { FaIdCard } from 'react-icons/fa';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
 import Page from '../Page';
@@ -9,20 +9,33 @@ import CurrentUserDetails from './CurrentUserDetails';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import Modal from '../../Modal';
 import fetchTerminateUserAccount from '../../../utils/api/fetchTerminateUserAccount';
+import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 
 /**
  * a route wrapped with the Page component to display the currently
  * authenticated user's details.
  */
 const Profile: FunctionComponent = () => {
-  const { isAuthenticated } = useContext(AuthenticationContext);
+  const { isAuthenticated, authenticate } = useContext(AuthenticationContext);
   const disclosure = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
+  const { replace } = useHistory();
+  const {
+    toast: userAccountTerminatedToast,
+    toastOptions: userAccountTerminatedToastOptions,
+  } = useSuccessToast(`Account terminated successfully.`);
   const terminateUserAccount = (onClose: () => void) => async () => {
     setIsLoading(true);
     await fetchTerminateUserAccount();
     setIsLoading(false);
+
     onClose();
+
+    await authenticate();
+
+    replace(`/`, {
+      toast: userAccountTerminatedToast(userAccountTerminatedToastOptions),
+    });
   };
 
   if (!isAuthenticated) {
