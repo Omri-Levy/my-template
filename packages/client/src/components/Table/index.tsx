@@ -120,10 +120,10 @@ const Table: FunctionComponent<Props> = ({
     localStorage.setItem(`pageSize`, JSON.stringify(pageSize));
   }, [pageSize]);
   useEffect(() => {
-    localStorage.setItem(`checkedItems`, JSON.stringify(checkedItems));
+    sessionStorage.setItem(`checkedItems`, JSON.stringify(checkedItems));
   }, [checkedItems]);
   useEffect(() => {
-    localStorage.setItem(`userIds`, JSON.stringify(userIds));
+    sessionStorage.setItem(`userIds`, JSON.stringify(userIds));
   }, [userIds]);
 
   return (
