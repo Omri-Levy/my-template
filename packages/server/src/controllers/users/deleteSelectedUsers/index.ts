@@ -1,7 +1,7 @@
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
 
-const deleteUser: Route = async (req, res) => {
+const deleteSelectedUsers: Route = async (req, res) => {
   try {
     const { userIds } = req.body;
 
@@ -15,4 +15,4 @@ const deleteUser: Route = async (req, res) => {
   }
 };
 
-export default deleteUser;
+export default deleteSelectedUsers;

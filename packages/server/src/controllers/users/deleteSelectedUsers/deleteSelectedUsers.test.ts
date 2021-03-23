@@ -3,7 +3,7 @@ import app from '../../../server';
 import db from '../../../db';
 import User from '../../../models/User.model';
 
-describe(`deleteUser`, () => {
+describe(`deleteSelectedUsers`, () => {
   it(`returns an array of all users`, async () => {
     const data = {
       firstName: `test`,
@@ -22,7 +22,9 @@ describe(`deleteUser`, () => {
         password: `Create!@`,
       });
     }
-    const { body } = await supertest(app).post(`/api/deleteUser`).expect(200);
+    const { body } = await supertest(app)
+      .post(`/api/deleteSelectedUsers`)
+      .expect(200);
 
     expect(body).toHaveProperty(`status`, `success`);
     expect(body.users).toHaveLength(3);

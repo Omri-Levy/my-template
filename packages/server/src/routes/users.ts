@@ -5,9 +5,10 @@ import forgotPassword from '../controllers/users/forgotPassword';
 import resetPassword from '../controllers/users/resetPassword';
 import validateResetPasswordToken from '../middleware/validateResetPasswordToken';
 import validateResetPasswordTokenController from '../controllers/users/validateResetPasswordToken';
-import deleteUser from '../controllers/users/deleteUser';
+import deleteSelectedUsers from '../controllers/users/deleteSelectedUsers';
 import deleteUsers from '../controllers/users/deleteUsers';
 import isAuthorized from '../middleware/isAuthorized';
+import terminateUserAccount from '../controllers/users/terminateUserAccount';
 
 const users = Router();
 
@@ -117,12 +118,12 @@ users.get(
 );
 
 users.delete(
-  `/deleteUser`,
+  `/deleteSelectedUsers`,
   authenticate(`jwt`, {
     session: false,
   }),
   isAuthorized(`admin`),
-  deleteUser
+  deleteSelectedUsers
 );
 
 users.delete(
@@ -132,6 +133,14 @@ users.delete(
   }),
   isAuthorized(`admin`),
   deleteUsers
+);
+
+users.delete(
+  `/terminateUserAccount`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  terminateUserAccount
 );
 
 export default users;

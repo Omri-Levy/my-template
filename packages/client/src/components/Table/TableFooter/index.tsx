@@ -15,11 +15,11 @@ import { FaTrashAlt } from 'react-icons/all';
 import { Users } from '@my-template/shared';
 import { DeleteUser, Props } from './types';
 import GlobalFilter from '../GlobalFilter';
-import Pagination from '../Pagination';
 import useDarkMode from '../../../hooks/ui/useDarkMode';
 import fetchDeleteUser from '../../../utils/api/fetchDeleteUser';
-import DeleteAllUsersModal from './DeleteAllUsersModal';
 import queryClient from '../../globals/Providers/queryClient';
+import DeleteAllUsersModal from './DeleteAllUsersModal';
+import Pagination from '../Pagination';
 
 const TableFooter: FunctionComponent<Props> = ({
   footerGroups,
@@ -41,7 +41,7 @@ const TableFooter: FunctionComponent<Props> = ({
 }) => {
   const { isDarkMode } = useDarkMode();
   const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
-  const deleteUser: DeleteUser = async () => {
+  const deleteSelectedUsers: DeleteUser = async () => {
     await fetchDeleteUser(userIds);
   };
   const users = queryClient.getQueryData(`users`) as Users;
@@ -78,7 +78,7 @@ const TableFooter: FunctionComponent<Props> = ({
             <ButtonGroup spacing={5}>
               <Button
                 leftIcon={<Icon as={FaTrashAlt} />}
-                onClick={userIds.length > 0 ? deleteUser : undefined}
+                onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
                 disabled={!checkedItems.some(Boolean)}
               >
                 Delete

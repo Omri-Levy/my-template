@@ -8,6 +8,7 @@ import Card from '../../Card';
 import CurrentUserDetails from './CurrentUserDetails';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import Modal from '../../Modal';
+import fetchTerminateUserAccount from '../../../utils/api/fetchTerminateUserAccount';
 
 /**
  * a route wrapped with the Page component to display the currently
@@ -17,9 +18,9 @@ const Profile: FunctionComponent = () => {
   const { isAuthenticated } = useContext(AuthenticationContext);
   const disclosure = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
-  const onClick = (onClose: () => void) => () => {
+  const terminateUserAccount = (onClose: () => void) => async () => {
     setIsLoading(true);
-    alert(`yeet`);
+    await fetchTerminateUserAccount();
     setIsLoading(false);
     onClose();
   };
@@ -44,7 +45,7 @@ const Profile: FunctionComponent = () => {
             }
             actionText={`Terminate account`}
             actionIcon={FaTrashAlt}
-            onClick={onClick}
+            onClick={terminateUserAccount}
             isLoading={isLoading}
             disclosure={disclosure}
           />

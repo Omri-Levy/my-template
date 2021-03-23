@@ -31,6 +31,7 @@ import {
   securityAnswerIsRequiredMessage,
   securityQuestionIsRequiredMessage,
   serverErrorMessage,
+  terminateUserAccountMessage,
   wrongCredentialsMessage,
 } from './utils/validation/validationMessages';
 import axiosRequest from './utils/axiosRequest';
@@ -105,6 +106,7 @@ export {
   lockoutMessage,
   firstNameIsRequiredMessage,
   lastNameIsRequiredMessage,
+  terminateUserAccountMessage,
   personalInformationSchema,
   securityInformationSchema,
   signUpSchema,
