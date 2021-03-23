@@ -1,9 +1,11 @@
 import { FunctionComponent, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
+import { Users } from '@my-template/shared';
 import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
 import Modal from '../../../Modal';
 import { DeleteAllUsers } from './types';
+import queryClient from '../../../globals/Providers/queryClient';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
@@ -18,6 +20,8 @@ const DeleteAllUsersModal: FunctionComponent = () => {
       onClose();
     }, 5000);
   };
+  const users = queryClient.getQueryData(`users`) as Users;
+  const admins = users.filter((user) => user.role === `admin`);
 
   return (
     <Modal
@@ -29,7 +33,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
         `This action will delete all users with no way ` +
         `of reverting.. Are you sure?`
       }
-      checkbox
+      checkbox={admins.length > 1}
       checkboxText={`Delete other admins`}
       actionText={`Delete`}
       actionIcon={FaTrashAlt}
