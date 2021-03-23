@@ -79,6 +79,7 @@ const TableFooter: FunctionComponent<Props> = ({
               <Button
                 leftIcon={<Icon as={FaTrashAlt} />}
                 onClick={userIds.length > 0 ? deleteUser : undefined}
+                disabled={!checkedItems.some(Boolean)}
               >
                 Delete
               </Button>
