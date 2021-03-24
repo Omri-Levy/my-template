@@ -16,6 +16,12 @@ const App: FunctionComponent = () => {
       dispatch(resetSignUpFormDetails());
     }
   }, [dispatch, pathname]);
+  useEffect(() => {
+    if (!pathname.match(/adminPanel*/)) {
+      sessionStorage.setItem(`userIds`, JSON.stringify([]));
+      sessionStorage.setItem(`checkedItems`, JSON.stringify([false]));
+    }
+  }, [pathname]);
 
   return (
     <Suspense fallback={<Loading suspense />}>
