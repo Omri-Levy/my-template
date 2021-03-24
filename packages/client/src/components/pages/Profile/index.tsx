@@ -56,7 +56,7 @@ const Profile: FunctionComponent = () => {
 
   return (
     <Page title={`Profile`} icon={FaIdCard}>
-      <Card color={`unset`} backgroundColor={`unset`} mt={100}>
+      <Card color={`unset`} backgroundColor={`unset`}>
         <CurrentUserDetails />
         <Flex justifyContent={`flex-end`} mt={5}>
           <Modal
