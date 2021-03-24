@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { resetSignUpFormDetails } from '../../redux/reducer';
 import Routes from '../globals/Routes';
 import Loading from '../globals/Loading';
+import resetSensitiveSessionStorage from '../../utils/functions/resetSensitiveSessionStorage';
 
 const App: FunctionComponent = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,7 @@ const App: FunctionComponent = () => {
   }, [dispatch, pathname]);
   useEffect(() => {
     if (!pathname.match(/adminPanel*/)) {
-      sessionStorage.setItem(`userIds`, JSON.stringify([]));
-      sessionStorage.setItem(`checkedItems`, JSON.stringify([false]));
+      resetSensitiveSessionStorage();
     }
   }, [pathname]);
 
