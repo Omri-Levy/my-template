@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent, memo, useState } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { FaTrashAlt } from 'react-icons/all';
-import { Users } from '@my-template/shared';
+import { deleteSelectedUsersMessage, Users } from '@my-template/shared';
 import { DeleteUser, Props } from './types';
 import GlobalFilter from '../GlobalFilter';
 import useDarkMode from '../../../hooks/ui/useDarkMode';
@@ -20,6 +20,7 @@ import fetchDeleteUser from '../../../utils/api/fetchDeleteUser';
 import queryClient from '../../globals/Providers/queryClient';
 import DeleteAllUsersModal from './DeleteAllUsersModal';
 import Pagination from '../Pagination';
+import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 
 const TableFooter: FunctionComponent<Props> = ({
   footerGroups,
@@ -41,8 +42,22 @@ const TableFooter: FunctionComponent<Props> = ({
 }) => {
   const { isDarkMode } = useDarkMode();
   const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    toast: deleteSelectedUsersToast,
+    toastOptions: deleteSelectedUsersToastOptions,
+  } = useSuccessToast(`Deleted selected users successfully.`);
   const deleteSelectedUsers: DeleteUser = async () => {
-    await fetchDeleteUser(userIds);
+    try {
+      setIsLoading(true);
+      await fetchDeleteUser(userIds);
+
+      deleteSelectedUsersToast(deleteSelectedUsersToastOptions);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setIsLoading(false);
   };
   const users = queryClient.getQueryData(`users`) as Users;
 
@@ -80,8 +95,14 @@ const TableFooter: FunctionComponent<Props> = ({
                 leftIcon={<Icon as={FaTrashAlt} />}
                 onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
                 disabled={!checkedItems.some(Boolean)}
+                isLoading={isLoading}
+                title={
+                  !checkedItems.some(Boolean)
+                    ? deleteSelectedUsersMessage
+                    : undefined
+                }
               >
-                Delete
+                Delete Selected
               </Button>
               {users?.length > 1 && <DeleteAllUsersModal />}
             </ButtonGroup>

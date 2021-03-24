@@ -16,7 +16,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaTimes, FaTrashAlt } from 'react-icons/all';
+import { terminateUserAccountMessage } from '@my-template/shared';
 import { Props } from './types';
+import Alert from '../Alert';
 
 const Modal: FunctionComponent<Props> = ({
   toggleButtonText,
@@ -31,6 +33,7 @@ const Modal: FunctionComponent<Props> = ({
   isLoading,
   actionText,
   disclosure,
+  alertDisclosure,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isChecked, onOpen: onCheck, onClose: onUncheck } = disclosure;
@@ -59,6 +62,13 @@ const Modal: FunctionComponent<Props> = ({
                 </Checkbox>
               </Flex>
             )}
+            <Alert
+              status={`error`}
+              mt={5}
+              message={terminateUserAccountMessage}
+              disclosure={alertDisclosure}
+              closeable
+            />
           </ModalBody>
           <ModalFooter>
             <ButtonGroup spacing={5}>

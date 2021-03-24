@@ -4,6 +4,7 @@
 import * as yup from 'yup';
 import { isName, validPassword } from '../regex';
 import {
+  deleteAdminsIsRequiredMessage,
   emailIsRequiredMessage,
   firstNameIsRequiredMessage,
   invalidEmailMessage,
@@ -95,6 +96,9 @@ const resetPasswordFields = {
     .oneOf([yup.ref(`newPassword`)], invalidPasswordConfirmationMessage)
     .required(passwordConfirmationIsRequiredMessage),
 };
+const deleteUsersFields = {
+  deleteAdmins: yup.boolean().required(deleteAdminsIsRequiredMessage),
+};
 
 export {
   sharedFields,
@@ -103,4 +107,5 @@ export {
   signInFields,
   forgotPasswordFields,
   resetPasswordFields,
+  deleteUsersFields,
 };

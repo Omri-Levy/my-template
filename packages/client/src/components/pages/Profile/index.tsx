@@ -3,6 +3,7 @@ import { FaIdCard } from 'react-icons/fa';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
+import { terminateUserAccountMessage } from '@my-template/shared';
 import Page from '../Page';
 import Card from '../../Card';
 import CurrentUserDetails from './CurrentUserDetails';
@@ -18,6 +19,8 @@ import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 const Profile: FunctionComponent = () => {
   const { isAuthenticated, authenticate } = useContext(AuthenticationContext);
   const disclosure = useDisclosure();
+  const alertDisclosure = useDisclosure();
+  const { onOpen } = alertDisclosure;
   const [isLoading, setIsLoading] = useState(false);
   const { replace } = useHistory();
   const {
@@ -25,17 +28,26 @@ const Profile: FunctionComponent = () => {
     toastOptions: userAccountTerminatedToastOptions,
   } = useSuccessToast(`Account terminated successfully.`);
   const terminateUserAccount = (onClose: () => void) => async () => {
-    setIsLoading(true);
-    await fetchTerminateUserAccount();
+    try {
+      setIsLoading(true);
+      await fetchTerminateUserAccount();
+
+      onClose();
+
+      await authenticate();
+
+      replace(`/`, {
+        toast: userAccountTerminatedToast(userAccountTerminatedToastOptions),
+      });
+    } catch (error) {
+      console.error(error);
+
+      if (error?.response?.data?.message === terminateUserAccountMessage) {
+        onOpen();
+      }
+    }
+
     setIsLoading(false);
-
-    onClose();
-
-    await authenticate();
-
-    replace(`/`, {
-      toast: userAccountTerminatedToast(userAccountTerminatedToastOptions),
-    });
   };
 
   if (!isAuthenticated) {
@@ -61,6 +73,7 @@ const Profile: FunctionComponent = () => {
             onClick={terminateUserAccount}
             isLoading={isLoading}
             disclosure={disclosure}
+            alertDisclosure={alertDisclosure}
           />
         </Flex>
       </Card>

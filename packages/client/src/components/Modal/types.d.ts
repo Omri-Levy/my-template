@@ -19,6 +19,11 @@ interface Props {
     onOpen: () => void;
     onClose: () => void;
   };
+  alertDisclosure: {
+    isOpen: boolean;
+    onOpen: () => void;
+    onClose: () => void;
+  };
 }
 
 export { Props };

@@ -10,6 +10,7 @@ import {
   Users,
 } from './utils/types';
 import {
+  deleteSelectedUsersMessage,
   emailAlreadyInUseMessage,
   emailIsRequiredMessage,
   firstNameIsRequiredMessage,
@@ -37,6 +38,7 @@ import {
 import axiosRequest from './utils/axiosRequest';
 import { apiUrl, securityQuestions } from './utils/constants';
 import {
+  deleteUsersSchema,
   forgotPasswordSchema,
   personalInformationSchema,
   resetPasswordSchema,
@@ -107,12 +109,14 @@ export {
   firstNameIsRequiredMessage,
   lastNameIsRequiredMessage,
   terminateUserAccountMessage,
+  deleteSelectedUsersMessage,
   personalInformationSchema,
   securityInformationSchema,
   signUpSchema,
   signInSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
+  deleteUsersSchema,
   axiosRequest,
   calculateMinutes,
   calculateHours,

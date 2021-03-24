@@ -23,6 +23,7 @@ const securityQuestion = `${security} question`;
 const securityAnswer = `${security} answer`;
 const password = `Password`;
 const passwordConfirmation = `${password} confirmation`;
+const deleteAdmins = `Delete admins`;
 
 const requiredFieldMessage = `is a required field.`;
 const invalidNameMessage = (type: `firstName` | `lastName`) => {
@@ -106,8 +107,12 @@ const forgotPasswordMessage =
   `- you will receive an email with the next steps in order to ` +
   `reset your password shortly.`;
 const terminateUserAccountMessage =
-  `Please make sure there are at least ` +
-  `two admin users in total in existence before trying again.`;
+  `Please make sure there is at least ` +
+  `one more admin user in existence before trying again.`;
+const deleteSelectedUsersMessage = `Please select one or more users to delete.`;
+
+// admin actions
+const deleteAdminsIsRequiredMessage = `${deleteAdmins} ${requiredFieldMessage}`;
 
 export {
   invalidFirstNameMessage,
@@ -134,4 +139,6 @@ export {
   lastNameIsRequiredMessage,
   lockoutMessage,
   terminateUserAccountMessage,
+  deleteSelectedUsersMessage,
+  deleteAdminsIsRequiredMessage,
 };

@@ -6,19 +6,29 @@ import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
 import Modal from '../../../Modal';
 import { DeleteAllUsers } from './types';
 import queryClient from '../../../globals/Providers/queryClient';
+import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
+  const alertDisclosure = useDisclosure();
   const { isOpen } = disclosure;
   const [isLoading, setIsLoading] = useState(false);
+  const {
+    toast: deleteAllUsersToast,
+    toastOptions: deleteAllUsersToastOptions,
+  } = useSuccessToast(`Deleted all users successfully.`);
   const deleteAllUsers: DeleteAllUsers = (onClose) => async () => {
-    setIsLoading(true);
-    await fetchDeleteAllUsers(isOpen);
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await fetchDeleteAllUsers(isOpen);
 
-      onClose();
-    }, 5000);
+      deleteAllUsersToast(deleteAllUsersToastOptions);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+
+    onClose();
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
@@ -40,6 +50,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
       onClick={deleteAllUsers}
       isLoading={isLoading}
       disclosure={disclosure}
+      alertDisclosure={alertDisclosure}
     />
   );
 };
