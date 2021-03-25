@@ -2,8 +2,8 @@ import useToast from '../useToast';
 
 type Variant = `subtle`;
 type Position = `top`;
-type Title = `Success`;
-type Status = `success`;
+type Title = `Error`;
+type Status = `error`;
 interface ToastOptions {
   duration: null;
   isClosable: boolean;
