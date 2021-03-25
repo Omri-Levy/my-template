@@ -96,7 +96,7 @@ const resetPasswordFields = {
     .oneOf([yup.ref(`newPassword`)], invalidPasswordConfirmationMessage)
     .required(passwordConfirmationIsRequiredMessage),
 };
-const deleteUsersFields = {
+const deleteAllUsersFields = {
   deleteAdmins: yup.boolean().required(deleteAdminsIsRequiredMessage),
 };
 
@@ -107,5 +107,5 @@ export {
   signInFields,
   forgotPasswordFields,
   resetPasswordFields,
-  deleteUsersFields,
+  deleteAllUsersFields,
 };

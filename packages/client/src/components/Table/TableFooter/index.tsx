@@ -21,6 +21,7 @@ import queryClient from '../../globals/Providers/queryClient';
 import DeleteAllUsersModal from './DeleteAllUsersModal';
 import Pagination from '../Pagination';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
+import useErrorToast from '../../../hooks/ui/useErrorToast';
 
 const TableFooter: FunctionComponent<Props> = ({
   footerGroups,
@@ -44,17 +45,23 @@ const TableFooter: FunctionComponent<Props> = ({
   const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
   const [isLoading, setIsLoading] = useState(false);
   const {
-    toast: deleteSelectedUsersToast,
-    toastOptions: deleteSelectedUsersToastOptions,
+    toast: deleteSelectedUsersSuccessToast,
+    toastOptions: deleteSelectedUsersSuccessToastOptions,
   } = useSuccessToast(`Deleted selected users successfully.`);
+  const {
+    toast: deleteSelectedUsersErrorToast,
+    toastOptions: deleteSelectedUsersErrorToastOptions,
+  } = useErrorToast(`Deleting selected users failed - please try again.`);
   const deleteSelectedUsers: DeleteUser = async () => {
     try {
       setIsLoading(true);
       await fetchDeleteUser(userIds);
 
-      deleteSelectedUsersToast(deleteSelectedUsersToastOptions);
+      deleteSelectedUsersSuccessToast(deleteSelectedUsersSuccessToastOptions);
     } catch (error) {
       console.error(error);
+
+      deleteSelectedUsersErrorToast(deleteSelectedUsersErrorToastOptions);
     }
 
     setIsLoading(false);

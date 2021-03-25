@@ -6,7 +6,7 @@ import resetPassword from '../controllers/users/resetPassword';
 import validateResetPasswordToken from '../middleware/validateResetPasswordToken';
 import validateResetPasswordTokenController from '../controllers/users/validateResetPasswordToken';
 import deleteSelectedUsers from '../controllers/users/deleteSelectedUsers';
-import deleteUsers from '../controllers/users/deleteUsers';
+import deleteAllUsers from '../controllers/users/deleteAllUsers';
 import isAuthorized from '../middleware/isAuthorized';
 import terminateUserAccount from '../controllers/users/terminateUserAccount';
 
@@ -127,12 +127,12 @@ users.delete(
 );
 
 users.delete(
-  `/deleteUsers`,
+  `/deleteAllUsers`,
   authenticate(`jwt`, {
     session: false,
   }),
   isAuthorized(`admin`),
-  deleteUsers
+  deleteAllUsers
 );
 
 users.delete(

@@ -38,7 +38,7 @@ import {
 import axiosRequest from './utils/axiosRequest';
 import { apiUrl, securityQuestions } from './utils/constants';
 import {
-  deleteUsersSchema,
+  deleteAllUsersSchema,
   forgotPasswordSchema,
   personalInformationSchema,
   resetPasswordSchema,
@@ -116,7 +116,7 @@ export {
   signInSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
-  deleteUsersSchema,
+  deleteAllUsersSchema,
   axiosRequest,
   calculateMinutes,
   calculateHours,

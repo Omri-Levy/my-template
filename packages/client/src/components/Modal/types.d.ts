@@ -24,6 +24,7 @@ interface Props {
     onOpen: () => void;
     onClose: () => void;
   };
+  errorMessage?: string;
 }
 
 export { Props };

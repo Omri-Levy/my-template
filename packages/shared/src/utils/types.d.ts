@@ -11,7 +11,7 @@ type Endpoint =
   | `getUser`
   | `getUsers`
   | `deleteSelectedUsers`
-  | `deleteUsers`
+  | `deleteAllUsers`
   | `terminateUserAccount`
   | `forgotPassword`
   | `resetPassword`

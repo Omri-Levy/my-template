@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import {
-  deleteUsersFields,
+  deleteAllUsersFields,
   forgotPasswordFields,
   personalInformationFields,
   resetPasswordFields,
@@ -19,7 +19,7 @@ const signUpSchema = yup.object().shape({
 const signInSchema = yup.object().shape(signInFields);
 const forgotPasswordSchema = yup.object().shape(forgotPasswordFields);
 const resetPasswordSchema = yup.object().shape(resetPasswordFields);
-const deleteUsersSchema = yup.object().shape(deleteUsersFields);
+const deleteAllUsersSchema = yup.object().shape(deleteAllUsersFields);
 
 export {
   personalInformationSchema,
@@ -28,5 +28,5 @@ export {
   signInSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
-  deleteUsersSchema,
+  deleteAllUsersSchema,
 };

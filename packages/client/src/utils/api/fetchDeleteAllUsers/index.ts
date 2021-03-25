@@ -3,16 +3,12 @@ import { FetchDeleteAllUsers } from './types';
 import queryClient from '../../../components/globals/Providers/queryClient';
 
 const fetchDeleteAllUsers: FetchDeleteAllUsers = async (deleteAdmins) => {
-  try {
-    const data = {
-      deleteAdmins,
-    };
-    await axiosRequest(`DELETE`, undefined, `deleteUsers`, data);
+  const data = {
+    deleteAdmins,
+  };
+  await axiosRequest(`DELETE`, undefined, `deleteAllUsers`, data);
 
-    await queryClient.invalidateQueries(`users`);
-  } catch (error) {
-    console.error(error);
-  }
+  await queryClient.invalidateQueries(`users`);
 };
 
 export default fetchDeleteAllUsers;

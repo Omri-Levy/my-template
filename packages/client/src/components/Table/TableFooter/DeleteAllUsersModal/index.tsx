@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
-import { Users } from '@my-template/shared';
+import { serverErrorMessage, Users } from '@my-template/shared';
 import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
 import Modal from '../../../Modal';
 import { DeleteAllUsers } from './types';
@@ -11,24 +11,31 @@ import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
   const alertDisclosure = useDisclosure();
+  const { onOpen } = alertDisclosure;
   const { isOpen } = disclosure;
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(``);
   const {
-    toast: deleteAllUsersToast,
-    toastOptions: deleteAllUsersToastOptions,
+    toast: deleteAllUsersSuccessToast,
+    toastOptions: deleteAllUsersSuccessToastOptions,
   } = useSuccessToast(`Deleted all users successfully.`);
   const deleteAllUsers: DeleteAllUsers = (onClose) => async () => {
     try {
       setIsLoading(true);
       await fetchDeleteAllUsers(isOpen);
 
-      deleteAllUsersToast(deleteAllUsersToastOptions);
+      onClose();
+
+      deleteAllUsersSuccessToast(deleteAllUsersSuccessToastOptions);
     } catch (error) {
       console.error(error);
-    }
-    setIsLoading(false);
 
-    onClose();
+      setErrorMessage(serverErrorMessage);
+
+      onOpen();
+    }
+
+    setIsLoading(false);
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
@@ -51,6 +58,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
       isLoading={isLoading}
       disclosure={disclosure}
       alertDisclosure={alertDisclosure}
+      errorMessage={errorMessage}
     />
   );
 };

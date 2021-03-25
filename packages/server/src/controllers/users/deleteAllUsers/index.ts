@@ -1,14 +1,14 @@
-import { deleteUsersSchema, User as UserType } from '@my-template/shared';
+import { deleteAllUsersSchema, User as UserType } from '@my-template/shared';
 import { Op } from 'sequelize';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 
-const deleteUsers: Route = async (req, res) => {
+const deleteAllUsers: Route = async (req, res) => {
   try {
     const user = req.user as UserType;
     const { deleteAdmins } = req.body;
 
-    await deleteUsersSchema.validate({ deleteAdmins });
+    await deleteAllUsersSchema.validate({ deleteAdmins });
 
     if (deleteAdmins) {
       await User.destroy({
@@ -49,4 +49,4 @@ const deleteUsers: Route = async (req, res) => {
   }
 };
 
-export default deleteUsers;
+export default deleteAllUsers;

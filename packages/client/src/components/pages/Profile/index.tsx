@@ -3,7 +3,10 @@ import { FaIdCard } from 'react-icons/fa';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Flex, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
-import { terminateUserAccountMessage } from '@my-template/shared';
+import {
+  serverErrorMessage,
+  terminateUserAccountMessage,
+} from '@my-template/shared';
 import Page from '../Page';
 import Card from '../../Card';
 import CurrentUserDetails from './CurrentUserDetails';
@@ -20,6 +23,7 @@ const Profile: FunctionComponent = () => {
   const { isAuthenticated, authenticate } = useContext(AuthenticationContext);
   const disclosure = useDisclosure();
   const alertDisclosure = useDisclosure();
+  const [errorMessage, setErrorMessage] = useState(``);
   const { onOpen } = alertDisclosure;
   const [isLoading, setIsLoading] = useState(false);
   const { replace } = useHistory();
@@ -42,9 +46,17 @@ const Profile: FunctionComponent = () => {
     } catch (error) {
       console.error(error);
 
+      let message: string;
+
       if (error?.response?.data?.message === terminateUserAccountMessage) {
-        onOpen();
+        message = terminateUserAccountMessage;
+      } else {
+        message = serverErrorMessage;
       }
+
+      setErrorMessage(message);
+
+      onOpen();
     }
 
     setIsLoading(false);
@@ -74,6 +86,7 @@ const Profile: FunctionComponent = () => {
             isLoading={isLoading}
             disclosure={disclosure}
             alertDisclosure={alertDisclosure}
+            errorMessage={errorMessage}
           />
         </Flex>
       </Card>
