@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
 import ModalForm from '.';
-import ContainerDecorator from '../../../utils/storybookDecorators/ContainerDecorator';
+import ContainerDecorator from '../../../../utils/storybookDecorators/ContainerDecorator';
 
 export default {
   title: `ModalForm`,

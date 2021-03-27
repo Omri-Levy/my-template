@@ -43,7 +43,7 @@ const Modal: FunctionComponent<Props> = ({
   return (
     <>
       <Button
-        leftIcon={icons ? <Icon as={FaTrashAlt} /> : undefined}
+        rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
         onClick={onOpen}
       >
         {toggleButtonText}
@@ -82,13 +82,15 @@ const Modal: FunctionComponent<Props> = ({
             <ButtonGroup spacing={5}>
               <Button
                 onClick={onClose}
-                leftIcon={icons ? <Icon as={FaTimes} /> : undefined}
+                rightIcon={icons ? <Icon as={FaTimes} mb={0.5} /> : undefined}
               >
                 Cancel
               </Button>
               <Button
-                leftIcon={
-                  icons && actionIcon ? <Icon as={actionIcon} /> : undefined
+                rightIcon={
+                  icons && actionIcon ? (
+                    <Icon as={actionIcon} mb={0.5} />
+                  ) : undefined
                 }
                 onClick={onClick(onClose)}
                 isLoading={isLoading}

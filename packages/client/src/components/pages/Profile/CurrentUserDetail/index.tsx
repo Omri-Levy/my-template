@@ -23,7 +23,7 @@ const CurrentUserDetail: FunctionComponent<Props> = ({
   return (
     <>
       <ListItem {...props}>
-        <ListIcon as={icon} color={iconColor} />
+        <ListIcon as={icon} color={iconColor} mb={0.5} />
         {conditionalText(currentUser, text, objectKey)}
       </ListItem>
       <Divider

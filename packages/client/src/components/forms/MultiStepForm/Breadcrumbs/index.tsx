@@ -54,7 +54,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({
             key={to}
             {...disabledLinkStyles}
           >
-            {icons && <Icon as={breadcrumb.icon} mr={3} />}
+            {icons && <Icon as={breadcrumb.icon} mr={2} mb={0.5} />}
             <BreadcrumbLink
               pointerEvents={disableLink || isCurrentPage ? `none` : undefined}
               _activeLink={{

@@ -16,7 +16,7 @@ const DarkModeSwitch: FunctionComponent<Props> = (props) => {
 
   return (
     <HStack spacing={3} alignItems={`center`} {...props}>
-      <Icon as={icon} />
+      <Icon as={icon} mb={`3.5px`} />
       <Switch onChange={toggleColorMode} colorScheme={darkModeColor} />
     </HStack>
   );

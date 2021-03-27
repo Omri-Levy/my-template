@@ -31,7 +31,7 @@ const useDisableSubmit: HookReturns = (
     }
   }, [errors, errorsKeys, formKeys, formValues, gRecaptchaResponse]);
 
-  return { disableSubmit };
+  return disableSubmit;
 };
 
 export default useDisableSubmit;

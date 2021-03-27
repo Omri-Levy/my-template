@@ -104,7 +104,9 @@ const TableFooter: FunctionComponent<Props> = ({
           <Flex justifyContent={`flex-end`}>
             <ButtonGroup spacing={5}>
               <Button
-                leftIcon={icons ? <Icon as={FaTrashAlt} /> : undefined}
+                rightIcon={
+                  icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined
+                }
                 onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
                 disabled={!checkedItems.some(Boolean)}
                 isLoading={isLoading}

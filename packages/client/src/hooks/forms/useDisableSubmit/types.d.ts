@@ -1,8 +1,7 @@
-import { FieldErrors, FieldValues } from 'react-hook-form';
+import { FieldErrors } from 'react-hook-form';
 import { GetValues, GRecaptchaResponse } from '../../../utils/types';
 
-type DisableSubmit = boolean;
-type Errors = FieldErrors<FieldValues>;
+type Errors = FieldErrors;
 type FormHasEmptyFields = (
   formKeys: string[],
   formValues: GetValues
@@ -15,9 +14,7 @@ type HookReturns = (
   errors: Errors,
   getValues: GetValues,
   gRecaptchaResponse?: GRecaptchaResponse
-) => {
-  disableSubmit: DisableSubmit;
-};
+) => boolean;
 
 export {
   FormHasEmptyFields,

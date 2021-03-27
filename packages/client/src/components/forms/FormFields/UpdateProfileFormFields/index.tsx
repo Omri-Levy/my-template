@@ -12,41 +12,47 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
   clearErrors,
   register,
   ...props
-}) => (
-  <>
-    <FormField
-      onChange={clearResponseError(clearErrors)}
-      isRequired
-      labelTitle={`Email:`}
-      name={`email`}
-      errors={errors}
-      register={register}
-      type={`email`}
-      maxLength={320}
-      icon={FaAt}
-      {...props}
-    />
-    <FormField
-      isRequired
-      labelTitle={`First Name:`}
-      name={`fname`}
-      errors={errors}
-      register={register}
-      type={`text`}
-      maxLength={35}
-      icon={FaSignature}
-    />
-    <FormField
-      isRequired
-      labelTitle={`Last Name:`}
-      name={`lname`}
-      errors={errors}
-      register={register}
-      type={`text`}
-      maxLength={35}
-      icon={FaSignature}
-    />
-  </>
-);
+}) => {
+  const onChange = errors?.responseError?.message
+    ? clearResponseError(clearErrors)
+    : undefined;
+
+  return (
+    <>
+      <FormField
+        onChange={onChange}
+        isRequired
+        labelTitle={`Email:`}
+        name={`email`}
+        errors={errors}
+        register={register}
+        type={`email`}
+        maxLength={320}
+        icon={FaAt}
+        {...props}
+      />
+      <FormField
+        isRequired
+        labelTitle={`First Name:`}
+        name={`fname`}
+        errors={errors}
+        register={register}
+        type={`text`}
+        maxLength={35}
+        icon={FaSignature}
+      />
+      <FormField
+        isRequired
+        labelTitle={`Last Name:`}
+        name={`lname`}
+        errors={errors}
+        register={register}
+        type={`text`}
+        maxLength={35}
+        icon={FaSignature}
+      />
+    </>
+  );
+};
 
 export default UpdateProfileFormFields;

@@ -63,8 +63,12 @@ const PaginationButton: FunctionComponent<Props> = ({
   return (
     <ListItem>
       <Button
-        leftIcon={icons && leftIcon ? <Icon as={leftIcon} /> : undefined}
-        rightIcon={icons && rightIcon ? <Icon as={rightIcon} /> : undefined}
+        leftIcon={
+          icons && leftIcon ? <Icon as={leftIcon} mb={0.5} /> : undefined
+        }
+        rightIcon={
+          icons && rightIcon ? <Icon as={rightIcon} mb={0.5} /> : undefined
+        }
         onClick={onClick}
         disabled={disabled}
       >

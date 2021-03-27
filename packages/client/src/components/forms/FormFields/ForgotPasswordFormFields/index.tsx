@@ -11,18 +11,24 @@ const ForgotPasswordFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
-}) => (
-  <FormField
-    onChange={clearResponseError(clearErrors)}
-    isRequired
-    labelTitle={`Email:`}
-    name={`email`}
-    errors={errors}
-    register={register}
-    type={`email`}
-    maxLength={320}
-    icon={FaAt}
-  />
-);
+}) => {
+  const onChange = errors?.responseError?.message
+    ? clearResponseError(clearErrors)
+    : undefined;
+
+  return (
+    <FormField
+      onChange={onChange}
+      isRequired
+      labelTitle={`Email:`}
+      name={`email`}
+      errors={errors}
+      register={register}
+      type={`email`}
+      maxLength={320}
+      icon={FaAt}
+    />
+  );
+};
 
 export default ForgotPasswordFormFields;

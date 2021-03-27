@@ -16,43 +16,49 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
-}) => (
-  <>
-    <FormField
-      isRequired
-      labelTitle={`First Name:`}
-      name={`fname`}
-      errors={errors}
-      register={register}
-      type={`text`}
-      maxLength={35}
-      icon={FaSignature}
-      helperText={firstNameHelperText}
-    />
-    <FormField
-      isRequired
-      labelTitle={`Last Name:`}
-      name={`lname`}
-      errors={errors}
-      register={register}
-      type={`text`}
-      maxLength={35}
-      icon={FaSignature}
-      helperText={lastNameHelperText}
-    />
-    <FormField
-      onChange={clearResponseError(clearErrors)}
-      isRequired
-      labelTitle={`Email:`}
-      name={`email`}
-      errors={errors}
-      register={register}
-      type={`email`}
-      maxLength={320}
-      icon={FaAt}
-      helperText={emailHelperText}
-    />
-  </>
-);
+}) => {
+  const onChange = errors?.responseError?.message
+    ? clearResponseError(clearErrors)
+    : undefined;
+
+  return (
+    <>
+      <FormField
+        isRequired
+        labelTitle={`First Name:`}
+        name={`fname`}
+        errors={errors}
+        register={register}
+        type={`text`}
+        maxLength={35}
+        icon={FaSignature}
+        helperText={firstNameHelperText}
+      />
+      <FormField
+        isRequired
+        labelTitle={`Last Name:`}
+        name={`lname`}
+        errors={errors}
+        register={register}
+        type={`text`}
+        maxLength={35}
+        icon={FaSignature}
+        helperText={lastNameHelperText}
+      />
+      <FormField
+        onChange={onChange}
+        isRequired
+        labelTitle={`Email:`}
+        name={`email`}
+        errors={errors}
+        register={register}
+        type={`email`}
+        maxLength={320}
+        icon={FaAt}
+        helperText={emailHelperText}
+      />
+    </>
+  );
+};
 
 export default PersonalInformationFormFields;

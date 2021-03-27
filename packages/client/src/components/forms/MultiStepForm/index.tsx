@@ -33,7 +33,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
 }) => {
   const { gRecaptchaResponse, setGRecaptchaResponse } = useGRecaptchaResponse();
   const recaptchaDisablesSubmit = onSubmit ? gRecaptchaResponse : `empty`;
-  const { disableSubmit } = useDisableSubmit(
+  const disableSubmit = useDisableSubmit(
     errors,
     getValues,
     recaptchaDisablesSubmit
@@ -63,7 +63,9 @@ const MultiStepForm: FunctionComponent<Props> = ({
           {!isFirstForm && (
             <Button
               onClick={previousForm}
-              leftIcon={icons ? <Icon as={FaCaretLeft} mr={0.3} /> : undefined}
+              leftIcon={
+                icons ? <Icon as={FaCaretLeft} mr={0.3} mb={0.5} /> : undefined
+              }
               type={`button`}
               mt={4}
               disabled={isSubmitting}
@@ -76,7 +78,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
               icons ? (
                 <Icon
                   as={!onSubmit ? FaCaretRight : submitButtonIcon}
-                  mb={0.3}
+                  mb={0.5}
                 />
               ) : undefined
             }

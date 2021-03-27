@@ -13,35 +13,41 @@ const SignInFormFields: FunctionComponent<Props> = ({
   clearErrors,
   register,
   ...props
-}) => (
-  <>
-    <FormField
-      onChange={clearResponseError(clearErrors)}
-      isRequired
-      labelTitle={`Email:`}
-      name={`email`}
-      errors={errors}
-      register={register}
-      type={`email`}
-      maxLength={320}
-      icon={FaAt}
-      {...props}
-    />
-    <FormField
-      onChange={clearResponseError(clearErrors)}
-      isRequired
-      labelTitle={`Password:`}
-      name={`password`}
-      errors={errors}
-      register={register}
-      type={`password`}
-      maxLength={128}
-      icon={FaLock}
-      mb={1}
-      {...props}
-    />
-    <ForgotPasswordLink />
-  </>
-);
+}) => {
+  const onChange = errors?.responseError?.message
+    ? clearResponseError(clearErrors)
+    : undefined;
+
+  return (
+    <>
+      <FormField
+        onChange={onChange}
+        isRequired
+        labelTitle={`Email:`}
+        name={`email`}
+        errors={errors}
+        register={register}
+        type={`email`}
+        maxLength={320}
+        icon={FaAt}
+        {...props}
+      />
+      <FormField
+        onChange={onChange}
+        isRequired
+        labelTitle={`Password:`}
+        name={`password`}
+        errors={errors}
+        register={register}
+        type={`password`}
+        maxLength={128}
+        icon={FaLock}
+        mb={1}
+        {...props}
+      />
+      <ForgotPasswordLink />
+    </>
+  );
+};
 
 export default SignInFormFields;

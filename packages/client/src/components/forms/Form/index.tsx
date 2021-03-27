@@ -24,11 +24,7 @@ const Form: FunctionComponent<Props> = ({
   ...props
 }) => {
   const { gRecaptchaResponse, setGRecaptchaResponse } = useGRecaptchaResponse();
-  const { disableSubmit } = useDisableSubmit(
-    errors,
-    getValues,
-    gRecaptchaResponse
-  );
+  const disableSubmit = useDisableSubmit(errors, getValues, gRecaptchaResponse);
 
   return (
     <Card color={`unset`} backgroundColor={`unset`}>
@@ -49,7 +45,7 @@ const Form: FunctionComponent<Props> = ({
         <Flex justifyContent={`flex-end`}>
           <Button
             rightIcon={
-              icons ? <Icon as={submitButtonIcon} mb={0.3} /> : undefined
+              icons ? <Icon as={submitButtonIcon} mb={0.5} /> : undefined
             }
             type={`submit`}
             mt={4}

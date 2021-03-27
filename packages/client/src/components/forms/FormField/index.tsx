@@ -46,8 +46,8 @@ const FormField: FunctionComponent<Props> = ({
     type,
     name,
     maxLength,
-    onChange: onChange ?? onChange,
     ref: register,
+    onChange: onChange ?? onChange,
   };
 
   return (
