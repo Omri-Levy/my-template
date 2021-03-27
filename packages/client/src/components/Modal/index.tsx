@@ -20,6 +20,8 @@ import { Props } from './types';
 import Alert from '../Alert';
 
 const Modal: FunctionComponent<Props> = ({
+  icons = true,
+  headerIcon,
   toggleButtonText,
   headerText,
   headingProps,
@@ -40,13 +42,19 @@ const Modal: FunctionComponent<Props> = ({
 
   return (
     <>
-      <Button leftIcon={<Icon as={FaTrashAlt} />} onClick={onOpen}>
+      <Button
+        leftIcon={icons ? <Icon as={FaTrashAlt} /> : undefined}
+        onClick={onOpen}
+      >
         {toggleButtonText}
       </Button>
       <ChakraModal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{headerText}</ModalHeader>
+          <ModalHeader>
+            {icons && <Icon as={headerIcon} mr={5} mb={0.5} />}
+            {headerText}
+          </ModalHeader>
           <ModalBody>
             <Heading as={`h2`} {...headingProps}>
               {bodyHeadingText}
@@ -72,11 +80,16 @@ const Modal: FunctionComponent<Props> = ({
           </ModalBody>
           <ModalFooter>
             <ButtonGroup spacing={5}>
-              <Button onClick={onClose} leftIcon={<Icon as={FaTimes} />}>
+              <Button
+                onClick={onClose}
+                leftIcon={icons ? <Icon as={FaTimes} /> : undefined}
+              >
                 Cancel
               </Button>
               <Button
-                leftIcon={actionIcon && <Icon as={actionIcon} />}
+                leftIcon={
+                  icons && actionIcon ? <Icon as={actionIcon} /> : undefined
+                }
                 onClick={onClick(onClose)}
                 isLoading={isLoading}
               >

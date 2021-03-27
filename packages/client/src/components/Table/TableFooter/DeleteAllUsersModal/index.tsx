@@ -7,21 +7,25 @@ import Modal from '../../../Modal';
 import { DeleteAllUsers } from './types';
 import queryClient from '../../../globals/Providers/queryClient';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
+import useLoading from '../../../../hooks/useLoading';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
   const alertDisclosure = useDisclosure();
   const { onOpen } = alertDisclosure;
   const { isOpen } = disclosure;
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, stopLoading, startLoading } = useLoading();
   const [errorMessage, setErrorMessage] = useState(``);
   const {
     toast: deleteAllUsersSuccessToast,
     toastOptions: deleteAllUsersSuccessToastOptions,
   } = useSuccessToast(`Deleted all users successfully.`);
+  /**
+   * TODO: abstract this function
+   */
   const deleteAllUsers: DeleteAllUsers = (onClose) => async () => {
     try {
-      setIsLoading(true);
+      startLoading();
       await fetchDeleteAllUsers(isOpen);
 
       onClose();
@@ -35,13 +39,14 @@ const DeleteAllUsersModal: FunctionComponent = () => {
       onOpen();
     }
 
-    setIsLoading(false);
+    stopLoading();
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
 
   return (
     <Modal
+      headerIcon={FaTrashAlt}
       toggleButtonText={`Delete All`}
       headerText={`Delete all users`}
       bodyHeadingText={`Warning!`}

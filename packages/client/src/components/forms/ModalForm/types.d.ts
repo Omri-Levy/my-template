@@ -1,24 +1,28 @@
 import { FieldErrors } from 'react-hook-form';
-import { BoxProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import {
-  Children,
+  Disclosure,
   FormSubmit,
   GetValues,
   HandleSubmit,
 } from '../../../utils/types';
 
-interface Props extends BoxProps {
+interface Props {
+  icons?: boolean;
+  headerIcon?: IconType;
   errors: FieldErrors;
+  errorMessage: string;
   getValues: GetValues;
   handleSubmit: HandleSubmit;
-  onSubmit: FormSubmit;
   isSubmitting: boolean;
+  toggleButtonText: string;
+  headerText: string;
   submitButtonText: string;
-  icons?: boolean;
-  submitButtonIcon?: IconType;
-  children: Children;
-  useRecaptcha?: boolean;
+  submitButtonIcon: IconType;
+  onSubmit: FormSubmit;
+  useRecaptcha: boolean;
+  disclosure: Disclosure;
+  alertDisclosure: Disclosure;
 }
 
 export { Props };

@@ -9,6 +9,7 @@ import {
 import { Props } from './types';
 
 const PaginationButton: FunctionComponent<Props> = ({
+  icons = true,
   type,
   gotoPage,
   pageCount,
@@ -62,8 +63,8 @@ const PaginationButton: FunctionComponent<Props> = ({
   return (
     <ListItem>
       <Button
-        leftIcon={leftIcon && <Icon as={leftIcon} />}
-        rightIcon={rightIcon && <Icon as={rightIcon} />}
+        leftIcon={icons && leftIcon ? <Icon as={leftIcon} /> : undefined}
+        rightIcon={icons && rightIcon ? <Icon as={rightIcon} /> : undefined}
         onClick={onClick}
         disabled={disabled}
       >

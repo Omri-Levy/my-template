@@ -1,4 +1,5 @@
 import { AlertProps } from '@chakra-ui/react';
+import { Disclosure } from '../../utils/types';
 
 interface Props extends AlertProps {
   message: string;
@@ -6,11 +7,7 @@ interface Props extends AlertProps {
   /**
    * requires the full object of Chakra-UI's useDisclosure hook.
    */
-  disclosure: {
-    isOpen: boolean;
-    onOpen: () => void;
-    onClose: () => void;
-  };
+  disclosure: Disclosure;
 }
 
 export { Props };

@@ -5,5 +5,11 @@ interface CurrentUserDetail {
   text: string;
   icon: FunctionComponent;
 }
+interface UpdateProfileFormFields {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+type UpdateProfile = () => (data: UpdateProfileFormFields) => Promise<void>;
 
-export { CurrentUserDetail };
+export { CurrentUserDetail, UpdateProfile };

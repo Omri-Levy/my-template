@@ -1,4 +1,4 @@
-import { FunctionComponent, memo, useState } from 'react';
+import { FunctionComponent, memo } from 'react';
 import {
   Button,
   ButtonGroup,
@@ -22,8 +22,10 @@ import DeleteAllUsersModal from './DeleteAllUsersModal';
 import Pagination from '../Pagination';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 import useErrorToast from '../../../hooks/ui/useErrorToast';
+import useLoading from '../../../hooks/useLoading';
 
 const TableFooter: FunctionComponent<Props> = ({
+  icons = true,
   footerGroups,
   globalFilter,
   setGlobalFilter,
@@ -43,7 +45,7 @@ const TableFooter: FunctionComponent<Props> = ({
 }) => {
   const { isDarkMode } = useDarkMode();
   const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, startLoading, stopLoading } = useLoading();
   const {
     toast: deleteSelectedUsersSuccessToast,
     toastOptions: deleteSelectedUsersSuccessToastOptions,
@@ -52,9 +54,12 @@ const TableFooter: FunctionComponent<Props> = ({
     toast: deleteSelectedUsersErrorToast,
     toastOptions: deleteSelectedUsersErrorToastOptions,
   } = useErrorToast(`Deleting selected users failed - please try again.`);
+  /**
+   * TODO: abstract this function
+   */
   const deleteSelectedUsers: DeleteUser = async () => {
     try {
-      setIsLoading(true);
+      startLoading();
       await fetchDeleteUser(userIds);
 
       deleteSelectedUsersSuccessToast(deleteSelectedUsersSuccessToastOptions);
@@ -64,7 +69,7 @@ const TableFooter: FunctionComponent<Props> = ({
       deleteSelectedUsersErrorToast(deleteSelectedUsersErrorToastOptions);
     }
 
-    setIsLoading(false);
+    stopLoading();
   };
   const users = queryClient.getQueryData(`users`) as Users;
 
@@ -99,7 +104,7 @@ const TableFooter: FunctionComponent<Props> = ({
           <Flex justifyContent={`flex-end`}>
             <ButtonGroup spacing={5}>
               <Button
-                leftIcon={<Icon as={FaTrashAlt} />}
+                leftIcon={icons ? <Icon as={FaTrashAlt} /> : undefined}
                 onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
                 disabled={!checkedItems.some(Boolean)}
                 isLoading={isLoading}

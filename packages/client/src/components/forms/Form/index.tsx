@@ -20,6 +20,7 @@ const Form: FunctionComponent<Props> = ({
   icons = true,
   submitButtonIcon,
   children,
+  useRecaptcha = true,
   ...props
 }) => {
   const { gRecaptchaResponse, setGRecaptchaResponse } = useGRecaptchaResponse();
@@ -39,10 +40,12 @@ const Form: FunctionComponent<Props> = ({
       >
         {children}
         <FormResponseError errors={errors} mb={10} />
-        <Recaptcha
-          setGRecaptchaResponse={setGRecaptchaResponse}
-          errors={errors}
-        />
+        {useRecaptcha && (
+          <Recaptcha
+            setGRecaptchaResponse={setGRecaptchaResponse}
+            errors={errors}
+          />
+        )}
         <Flex justifyContent={`flex-end`}>
           <Button
             rightIcon={

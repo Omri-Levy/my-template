@@ -14,6 +14,8 @@ import AuthenticationContext from '../../../context/AuthenticationContext/Authen
 import Modal from '../../Modal';
 import fetchTerminateUserAccount from '../../../utils/api/fetchTerminateUserAccount';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
+import UpdateProfileForm from '../../forms/UpdateProfileForm';
+import useLoading from '../../../hooks/useLoading';
 
 /**
  * a route wrapped with the Page component to display the currently
@@ -25,15 +27,18 @@ const Profile: FunctionComponent = () => {
   const alertDisclosure = useDisclosure();
   const [errorMessage, setErrorMessage] = useState(``);
   const { onOpen } = alertDisclosure;
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, startLoading, stopLoading } = useLoading();
   const { replace } = useHistory();
   const {
     toast: userAccountTerminatedToast,
     toastOptions: userAccountTerminatedToastOptions,
   } = useSuccessToast(`Account terminated successfully.`);
+  /**
+   * TODO: abstract this function
+   */
   const terminateUserAccount = (onClose: () => void) => async () => {
     try {
-      setIsLoading(true);
+      startLoading();
       await fetchTerminateUserAccount();
 
       onClose();
@@ -59,7 +64,7 @@ const Profile: FunctionComponent = () => {
       onOpen();
     }
 
-    setIsLoading(false);
+    stopLoading();
   };
 
   if (!isAuthenticated) {
@@ -70,7 +75,8 @@ const Profile: FunctionComponent = () => {
     <Page title={`Profile`} icon={FaIdCard}>
       <Card color={`unset`} backgroundColor={`unset`}>
         <CurrentUserDetails />
-        <Flex justifyContent={`flex-end`} mt={5}>
+        <Flex justifyContent={`center`} mt={5}>
+          <UpdateProfileForm />
           <Modal
             toggleButtonText={`Terminate account`}
             headerText={`Terminate account`}

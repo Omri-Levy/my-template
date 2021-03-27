@@ -1,8 +1,11 @@
 import { HeadingProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
+import { Disclosure } from '../../utils/types';
 
 type OnClose = () => void;
 interface Props {
+  icons?: boolean;
+  headerIcon?: IconType;
   toggleButtonText: string;
   headerText: string;
   headingProps: HeadingProps;
@@ -14,16 +17,8 @@ interface Props {
   onClick: (onClose: OnClose) => () => void | Promise<void>;
   isLoading?: boolean;
   actionText: string;
-  disclosure: {
-    isOpen: boolean;
-    onOpen: () => void;
-    onClose: () => void;
-  };
-  alertDisclosure: {
-    isOpen: boolean;
-    onOpen: () => void;
-    onClose: () => void;
-  };
+  disclosure: Disclosure;
+  alertDisclosure: Disclosure;
   errorMessage?: string;
 }
 

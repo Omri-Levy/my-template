@@ -2,6 +2,7 @@ import { HeaderGroup } from 'react-table';
 import { CheckAllCheckboxes, ColumnType } from '../types';
 
 interface Props {
+  icons?: boolean;
   footerGroups: HeaderGroup<ColumnType>[];
   globalFilter: string;
   setGlobalFilter: (value: string) => void;

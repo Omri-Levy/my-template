@@ -1,5 +1,6 @@
 type ButtonType = `firstPage` | `lastPage` | `previousPage` | `nextPage`;
 interface Props {
+  icons?: boolean;
   type: ButtonType;
   gotoPage: (number: number) => void;
   pageCount: number;

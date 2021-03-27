@@ -1,10 +1,13 @@
-import { FieldErrors, useForm } from 'react-hook-form';
+import { FieldErrors } from 'react-hook-form';
 import { BoxProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { Children, GetValues } from '../../../utils/types';
+import {
+  Children,
+  FormSubmit,
+  GetValues,
+  HandleSubmit,
+} from '../../../utils/types';
 import { Breadcrumbs } from './Breadcrumbs/types';
-import { SignIn } from '../../../hooks/api/useSignIn/types';
-import { SignUp } from '../../../hooks/api/useSignUp/types';
 
 interface Props extends BoxProps {
   breadcrumbs: Breadcrumbs;
@@ -12,8 +15,8 @@ interface Props extends BoxProps {
   errors: FieldErrors;
   getValues: GetValues;
   nextFormPath?: string;
-  handleSubmit: typeof useForm.handleSubmit;
-  onSubmit?: SignUp | SignIn;
+  handleSubmit: HandleSubmit;
+  onSubmit?: FormSubmit;
   isSubmitting: boolean;
   submitButtonText?: string;
   icons?: boolean;
