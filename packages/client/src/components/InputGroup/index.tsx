@@ -49,7 +49,7 @@ const InputGroup: FunctionComponent<Props> = ({
           title={passwordVisibilityTitle}
           onChange={setPasswordVisibility}
         >
-          <Text mb={1}>Show Password</Text>
+          <Text mt={0.5}>Show Password</Text>
         </Checkbox>
       )}
     </>
