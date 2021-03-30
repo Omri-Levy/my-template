@@ -1,13 +1,10 @@
-import {
-  terminateUserAccountMessage,
-  User as UserType,
-} from '@my-template/shared';
+import { terminateUserAccountMessage, UserObject } from '@my-template/shared';
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
 
 const terminateUserAccount: Route = async (req, res) => {
   try {
-    const user = req.user as UserType;
+    const user = req.user as UserObject;
     const { id, role } = user;
 
     const isOnlyAdmin = (await User.count({ where: { role: `admin` } })) === 1;

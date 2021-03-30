@@ -22,7 +22,10 @@ const security = `Security`;
 const securityQuestion = `${security} question`;
 const securityAnswer = `${security} answer`;
 const password = `Password`;
+const oldPassword = `Old ${password.toLowerCase()}`;
+const newPassword = `New ${password.toLowerCase()}`;
 const passwordConfirmation = `${password} confirmation`;
+const newPasswordConfirmation = `${newPassword} confirmation`;
 const deleteAdmins = `Delete admins`;
 
 const requiredFieldMessage = `is a required field.`;
@@ -64,7 +67,8 @@ const invalidSecurityAnswerMessage =
   `include a minimum of ${securityAnswerMin} characters and a maximum of ` +
   `${securityAnswerMax} characters.`;
 const invalidPasswordConfirmationMessage =
-  `${passwordConfirmation} must ` + `match the inserted password.`;
+  `${passwordConfirmation} must ` +
+  `match the inserted ${password.toLowerCase()}.`;
 
 const passwordConfirmationIsRequiredMessage =
   `${passwordConfirmation} ` + `${requiredFieldMessage}`;
@@ -89,6 +93,8 @@ const invalidIsRobotMessage =
   `Please verify you are not a robot and ` + `try again.`;
 
 const passwordIsRequiredMessage = `${password} ` + `${requiredFieldMessage}`;
+const oldPasswordIsRequiredMessage =
+  `${oldPassword} ` + `${requiredFieldMessage}`;
 const emailIsRequiredMessage = `${email} ` + `${requiredFieldMessage}`;
 const securityQuestionIsRequiredMessage =
   `${securityQuestion} ` + `${requiredFieldMessage}`;
@@ -96,10 +102,12 @@ const securityQuestionIsRequiredMessage =
 const serverErrorMessage = `Something went wrong - please try again.`;
 const securityQuestionOneOfMessage =
   `Please select a ` + `${securityQuestion.toLowerCase()}.`;
+const noUserWasFoundMessage = `No user was found.`;
 
 // forgot password
 const invalidSecurityInformationMessage =
-  `Wrong security question or ` + `security answer - please try again.`;
+  `Wrong ${securityQuestion.toLowerCase()} or ` +
+  `${securityAnswer.toLowerCase()} - please try again.`;
 const invalidTokenMessage = `Invalid token.`;
 
 const forgotPasswordMessage =
@@ -113,6 +121,21 @@ const deleteSelectedUsersMessage = `Please select one or more users to delete.`;
 
 // admin actions
 const deleteAdminsIsRequiredMessage = `${deleteAdmins} ${requiredFieldMessage}`;
+
+const noChangesWereMadeMessage = `No changes were made.`;
+const invalidOldPasswordMessage =
+  `Wrong ${oldPassword.toLowerCase()}` + ` - please try again.`;
+const invalidNewPasswordMessage =
+  `${newPassword} cannot ` + `match ${oldPassword.toLowerCase()}.`;
+const invalidNewPasswordPolicyMessage =
+  `${newPassword} must ` + `match ${password.toLowerCase()} policy.`;
+const newPasswordIsRequiredMessage =
+  `${newPassword} ` + `${requiredFieldMessage}`;
+const newPasswordConfirmationIsRequiredMessage =
+  `${newPasswordConfirmation} ` + `${requiredFieldMessage}`;
+const invalidNewPasswordConfirmationMessage =
+  `${newPasswordConfirmation} must ` +
+  `match the inserted ${newPassword.toLowerCase()}.`;
 
 export {
   invalidFirstNameMessage,
@@ -141,4 +164,13 @@ export {
   terminateUserAccountMessage,
   deleteSelectedUsersMessage,
   deleteAdminsIsRequiredMessage,
+  oldPasswordIsRequiredMessage,
+  noChangesWereMadeMessage,
+  noUserWasFoundMessage,
+  invalidOldPasswordMessage,
+  invalidNewPasswordMessage,
+  invalidNewPasswordPolicyMessage,
+  newPasswordIsRequiredMessage,
+  newPasswordConfirmationIsRequiredMessage,
+  invalidNewPasswordConfirmationMessage,
 };

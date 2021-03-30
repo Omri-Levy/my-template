@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
+import { UserKey } from '@my-template/shared';
 
 interface CurrentUserDetail {
-  objectKey: string;
+  objectKey: UserKey;
   text: string;
   icon: FunctionComponent;
 }
@@ -10,6 +11,12 @@ interface UpdateProfileFormFields {
   lastName: string;
   email: string;
 }
+interface UpdatePasswordFormFields {
+  oldPassword: string;
+  newPassword: string;
+  newPasswordConfirmation: string;
+}
 type UpdateProfile = () => (data: UpdateProfileFormFields) => Promise<void>;
+type UpdatePassword = () => (data: UpdatePasswordFormFields) => Promise<void>;
 
-export { CurrentUserDetail, UpdateProfile };
+export { CurrentUserDetail, UpdateProfile, UpdatePassword };

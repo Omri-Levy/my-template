@@ -31,6 +31,7 @@ const FormField: FunctionComponent<Props> = ({
   isSelectField,
   selectPlaceholder,
   selectOptions,
+  inputProps,
   ...props
 }) => {
   const selectProps = {
@@ -40,7 +41,7 @@ const FormField: FunctionComponent<Props> = ({
     type,
     name,
   };
-  const inputProps = {
+  const defaultInputProps = {
     variant: `filled`,
     placeholder: `Type here...`,
     type,
@@ -48,6 +49,7 @@ const FormField: FunctionComponent<Props> = ({
     maxLength,
     ref: register,
     onChange: onChange ?? onChange,
+    ...inputProps,
   };
 
   return (
@@ -67,7 +69,11 @@ const FormField: FunctionComponent<Props> = ({
           selectProps={selectProps}
         />
       ) : (
-        <InputGroup icon={icon} iconColor={iconColor} inputProps={inputProps} />
+        <InputGroup
+          icon={icon}
+          iconColor={iconColor}
+          inputProps={defaultInputProps}
+        />
       )}
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       <ErrorMessage errors={errors} name={name} as={FormErrorMessage} />

@@ -1,10 +1,10 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
-import { IterableUser } from '@my-template/shared';
+import { User } from '@my-template/shared';
 import AuthenticationContext from './AuthenticationContext';
 import fetchAuthenticate from '../../utils/api/fetchAuthenticate';
 
 const AuthenticationProvider: FunctionComponent = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<IterableUser>(null);
+  const [currentUser, setCurrentUser] = useState<User>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const authenticate = useCallback(async () => {
     const user = await fetchAuthenticate();

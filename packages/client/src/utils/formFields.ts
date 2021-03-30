@@ -44,6 +44,18 @@ const formFields = [
     maxLength: 128,
   },
   {
+    name: `newPassword`,
+    text: `New Password`,
+    type: `password`,
+    maxLength: 128,
+  },
+  {
+    name: `newPasswordConfirmation`,
+    text: `New Password Confirmation`,
+    type: `password`,
+    maxLength: 128,
+  },
+  {
     name: `responseError`,
   },
 ];

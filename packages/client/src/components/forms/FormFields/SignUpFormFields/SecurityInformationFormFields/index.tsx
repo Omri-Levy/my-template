@@ -17,6 +17,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
+  ...props
 }) => {
   const isEmailAlreadyInUse =
     errors?.responseError?.message === emailAlreadyInUseMessage;
@@ -34,6 +35,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`text`}
         icon={FaShieldAlt}
+        {...props}
       />
       <FormField
         isRequired
@@ -44,6 +46,10 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         type={`text`}
         maxLength={70}
         icon={FaShieldAlt}
+        inputProps={{
+          autoComplete: `new-password`,
+        }}
+        {...props}
       />
       <FormField
         onChange={
@@ -58,6 +64,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         maxLength={128}
         icon={FaLock}
         helperText={invalidPasswordPolicyMessage}
+        {...props}
       />
       <FormField
         isRequired
@@ -69,6 +76,10 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         maxLength={128}
         icon={FaLock}
         mb={10}
+        inputProps={{
+          autoComplete: `off`,
+        }}
+        {...props}
       />
     </>
   );

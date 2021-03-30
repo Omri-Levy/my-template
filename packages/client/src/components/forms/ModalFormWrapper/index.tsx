@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Props } from './types';
-import Modal from './ModalFormContainer';
+import ModalFormContainer from './ModalFormContainer';
 
 const ModalFormWrapper: FunctionComponent<Props> = ({
   icons = true,
@@ -9,20 +9,22 @@ const ModalFormWrapper: FunctionComponent<Props> = ({
   toggleButtonText,
   headerText,
   disclosure,
+  buttonProps,
   children,
   ...props
 }) => (
-  <Modal
+  <ModalFormContainer
     icons={icons}
     headerIcon={headerIcon}
     toggleButtonIcon={toggleButtonIcon}
     toggleButtonText={toggleButtonText}
     headerText={headerText}
     disclosure={disclosure}
+    buttonProps={buttonProps}
     {...props}
   >
     {children}
-  </Modal>
+  </ModalFormContainer>
 );
 
 export default ModalFormWrapper;

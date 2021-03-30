@@ -15,19 +15,21 @@ type Endpoint =
   | `terminateUserAccount`
   | `forgotPassword`
   | `resetPassword`
-  | `validateResetPasswordToken`;
+  | `validateResetPasswordToken`
+  | `updateProfile`
+  | `updatePassword`;
 
-interface User {
+interface UserObject {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   role: string;
 }
+type User = UserObject | `unauthenticated` | null;
+type UserKey = `id` | `firstName` | `lastName` | `email` | `role`;
 
-type Users = User[];
-
-type IterableUser = { [key: string]: User } | `unauthenticated` | null;
+type Users = UserObject[];
 
 export {
   ObjectKey,
@@ -35,7 +37,8 @@ export {
   Data,
   Endpoint,
   RequestMethod,
+  UserObject,
   User,
   Users,
-  IterableUser,
+  UserKey,
 };

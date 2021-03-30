@@ -1,9 +1,10 @@
-import { HeadingProps } from '@chakra-ui/react';
+import { ButtonProps, HeadingProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { Disclosure } from '../../utils/types';
 
 type OnClose = () => void;
 interface Props {
+  buttonProps?: ButtonProps;
   icons?: boolean;
   headerIcon?: IconType;
   toggleButtonText: string;

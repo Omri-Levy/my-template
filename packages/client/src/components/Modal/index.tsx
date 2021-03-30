@@ -20,6 +20,7 @@ import { Props } from './types';
 import Alert from '../Alert';
 
 const Modal: FunctionComponent<Props> = ({
+  buttonProps,
   icons = true,
   headerIcon,
   toggleButtonText,
@@ -45,6 +46,7 @@ const Modal: FunctionComponent<Props> = ({
       <Button
         rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
         onClick={onOpen}
+        {...buttonProps}
       >
         {toggleButtonText}
       </Button>

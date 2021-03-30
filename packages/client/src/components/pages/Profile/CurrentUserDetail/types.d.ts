@@ -1,20 +1,20 @@
-import { IterableUser } from '@my-template/shared';
+import { User, UserKey } from '@my-template/shared';
 import { FunctionComponent } from 'react';
 import { DividerProps, ListItemProps } from '@chakra-ui/react';
 
 interface Props extends ListItemProps {
-  objectKey: string;
+  objectKey: UserKey;
   icon: FunctionComponent;
   iconColor?: string;
   text: string;
-  currentUser: IterableUser;
+  currentUser: User;
   dividerProps?: DividerProps;
 }
 
 type ConditionalText = (
-  currentUser: IterableUser,
+  currentUser: User,
   text: string,
-  objectKey: string
+  objectKey: UserKey
 ) => string;
 
 export { Props, ConditionalText };

@@ -12,7 +12,8 @@ import formHasInvalidRecaptcha from './formHasInvalidRecaptcha';
 const useDisableSubmit: HookReturns = (
   errors,
   getValues,
-  gRecaptchaResponse
+  gRecaptchaResponse,
+  disableSubmitCondition
 ) => {
   const [disableSubmit, setDisableSubmit] = useState(true);
   const errorsKeys = Object.keys(errors);
@@ -24,12 +25,23 @@ const useDisableSubmit: HookReturns = (
       formHasEmptyFields(formKeys, formValues) || formHasErrors(errors);
     const invalidRecaptcha = formHasInvalidRecaptcha(gRecaptchaResponse);
 
-    if (invalidForm || invalidRecaptcha) {
+    if (
+      invalidForm ||
+      invalidRecaptcha ||
+      (disableSubmitCondition && disableSubmitCondition())
+    ) {
       setDisableSubmit(true);
     } else {
       setDisableSubmit(false);
     }
-  }, [errors, errorsKeys, formKeys, formValues, gRecaptchaResponse]);
+  }, [
+    disableSubmitCondition,
+    errors,
+    errorsKeys,
+    formKeys,
+    formValues,
+    gRecaptchaResponse,
+  ]);
 
   return disableSubmit;
 };

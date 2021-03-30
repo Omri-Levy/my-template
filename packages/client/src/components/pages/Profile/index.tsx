@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext, useState } from 'react';
 import { FaIdCard } from 'react-icons/fa';
 import { Redirect, useHistory } from 'react-router-dom';
-import { Flex, useDisclosure } from '@chakra-ui/react';
+import { HStack, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
 import {
   serverErrorMessage,
@@ -16,6 +16,7 @@ import fetchTerminateUserAccount from '../../../utils/api/fetchTerminateUserAcco
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 import UpdateProfileForm from '../../forms/UpdateProfileForm';
 import useLoading from '../../../hooks/useLoading';
+import UpdatePasswordForm from '../../forms/UpdatePasswordForm';
 
 /**
  * a route wrapped with the Page component to display the currently
@@ -75,26 +76,30 @@ const Profile: FunctionComponent = () => {
     <Page title={`Profile`} icon={FaIdCard}>
       <Card color={`unset`} backgroundColor={`unset`}>
         <CurrentUserDetails />
-        <Flex justifyContent={`center`} mt={5}>
+        <HStack my={5}>
           <UpdateProfileForm />
-          <Modal
-            toggleButtonText={`Terminate account`}
-            headerText={`Terminate account`}
-            bodyHeadingText={`Warning!`}
-            headingProps={{ color: `red.300`, fontSize: 16 }}
-            bodyText={
-              `This action will delete your account with no way ` +
-              `of reverting.. Are you sure?`
-            }
-            actionText={`Terminate account`}
-            actionIcon={FaTrashAlt}
-            onClick={terminateUserAccount}
-            isLoading={isLoading}
-            disclosure={disclosure}
-            alertDisclosure={alertDisclosure}
-            errorMessage={errorMessage}
-          />
-        </Flex>
+          <UpdatePasswordForm />
+        </HStack>
+        <Modal
+          buttonProps={{
+            isFullWidth: true,
+          }}
+          toggleButtonText={`Terminate account`}
+          headerText={`Terminate account`}
+          bodyHeadingText={`Warning!`}
+          headingProps={{ color: `red.300`, fontSize: 16 }}
+          bodyText={
+            `This action will delete your account with no way ` +
+            `of reverting.. Are you sure?`
+          }
+          actionText={`Terminate account`}
+          actionIcon={FaTrashAlt}
+          onClick={terminateUserAccount}
+          isLoading={isLoading}
+          disclosure={disclosure}
+          alertDisclosure={alertDisclosure}
+          errorMessage={errorMessage}
+        />
       </Card>
     </Page>
   );

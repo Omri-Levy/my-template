@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { capitalize, User } from '@my-template/shared';
+import { capitalize } from '@my-template/shared';
 import { HookReturns } from './types';
 
 /**
@@ -8,7 +8,7 @@ import { HookReturns } from './types';
 const useTableData: HookReturns = (users) =>
   useMemo(
     () =>
-      users?.map((user: User) => ({
+      users?.map((user) => ({
         col1: user?.id,
         col2: user?.email,
         col3: user?.firstName,

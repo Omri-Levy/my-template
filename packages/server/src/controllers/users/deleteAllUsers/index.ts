@@ -1,11 +1,11 @@
-import { deleteAllUsersSchema, User as UserType } from '@my-template/shared';
+import { deleteAllUsersSchema, UserObject } from '@my-template/shared';
 import { Op } from 'sequelize';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 
 const deleteAllUsers: Route = async (req, res) => {
   try {
-    const user = req.user as UserType;
+    const user = req.user as UserObject;
     const { deleteAdmins } = req.body;
 
     await deleteAllUsersSchema.validate({ deleteAdmins });

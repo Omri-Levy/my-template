@@ -22,9 +22,9 @@ const useSignOut: HookReturns = () => {
     try {
       await axiosRequest(`POST`, undefined, `signOut`);
 
-      await authenticate();
-
       resetSensitiveSessionStorage();
+
+      await authenticate();
 
       replace(`/signIn`, {
         toast: signOutToast(signOutToastOptions),

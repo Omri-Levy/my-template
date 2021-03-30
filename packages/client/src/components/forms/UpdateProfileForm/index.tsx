@@ -1,7 +1,8 @@
-import { FunctionComponent, useMemo, useState } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import {
-  personalInformationSchema,
-  serverErrorMessage,
+  emailAlreadyInUseMessage,
+  updateProfileSchema,
+  UserObject,
 } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,10 +12,14 @@ import ModalFormWrapper from '../ModalFormWrapper';
 import { UpdateProfile } from '../../pages/Profile/types';
 import ModalForm from '../ModalFormWrapper/ModalForm';
 import FormFields from '../FormFields';
-import Alert from '../../Alert';
+import NoUserFound from '../../NoUserFound';
+import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
+import fetchUpdateProfile from '../../../utils/api/fetchUpdateProfile';
+import setResponseError from '../FormResponseError/setResponseError';
+import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 
 const UpdateProfileForm: FunctionComponent = () => {
-  const schema = useMemo(() => personalInformationSchema, []);
+  const schema = useMemo(() => updateProfileSchema, []);
   const {
     errors,
     clearErrors,
@@ -22,26 +27,53 @@ const UpdateProfileForm: FunctionComponent = () => {
     handleSubmit,
     formState,
     register,
+    watch,
+    setError,
   } = useForm({
     mode: `onChange`,
     resolver: yupResolver(schema),
   });
   const { isSubmitting } = formState;
-  const [errorMessage, setErrorMessage] = useState(``);
   const alertDisclosure = useDisclosure();
+  const { onOpen } = alertDisclosure;
   const disclosure = useDisclosure();
   const { onClose } = disclosure;
-  const onSubmit: UpdateProfile = () => async (data) => {
+  const { authenticate } = useContext(AuthenticationContext);
+  const {
+    toast: updateProfileSuccessToast,
+    toastOptions: updateProfileSuccessToastOptions,
+  } = useSuccessToast(`Updated profile successfully.`);
+  const updateProfile: UpdateProfile = () => async (data) => {
     try {
-      console.log(data);
+      await fetchUpdateProfile(data);
+
+      onClose();
+
+      updateProfileSuccessToast(updateProfileSuccessToastOptions);
+
+      await authenticate();
     } catch (error) {
       console.error(error);
 
-      setErrorMessage(serverErrorMessage);
+      setResponseError(error, setError, [emailAlreadyInUseMessage]);
+      onOpen();
     }
-
-    onClose();
   };
+  const { currentUser } = useContext(AuthenticationContext);
+  const authenticatedUser = currentUser as UserObject;
+  const disableSubmitCondition = () => {
+    const formValues = watch();
+    const unchangedEmail = formValues?.email === authenticatedUser?.email;
+    const unchangedFirstName =
+      formValues?.fname === authenticatedUser?.firstName;
+    const unchangedLastName = formValues?.lname === authenticatedUser?.lastName;
+
+    return unchangedEmail && unchangedFirstName && unchangedLastName;
+  };
+
+  if (!currentUser) {
+    return <NoUserFound />;
+  }
 
   return (
     <ModalFormWrapper
@@ -50,6 +82,9 @@ const UpdateProfileForm: FunctionComponent = () => {
       disclosure={disclosure}
       toggleButtonIcon={FaUserEdit}
       toggleButtonText={`Update Profile`}
+      buttonProps={{
+        width: `50%`,
+      }}
     >
       <ModalForm
         useRecaptcha={false}
@@ -57,23 +92,18 @@ const UpdateProfileForm: FunctionComponent = () => {
         submitButtonText={`Update Profile`}
         handleSubmit={handleSubmit}
         isSubmitting={isSubmitting}
-        onSubmit={onSubmit}
+        onSubmit={updateProfile}
         errors={errors}
         getValues={getValues}
         onClose={onClose}
+        disableSubmitCondition={disableSubmitCondition}
+        submitButtonDisabledTitle={`Please update at least one field.`}
       >
         <FormFields
           formType={`updateProfile`}
           errors={errors}
           clearErrors={clearErrors}
           register={register}
-        />
-        <Alert
-          status={`error`}
-          mt={5}
-          message={errorMessage || ``}
-          disclosure={alertDisclosure}
-          closeable
         />
       </ModalForm>
     </ModalFormWrapper>

@@ -1,5 +1,5 @@
-import { IterableUser } from '@my-template/shared';
+import { User } from '@my-template/shared';
 
-type FetchAuthenticate = () => Promise<IterableUser>;
+type FetchAuthenticate = () => Promise<User>;
 
 export { FetchAuthenticate };

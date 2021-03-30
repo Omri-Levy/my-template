@@ -1,5 +1,5 @@
 describe(`UpdateProfileForm`, () => {
-	it(`UpdateProfileForm temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`UpdateProfileForm temp`, () => {
+    expect(true).toBe(true);
+  });
 });

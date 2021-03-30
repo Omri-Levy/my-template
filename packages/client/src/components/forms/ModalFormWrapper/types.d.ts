@@ -1,4 +1,5 @@
 import { IconType } from 'react-icons';
+import { ButtonProps } from '@chakra-ui/react';
 import { Disclosure } from '../../../utils/types';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
   toggleButtonText: string;
   headerText: string;
   disclosure: Disclosure;
+  buttonProps?: ButtonProps;
 }
 
 export { Props };

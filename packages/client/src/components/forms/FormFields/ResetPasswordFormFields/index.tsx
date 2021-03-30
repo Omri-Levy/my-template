@@ -16,6 +16,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
+  ...props
 }) => {
   const onChange = errors?.responseError?.message
     ? clearResponseError(clearErrors)
@@ -35,6 +36,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
         name={`securityQuestion`}
         icon={FaShieldAlt}
         register={register}
+        {...props}
       />
       <FormField
         onChange={onChange}
@@ -45,6 +47,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
         name={`securityAnswer`}
         icon={FaShieldAlt}
         register={register}
+        {...props}
       />
       <FormField
         onChange={onChange}
@@ -56,6 +59,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
         icon={FaLock}
         register={register}
         helperText={invalidPasswordPolicyMessage}
+        {...props}
       />
       <FormField
         onChange={onChange}
@@ -66,6 +70,10 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
         name={`newPasswordConfirmation`}
         icon={FaLock}
         register={register}
+        inputProps={{
+          autoComplete: `off`,
+        }}
+        {...props}
       />
     </>
   );

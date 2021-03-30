@@ -1,5 +1,5 @@
 describe(`DeleteAllUsersModal`, () => {
-	it(`DeleteAllUsersModal temp`, () => {
-		expect(true).toBe(true);
-	});
+  it(`DeleteAllUsersModal temp`, () => {
+    expect(true).toBe(true);
+  });
 });

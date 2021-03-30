@@ -1,8 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { FaAt, FaSignature } from 'react-icons/fa';
+import { UserObject } from '@my-template/shared';
 import FormField from '../../FormField';
 import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
+import AuthenticationContext from '../../../../context/AuthenticationContext/AuthenticationContext';
+import NoUserFound from '../../../NoUserFound';
 
 /**
  * TODO: update description
@@ -16,12 +19,18 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
   const onChange = errors?.responseError?.message
     ? clearResponseError(clearErrors)
     : undefined;
+  const { currentUser } = useContext(AuthenticationContext);
+
+  if (!currentUser) {
+    return <NoUserFound />;
+  }
+
+  const { email, firstName, lastName } = currentUser as UserObject;
 
   return (
     <>
       <FormField
         onChange={onChange}
-        isRequired
         labelTitle={`Email:`}
         name={`email`}
         errors={errors}
@@ -29,10 +38,10 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         type={`email`}
         maxLength={320}
         icon={FaAt}
+        inputProps={{ defaultValue: email }}
         {...props}
       />
       <FormField
-        isRequired
         labelTitle={`First Name:`}
         name={`fname`}
         errors={errors}
@@ -40,9 +49,10 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         type={`text`}
         maxLength={35}
         icon={FaSignature}
+        inputProps={{ defaultValue: firstName }}
+        {...props}
       />
       <FormField
-        isRequired
         labelTitle={`Last Name:`}
         name={`lname`}
         errors={errors}
@@ -50,6 +60,8 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         type={`text`}
         maxLength={35}
         icon={FaSignature}
+        inputProps={{ defaultValue: lastName }}
+        {...props}
       />
     </>
   );

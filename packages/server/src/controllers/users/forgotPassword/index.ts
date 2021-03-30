@@ -50,6 +50,8 @@ const forgotPassword: Route = async (req, res) => {
 
     res.status(200).send({ message: forgotPasswordMessage });
   } catch (error) {
+    console.error(error);
+
     res.status(500).send({ error });
   }
 };

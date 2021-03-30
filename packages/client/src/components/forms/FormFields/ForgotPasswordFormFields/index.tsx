@@ -11,6 +11,7 @@ const ForgotPasswordFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
+  ...props
 }) => {
   const onChange = errors?.responseError?.message
     ? clearResponseError(clearErrors)
@@ -27,6 +28,7 @@ const ForgotPasswordFormFields: FunctionComponent<Props> = ({
       type={`email`}
       maxLength={320}
       icon={FaAt}
+      {...props}
     />
   );
 };

@@ -6,6 +6,8 @@ import {
   resetPasswordFields,
   securityInformationFields,
   signInFields,
+  updatePasswordFields,
+  updateProfileFields,
 } from './validationFields';
 import { roles } from './validationReferences';
 
@@ -20,6 +22,8 @@ const signInSchema = yup.object().shape(signInFields);
 const forgotPasswordSchema = yup.object().shape(forgotPasswordFields);
 const resetPasswordSchema = yup.object().shape(resetPasswordFields);
 const deleteAllUsersSchema = yup.object().shape(deleteAllUsersFields);
+const updateProfileSchema = yup.object().shape(updateProfileFields);
+const updatePasswordSchema = yup.object().shape(updatePasswordFields);
 
 export {
   personalInformationSchema,
@@ -29,4 +33,6 @@ export {
   forgotPasswordSchema,
   resetPasswordSchema,
   deleteAllUsersSchema,
+  updateProfileSchema,
+  updatePasswordSchema,
 };

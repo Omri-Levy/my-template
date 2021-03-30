@@ -19,6 +19,9 @@ const ModalForm: FunctionComponent<Props> = ({
   onSubmit,
   useRecaptcha = true,
   onClose,
+  disableSubmitCondition,
+  submitButtonTitle,
+  submitButtonDisabledTitle,
   children,
   ...props
 }) => {
@@ -27,8 +30,16 @@ const ModalForm: FunctionComponent<Props> = ({
   const disableSubmit = useDisableSubmit(
     errors,
     getValues,
-    gRecaptchaResponseValue
+    gRecaptchaResponseValue,
+    disableSubmitCondition
   );
+  let conditionalSubmitButtonTitle;
+
+  if (disableSubmit && submitButtonDisabledTitle) {
+    conditionalSubmitButtonTitle = submitButtonDisabledTitle;
+  } else if (submitButtonTitle) {
+    conditionalSubmitButtonTitle = submitButtonTitle;
+  }
 
   return (
     <>
@@ -62,6 +73,7 @@ const ModalForm: FunctionComponent<Props> = ({
               type={`submit`}
               isLoading={isSubmitting}
               disabled={disableSubmit}
+              title={conditionalSubmitButtonTitle}
             >
               {submitButtonText}
             </Button>

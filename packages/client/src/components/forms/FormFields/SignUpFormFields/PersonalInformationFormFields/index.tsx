@@ -16,6 +16,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
+  ...props
 }) => {
   const onChange = errors?.responseError?.message
     ? clearResponseError(clearErrors)
@@ -33,6 +34,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
         maxLength={35}
         icon={FaSignature}
         helperText={firstNameHelperText}
+        {...props}
       />
       <FormField
         isRequired
@@ -44,6 +46,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
         maxLength={35}
         icon={FaSignature}
         helperText={lastNameHelperText}
+        {...props}
       />
       <FormField
         onChange={onChange}
@@ -56,6 +59,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
         maxLength={320}
         icon={FaAt}
         helperText={emailHelperText}
+        {...props}
       />
     </>
   );

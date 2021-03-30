@@ -9,6 +9,8 @@ import deleteSelectedUsers from '../controllers/users/deleteSelectedUsers';
 import deleteAllUsers from '../controllers/users/deleteAllUsers';
 import isAuthorized from '../middleware/isAuthorized';
 import terminateUserAccount from '../controllers/users/terminateUserAccount';
+import updateProfile from '../controllers/users/updateProfile';
+import updatePassword from '../controllers/users/updatePassword';
 
 const users = Router();
 
@@ -141,6 +143,22 @@ users.delete(
     session: false,
   }),
   terminateUserAccount
+);
+
+users.post(
+  `/updateProfile`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  updateProfile
+);
+
+users.post(
+  `/updatePassword`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  updatePassword
 );
 
 export default users;

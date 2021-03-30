@@ -17,6 +17,9 @@ interface Props {
   onSubmit: ModalFormSubmit;
   useRecaptcha: boolean;
   onClose: () => void;
+  disableSubmitCondition?: () => boolean;
+  submitButtonTitle?: string;
+  submitButtonDisabledTitle?: string;
 }
 
 export { Props };

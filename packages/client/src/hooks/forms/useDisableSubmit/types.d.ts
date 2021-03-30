@@ -13,7 +13,8 @@ type FormHasInvalidRecaptcha = (
 type HookReturns = (
   errors: Errors,
   getValues: GetValues,
-  gRecaptchaResponse?: GRecaptchaResponse
+  gRecaptchaResponse?: GRecaptchaResponse,
+  disableSubmitCondition?: () => boolean
 ) => boolean;
 
 export {
