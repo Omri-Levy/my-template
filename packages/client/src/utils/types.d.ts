@@ -33,6 +33,13 @@ interface Disclosure {
   onClose: () => void;
 }
 type FormSubmit = SignUp | SignIn | UpdateProfile;
+type ColumnsArray = {
+  col1: string;
+  col2: string;
+  col3: string;
+  col4: string;
+  col5: string;
+}[];
 
 export {
   SetState,
@@ -52,4 +59,5 @@ export {
   HandleSubmit,
   Disclosure,
   FormSubmit,
+  ColumnsArray,
 };

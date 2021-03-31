@@ -1,31 +1,22 @@
 import { FunctionComponent, memo } from 'react';
 import {
-  Button,
   ButtonGroup,
   Checkbox,
   Flex,
-  Icon,
   Td,
   Text,
   Tfoot,
   Tr,
 } from '@chakra-ui/react';
 import { v4 } from 'uuid';
-import { FaTrashAlt } from 'react-icons/all';
-import { deleteSelectedUsersMessage, Users } from '@my-template/shared';
-import { DeleteUser, Props } from './types';
+import { Users } from '@my-template/shared';
+import { Props } from './types';
 import GlobalFilter from '../GlobalFilter';
 import useDarkMode from '../../../hooks/ui/useDarkMode';
-import fetchDeleteUser from '../../../utils/api/fetchDeleteUser';
 import queryClient from '../../globals/Providers/queryClient';
-import DeleteAllUsersModal from './DeleteAllUsersModal';
 import Pagination from '../Pagination';
-import useSuccessToast from '../../../hooks/ui/useSuccessToast';
-import useErrorToast from '../../../hooks/ui/useErrorToast';
-import useLoading from '../../../hooks/useLoading';
 
 const TableFooter: FunctionComponent<Props> = ({
-  icons = true,
   footerGroups,
   globalFilter,
   setGlobalFilter,
@@ -39,38 +30,12 @@ const TableFooter: FunctionComponent<Props> = ({
   nextPage,
   setPageSize,
   colSpan,
-  userIds,
   checkAllCheckboxes,
   checkedItems,
+  Actions,
 }) => {
   const { isDarkMode } = useDarkMode();
   const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
-  const { isLoading, startLoading, stopLoading } = useLoading();
-  const {
-    toast: deleteSelectedUsersSuccessToast,
-    toastOptions: deleteSelectedUsersSuccessToastOptions,
-  } = useSuccessToast(`Deleted selected users successfully.`);
-  const {
-    toast: deleteSelectedUsersErrorToast,
-    toastOptions: deleteSelectedUsersErrorToastOptions,
-  } = useErrorToast(`Deleting selected users failed - please try again.`);
-  /**
-   * TODO: abstract this function
-   */
-  const deleteSelectedUsers: DeleteUser = async () => {
-    try {
-      startLoading();
-      await fetchDeleteUser(userIds);
-
-      deleteSelectedUsersSuccessToast(deleteSelectedUsersSuccessToastOptions);
-    } catch (error) {
-      console.error(error);
-
-      deleteSelectedUsersErrorToast(deleteSelectedUsersErrorToastOptions);
-    }
-
-    stopLoading();
-  };
   const users = queryClient.getQueryData(`users`) as Users;
 
   return (
@@ -102,24 +67,7 @@ const TableFooter: FunctionComponent<Props> = ({
         />
         <Td borderLeft={`1px solid ${borderColor}`} colSpan={colSpan}>
           <Flex justifyContent={`flex-end`}>
-            <ButtonGroup spacing={5}>
-              <Button
-                rightIcon={
-                  icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined
-                }
-                onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
-                disabled={!checkedItems.some(Boolean)}
-                isLoading={isLoading}
-                title={
-                  !checkedItems.some(Boolean)
-                    ? deleteSelectedUsersMessage
-                    : undefined
-                }
-              >
-                Delete Selected
-              </Button>
-              {users?.length > 1 && <DeleteAllUsersModal />}
-            </ButtonGroup>
+            <ButtonGroup spacing={5}>{Actions}</ButtonGroup>
           </Flex>
         </Td>
       </Tr>

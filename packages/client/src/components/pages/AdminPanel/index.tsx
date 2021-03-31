@@ -12,6 +12,8 @@ import Table from '../../Table';
 import useIsAdmin from '../../../hooks/useIsAdmin';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import NoUserFound from '../../NoUserFound';
+import AdminActions from './AdminActions';
+import useUserIds from '../../../hooks/useUserIds';
 
 /**
  * TODO: update description
@@ -26,6 +28,14 @@ const AdminPanel: FunctionComponent = () => {
   const columns = useTableColumns();
   const data = useTableData(filteredUsers);
   const isAdmin = useIsAdmin();
+  const {
+    setUserIds: setSessionStorageUserIds,
+    userIds,
+    _setUserIds,
+  } = useUserIds();
+  const actionsProps = {
+    ids: userIds,
+  };
 
   if (!isAdmin) {
     return <Redirect to={{ pathname: `/` }} />;
@@ -43,6 +53,11 @@ const AdminPanel: FunctionComponent = () => {
           columns={columns}
           minWidth={`80vw`}
           caption={`Manage Users`}
+          Actions={AdminActions}
+          actionsProps={actionsProps}
+          ids={userIds}
+          setIds={_setUserIds}
+          setSessionStorageIds={setSessionStorageUserIds}
         />
       ) : (
         <Heading as={`h2`}>No users were found.</Heading>

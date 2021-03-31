@@ -1,6 +1,7 @@
 import { TableProps } from '@chakra-ui/react';
 import { Column } from 'react-table';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FunctionComponent } from 'react';
+import { SetState } from '../../utils/types';
 
 interface ColumnType {
   col1: string;
@@ -11,11 +12,22 @@ interface ColumnType {
 }
 
 type Columns = ColumnType[];
-
+interface ActionsProps {
+  icons?: boolean;
+  ids: string[];
+}
+interface ActionsPropsPlusCheckedItems extends ActionsProps {
+  checkedItems: boolean[];
+}
 interface Props extends TableProps {
   caption: string;
   data: Columns;
   columns: Column<ColumnType>[];
+  ids: string[];
+  setIds: SetState<string[]>;
+  Actions: FunctionComponent<ActionsPropsPlusCheckedItems>;
+  actionsProps: ActionsProps;
+  setSessionStorageIds: (ids: string[]) => void;
 }
 type CheckCheckbox = (
   id: string,

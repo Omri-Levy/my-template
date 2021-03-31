@@ -1,4 +1,4 @@
-import { FunctionComponent, memo, useEffect, useMemo, useState } from 'react';
+import { FunctionComponent, memo, useEffect, useMemo } from 'react';
 import {
   Flex,
   Table as ChakraTable,
@@ -11,12 +11,15 @@ import {
   useSortBy,
   useTable,
 } from 'react-table';
-import { CheckAllCheckboxes, CheckCheckbox, Props } from './types';
+import { Props } from './types';
 import TableHead from './TableHead';
 import Card from '../Card';
 import TableFooter from './TableFooter';
 import TableBody from './TableBody';
 import fuzzyTextFilter from './functions/fuzzyTextFilter';
+import useCheckedItems from '../../hooks/useCheckedItems';
+import useCachedPageSize from '../../hooks/useCachedPageSize';
+import useUpdatePageSize from '../../hooks/useUpdatePageSize';
 
 /**
  * refactor to smaller abstractions
@@ -25,21 +28,25 @@ const Table: FunctionComponent<Props> = ({
   caption,
   data,
   columns,
+  ids,
+  setIds,
+  Actions,
+  actionsProps,
+  setSessionStorageIds,
   ...props
 }) => {
-  const [checkedItems, setCheckedItems] = useState(
-    () => JSON.parse(localStorage.getItem(`checkedItems`) as string) || [false]
+  const { checkedItems, checkCheckbox, checkAllCheckboxes } = useCheckedItems(
+    setIds
   );
-  const [userIds, setUserIds] = useState<string[]>(
-    () => JSON.parse(localStorage.getItem(`userIds`) as string) || []
-  );
+  const checkCheckboxInstance = checkCheckbox(ids, setIds);
+  const checkAllCheckboxesInstance = checkAllCheckboxes(data);
   const filterTypes = useMemo(
     () => ({
       fuzzyText: fuzzyTextFilter,
     }),
     []
   );
-  const cachedPageSize = Number(localStorage.getItem(`pageSize`)) || 10;
+  const { cachedPageSize } = useCachedPageSize();
   const tableInstance = useTable(
     {
       data,
@@ -78,53 +85,13 @@ const Table: FunctionComponent<Props> = ({
     setPageSize,
     state: { pageIndex, pageSize },
   } = tableInstance;
+  useUpdatePageSize(pageSize);
   const rowsLength = data.length + 1;
   const size = useBreakpointValue({ sm: `sm` });
-  const checkCheckbox: CheckCheckbox = (id, index) => (event) => {
-    const newState = [...checkedItems];
-    newState[index] = event.target.checked;
-
-    setCheckedItems(newState);
-
-    if (checkedItems[index]) {
-      const newUserIds = userIds.filter((userId) => userId !== id);
-
-      setUserIds(newUserIds);
-    } else {
-      setUserIds([...userIds, id]);
-    }
-  };
-  const checkAllCheckboxes: CheckAllCheckboxes = () => {
-    let newState: boolean[] = [];
-
-    checkedItems.forEach(() => {
-      newState = [...newState, !checkedItems.every(Boolean)];
-    });
-
-    setCheckedItems(newState);
-
-    if (checkedItems.every(Boolean)) {
-      setUserIds([]);
-    } else {
-      let newUserIds: string[] = [];
-
-      data.forEach((item) => {
-        newUserIds = [...newUserIds, item.col1];
-      });
-
-      setUserIds(newUserIds);
-    }
-  };
 
   useEffect(() => {
-    localStorage.setItem(`pageSize`, JSON.stringify(pageSize));
-  }, [pageSize]);
-  useEffect(() => {
-    sessionStorage.setItem(`checkedItems`, JSON.stringify(checkedItems));
-  }, [checkedItems]);
-  useEffect(() => {
-    sessionStorage.setItem(`userIds`, JSON.stringify(userIds));
-  }, [userIds]);
+    setSessionStorageIds(ids);
+  }, [ids, setSessionStorageIds]);
 
   return (
     <Flex flexDirection={`column`} alignItems={`center`}>
@@ -136,7 +103,7 @@ const Table: FunctionComponent<Props> = ({
             getTableBodyProps={getTableBodyProps}
             page={page}
             prepareRow={prepareRow}
-            checkCheckbox={checkCheckbox}
+            checkCheckbox={checkCheckboxInstance}
             checkedItems={checkedItems}
           />
           <TableFooter
@@ -153,9 +120,9 @@ const Table: FunctionComponent<Props> = ({
             nextPage={nextPage}
             setPageSize={setPageSize}
             colSpan={columns.length + 1}
-            userIds={userIds}
-            checkAllCheckboxes={checkAllCheckboxes}
+            checkAllCheckboxes={checkAllCheckboxesInstance}
             checkedItems={checkedItems}
+            Actions={<Actions {...actionsProps} checkedItems={checkedItems} />}
           />
         </ChakraTable>
       </Card>

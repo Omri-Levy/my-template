@@ -2,7 +2,6 @@ import { HeaderGroup } from 'react-table';
 import { CheckAllCheckboxes, ColumnType } from '../types';
 
 interface Props {
-  icons?: boolean;
   footerGroups: HeaderGroup<ColumnType>[];
   globalFilter: string;
   setGlobalFilter: (value: string) => void;
@@ -16,9 +15,9 @@ interface Props {
   nextPage: () => void;
   setPageSize: (number: number) => void;
   colSpan: number;
-  userIds: string[];
   checkAllCheckboxes: CheckAllCheckboxes;
   checkedItems: boolean[];
+  Actions: JSX.Element;
 }
 type DeleteUser = (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
 

@@ -1,13 +1,6 @@
 import { Users } from '@my-template/shared';
+import { ColumnsArray } from '../../../../../utils/types';
 
-type HookReturns = (
-  users: Users | undefined
-) => {
-  col1: string;
-  col2: string;
-  col3: string;
-  col4: string;
-  col5: string;
-}[];
+type HookReturns = (users: Users | undefined) => ColumnsArray;
 
 export { HookReturns };
