@@ -103,6 +103,7 @@ const serverErrorMessage = `Something went wrong - please try again.`;
 const securityQuestionOneOfMessage =
   `Please select a ` + `${securityQuestion.toLowerCase()}.`;
 const noUserWasFoundMessage = `No user was found.`;
+const invalidUserIdMessage = `Invalid user id.`;
 
 // forgot password
 const invalidSecurityInformationMessage =
@@ -173,4 +174,5 @@ export {
   newPasswordIsRequiredMessage,
   newPasswordConfirmationIsRequiredMessage,
   invalidNewPasswordConfirmationMessage,
+  invalidUserIdMessage,
 };

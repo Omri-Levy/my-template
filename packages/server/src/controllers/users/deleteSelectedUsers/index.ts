@@ -5,8 +5,15 @@ import { Route } from '../../../utils/types';
 const deleteSelectedUsers: Route = async (req, res) => {
   try {
     const { userIds } = req.body;
+    let isAnArrayOfStrings = true;
 
-    if (userIds.length === 0) {
+    userIds.forEach((userId: string | unknown) => {
+      if (typeof userId !== `string`) {
+        isAnArrayOfStrings = false;
+      }
+    });
+
+    if (userIds.length === 0 || !isAnArrayOfStrings) {
       console.error(deleteSelectedUsersMessage);
 
       res.status(400).send({ message: deleteSelectedUsersMessage });

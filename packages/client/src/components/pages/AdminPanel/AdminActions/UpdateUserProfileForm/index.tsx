@@ -16,7 +16,8 @@ import NoUserFound from '../../../../NoUserFound';
 import FormFields from '../../../../forms/FormFields';
 import ModalFormWrapper from '../../../../forms/ModalFormWrapper';
 import setResponseError from '../../../../forms/FormResponseError/setResponseError';
-import fetchUpdateProfile from '../../../../../utils/api/fetchUpdateProfile';
+import fetchUpdateUserProfile from '../../../../../utils/api/fetchUpdateUserProfile';
+import queryClient from '../../../../globals/Providers/queryClient';
 
 const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const schema = useMemo(() => updateProfileSchema, []);
@@ -38,20 +39,19 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const { onOpen } = alertDisclosure;
   const disclosure = useDisclosure();
   const { onClose } = disclosure;
-  const { authenticate } = useContext(AuthenticationContext);
   const {
     toast: updateUserProfileSuccessToast,
     toastOptions: updateUserProfileSuccessToastOptions,
-  } = useSuccessToast(`Updated profile successfully.`);
+  } = useSuccessToast(`Updated user profile successfully.`);
   const updateUserProfile: UpdateUserProfile = () => async (data) => {
     try {
-      await fetchUpdateProfile(data);
+      await fetchUpdateUserProfile(userIds[0], data);
 
       onClose();
 
       updateUserProfileSuccessToast(updateUserProfileSuccessToastOptions);
 
-      await authenticate();
+      await queryClient.invalidateQueries(`users`);
     } catch (error) {
       console.error(error);
 
@@ -109,7 +109,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
         submitButtonDisabledTitle={`Please update at least one field.`}
       >
         <FormFields
-          formType={`updateProfile`}
+          formType={`updateUserProfile`}
           errors={errors}
           clearErrors={clearErrors}
           register={register}

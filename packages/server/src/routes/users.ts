@@ -11,6 +11,7 @@ import isAuthorized from '../middleware/isAuthorized';
 import terminateUserAccount from '../controllers/users/terminateUserAccount';
 import updateProfile from '../controllers/users/updateProfile';
 import updatePassword from '../controllers/users/updatePassword';
+import updateUserProfile from '../controllers/users/updateUserProfile';
 
 const users = Router();
 
@@ -151,6 +152,15 @@ users.post(
     session: false,
   }),
   updateProfile
+);
+
+users.post(
+  `/updateUserProfile`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  isAuthorized(`admin`),
+  updateUserProfile
 );
 
 users.post(

@@ -9,12 +9,14 @@ type FormType =
   | `forgotPassword`
   | `resetPassword`
   | `updateProfile`
+  | `updateUserProfile`
   | `updatePassword`;
 
 interface Props extends FormControlProps {
   errors: FieldErrors;
   clearErrors: ClearErrors;
   register: Register;
+  isAdminAction?: boolean;
 }
 
 interface PropsPlusFormType {
