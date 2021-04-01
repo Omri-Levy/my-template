@@ -29,8 +29,9 @@ interface UserObject {
 }
 type User = UserObject | `unauthenticated` | null;
 type UserKey = `id` | `firstName` | `lastName` | `email` | `role`;
-
 type Users = UserObject[];
+
+type Roles = `admin` | `user`;
 
 export {
   ObjectKey,
@@ -42,4 +43,5 @@ export {
   User,
   Users,
   UserKey,
+  Roles,
 };

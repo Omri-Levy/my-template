@@ -1,7 +1,8 @@
 import { FieldErrors } from 'react-hook-form';
-import { FormControlProps, InputProps } from '@chakra-ui/react';
+import { FormControlProps, InputProps, SelectProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { Register } from '../../../utils/types';
+import { OptionComponent } from '../../Select/Options/Option/types';
 
 interface Props extends FormControlProps {
   errors: FieldErrors;
@@ -16,7 +17,9 @@ interface Props extends FormControlProps {
   isSelectField?: boolean;
   selectPlaceholder?: string;
   selectOptions?: string[];
+  optionsProps?: OptionComponent;
   inputProps?: InputProps;
+  selectProps?: SelectProps;
 }
 
 export { Props };

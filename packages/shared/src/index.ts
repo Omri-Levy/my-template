@@ -43,6 +43,7 @@ import {
   securityQuestionIsRequiredMessage,
   serverErrorMessage,
   terminateUserAccountMessage,
+  unauthorizedMessage,
   wrongCredentialsMessage,
 } from './utils/validation/validationMessages';
 import axiosRequest from './utils/axiosRequest';
@@ -57,6 +58,7 @@ import {
   signUpSchema,
   updatePasswordSchema,
   updateProfileSchema,
+  updateUserProfileSchema,
 } from './utils/validation/validationSchemas';
 import {
   emailMax,
@@ -78,6 +80,8 @@ import calculateHours from './utils/functions/calculateHours';
 import calculateMinutes from './utils/functions/calculateMinutes';
 import secondsToHours from './utils/functions/secondsToHours';
 import capitalize from './utils/functions/capitalize';
+import { roles } from './utils/validation/validationReferences';
+import lowerCaseComparison from './utils/functions/lowerCaseComparison';
 
 export {
   apiUrl,
@@ -130,6 +134,7 @@ export {
   newPasswordIsRequiredMessage,
   newPasswordConfirmationIsRequiredMessage,
   invalidNewPasswordConfirmationMessage,
+  unauthorizedMessage,
   invalidUserIdMessage,
   personalInformationSchema,
   securityInformationSchema,
@@ -140,11 +145,14 @@ export {
   deleteAllUsersSchema,
   updateProfileSchema,
   updatePasswordSchema,
+  updateUserProfileSchema,
+  roles,
   axiosRequest,
   calculateMinutes,
   calculateHours,
   secondsToHours,
   capitalize,
+  lowerCaseComparison,
 };
 
 export type {

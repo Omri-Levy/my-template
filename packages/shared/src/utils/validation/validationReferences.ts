@@ -1,3 +1,5 @@
-const roles = [`admin`, `user`];
+import { Roles } from '../types';
+
+const roles: Roles[] = [`admin`, `user`];
 
 export { roles };

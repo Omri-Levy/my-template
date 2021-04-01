@@ -1,9 +1,10 @@
 import {
   emailAlreadyInUseMessage,
   invalidUserIdMessage,
+  lowerCaseComparison,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
-  updateProfileSchema,
+  updateUserProfileSchema,
 } from '@my-template/shared';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
@@ -20,11 +21,14 @@ const updateUserProfile: Route = async (req, res) => {
       res.status(400).send({ message });
     }
 
-    const { email, fname: firstName, lname: lastName } = req.body;
+    const { email, fname: firstName, lname: lastName, role } = req.body;
 
-    await updateProfileSchema.validate(req.body);
+    await updateUserProfileSchema.validate(req.body);
 
-    const userToUpdate = await User.findOne({ where: { id: userId } });
+    const userToUpdate = await User.findOne({
+      attributes: [`id`, `email`, `firstName`, `lastName`, `role`],
+      where: { id: userId },
+    });
 
     if (!userToUpdate) {
       const message = noUserWasFoundMessage;
@@ -37,8 +41,14 @@ const updateUserProfile: Route = async (req, res) => {
     const unchangedEmail = userToUpdate?.email === email;
     const unchangedFirstName = userToUpdate?.firstName === firstName;
     const unchangedLastName = userToUpdate?.lastName === lastName;
+    const unchangedRole = lowerCaseComparison(userToUpdate?.role, role);
 
-    if (unchangedEmail && unchangedFirstName && unchangedLastName) {
+    if (
+      unchangedEmail &&
+      unchangedFirstName &&
+      unchangedLastName &&
+      unchangedRole
+    ) {
       console.error(noChangesWereMadeMessage);
 
       res.status(400).send({ message: noChangesWereMadeMessage });
@@ -61,9 +71,10 @@ const updateUserProfile: Route = async (req, res) => {
     }
 
     await userToUpdate?.update({
-      email: email || userToUpdate.email,
-      firstName: firstName || userToUpdate.firstName,
-      lastName: lastName || userToUpdate.lastName,
+      email: email || userToUpdate?.email,
+      firstName: firstName || userToUpdate?.firstName,
+      lastName: lastName || userToUpdate?.lastName,
+      role: role || userToUpdate?.role,
     });
 
     res.status(200).send({ status: `success` });

@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext } from 'react';
 import { FaAt, FaSignature } from 'react-icons/fa';
-import { UserObject, Users } from '@my-template/shared';
+import { roles, UserObject, Users } from '@my-template/shared';
+import { Roles } from '@my-template/shared/src/utils/types';
 import FormField from '../../FormField';
 import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
@@ -36,15 +37,20 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
   let email = userToUpdate?.email;
   let firstName = userToUpdate?.firstName;
   let lastName = userToUpdate?.lastName;
+  let selectOptions;
 
   if (isAdminAction && isAdmin) {
-    userToUpdate = {
-      ...users.filter((user) => user.id === userIds[0])[0],
-    };
+    userToUpdate = users.filter(
+      (user) => user.id === userIds[0]
+    )[0] as UserObject;
 
-    email = userToUpdate.email;
-    firstName = userToUpdate.firstName;
-    lastName = userToUpdate.lastName;
+    const role = userToUpdate?.role as Roles;
+    const restOfRoles = roles.filter((otherRole) => otherRole !== role);
+    selectOptions = [role, ...restOfRoles];
+
+    email = userToUpdate?.email;
+    firstName = userToUpdate?.firstName;
+    lastName = userToUpdate?.lastName;
   }
 
   return (
@@ -83,6 +89,23 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         inputProps={{ defaultValue: lastName }}
         {...props}
       />
+      {isAdminAction && (
+        <FormField
+          isSelectField
+          selectOptions={selectOptions}
+          labelTitle={`Role:`}
+          name={`role`}
+          errors={errors}
+          register={register}
+          type={`text`}
+          maxLength={35}
+          icon={FaSignature}
+          selectProps={{ textTransform: `capitalize` }}
+          optionsProps={{ textTransform: `capitalize` }}
+          inputProps={{ defaultValue: lastName, textTransform: `capitalize` }}
+          {...props}
+        />
+      )}
     </>
   );
 };

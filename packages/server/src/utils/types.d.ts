@@ -28,7 +28,6 @@ type VerifyIfVerifiable = (
   toVerifyAgainst: string | undefined,
   toVerify: string | undefined
 ) => Promise<boolean | null>;
-type Roles = `admin` | `user`;
 
 export {
   JwtToken,
@@ -38,5 +37,4 @@ export {
   JwtTokenExtractor,
   JwtTokenPayload,
   VerifyIfVerifiable,
-  Roles,
 };

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { Roles } from '../../utils/types';
+import { Roles } from '@my-template/shared/src/utils/types';
 
 type IsAuthorizedMiddleware = (
   role: Roles

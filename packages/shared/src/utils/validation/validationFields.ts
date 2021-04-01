@@ -40,6 +40,7 @@ import {
   securityAnswerMin,
 } from './validationConstants';
 import { securityQuestions } from '../constants';
+import { roles } from './validationReferences';
 
 const sharedFields = {
   email: yup
@@ -62,6 +63,7 @@ const sharedFields = {
     .string()
     .oneOf([yup.ref(`newPassword`)], invalidNewPasswordConfirmationMessage)
     .required(newPasswordConfirmationIsRequiredMessage),
+  role: yup.string().nullable().oneOf(roles),
 };
 const personalInformationFields = {
   email: sharedFields.email,
@@ -112,7 +114,11 @@ const resetPasswordFields = {
 const deleteAllUsersFields = {
   deleteAdmins: yup.boolean().required(deleteAdminsIsRequiredMessage),
 };
-const updateProfileFields = {
+/**
+ * shared validation fields between the user updating his own profile and
+ * the admin updating other users' profile.
+ */
+const sharedUpdateFields = {
   email: yup
     .string()
     .email(invalidEmailMessage)
@@ -131,6 +137,17 @@ const updateProfileFields = {
     .min(lastNameMin)
     .max(lastNameMax)
     .nullable(),
+};
+const updateProfileFields = {
+  email: sharedUpdateFields.email,
+  fname: sharedUpdateFields.fname,
+  lname: sharedUpdateFields.lname,
+};
+const updateUserProfileFields = {
+  email: sharedUpdateFields.email,
+  fname: sharedUpdateFields.fname,
+  lname: sharedUpdateFields.lname,
+  role: yup.string().oneOf(roles),
 };
 const updatePasswordFields = {
   oldPassword: yup.string().required(oldPasswordIsRequiredMessage),
@@ -154,4 +171,5 @@ export {
   deleteAllUsersFields,
   updateProfileFields,
   updatePasswordFields,
+  updateUserProfileFields,
 };

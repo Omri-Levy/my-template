@@ -5,10 +5,10 @@ import Option from './Option';
 /**
  * TODO: update description
  */
-const Options: FunctionComponent<Props> = ({ options }) => (
+const Options: FunctionComponent<Props> = ({ options, optionsProps }) => (
   <>
     {options?.map((option) => (
-      <Option key={option} option={option} />
+      <Option key={option} option={option} optionsProps={optionsProps} />
     ))}
   </>
 );

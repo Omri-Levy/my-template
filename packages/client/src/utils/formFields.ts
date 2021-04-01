@@ -56,6 +56,11 @@ const formFields = [
     maxLength: 128,
   },
   {
+    name: `role`,
+    text: `Role`,
+    type: `text`,
+  },
+  {
     name: `responseError`,
   },
 ];

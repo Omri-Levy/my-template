@@ -1,8 +1,9 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import {
   emailAlreadyInUseMessage,
-  updateProfileSchema,
-  UserObject,
+  unauthorizedMessage,
+  updateUserProfileSchema,
+  Users,
 } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,9 +19,11 @@ import ModalFormWrapper from '../../../../forms/ModalFormWrapper';
 import setResponseError from '../../../../forms/FormResponseError/setResponseError';
 import fetchUpdateUserProfile from '../../../../../utils/api/fetchUpdateUserProfile';
 import queryClient from '../../../../globals/Providers/queryClient';
+import useErrorToast from '../../../../../hooks/ui/useErrorToast';
+import useIsAdmin from '../../../../../hooks/useIsAdmin';
 
 const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
-  const schema = useMemo(() => updateProfileSchema, []);
+  const schema = useMemo(() => updateUserProfileSchema, []);
   const {
     errors,
     clearErrors,
@@ -43,8 +46,21 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     toast: updateUserProfileSuccessToast,
     toastOptions: updateUserProfileSuccessToastOptions,
   } = useSuccessToast(`Updated user profile successfully.`);
+  const {
+    toast: unauthorizedErrorToast,
+    toastOptions: unauthorizedErrorToastOptions,
+  } = useErrorToast(unauthorizedMessage);
+  const isAdmin = useIsAdmin();
   const updateUserProfile: UpdateUserProfile = () => async (data) => {
     try {
+      if (!isAdmin) {
+        console.error(unauthorizedMessage);
+
+        unauthorizedErrorToast(unauthorizedErrorToastOptions);
+
+        return;
+      }
+
       await fetchUpdateUserProfile(userIds[0], data);
 
       onClose();
@@ -60,19 +76,27 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     }
   };
   const { currentUser } = useContext(AuthenticationContext);
-  const authenticatedUser = currentUser as UserObject;
   const oneUserSelected = userIds.length === 1;
+  const users = queryClient.getQueryData(`users`) as Users;
+  const userToUpdate = users.filter((user) => user.id === userIds[0])[0];
   const disableSubmitCondition = () => {
     const formValues = watch();
-    const unchangedEmail = formValues?.email === authenticatedUser?.email;
-    const unchangedFirstName =
-      formValues?.fname === authenticatedUser?.firstName;
-    const unchangedLastName = formValues?.lname === authenticatedUser?.lastName;
+    const unchangedEmail = formValues?.email === userToUpdate?.email;
+    const unchangedFirstName = formValues?.fname === userToUpdate?.firstName;
+    const unchangedLastName = formValues?.lname === userToUpdate?.lastName;
+    const unchangedRole = formValues?.role === userToUpdate?.role;
+    console.log({
+      unchangedRole,
+      unchangedEmail,
+      unchangedFirstName,
+      unchangedLastName,
+    });
 
     return (
-      unchangedEmail &&
-      unchangedFirstName &&
-      unchangedLastName &&
+      (unchangedEmail &&
+        unchangedFirstName &&
+        unchangedLastName &&
+        unchangedRole) ||
       !oneUserSelected
     );
   };

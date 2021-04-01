@@ -53,9 +53,9 @@ const updateProfile: Route = async (req, res) => {
     }
 
     await userToUpdate?.update({
-      email: email || userToUpdate.email,
-      firstName: firstName || userToUpdate.firstName,
-      lastName: lastName || userToUpdate.lastName,
+      email: email || userToUpdate?.email,
+      firstName: firstName || userToUpdate?.firstName,
+      lastName: lastName || userToUpdate?.lastName,
     });
 
     res.status(200).send({ status: `success` });

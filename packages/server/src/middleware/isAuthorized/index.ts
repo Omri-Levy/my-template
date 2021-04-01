@@ -1,4 +1,4 @@
-import { UserObject } from '@my-template/shared';
+import { unauthorizedMessage, UserObject } from '@my-template/shared';
 import { IsAuthorizedMiddleware } from './types';
 
 const isAuthorized: IsAuthorizedMiddleware = (role) => async (
@@ -9,11 +9,9 @@ const isAuthorized: IsAuthorizedMiddleware = (role) => async (
   const user = req.user as UserObject;
 
   if (role !== user?.role) {
-    const errorMessage = `Unauthorized`;
+    console.error(unauthorizedMessage);
 
-    console.error(errorMessage);
-
-    res.status(401).send(errorMessage);
+    res.status(401).send({ message: unauthorizedMessage });
 
     return;
   }

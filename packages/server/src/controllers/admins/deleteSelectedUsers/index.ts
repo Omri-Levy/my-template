@@ -7,11 +7,15 @@ const deleteSelectedUsers: Route = async (req, res) => {
     const { userIds } = req.body;
     let isAnArrayOfStrings = true;
 
-    userIds.forEach((userId: string | unknown) => {
-      if (typeof userId !== `string`) {
-        isAnArrayOfStrings = false;
-      }
-    });
+    if (!Array.isArray(userIds)) {
+      isAnArrayOfStrings = false;
+    } else {
+      userIds.forEach((userId: string | unknown) => {
+        if (typeof userId !== `string`) {
+          isAnArrayOfStrings = false;
+        }
+      });
+    }
 
     if (userIds.length === 0 || !isAnArrayOfStrings) {
       console.error(deleteSelectedUsersMessage);

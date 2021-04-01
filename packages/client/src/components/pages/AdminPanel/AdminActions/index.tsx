@@ -1,7 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Button, Icon } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/all';
-import { deleteSelectedUsersMessage, Users } from '@my-template/shared';
+import {
+  deleteSelectedUsersMessage,
+  unauthorizedMessage,
+  Users,
+} from '@my-template/shared';
 import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
 import useLoading from '../../../../hooks/useLoading';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
@@ -11,6 +15,7 @@ import fetchDeleteUser from '../../../../utils/api/fetchDeleteUser';
 import queryClient from '../../../globals/Providers/queryClient';
 import { Props } from './types';
 import UpdateUserProfileForm from './UpdateUserProfileForm';
+import useIsAdmin from '../../../../hooks/useIsAdmin';
 
 const AdminActions: FunctionComponent<Props> = ({
   icons = true,
@@ -26,11 +31,24 @@ const AdminActions: FunctionComponent<Props> = ({
     toast: deleteSelectedUsersErrorToast,
     toastOptions: deleteSelectedUsersErrorToastOptions,
   } = useErrorToast(`Deleting selected users failed - please try again.`);
+  const {
+    toast: unauthorizedErrorToast,
+    toastOptions: unauthorizedErrorToastOptions,
+  } = useErrorToast(unauthorizedMessage);
+  const isAdmin = useIsAdmin();
   /**
    * TODO: abstract this function
    */
   const deleteSelectedUsers: DeleteUser = async () => {
     try {
+      if (!isAdmin) {
+        console.error(unauthorizedMessage);
+
+        unauthorizedErrorToast(unauthorizedErrorToastOptions);
+
+        return;
+      }
+
       startLoading();
       await fetchDeleteUser(userIds);
 

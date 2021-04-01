@@ -6,9 +6,14 @@ import Options from './Options';
 /**
  * TODO: update description
  */
-const Select: FunctionComponent<Props> = ({ options, register, ...props }) => (
+const Select: FunctionComponent<Props> = ({
+  options,
+  register,
+  optionsProps,
+  ...props
+}) => (
   <ChakraSelect ref={register} {...props}>
-    <Options options={options} />
+    <Options options={options} optionsProps={optionsProps} />
   </ChakraSelect>
 );
 

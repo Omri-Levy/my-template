@@ -5,24 +5,26 @@ import {
   personalInformationFields,
   resetPasswordFields,
   securityInformationFields,
+  sharedFields,
   signInFields,
   updatePasswordFields,
   updateProfileFields,
+  updateUserProfileFields,
 } from './validationFields';
-import { roles } from './validationReferences';
 
 const personalInformationSchema = yup.object().shape(personalInformationFields);
 const securityInformationSchema = yup.object().shape(securityInformationFields);
 const signUpSchema = yup.object().shape({
   ...personalInformationFields,
   ...securityInformationFields,
-  role: yup.string().nullable().oneOf(roles),
+  role: sharedFields.role,
 });
 const signInSchema = yup.object().shape(signInFields);
 const forgotPasswordSchema = yup.object().shape(forgotPasswordFields);
 const resetPasswordSchema = yup.object().shape(resetPasswordFields);
 const deleteAllUsersSchema = yup.object().shape(deleteAllUsersFields);
 const updateProfileSchema = yup.object().shape(updateProfileFields);
+const updateUserProfileSchema = yup.object().shape(updateUserProfileFields);
 const updatePasswordSchema = yup.object().shape(updatePasswordFields);
 
 export {
@@ -35,4 +37,5 @@ export {
   deleteAllUsersSchema,
   updateProfileSchema,
   updatePasswordSchema,
+  updateUserProfileSchema,
 };

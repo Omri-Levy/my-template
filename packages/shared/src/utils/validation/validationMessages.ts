@@ -120,7 +120,7 @@ const terminateUserAccountMessage =
   `one more admin user in existence before trying again.`;
 const deleteSelectedUsersMessage = `Please select one or more users to delete.`;
 
-// admin actions
+// admins.ts actions
 const deleteAdminsIsRequiredMessage = `${deleteAdmins} ${requiredFieldMessage}`;
 
 const noChangesWereMadeMessage = `No changes were made.`;
@@ -137,6 +137,7 @@ const newPasswordConfirmationIsRequiredMessage =
 const invalidNewPasswordConfirmationMessage =
   `${newPasswordConfirmation} must ` +
   `match the inserted ${newPassword.toLowerCase()}.`;
+const unauthorizedMessage = `Unauthorized.`;
 
 export {
   invalidFirstNameMessage,
@@ -175,4 +176,5 @@ export {
   newPasswordConfirmationIsRequiredMessage,
   invalidNewPasswordConfirmationMessage,
   invalidUserIdMessage,
+  unauthorizedMessage,
 };
