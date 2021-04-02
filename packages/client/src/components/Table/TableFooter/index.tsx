@@ -1,90 +1,9 @@
 import { FunctionComponent, memo } from 'react';
-import {
-  ButtonGroup,
-  Checkbox,
-  Flex,
-  Td,
-  Text,
-  Tfoot,
-  Tr,
-} from '@chakra-ui/react';
-import { v4 } from 'uuid';
-import { Users } from '@my-template/shared';
 import { Props } from './types';
-import GlobalFilter from '../GlobalFilter';
-import useDarkMode from '../../../hooks/ui/useDarkMode';
-import queryClient from '../../globals/Providers/queryClient';
-import Pagination from '../Pagination';
+import TableFooterController from './TableFooterController';
 
-const TableFooter: FunctionComponent<Props> = ({
-  footerGroups,
-  globalFilter,
-  setGlobalFilter,
-  rowsLength,
-  pageIndex,
-  pageCount,
-  gotoPage,
-  canPreviousPage,
-  canNextPage,
-  previousPage,
-  nextPage,
-  setPageSize,
-  colSpan,
-  checkAllCheckboxes,
-  checkedItems,
-  Actions,
-}) => {
-  const { isDarkMode } = useDarkMode();
-  const borderColor = isDarkMode ? `#2D3748` : `#EDF2F7`;
-  const users = queryClient.getQueryData(`users`) as Users;
-
-  return (
-    <Tfoot>
-      {footerGroups?.map((group) => (
-        <Tr {...group?.getFooterGroupProps()} key={v4()}>
-          {group?.headers?.map((column) => (
-            <Td {...column?.getFooterProps()} key={v4()}>
-              {column?.render(`Footer`)}
-            </Td>
-          ))}
-          {users?.length > 1 && (
-            <Td>
-              <Checkbox
-                mb={1}
-                isChecked={checkedItems.every(Boolean)}
-                onChange={checkAllCheckboxes}
-              >
-                <Text mt={1}>Select All</Text>
-              </Checkbox>
-            </Td>
-          )}
-        </Tr>
-      ))}
-      <Tr>
-        <GlobalFilter
-          globalFilter={globalFilter}
-          setGlobalFilter={setGlobalFilter}
-        />
-        <Td borderLeft={`1px solid ${borderColor}`} colSpan={colSpan}>
-          <Flex justifyContent={`flex-end`}>
-            <ButtonGroup spacing={5}>{Actions}</ButtonGroup>
-          </Flex>
-        </Td>
-      </Tr>
-      <Pagination
-        colSpan={colSpan}
-        pageIndex={pageIndex}
-        pageCount={pageCount}
-        rowsLength={rowsLength}
-        gotoPage={gotoPage}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        setPageSize={setPageSize}
-      />
-    </Tfoot>
-  );
-};
+const TableFooter: FunctionComponent<Props> = (props) => (
+  <TableFooterController {...props} />
+);
 
 export default memo(TableFooter);

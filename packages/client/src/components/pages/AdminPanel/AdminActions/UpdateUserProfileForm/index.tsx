@@ -85,12 +85,6 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     const unchangedFirstName = formValues?.fname === userToUpdate?.firstName;
     const unchangedLastName = formValues?.lname === userToUpdate?.lastName;
     const unchangedRole = formValues?.role === userToUpdate?.role;
-    console.log({
-      unchangedRole,
-      unchangedEmail,
-      unchangedFirstName,
-      unchangedLastName,
-    });
 
     return (
       (unchangedEmail &&
