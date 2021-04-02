@@ -1,23 +1,23 @@
-import { deleteSelectedUsersMessage } from '@my-template/shared';
+import { deleteSelectedUsersMessage, isUuidV4 } from '@my-template/shared';
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
 
 const deleteSelectedUsers: Route = async (req, res) => {
   try {
     const { userIds } = req.body;
-    let isAnArrayOfStrings = true;
+    let isAnArrayOfUuidV4 = true;
 
     if (!Array.isArray(userIds)) {
-      isAnArrayOfStrings = false;
+      isAnArrayOfUuidV4 = false;
     } else {
-      userIds.forEach((userId: string | unknown) => {
-        if (typeof userId !== `string`) {
-          isAnArrayOfStrings = false;
+      userIds.forEach((userId: string) => {
+        if (!isUuidV4.test(userId)) {
+          isAnArrayOfUuidV4 = false;
         }
       });
     }
 
-    if (userIds.length === 0 || !isAnArrayOfStrings) {
+    if (userIds.length === 0 || !isAnArrayOfUuidV4) {
       console.error(deleteSelectedUsersMessage);
 
       res.status(400).send({ message: deleteSelectedUsersMessage });

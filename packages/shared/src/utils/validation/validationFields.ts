@@ -160,6 +160,15 @@ const updatePasswordFields = {
     .required(newPasswordIsRequiredMessage),
   newPasswordConfirmation: sharedFields.newPasswordConfirmation,
 };
+const updateUserPasswordFields = {
+  newPassword: yup
+    .string()
+    .matches(validPassword, invalidNewPasswordPolicyMessage)
+    .min(passwordMin)
+    .max(passwordMax)
+    .required(newPasswordIsRequiredMessage),
+  newPasswordConfirmation: sharedFields.newPasswordConfirmation,
+};
 
 export {
   sharedFields,
@@ -172,4 +181,5 @@ export {
   updateProfileFields,
   updatePasswordFields,
   updateUserProfileFields,
+  updateUserPasswordFields,
 };

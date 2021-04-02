@@ -1,6 +1,7 @@
 import {
   emailAlreadyInUseMessage,
   invalidUserIdMessage,
+  isUuidV4,
   lowerCaseComparison,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
@@ -11,9 +12,9 @@ import User from '../../../models/User.model';
 
 const updateUserProfile: Route = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
 
-    if (typeof userId !== `string`) {
+    if (!isUuidV4.test(userId)) {
       const message = invalidUserIdMessage;
 
       console.error(message);

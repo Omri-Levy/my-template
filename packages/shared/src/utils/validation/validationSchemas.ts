@@ -9,6 +9,7 @@ import {
   signInFields,
   updatePasswordFields,
   updateProfileFields,
+  updateUserPasswordFields,
   updateUserProfileFields,
 } from './validationFields';
 
@@ -26,6 +27,7 @@ const deleteAllUsersSchema = yup.object().shape(deleteAllUsersFields);
 const updateProfileSchema = yup.object().shape(updateProfileFields);
 const updateUserProfileSchema = yup.object().shape(updateUserProfileFields);
 const updatePasswordSchema = yup.object().shape(updatePasswordFields);
+const updateUserPasswordSchema = yup.object().shape(updateUserPasswordFields);
 
 export {
   personalInformationSchema,
@@ -38,4 +40,5 @@ export {
   updateProfileSchema,
   updatePasswordSchema,
   updateUserProfileSchema,
+  updateUserPasswordSchema,
 };

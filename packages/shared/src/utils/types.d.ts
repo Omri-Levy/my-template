@@ -18,7 +18,8 @@ type Endpoint =
   | `validateResetPasswordToken`
   | `updateProfile`
   | `updateUserProfile`
-  | `updatePassword`;
+  | `updatePassword`
+  | `updateUserPassword`;
 
 interface UserObject {
   id: string;

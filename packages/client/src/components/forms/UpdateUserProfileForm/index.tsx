@@ -10,17 +10,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
 import { useDisclosure } from '@chakra-ui/react';
 import { Props, UpdateUserProfile } from './types';
-import AuthenticationContext from '../../../../../context/AuthenticationContext/AuthenticationContext';
-import useSuccessToast from '../../../../../hooks/ui/useSuccessToast';
-import ModalForm from '../../../../forms/ModalFormWrapper/ModalForm';
-import NoUserFound from '../../../../NoUserFound';
-import FormFields from '../../../../forms/FormFields';
-import ModalFormWrapper from '../../../../forms/ModalFormWrapper';
-import setResponseError from '../../../../forms/FormResponseError/setResponseError';
-import fetchUpdateUserProfile from '../../../../../utils/api/fetchUpdateUserProfile';
-import queryClient from '../../../../globals/Providers/queryClient';
-import useErrorToast from '../../../../../hooks/ui/useErrorToast';
-import useIsAdmin from '../../../../../hooks/useIsAdmin';
+import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
+import useSuccessToast from '../../../hooks/ui/useSuccessToast';
+import ModalForm from '../ModalFormWrapper/ModalForm';
+import NoUserFound from '../../NoUserFound';
+import FormFields from '../FormFields';
+import ModalFormWrapper from '../ModalFormWrapper';
+import setResponseError from '../FormResponseError/setResponseError';
+import fetchUpdateUserProfile from '../../../utils/api/fetchUpdateUserProfile';
+import queryClient from '../../globals/Providers/queryClient';
+import useErrorToast from '../../../hooks/ui/useErrorToast';
+import useIsAdmin from '../../../hooks/useIsAdmin';
 
 const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const schema = useMemo(() => updateUserProfileSchema, []);
@@ -107,6 +107,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       toggleButtonIcon={FaUserEdit}
       toggleButtonText={`Update Profile`}
       buttonProps={{
+        marginRight: 0,
         disabled: !oneUserSelected,
         title: !oneUserSelected
           ? `Please make sure a single user is selected.`

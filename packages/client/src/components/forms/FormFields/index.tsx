@@ -83,6 +83,15 @@ const FormFields: FunctionComponent<PropsPlusFormType> = ({
           register={register}
         />
       );
+    case `updateUserPassword`:
+      return (
+        <UpdatePasswordFormFields
+          errors={errors}
+          clearErrors={clearErrors}
+          register={register}
+          isAdminAction
+        />
+      );
     default:
       return null;
   }

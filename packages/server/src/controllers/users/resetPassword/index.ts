@@ -20,11 +20,10 @@ const resetPassword: Route = async (req, res) => {
       res.status(404).send({ message });
     }
 
-    const { securityQuestion, securityAnswer, newPassword } = req.body;
-
-    resetPasswordSchema.validate(req.body);
+    await resetPasswordSchema.validate(req.body);
 
     const verify = verifyIfVerifiable(user);
+    const { securityQuestion, securityAnswer, newPassword } = req.body;
     const securityQuestionMatches = await verify(
       user?.securityQuestion,
       securityQuestion
@@ -50,6 +49,16 @@ const resetPassword: Route = async (req, res) => {
 
     res.status(200).send({ status: `success` });
   } catch (error) {
+    const { name, errors } = error;
+
+    if (name === `ValidationError`) {
+      console.error(errors);
+
+      res.status(400).send({ message: errors });
+
+      return;
+    }
+
     console.error(error);
 
     res.status(500).send({ error });

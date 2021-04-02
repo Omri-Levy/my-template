@@ -10,7 +10,8 @@ type FormType =
   | `resetPassword`
   | `updateProfile`
   | `updateUserProfile`
-  | `updatePassword`;
+  | `updatePassword`
+  | `updateUserPassword`;
 
 interface Props extends FormControlProps {
   errors: FieldErrors;

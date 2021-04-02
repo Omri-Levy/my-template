@@ -14,9 +14,13 @@ import { DeleteUser } from '../../../Table/TableFooter/types';
 import fetchDeleteUser from '../../../../utils/api/fetchDeleteUser';
 import queryClient from '../../../globals/Providers/queryClient';
 import { Props } from './types';
-import UpdateUserProfileForm from './UpdateUserProfileForm';
+import UpdateUserProfileForm from '../../../forms/UpdateUserProfileForm';
 import useIsAdmin from '../../../../hooks/useIsAdmin';
+import UpdateUserPasswordForm from '../../../forms/UpdateUserPasswordForm';
 
+/**
+ * TODO: refactor to controller pattern
+ */
 const AdminActions: FunctionComponent<Props> = ({
   icons = true,
   ids: userIds,
@@ -66,6 +70,7 @@ const AdminActions: FunctionComponent<Props> = ({
   return (
     <>
       <UpdateUserProfileForm userIds={userIds} />
+      <UpdateUserPasswordForm userIds={userIds} />
       <Button
         rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
         onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}

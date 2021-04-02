@@ -14,35 +14,46 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
   errors,
   clearErrors,
   register,
+  isAdminAction,
   ...props
 }) => {
-  const isWrongOldPassword =
-    errors?.responseError?.message === invalidOldPasswordMessage;
   const { currentUser } = useContext(AuthenticationContext);
 
   if (!currentUser) {
     return <NoUserFound />;
   }
 
+  let isWrongOldPassword;
+  let onChange;
+
+  if (!isAdminAction) {
+    isWrongOldPassword =
+      errors?.responseError?.message === invalidOldPasswordMessage;
+
+    if (isWrongOldPassword) {
+      onChange = clearResponseError(clearErrors);
+    }
+  }
+
   return (
     <>
-      <FormField
-        isRequired
-        onChange={
-          isWrongOldPassword ? clearResponseError(clearErrors) : undefined
-        }
-        labelTitle={`Old Password:`}
-        name={`oldPassword`}
-        errors={errors}
-        register={register}
-        type={`password`}
-        maxLength={128}
-        icon={FaLock}
-        inputProps={{
-          autoComplete: `off`,
-        }}
-        {...props}
-      />
+      {!isAdminAction && (
+        <FormField
+          isRequired
+          onChange={onChange}
+          labelTitle={`Old Password:`}
+          name={`oldPassword`}
+          errors={errors}
+          register={register}
+          type={`password`}
+          maxLength={128}
+          icon={FaLock}
+          inputProps={{
+            autoComplete: `off`,
+          }}
+          {...props}
+        />
+      )}
       <FormField
         isRequired
         labelTitle={`New Password:`}

@@ -5,6 +5,7 @@ import deleteSelectedUsers from '../controllers/admins/deleteSelectedUsers';
 import deleteAllUsers from '../controllers/admins/deleteAllUsers';
 import updateUserProfile from '../controllers/admins/updateUserProfile';
 import getUsers from '../controllers/admins/getUsers';
+import updateUserPassword from '../controllers/admins/updateUserPassword';
 
 const admins = Router();
 
@@ -122,12 +123,21 @@ admins.delete(
 );
 
 admins.post(
-  `/updateUserProfile`,
+  `/updateUserProfile/:userId`,
   authenticate(`jwt`, {
     session: false,
   }),
   isAuthorized(`admin`),
   updateUserProfile
+);
+
+admins.post(
+  `/updateUserPassword/:userId`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  isAuthorized(`admin`),
+  updateUserPassword
 );
 
 export default admins;

@@ -1,5 +1,5 @@
-describe(`fetchUpdateProfile`, () => {
-  it(`fetchUpdateProfile temp`, () => {
+describe(`fetchUpdatePassword`, () => {
+  it(`fetchUpdatePassword temp`, () => {
     expect(true).toBe(true);
   });
 });

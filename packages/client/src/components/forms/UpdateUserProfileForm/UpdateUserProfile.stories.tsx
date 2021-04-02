@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { Story } from '@storybook/react';
-import UpdateUserProfile from '.';
-import ContainerDecorator from '../../../../../utils/storybookDecorators/ContainerDecorator';
+import UpdateUserProfile from './index';
+import ContainerDecorator from '../../../utils/storybookDecorators/ContainerDecorator';
 
 export default {
   title: `UpdateUserProfile`,

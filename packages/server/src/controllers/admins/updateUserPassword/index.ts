@@ -1,9 +1,9 @@
 import {
-  invalidOldPasswordMessage,
+  invalidUserIdMessage,
+  isUuidV4,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
-  updatePasswordSchema,
-  UserObject,
+  updateUserPasswordSchema,
 } from '@my-template/shared';
 import { hash } from 'argon2';
 import { v4 } from 'uuid';
@@ -11,12 +11,22 @@ import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 import verifyIfVerifiable from '../../../utils/verifyIfVerifiable';
 
-const updatePassword: Route = async (req, res) => {
+const updateUserPassword: Route = async (req, res) => {
   try {
-    const { user } = req;
-    const { id } = user as UserObject;
+    const { userId } = req.params;
+
+    if (!isUuidV4.test(userId)) {
+      const message = invalidUserIdMessage;
+
+      console.error(message);
+
+      res.status(400).send({ message });
+    }
+
+    await updateUserPasswordSchema.validate(req.body);
+
     const userToUpdate = await User.findOne({
-      where: { id },
+      where: { id: userId },
       attributes: [`id`, `password`],
     });
 
@@ -28,28 +38,14 @@ const updatePassword: Route = async (req, res) => {
       res.status(404).send({ message });
     }
 
-    await updatePasswordSchema.validate(req.body);
-
-    const { oldPassword, newPassword } = req.body;
+    const { newPassword } = req.body;
     const verify = verifyIfVerifiable(userToUpdate);
     const unchangedPassword = await verify(userToUpdate?.password, newPassword);
-    const oldPasswordMatches = await verify(
-      userToUpdate?.password,
-      oldPassword
-    );
 
     if (unchangedPassword) {
       console.error(noChangesWereMadeMessage);
 
       res.status(400).send({ message: noChangesWereMadeMessage });
-
-      return;
-    }
-
-    if (!oldPasswordMatches) {
-      console.error(invalidOldPasswordMessage);
-
-      res.status(400).send({ message: invalidOldPasswordMessage });
 
       return;
     }
@@ -81,4 +77,4 @@ const updatePassword: Route = async (req, res) => {
   }
 };
 
-export default updatePassword;
+export default updateUserPassword;

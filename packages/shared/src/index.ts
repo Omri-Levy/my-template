@@ -1,4 +1,4 @@
-import { isName, validPassword } from './utils/regex';
+import { isName, isUuidV4, validPassword } from './utils/regex';
 import {
   Data,
   Endpoint,
@@ -58,6 +58,7 @@ import {
   signUpSchema,
   updatePasswordSchema,
   updateProfileSchema,
+  updateUserPasswordSchema,
   updateUserProfileSchema,
 } from './utils/validation/validationSchemas';
 import {
@@ -88,6 +89,7 @@ export {
   securityQuestions,
   isName,
   validPassword,
+  isUuidV4,
   firstNameMin,
   firstNameMax,
   lastNameMin,
@@ -146,6 +148,7 @@ export {
   updateProfileSchema,
   updatePasswordSchema,
   updateUserProfileSchema,
+  updateUserPasswordSchema,
   roles,
   axiosRequest,
   calculateMinutes,

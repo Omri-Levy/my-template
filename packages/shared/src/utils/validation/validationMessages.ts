@@ -60,7 +60,8 @@ const invalidPasswordPolicyMessage =
   `${passwordUppercaseCharacters} uppercase characters, ` +
   `${passwordLowercaseCharacters} lowercase ` +
   `characters, ${passwordNumbers} number ` +
-  `and ${passwordSpecialCharacters} special characters.`;
+  `and ${passwordSpecialCharacters} of the following special ` +
+  `characters '@$!%*?&'.`;
 const invalidPasswordMessage = `${password} must match password policy.`;
 const invalidSecurityAnswerMessage =
   `${securityAnswer} must ` +
