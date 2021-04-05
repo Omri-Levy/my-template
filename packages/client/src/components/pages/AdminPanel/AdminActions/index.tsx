@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Button, Icon } from '@chakra-ui/react';
-import { FaTrashAlt } from 'react-icons/all';
+import { FaTrashAlt } from 'react-icons/fa';
 import {
   deleteSelectedUsersMessage,
   unauthorizedMessage,
@@ -79,6 +79,7 @@ const AdminActions: FunctionComponent<Props> = ({
         title={
           !checkedItems.some(Boolean) ? deleteSelectedUsersMessage : undefined
         }
+        colorScheme={`red`}
       >
         Delete Selected
       </Button>

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Box, Button, Flex, Icon } from '@chakra-ui/react';
-import { FaTimes } from 'react-icons/all';
+import { FaTimes } from 'react-icons/fa';
 import Card from '../../../Card';
 import FormResponseError from '../../FormResponseError';
 import Recaptcha from '../../Recaptcha';
@@ -16,6 +16,7 @@ const ModalForm: FunctionComponent<Props> = ({
   isSubmitting,
   submitButtonText,
   submitButtonIcon,
+  submitButtonColor,
   onSubmit,
   useRecaptcha = true,
   onClose,
@@ -62,6 +63,7 @@ const ModalForm: FunctionComponent<Props> = ({
             <Button
               onClick={onClose}
               rightIcon={icons ? <Icon as={FaTimes} /> : undefined}
+              colorScheme={`red`}
             >
               Cancel
             </Button>
@@ -74,6 +76,7 @@ const ModalForm: FunctionComponent<Props> = ({
               isLoading={isSubmitting}
               disabled={disableSubmit}
               title={conditionalSubmitButtonTitle}
+              colorScheme={submitButtonColor || `orange`}
             >
               {submitButtonText}
             </Button>

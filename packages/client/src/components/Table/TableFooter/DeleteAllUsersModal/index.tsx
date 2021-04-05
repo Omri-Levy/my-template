@@ -1,6 +1,6 @@
 import { FunctionComponent, useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
-import { FaTrashAlt } from 'react-icons/all';
+import { FaTrashAlt } from 'react-icons/fa';
 import { serverErrorMessage, Users } from '@my-template/shared';
 import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
 import Modal from '../../../Modal';
@@ -48,6 +48,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
     <Modal
       headerIcon={FaTrashAlt}
       toggleButtonText={`Delete All`}
+      toggleButtonColor={`red`}
       headerText={`Delete all users`}
       bodyHeadingText={`Warning!`}
       headingProps={{ color: `red.300`, fontSize: 16 }}

@@ -1,19 +1,5 @@
-import redis from 'redis';
-import { promisify } from 'util';
+import Redis from 'ioredis';
 
-const redisClient = redis.createClient();
-const getAsync = promisify(redisClient.get).bind(redisClient);
-const setAsync = promisify(redisClient.set).bind(redisClient);
-const setnxAsync = promisify(redisClient.setnx).bind(redisClient);
-const decrAsync = promisify(redisClient.decr).bind(redisClient);
-const keysAsync = promisify(redisClient.keys).bind(redisClient);
+const redisClient = new Redis();
 
-export {
-  redisClient,
-  redis,
-  getAsync,
-  setAsync,
-  setnxAsync,
-  decrAsync,
-  keysAsync,
-};
+export { redisClient };

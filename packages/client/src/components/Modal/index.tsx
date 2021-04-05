@@ -15,7 +15,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FaTimes, FaTrashAlt } from 'react-icons/all';
+import { FaTimes, FaTrashAlt } from 'react-icons/fa';
 import { Props } from './types';
 import Alert from '../Alert';
 
@@ -24,6 +24,7 @@ const Modal: FunctionComponent<Props> = ({
   icons = true,
   headerIcon,
   toggleButtonText,
+  toggleButtonColor,
   headerText,
   headingProps,
   bodyHeadingText,
@@ -46,6 +47,7 @@ const Modal: FunctionComponent<Props> = ({
       <Button
         rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
         onClick={onOpen}
+        colorScheme={toggleButtonColor || `orange`}
         {...buttonProps}
       >
         {toggleButtonText}
@@ -85,6 +87,7 @@ const Modal: FunctionComponent<Props> = ({
               <Button
                 onClick={onClose}
                 rightIcon={icons ? <Icon as={FaTimes} mb={0.5} /> : undefined}
+                colorScheme={`red`}
               >
                 Cancel
               </Button>
@@ -96,6 +99,7 @@ const Modal: FunctionComponent<Props> = ({
                 }
                 onClick={onClick(onClose)}
                 isLoading={isLoading}
+                colorScheme={toggleButtonColor || `orange`}
               >
                 {actionText}
               </Button>

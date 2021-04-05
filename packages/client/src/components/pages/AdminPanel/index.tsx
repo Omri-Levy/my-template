@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
-import { FaUserCog } from 'react-icons/all';
+import { FaUserCog } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { Redirect } from 'react-router-dom';
 import { Heading } from '@chakra-ui/react';

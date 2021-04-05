@@ -3,6 +3,8 @@ import { emailAlreadyInUseMessage, signUpSchema } from '@my-template/shared';
 
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
+import isCountOneInUsers from '../../../utils/isCountOneInUsers';
+import isCountZeroInUsers from '../../../utils/isCountZeroInUsers';
 
 const signUp: Route = async (req, res) => {
   try {
@@ -25,8 +27,8 @@ const signUp: Route = async (req, res) => {
     const hashedSecurityQuestion = await hash(securityQuestion);
     const hashedSecurityAnswer = await hash(securityAnswer);
 
-    const isFirstUser = (await User.count()) === 0;
-    const noAdmins = (await User.count({ where: { role: `admin` } })) === 0;
+    const isFirstUser = await isCountOneInUsers();
+    const noAdmins = await isCountZeroInUsers(`role`, `admin`);
 
     let requiredRole = role || `user`;
 

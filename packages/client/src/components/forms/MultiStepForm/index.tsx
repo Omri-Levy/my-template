@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
-import { FaCaretLeft, FaCaretRight } from 'react-icons/all';
+import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 import Recaptcha from '../Recaptcha';
 import useDisableSubmit from '../../../hooks/forms/useDisableSubmit';
 import { Props } from './types';
@@ -28,6 +28,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
   submitButtonText,
   icons = true,
   submitButtonIcon,
+  submitButtonColor,
   children,
   ...props
 }) => {
@@ -69,6 +70,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
               type={`button`}
               mt={4}
               disabled={isSubmitting}
+              colorScheme={`orange`}
             >
               Previous
             </Button>
@@ -86,6 +88,11 @@ const MultiStepForm: FunctionComponent<Props> = ({
             mt={4}
             isLoading={isSubmitting}
             disabled={disableSubmit}
+            colorScheme={
+              onSubmit
+                ? submitButtonColor || `green`
+                : submitButtonColor || `orange`
+            }
           >
             {onSubmit ? submitButtonText : `Next`}
           </Button>

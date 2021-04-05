@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { FaRedoAlt } from 'react-icons/all';
+import { FaRedoAlt } from 'react-icons/fa';
 import { Redirect, useParams } from 'react-router-dom';
 import Page from '../Page';
 import ResetPasswordForm from '../../forms/ResetPasswordForm';

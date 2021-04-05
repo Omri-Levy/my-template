@@ -17,7 +17,7 @@ const NavLink: FunctionComponent<Props> = ({
   exact,
   ...props
 }) => {
-  const { darkModeColor } = useDarkMode();
+  const { darkModeColorInverted } = useDarkMode();
   const expandPseudoAfterWidth = {
     transition: `width 240ms ease-in-out`,
     width: `100%`,
@@ -29,7 +29,7 @@ const NavLink: FunctionComponent<Props> = ({
     content: `""`,
     width: 0,
     height: 1,
-    backgroundColor: darkModeColor,
+    backgroundColor: darkModeColorInverted,
   };
   // styles to apply only when an icon is passed in.
   let withIconStyles = {};

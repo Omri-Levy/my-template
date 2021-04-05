@@ -71,6 +71,7 @@ const PaginationButton: FunctionComponent<Props> = ({
         }
         onClick={onClick}
         disabled={disabled}
+        colorScheme={`orange`}
       >
         {text}
       </Button>

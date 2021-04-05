@@ -13,7 +13,7 @@ const Logo: FunctionComponent<Props> = ({
   iconProps,
   ...props
 }) => (
-  <Box pr={5} {...props}>
+  <Box {...props}>
     <Heading as={`h1`} size={`md`}>
       {icon && <Icon as={icon} {...iconProps} />}
       {text}

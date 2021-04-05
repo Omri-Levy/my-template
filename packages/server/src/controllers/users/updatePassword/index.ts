@@ -10,6 +10,7 @@ import { v4 } from 'uuid';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 import verifyIfVerifiable from '../../../utils/verifyIfVerifiable';
+import setCurrentUserCache from '../../../utils/currentUserCache/setCurrentUserCache';
 
 const updatePassword: Route = async (req, res) => {
   try {
@@ -62,6 +63,8 @@ const updatePassword: Route = async (req, res) => {
     });
 
     console.log(`user password updated successfully`);
+
+    await setCurrentUserCache(userToUpdate);
 
     res.status(200).send({ status: `success` });
   } catch (error) {

@@ -1,8 +1,15 @@
 import { FunctionComponent, memo } from 'react';
-import { HStack, Icon, Switch, useColorMode } from '@chakra-ui/react';
+import {
+  DarkMode,
+  HStack,
+  Icon,
+  LightMode,
+  Switch,
+  useColorMode,
+} from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
-import useDarkMode from '../../../../../hooks/ui/useDarkMode';
 import { Props } from './types';
+import useDarkMode from '../../../../../hooks/ui/useDarkMode';
 
 /**
  * @description a simple dark mode switch made using Chakra-UI's HStack,
@@ -12,12 +19,15 @@ import { Props } from './types';
 const DarkModeSwitch: FunctionComponent<Props> = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const icon = colorMode === `dark` ? FaMoon : FaSun;
-  const { darkModeColor } = useDarkMode();
+  const { isDarkMode } = useDarkMode();
+  const Mode = isDarkMode ? LightMode : DarkMode;
 
   return (
     <HStack spacing={3} alignItems={`center`} {...props}>
-      <Icon as={icon} mb={`3.5px`} />
-      <Switch onChange={toggleColorMode} colorScheme={darkModeColor} />
+      <Mode>
+        <Icon as={icon} mb={`3.5px`} />
+        <Switch onChange={toggleColorMode} />
+      </Mode>
     </HStack>
   );
 };

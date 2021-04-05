@@ -2,6 +2,7 @@ import { deleteAllUsersSchema, UserObject } from '@my-template/shared';
 import { Op } from 'sequelize';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
+import refreshUsersCache from '../../../utils/usersCache/refreshUsersCache';
 
 const deleteAllUsers: Route = async (req, res) => {
   try {
@@ -30,6 +31,8 @@ const deleteAllUsers: Route = async (req, res) => {
         },
       });
     }
+
+    await refreshUsersCache();
 
     res.status(200).send({ status: `success` });
   } catch (error) {

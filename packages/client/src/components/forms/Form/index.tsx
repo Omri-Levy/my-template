@@ -19,6 +19,7 @@ const Form: FunctionComponent<Props> = ({
   submitButtonText,
   icons = true,
   submitButtonIcon,
+  submitButtonColor,
   children,
   useRecaptcha = true,
   ...props
@@ -51,6 +52,7 @@ const Form: FunctionComponent<Props> = ({
             mt={4}
             isLoading={isSubmitting}
             disabled={disableSubmit}
+            colorScheme={submitButtonColor || `green`}
           >
             {submitButtonText}
           </Button>

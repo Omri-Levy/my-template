@@ -1,6 +1,6 @@
 import { ButtonProps, HeadingProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
-import { Disclosure } from '../../utils/types';
+import { ChakraColorScheme, Disclosure } from '../../utils/types';
 
 type OnClose = () => void;
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
   icons?: boolean;
   headerIcon?: IconType;
   toggleButtonText: string;
+  toggleButtonColor?: ChakraColorScheme;
   headerText: string;
   headingProps: HeadingProps;
   bodyHeadingText: string;

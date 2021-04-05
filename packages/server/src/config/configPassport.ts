@@ -1,8 +1,9 @@
 import passportJwt from 'passport-jwt';
 import passport from 'passport';
 import dotenv from 'dotenv-safe';
-import User from '../models/User.model';
 import jwtTokenExtractor from '../utils/jwtTokenExtractor';
+import getCurrentUserCache from '../utils/currentUserCache/getCurrentUserCache';
+import resetCurrentUserAndUsersCache from '../utils/resetCurrentUserAndUsersCache';
 
 const configPassport = (): void => {
   dotenv.config();
@@ -14,25 +15,41 @@ const configPassport = (): void => {
   };
   const strategy = new JwtStrategy(options, async (jwtPayload, done) => {
     try {
-      const user = await User.findOne({
-        attributes: [
-          `id`,
-          `email`,
-          `firstName`,
-          `lastName`,
-          `role`,
-          `tokenVersion`,
-        ],
-        where: { id: jwtPayload.id },
-      });
+      let currentUser = await getCurrentUserCache();
 
-      if (!user || user?.tokenVersion !== jwtPayload.tokenVersion) {
+      if (
+        !currentUser ||
+        currentUser?.tokenVersion !== jwtPayload.tokenVersion
+      ) {
+        if (currentUser) {
+          await resetCurrentUserAndUsersCache();
+        }
+
         return done(null);
       }
 
-      return done(null, user);
+      const {
+        id,
+        email,
+        firstName,
+        lastName,
+        role,
+        tokenVersion,
+      } = currentUser;
+      currentUser = {
+        id,
+        email,
+        firstName,
+        lastName,
+        role,
+        tokenVersion,
+      };
+
+      return done(null, currentUser);
     } catch (error) {
       console.error(error);
+
+      await resetCurrentUserAndUsersCache();
 
       return done(error);
     }

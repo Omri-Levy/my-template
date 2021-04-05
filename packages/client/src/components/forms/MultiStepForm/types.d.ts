@@ -2,6 +2,7 @@ import { FieldErrors } from 'react-hook-form';
 import { BoxProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import {
+  ChakraColorScheme,
   Children,
   FormSubmit,
   GetValues,
@@ -21,6 +22,7 @@ interface Props extends BoxProps {
   submitButtonText?: string;
   icons?: boolean;
   submitButtonIcon?: IconType;
+  submitButtonColor?: ChakraColorScheme;
   children: Children;
 }
 

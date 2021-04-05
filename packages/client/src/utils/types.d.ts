@@ -40,6 +40,25 @@ type ColumnsArray = {
   col4: string;
   col5: string;
 }[];
+type ChakraColorScheme =
+  | `blue`
+  | `cyan`
+  | `gray`
+  | `green`
+  | `orange`
+  | `pink`
+  | `purple`
+  | `red`
+  | `teal`
+  | `yellow`
+  | `whiteAlpha`
+  | `blackAlpha`
+  | `linkedin`
+  | `facebook`
+  | `messenger`
+  | `whatsapp`
+  | `twitter`
+  | `telegram`;
 
 export {
   SetState,
@@ -60,4 +79,5 @@ export {
   Disclosure,
   FormSubmit,
   ColumnsArray,
+  ChakraColorScheme,
 };

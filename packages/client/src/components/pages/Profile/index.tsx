@@ -1,8 +1,7 @@
 import { FunctionComponent, useContext, useState } from 'react';
-import { FaIdCard } from 'react-icons/fa';
+import { FaIdCard, FaTrashAlt } from 'react-icons/fa';
 import { Redirect, useHistory } from 'react-router-dom';
 import { HStack, useDisclosure } from '@chakra-ui/react';
-import { FaTrashAlt } from 'react-icons/all';
 import {
   serverErrorMessage,
   terminateUserAccountMessage,
@@ -85,6 +84,7 @@ const Profile: FunctionComponent = () => {
             isFullWidth: true,
           }}
           toggleButtonText={`Terminate account`}
+          toggleButtonColor={`red`}
           headerText={`Terminate account`}
           bodyHeadingText={`Warning!`}
           headingProps={{ color: `red.300`, fontSize: 16 }}

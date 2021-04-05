@@ -7,6 +7,7 @@ const ModalFormWrapper: FunctionComponent<Props> = ({
   headerIcon,
   toggleButtonIcon,
   toggleButtonText,
+  toggleButtonColor,
   headerText,
   disclosure,
   buttonProps,
@@ -18,6 +19,7 @@ const ModalFormWrapper: FunctionComponent<Props> = ({
     headerIcon={headerIcon}
     toggleButtonIcon={toggleButtonIcon}
     toggleButtonText={toggleButtonText}
+    toggleButtonColor={toggleButtonColor}
     headerText={headerText}
     disclosure={disclosure}
     buttonProps={buttonProps}

@@ -15,7 +15,7 @@ const FormWizard: FunctionComponent<Props> = ({ forms }) => {
   });
 
   return (
-    <Card color={`unset`} backgroundColor={`unset`}>
+    <Card color={`unset`} backgroundColor={`unset`} mb={5}>
       {forms.map((form, index) => {
         const { to, Component } = form;
         const isLastForm = index === forms.length + 1;

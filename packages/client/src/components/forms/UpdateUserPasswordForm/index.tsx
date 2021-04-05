@@ -70,6 +70,7 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
       disclosure={disclosure}
       toggleButtonIcon={FaUserEdit}
       toggleButtonText={`Update Password`}
+      toggleButtonColor={`blue`}
       buttonProps={{
         marginRight: 0,
         disabled: !oneUserSelected,

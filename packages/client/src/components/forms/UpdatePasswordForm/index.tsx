@@ -70,6 +70,7 @@ const UpdatePasswordForm: FunctionComponent = () => {
       disclosure={disclosure}
       toggleButtonIcon={FaUserEdit}
       toggleButtonText={`Update Password`}
+      toggleButtonColor={`blue`}
       buttonProps={{
         width: `50%`,
         marginRight: 0,
@@ -79,6 +80,7 @@ const UpdatePasswordForm: FunctionComponent = () => {
         useRecaptcha={false}
         submitButtonIcon={FaUserEdit}
         submitButtonText={`Update Password`}
+        submitButtonColor={`blue`}
         handleSubmit={handleSubmit}
         isSubmitting={isSubmitting}
         onSubmit={updatePassword}

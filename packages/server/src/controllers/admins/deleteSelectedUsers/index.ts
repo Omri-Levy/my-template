@@ -1,6 +1,7 @@
 import { deleteSelectedUsersMessage, isUuidV4 } from '@my-template/shared';
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
+import refreshUsersCache from '../../../utils/usersCache/refreshUsersCache';
 
 const deleteSelectedUsers: Route = async (req, res) => {
   try {
@@ -26,6 +27,8 @@ const deleteSelectedUsers: Route = async (req, res) => {
     }
 
     await User.destroy({ where: { id: userIds } });
+
+    await refreshUsersCache();
 
     res.status(200).send({ status: `success` });
   } catch (error) {

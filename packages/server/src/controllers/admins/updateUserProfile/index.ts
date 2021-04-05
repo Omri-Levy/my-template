@@ -1,5 +1,4 @@
 import {
-  emailAlreadyInUseMessage,
   invalidUserIdMessage,
   isUuidV4,
   lowerCaseComparison,
@@ -9,6 +8,8 @@ import {
 } from '@my-template/shared';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
+import emailIsAlreadyInUse from '../../../utils/emailIsAlreadyInUse';
+import refreshUsersCache from '../../../utils/usersCache/refreshUsersCache';
 
 const updateUserProfile: Route = async (req, res) => {
   try {
@@ -57,17 +58,13 @@ const updateUserProfile: Route = async (req, res) => {
       return;
     }
 
-    let emailAlreadyInUse = false;
+    const emailAlreadyInUser = await emailIsAlreadyInUse(
+      email,
+      userToUpdate,
+      res
+    );
 
-    if (email) {
-      emailAlreadyInUse = (await User.count({ where: { email } })) === 1;
-    }
-
-    if (emailAlreadyInUse && userToUpdate?.email !== email) {
-      console.error(emailAlreadyInUseMessage);
-
-      res.status(400).send({ message: emailAlreadyInUseMessage });
-
+    if (emailAlreadyInUser) {
       return;
     }
 
@@ -77,6 +74,8 @@ const updateUserProfile: Route = async (req, res) => {
       lastName: lastName || userToUpdate?.lastName,
       role: role || userToUpdate?.role,
     });
+
+    await refreshUsersCache();
 
     res.status(200).send({ status: `success` });
   } catch (error) {

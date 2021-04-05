@@ -4,7 +4,8 @@ import generateJwtToken from '../../../utils/generateJwtToken';
 import sendJwtToken from '../../../utils/sendJwtToken';
 import { Route } from '../../../utils/types';
 import verifyIfVerifiable from '../../../utils/verifyIfVerifiable';
-import { decrAsync, getAsync, setAsync, setnxAsync } from '../../../redis';
+import setCurrentUserCache from '../../../utils/currentUserCache/setCurrentUserCache';
+import { redisClient } from '../../../redis';
 
 const signIn: Route = async (req, res) => {
   try {
@@ -15,23 +16,31 @@ const signIn: Route = async (req, res) => {
     });
 
     const user = await User.findOne({
+      attributes: {
+        exclude: [
+          `createdAt`,
+          `updatedAt`,
+          `securityQuestion`,
+          `securityAnswer`,
+        ],
+      },
       where: { email },
-      attributes: [`id`, `tokenVersion`, `password`],
     });
+
     const verify = verifyIfVerifiable(user);
     const passwordMatches = await verify(user?.password, password);
-    await setnxAsync(`retriesLeft`, `5`);
+    await redisClient.setnx(`retriesLeft`, `5`);
 
     if (!user || !passwordMatches) {
-      const retriesLeft = Number(await getAsync(`retriesLeft`));
+      const retriesLeft = Number(await redisClient.get(`retriesLeft`));
       let attempts;
 
       if (retriesLeft !== 0) {
         attempts = retriesLeft - 1;
-        await decrAsync(`retriesLeft`);
+        await redisClient.decr(`retriesLeft`);
       } else {
         attempts = retriesLeft;
-        await setAsync(`retriesLeft`, `5`);
+        await redisClient.set(`retriesLeft`, `5`);
       }
 
       const attemptsLeft = `${attempts} attempts left.`;
@@ -57,7 +66,9 @@ const signIn: Route = async (req, res) => {
       console.log(`reset brute force`);
     }
 
-    await setAsync(`retriesLeft`, `5`);
+    await redisClient.set(`retriesLeft`, `5`);
+
+    await setCurrentUserCache(user);
 
     res.status(200).send({ status: `success` });
   } catch (error) {

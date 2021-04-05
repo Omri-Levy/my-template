@@ -16,6 +16,7 @@ const ModalFormContainer: FunctionComponent<Props> = ({
   headerIcon,
   toggleButtonIcon,
   toggleButtonText,
+  toggleButtonColor,
   headerText,
   disclosure,
   buttonProps,
@@ -29,6 +30,7 @@ const ModalFormContainer: FunctionComponent<Props> = ({
         rightIcon={icons ? <Icon as={toggleButtonIcon} mb={0.5} /> : undefined}
         mr={5}
         onClick={onOpen}
+        colorScheme={toggleButtonColor || `orange`}
         {...buttonProps}
       >
         {toggleButtonText}

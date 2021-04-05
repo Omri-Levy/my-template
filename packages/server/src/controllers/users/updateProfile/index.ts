@@ -1,5 +1,4 @@
 import {
-  emailAlreadyInUseMessage,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
   updateProfileSchema,
@@ -7,6 +6,8 @@ import {
 } from '@my-template/shared';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
+import emailIsAlreadyInUse from '../../../utils/emailIsAlreadyInUse';
+import setCurrentUserCache from '../../../utils/currentUserCache/setCurrentUserCache';
 
 const updateProfile: Route = async (req, res) => {
   try {
@@ -38,17 +39,13 @@ const updateProfile: Route = async (req, res) => {
       return;
     }
 
-    let emailAlreadyInUse = false;
+    const emailAlreadyInUser = await emailIsAlreadyInUse(
+      email,
+      userToUpdate,
+      res
+    );
 
-    if (email) {
-      emailAlreadyInUse = (await User.count({ where: { email } })) === 1;
-    }
-
-    if (emailAlreadyInUse && userToUpdate?.email !== email) {
-      console.error(emailAlreadyInUseMessage);
-
-      res.status(400).send({ message: emailAlreadyInUseMessage });
-
+    if (emailAlreadyInUser) {
       return;
     }
 
@@ -57,6 +54,8 @@ const updateProfile: Route = async (req, res) => {
       firstName: firstName || userToUpdate?.firstName,
       lastName: lastName || userToUpdate?.lastName,
     });
+
+    await setCurrentUserCache(userToUpdate);
 
     res.status(200).send({ status: `success` });
   } catch (error) {

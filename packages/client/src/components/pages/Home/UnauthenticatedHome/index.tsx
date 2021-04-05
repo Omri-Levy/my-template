@@ -19,18 +19,20 @@ const UnauthenticatedHome: FunctionComponent = () => {
   return (
     <Page title={`Home`} icon={FaHome} display={`grid`}>
       {toastRef.current}
-      <NavBox height={`300px`} mt={`100px`}>
+      <NavBox height={`300px`}>
         <NavButton
           to={`/signUp`}
           text={`Sign Up`}
           {...navLinksProps}
           icon={FaUserPlus}
+          colorScheme={`orange`}
         />
         <NavButton
           to={`/signIn`}
           text={`Sign In`}
           {...navLinksProps}
           icon={FaSignInAlt}
+          colorScheme={`orange`}
         />
       </NavBox>
     </Page>

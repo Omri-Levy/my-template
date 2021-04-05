@@ -1,6 +1,7 @@
 import { IconType } from 'react-icons';
 import { FieldErrors } from 'react-hook-form';
 import {
+  ChakraColorScheme,
   GetValues,
   HandleSubmit,
   ModalFormSubmit,
@@ -14,6 +15,7 @@ interface Props {
   isSubmitting: boolean;
   submitButtonIcon: IconType;
   submitButtonText: string;
+  submitButtonColor?: ChakraColorScheme;
   onSubmit: ModalFormSubmit;
   useRecaptcha: boolean;
   onClose: () => void;

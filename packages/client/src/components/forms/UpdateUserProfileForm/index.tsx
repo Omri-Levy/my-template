@@ -106,6 +106,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       disclosure={disclosure}
       toggleButtonIcon={FaUserEdit}
       toggleButtonText={`Update Profile`}
+      toggleButtonColor={`blue`}
       buttonProps={{
         marginRight: 0,
         disabled: !oneUserSelected,
@@ -118,6 +119,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
         useRecaptcha={false}
         submitButtonIcon={FaUserEdit}
         submitButtonText={`Update Profile`}
+        submitButtonColor={`blue`}
         handleSubmit={handleSubmit}
         isSubmitting={isSubmitting}
         onSubmit={updateUserProfile}

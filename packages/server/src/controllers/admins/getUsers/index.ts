@@ -1,9 +1,11 @@
-import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
+import getUsersCache from '../../../utils/usersCache/getUsersCache';
 
 const getUsers: Route = async (_req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await getUsersCache();
+
+    console.log(users);
 
     res.status(200).send({ status: `success`, users });
   } catch (error) {

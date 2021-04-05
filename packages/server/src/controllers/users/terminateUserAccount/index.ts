@@ -1,13 +1,15 @@
 import { terminateUserAccountMessage, UserObject } from '@my-template/shared';
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
+import isCountOneInUsers from '../../../utils/isCountOneInUsers';
+import resetCurrentUserAndUsersCache from '../../../utils/resetCurrentUserAndUsersCache';
 
 const terminateUserAccount: Route = async (req, res) => {
   try {
     const user = req.user as UserObject;
     const { id, role } = user;
 
-    const isOnlyAdmin = (await User.count({ where: { role: `admin` } })) === 1;
+    const isOnlyAdmin = isCountOneInUsers(role, `admin`);
 
     if (isOnlyAdmin && role === `admin`) {
       console.log(terminateUserAccountMessage);
@@ -18,6 +20,8 @@ const terminateUserAccount: Route = async (req, res) => {
     }
 
     await User.destroy({ where: { id } });
+
+    await resetCurrentUserAndUsersCache();
 
     res.status(200).send({ status: `success` });
   } catch (error) {
