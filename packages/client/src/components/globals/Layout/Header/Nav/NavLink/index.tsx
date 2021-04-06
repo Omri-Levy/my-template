@@ -43,6 +43,8 @@ const NavLink: FunctionComponent<Props> = ({
         border={`2px solid transparent`}
         _focus={{
           outline: `none`,
+        }}
+        _focusVisible={{
           borderColor: activeColor || `orange`,
           borderRadius: `18px`,
         }}
