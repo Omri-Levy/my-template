@@ -1,4 +1,4 @@
-import { Grid, List, Stack } from '@chakra-ui/react';
+import { Grid, HStack, List } from '@chakra-ui/react';
 import { FunctionComponent, memo, useContext } from 'react';
 import NavLink from './NavLink';
 import useRoutes from '../../../../../hooks/ui/useRoutes';
@@ -15,12 +15,7 @@ const Nav: FunctionComponent = () => {
 
   return (
     <Grid as={`nav`} flexGrow={1} placeContent={`center`}>
-      <Stack
-        direction={`row`}
-        as={List}
-        listStyleType={`none`}
-        backgroundColor={darkModeColor}
-      >
+      <HStack as={List} listStyleType={`none`} backgroundColor={darkModeColor}>
         {memoizedRoutes.map((memoizedRoute) => {
           const { to, text, icon, exact } = memoizedRoute;
           const path = Array.isArray(to) ? to[0] : to;
@@ -40,7 +35,7 @@ const Nav: FunctionComponent = () => {
             />
           );
         })}
-      </Stack>
+      </HStack>
     </Grid>
   );
 };

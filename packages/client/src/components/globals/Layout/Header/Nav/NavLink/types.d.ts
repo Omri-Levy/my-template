@@ -1,5 +1,5 @@
 import { ListItemProps } from '@chakra-ui/react';
-import { Icon } from '../../../../../../utils/types';
+import { ChakraColorScheme, Icon } from '../../../../../../utils/types';
 
 interface Props extends ListItemProps {
   to: string;
@@ -7,6 +7,7 @@ interface Props extends ListItemProps {
   onClick?: MouseEvent<HTMLAnchorElement>;
   icon?: Icon;
   exact: boolean;
+  activeColor?: ChakraColorScheme;
 }
 
 export { Props };

@@ -1,8 +1,7 @@
-import { Icon, Link, ListItem } from '@chakra-ui/react';
+import { Box, Icon, Link, ListItem, useDisclosure } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
-import useDarkMode from '../../../../../../hooks/ui/useDarkMode';
 
 /**
  * @description a reusable navigation link component with active link styling
@@ -15,22 +14,15 @@ const NavLink: FunctionComponent<Props> = ({
   onClick,
   icon,
   exact,
+  activeColor,
   ...props
 }) => {
-  const { darkModeColorInverted } = useDarkMode();
-  const expandPseudoAfterWidth = {
-    transition: `width 240ms ease-in-out`,
-    width: `100%`,
-  };
-  const activeLinkStyle = {
-    transition: `width 240ms ease-in-out`,
-    display: `block`,
-    marginTop: `3px`,
-    content: `""`,
-    width: 0,
-    height: 1,
-    backgroundColor: darkModeColorInverted,
-  };
+  const {
+    isOpen: isActive,
+    onOpen: onActive,
+    onClose: onInactive,
+  } = useDisclosure();
+  const dimensions = `8px`;
   // styles to apply only when an icon is passed in.
   let withIconStyles = {};
 
@@ -43,38 +35,48 @@ const NavLink: FunctionComponent<Props> = ({
   }
 
   return (
-    <ListItem pl={5} _first={{ paddingLeft: 0 }} {...props}>
+    <ListItem pl={5} _first={{ paddingLeft: 0 }} minWidth={`70px`} {...props}>
       <Link
         display={`flex`}
         exact={exact}
         _focus={{
           outline: `none`,
         }}
-        _activeLink={{
-          _after: {
-            ...expandPseudoAfterWidth,
-          },
-          _focus: {
-            ...expandPseudoAfterWidth,
-          },
-        }}
-        _after={{
-          ...activeLinkStyle,
-        }}
         as={ReactRouterNavLink}
         to={to}
         _hover={{
-          _after: {
-            ...expandPseudoAfterWidth,
-          },
           textDecoration: `none`,
+          '#activeLinkSpan': {
+            opacity: 1,
+          },
         }}
         onClick={onClick}
         fontWeight={700}
+        isActive={(match: any, _: any) => {
+          if (!match) {
+            onInactive();
+
+            return false;
+          }
+
+          onActive();
+
+          return true;
+        }}
         {...withIconStyles}
       >
         {icon && <Icon display={`block`} as={icon} />}
         {text}
+        <Box
+          id={`activeLinkSpan`}
+          height={dimensions}
+          width={dimensions}
+          borderRadius={`100vw`}
+          as={`span`}
+          backgroundColor={activeColor || `orange`}
+          opacity={isActive ? 1 : 0}
+          transition={`opacity 300ms ease-in`}
+        />
       </Link>
     </ListItem>
   );
