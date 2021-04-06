@@ -11,6 +11,9 @@ const styles = {
     'html, body, #root': {
       height: `100%`,
     },
+    '.chakra-toast__inner': {
+      mt: `120px !important`,
+    },
   },
 };
 const theme = extendTheme({ config, styles });
