@@ -39,8 +39,12 @@ const NavLink: FunctionComponent<Props> = ({
       <Link
         display={`flex`}
         exact={exact}
+        p={`5px`}
+        border={`2px solid transparent`}
         _focus={{
           outline: `none`,
+          borderColor: activeColor || `orange`,
+          borderRadius: `18px`,
         }}
         as={ReactRouterNavLink}
         to={to}
@@ -76,6 +80,9 @@ const NavLink: FunctionComponent<Props> = ({
           backgroundColor={activeColor || `orange`}
           opacity={isActive ? 1 : 0}
           transition={`opacity 300ms ease-in`}
+          role={`presentation`}
+          aria-label={`active-link-indicator`}
+          pointerEvents={`none`}
         />
       </Link>
     </ListItem>

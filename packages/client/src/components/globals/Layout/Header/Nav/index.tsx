@@ -32,6 +32,7 @@ const Nav: FunctionComponent = () => {
               icon={icon || undefined}
               text={text}
               onClick={to === `/signOut` ? signOut : undefined}
+              activeColor={`orange`}
             />
           );
         })}
