@@ -7,6 +7,7 @@ import {
   FaAngleRight,
 } from 'react-icons/fa';
 import { Props } from './types';
+import useColorModeShade from '../../../../../hooks/useColorModeShade';
 
 const PaginationButton: FunctionComponent<Props> = ({
   icons = true,
@@ -17,7 +18,10 @@ const PaginationButton: FunctionComponent<Props> = ({
   canNextPage,
   previousPage,
   nextPage,
+  buttonColor,
 }) => {
+  const color = buttonColor || `purple`;
+  const { colorModeShadeInverted } = useColorModeShade(color);
   const firstPage = () => gotoPage(0);
   const lastPage = () => gotoPage(pageCount - 1);
 
@@ -71,7 +75,8 @@ const PaginationButton: FunctionComponent<Props> = ({
         }
         onClick={onClick}
         disabled={disabled}
-        colorScheme={`orange`}
+        border={`2px solid`}
+        borderColor={colorModeShadeInverted}
       >
         {text}
       </Button>

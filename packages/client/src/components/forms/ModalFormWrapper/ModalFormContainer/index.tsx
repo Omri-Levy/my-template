@@ -10,6 +10,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import { Props } from './types';
+import useColorModeShade from '../../../../hooks/useColorModeShade';
 
 const ModalFormContainer: FunctionComponent<Props> = ({
   icons = true,
@@ -23,6 +24,9 @@ const ModalFormContainer: FunctionComponent<Props> = ({
   children,
 }) => {
   const { onOpen, onClose, isOpen } = disclosure;
+  const { colorModeShadeInverted } = useColorModeShade(
+    toggleButtonColor || `purple`
+  );
 
   return (
     <>
@@ -30,7 +34,8 @@ const ModalFormContainer: FunctionComponent<Props> = ({
         rightIcon={icons ? <Icon as={toggleButtonIcon} mb={0.5} /> : undefined}
         mr={5}
         onClick={onOpen}
-        colorScheme={toggleButtonColor || `orange`}
+        border={`2px solid`}
+        borderColor={colorModeShadeInverted}
         {...buttonProps}
       >
         {toggleButtonText}

@@ -25,14 +25,14 @@ const UnauthenticatedHome: FunctionComponent = () => {
           text={`Sign Up`}
           {...navLinksProps}
           icon={FaUserPlus}
-          colorScheme={`orange`}
+          colorScheme={`purple`}
         />
         <NavButton
           to={`/signIn`}
           text={`Sign In`}
           {...navLinksProps}
           icon={FaSignInAlt}
-          colorScheme={`orange`}
+          colorScheme={`purple`}
         />
       </NavBox>
     </Page>

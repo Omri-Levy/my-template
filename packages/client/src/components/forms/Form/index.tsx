@@ -6,6 +6,7 @@ import { Props } from './types';
 import useGRecaptchaResponse from '../../../hooks/forms/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 import Card from '../../Card';
+import useColorModeShade from '../../../hooks/useColorModeShade';
 
 /**
  * TODO: update description
@@ -26,6 +27,9 @@ const Form: FunctionComponent<Props> = ({
 }) => {
   const { gRecaptchaResponse, setGRecaptchaResponse } = useGRecaptchaResponse();
   const disableSubmit = useDisableSubmit(errors, getValues, gRecaptchaResponse);
+  const { colorModeShadeInverted } = useColorModeShade(
+    submitButtonColor || `green`
+  );
 
   return (
     <Card color={`unset`} backgroundColor={`unset`}>
@@ -52,7 +56,8 @@ const Form: FunctionComponent<Props> = ({
             mt={4}
             isLoading={isSubmitting}
             disabled={disableSubmit}
-            colorScheme={submitButtonColor || `green`}
+            border={`2px solid`}
+            borderColor={colorModeShadeInverted}
           >
             {submitButtonText}
           </Button>

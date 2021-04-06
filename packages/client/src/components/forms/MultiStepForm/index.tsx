@@ -8,6 +8,7 @@ import useGRecaptchaResponse from '../../../hooks/forms/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 import Breadcrumbs from './Breadcrumbs';
 import useFormNavigation from './hooks/useFormNavigation';
+import useColorModeShade from '../../../hooks/useColorModeShade';
 
 /**
  * NOTE: navigation to disabled breadcrumb links changing the browser's url is
@@ -40,6 +41,12 @@ const MultiStepForm: FunctionComponent<Props> = ({
     recaptchaDisablesSubmit
   );
   const { previousForm, nextForm } = useFormNavigation(getValues, nextFormPath);
+  const { colorModeShadeInverted: submitBorderColor } = useColorModeShade(
+    onSubmit ? submitButtonColor || `green` : submitButtonColor || `purple`
+  );
+  const { colorModeShadeInverted: previousFormBorderColor } = useColorModeShade(
+    `purple`
+  );
 
   return (
     <>
@@ -70,7 +77,8 @@ const MultiStepForm: FunctionComponent<Props> = ({
               type={`button`}
               mt={4}
               disabled={isSubmitting}
-              colorScheme={`orange`}
+              border={`2px solid`}
+              borderColor={previousFormBorderColor}
             >
               Previous
             </Button>
@@ -88,11 +96,8 @@ const MultiStepForm: FunctionComponent<Props> = ({
             mt={4}
             isLoading={isSubmitting}
             disabled={disableSubmit}
-            colorScheme={
-              onSubmit
-                ? submitButtonColor || `green`
-                : submitButtonColor || `orange`
-            }
+            border={`2px solid`}
+            borderColor={submitBorderColor}
           >
             {onSubmit ? submitButtonText : `Next`}
           </Button>

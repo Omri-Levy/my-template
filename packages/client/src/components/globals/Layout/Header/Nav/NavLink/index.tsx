@@ -2,6 +2,7 @@ import { Box, Icon, Link, ListItem, useDisclosure } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
+import useColorModeShade from '../../../../../../hooks/useColorModeShade';
 
 /**
  * @description a reusable navigation link component with active link styling
@@ -22,7 +23,7 @@ const NavLink: FunctionComponent<Props> = ({
     onOpen: onActive,
     onClose: onInactive,
   } = useDisclosure();
-  const dimensions = `8px`;
+  const { colorModeShade } = useColorModeShade(activeColor || `purple`);
   // styles to apply only when an icon is passed in.
   let withIconStyles = {};
 
@@ -45,7 +46,7 @@ const NavLink: FunctionComponent<Props> = ({
           outline: `none`,
         }}
         _focusVisible={{
-          borderColor: activeColor || `orange`,
+          borderColor: colorModeShade,
           borderRadius: `18px`,
         }}
         as={ReactRouterNavLink}
@@ -75,11 +76,11 @@ const NavLink: FunctionComponent<Props> = ({
         {text}
         <Box
           id={`activeLinkSpan`}
-          height={dimensions}
-          width={dimensions}
-          borderRadius={`100vw`}
+          height={`6px`}
+          width={`40px`}
+          borderRadius={`3px`}
           as={`span`}
-          backgroundColor={activeColor || `orange`}
+          backgroundColor={colorModeShade}
           opacity={isActive ? 1 : 0}
           transition={`opacity 300ms ease-in`}
           role={`presentation`}

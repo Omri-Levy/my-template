@@ -18,6 +18,7 @@ import {
 import { FaTimes, FaTrashAlt } from 'react-icons/fa';
 import { Props } from './types';
 import Alert from '../Alert';
+import useColorModeShade from '../../hooks/useColorModeShade';
 
 const Modal: FunctionComponent<Props> = ({
   buttonProps,
@@ -41,13 +42,17 @@ const Modal: FunctionComponent<Props> = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isChecked, onOpen: onCheck, onClose: onUncheck } = disclosure;
+  const { colorModeShadeInverted } = useColorModeShade(
+    toggleButtonColor || `purple`
+  );
 
   return (
     <>
       <Button
         rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
         onClick={onOpen}
-        colorScheme={toggleButtonColor || `orange`}
+        border={`2px solid`}
+        borderColor={colorModeShadeInverted}
         {...buttonProps}
       >
         {toggleButtonText}
@@ -87,7 +92,8 @@ const Modal: FunctionComponent<Props> = ({
               <Button
                 onClick={onClose}
                 rightIcon={icons ? <Icon as={FaTimes} mb={0.5} /> : undefined}
-                colorScheme={`red`}
+                border={`2px solid`}
+                borderColor={colorModeShadeInverted}
               >
                 Cancel
               </Button>
@@ -99,7 +105,8 @@ const Modal: FunctionComponent<Props> = ({
                 }
                 onClick={onClick(onClose)}
                 isLoading={isLoading}
-                colorScheme={toggleButtonColor || `orange`}
+                border={`2px solid`}
+                borderColor={colorModeShadeInverted}
               >
                 {actionText}
               </Button>

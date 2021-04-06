@@ -1,3 +1,5 @@
+import { ChakraColorScheme } from '../../../../../utils/types';
+
 type ButtonType = `firstPage` | `lastPage` | `previousPage` | `nextPage`;
 interface Props {
   icons?: boolean;
@@ -8,6 +10,7 @@ interface Props {
   canNextPage: boolean;
   previousPage: () => void;
   nextPage: () => void;
+  buttonColor?: ChakraColorScheme;
 }
 
 export { ButtonType, Props };

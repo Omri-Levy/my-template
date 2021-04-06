@@ -17,6 +17,7 @@ import { Props } from './types';
 import UpdateUserProfileForm from '../../../forms/UpdateUserProfileForm';
 import useIsAdmin from '../../../../hooks/useIsAdmin';
 import UpdateUserPasswordForm from '../../../forms/UpdateUserPasswordForm';
+import useColorModeShade from '../../../../hooks/useColorModeShade';
 
 /**
  * TODO: refactor to controller pattern
@@ -66,6 +67,7 @@ const AdminActions: FunctionComponent<Props> = ({
     stopLoading();
   };
   const users = queryClient.getQueryData(`users`) as Users;
+  const { colorModeShadeInverted } = useColorModeShade(`red`);
 
   return (
     <>
@@ -79,7 +81,8 @@ const AdminActions: FunctionComponent<Props> = ({
         title={
           !checkedItems.some(Boolean) ? deleteSelectedUsersMessage : undefined
         }
-        colorScheme={`red`}
+        border={`2px solid`}
+        borderColor={colorModeShadeInverted}
       >
         Delete Selected
       </Button>

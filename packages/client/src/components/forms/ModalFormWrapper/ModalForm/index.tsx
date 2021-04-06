@@ -7,6 +7,7 @@ import Recaptcha from '../../Recaptcha';
 import { Props } from './types';
 import useDisableSubmit from '../../../../hooks/forms/useDisableSubmit';
 import useGRecaptchaResponse from '../../../../hooks/forms/useGRecaptchaResponse';
+import useColorModeShade from '../../../../hooks/useColorModeShade';
 
 const ModalForm: FunctionComponent<Props> = ({
   icons = true,
@@ -33,6 +34,12 @@ const ModalForm: FunctionComponent<Props> = ({
     getValues,
     gRecaptchaResponseValue,
     disableSubmitCondition
+  );
+  const { colorModeShadeInverted: cancelBorderColor } = useColorModeShade(
+    `red`
+  );
+  const { colorModeShadeInverted: submitBorderColor } = useColorModeShade(
+    submitButtonColor || `purple`
   );
   let conditionalSubmitButtonTitle;
 
@@ -63,7 +70,8 @@ const ModalForm: FunctionComponent<Props> = ({
             <Button
               onClick={onClose}
               rightIcon={icons ? <Icon as={FaTimes} /> : undefined}
-              colorScheme={`red`}
+              border={`2px solid`}
+              borderColor={cancelBorderColor}
             >
               Cancel
             </Button>
@@ -76,7 +84,8 @@ const ModalForm: FunctionComponent<Props> = ({
               isLoading={isSubmitting}
               disabled={disableSubmit}
               title={conditionalSubmitButtonTitle}
-              colorScheme={submitButtonColor || `orange`}
+              border={`2px solid`}
+              borderColor={submitBorderColor}
             >
               {submitButtonText}
             </Button>
