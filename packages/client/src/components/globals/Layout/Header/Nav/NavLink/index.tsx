@@ -1,4 +1,4 @@
-import { Box, Icon, Link, ListItem, useDisclosure } from '@chakra-ui/react';
+import { Box, Icon, Link, ListItem } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
@@ -18,12 +18,8 @@ const NavLink: FunctionComponent<Props> = ({
   activeColor,
   ...props
 }) => {
-  const {
-    isOpen: isActive,
-    onOpen: onActive,
-    onClose: onInactive,
-  } = useDisclosure();
   const { colorModeShade } = useColorModeShade(activeColor || `purple`);
+
   // styles to apply only when an icon is passed in.
   let withIconStyles = {};
 
@@ -59,16 +55,10 @@ const NavLink: FunctionComponent<Props> = ({
         }}
         onClick={onClick}
         fontWeight={700}
-        isActive={(match: any, _: any) => {
-          if (!match) {
-            onInactive();
-
-            return false;
-          }
-
-          onActive();
-
-          return true;
+        _activeLink={{
+          '#activeLinkSpan': {
+            opacity: 1,
+          },
         }}
         {...withIconStyles}
       >
@@ -81,7 +71,7 @@ const NavLink: FunctionComponent<Props> = ({
           borderRadius={`3px`}
           as={`span`}
           backgroundColor={colorModeShade}
-          opacity={isActive ? 1 : 0}
+          opacity={0}
           transition={`opacity 300ms ease-in`}
           role={`presentation`}
           aria-label={`active-link-indicator`}

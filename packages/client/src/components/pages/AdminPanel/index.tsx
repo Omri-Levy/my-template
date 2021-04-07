@@ -51,7 +51,9 @@ const AdminPanel: FunctionComponent = () => {
         <Table
           data={data}
           columns={columns}
-          minWidth={`80vw`}
+          tableProps={{
+            minWidth: `80vw`,
+          }}
           caption={`Manage Users`}
           Actions={AdminActions}
           actionsProps={actionsProps}

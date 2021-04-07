@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import { Flex, Table as ChakraTable, TableCaption } from '@chakra-ui/react';
 import Card from '../../Card';
 import TableHead from '../TableHead';
@@ -6,10 +6,14 @@ import TableBody from '../TableBody';
 import TableFooter from '../TableFooter';
 import { Props } from './types';
 
-const TableInstance: FunctionComponent<Props> = ({ Actions, ...props }) => (
+const TableInstance: FunctionComponent<Props> = ({
+  Actions,
+  tableProps,
+  ...props
+}) => (
   <Flex flexDirection={`column`} alignItems={`center`}>
     <Card color={`unset`} backgroundColor={`unset`}>
-      <ChakraTable size={props.size} {...props.getTableProps()} {...props}>
+      <ChakraTable {...props.getTableProps()} {...tableProps}>
         <TableCaption>{props.caption}</TableCaption>
         <TableHead headerGroups={props.headerGroups} />
         <TableBody
@@ -47,4 +51,4 @@ const TableInstance: FunctionComponent<Props> = ({ Actions, ...props }) => (
   </Flex>
 );
 
-export default memo(TableInstance);
+export default TableInstance;

@@ -19,7 +19,7 @@ interface ActionsProps {
 interface ActionsPropsPlusCheckedItems extends ActionsProps {
   checkedItems: boolean[];
 }
-interface Props extends TableProps {
+interface Props {
   caption: string;
   data: Columns;
   columns: Column<ColumnType>[];
@@ -28,6 +28,7 @@ interface Props extends TableProps {
   Actions: FunctionComponent<ActionsPropsPlusCheckedItems>;
   actionsProps: ActionsProps;
   setSessionStorageIds: (ids: string[]) => void;
+  tableProps?: TableProps;
 }
 type CheckCheckbox = (
   id: string,

@@ -14,7 +14,14 @@ import TableInstance from '../TableInstance';
 import { Props } from '../types';
 
 const TableController: FunctionComponent<Props> = (props) => {
-  const { ids, setIds, data, columns, setSessionStorageIds } = props;
+  const {
+    ids,
+    setIds,
+    data,
+    columns,
+    setSessionStorageIds,
+    tableProps,
+  } = props;
   const { checkedItems, checkCheckbox, checkAllCheckboxes } = useCheckedItems(
     setIds
   );
@@ -89,7 +96,10 @@ const TableController: FunctionComponent<Props> = (props) => {
     setPageSize,
     pageIndex,
     rowsLength,
-    size,
+    tableProps: {
+      ...tableProps,
+      size,
+    },
   };
 
   useEffect(() => {

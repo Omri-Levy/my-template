@@ -109,6 +109,11 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
       {isAdminAction && (
         <FormField
           isDisabled={!currentUserIsAdmin}
+          title={
+            !currentUserIsAdmin
+              ? `Only admins may promote and demote role.`
+              : undefined
+          }
           isSelectField
           selectOptions={selectOptions}
           labelTitle={`Role:`}

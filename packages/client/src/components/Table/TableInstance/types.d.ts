@@ -4,6 +4,7 @@ import {
   TableBodyPropGetter,
   TableBodyProps,
 } from 'react-table';
+import { TableProps as ChakraTableProps } from '@chakra-ui/react';
 import {
   CheckAllCheckboxes,
   CheckCheckbox,
@@ -35,6 +36,7 @@ interface Props extends TableProps {
   setPageSize: (number) => void;
   checkAllCheckboxesInstance: CheckAllCheckboxes;
   footerGroups: FooterGroups;
+  tableProps?: ChakraTableProps;
 }
 
 export { Props, FooterGroups };

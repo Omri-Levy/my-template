@@ -63,6 +63,6 @@ TableStory.args = {
   caption: `Test Table`,
   data,
   columns,
-  minWidth: `80vw`,
+  tableProps: { minWidth: `80vw` },
 };
 TableStory.decorators = [ContainerDecorator];
