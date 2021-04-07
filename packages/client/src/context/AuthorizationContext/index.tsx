@@ -11,16 +11,14 @@ import fetchAuthorize from '../../utils/api/fetchAuthorize';
 
 const AuthorizationProvider: FunctionComponent = ({ children }) => {
   const [isAuthorized, setIsAuthorized] = useState<boolean | undefined>();
-  const authorize = useCallback(async () => {
-    setIsAuthorized(await fetchAuthorize());
-  }, []);
   const { isAuthenticated } = useContext(AuthenticationContext);
+  const authorize = useCallback(async () => {
+    setIsAuthorized(isAuthenticated && (await fetchAuthorize()));
+  }, [isAuthenticated]);
 
   useEffect(() => {
     (async () => {
-      if (isAuthenticated) {
-        await authorize();
-      }
+      await authorize();
     })();
   }, [authorize, isAuthenticated]);
 

@@ -10,7 +10,7 @@ authorization.get(
   authenticate(`jwt`, {
     session: false,
   }),
-  isAuthorized(`admin`),
+  isAuthorized([`admin`, `manager`]),
   isAuthorizedController
 );
 

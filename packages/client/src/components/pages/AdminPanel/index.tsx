@@ -9,11 +9,11 @@ import fetchGetUsers from '../../../utils/api/fetchGetUsers';
 import useTableColumns from './hooks/useTableColumns';
 import useTableData from './hooks/useTableData';
 import Table from '../../Table';
-import useIsAdmin from '../../../hooks/useIsAdmin';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import NoUserFound from '../../NoUserFound';
 import AdminActions from './AdminActions';
 import useUserIds from '../../../hooks/useUserIds';
+import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
 
 /**
  * TODO: update description
@@ -27,7 +27,7 @@ const AdminPanel: FunctionComponent = () => {
   );
   const columns = useTableColumns();
   const data = useTableData(filteredUsers);
-  const isAdmin = useIsAdmin();
+  const { isAuthorized } = useContext(AuthorizationContext);
   const {
     setUserIds: setSessionStorageUserIds,
     userIds,
@@ -37,7 +37,7 @@ const AdminPanel: FunctionComponent = () => {
     ids: userIds,
   };
 
-  if (!isAdmin) {
+  if (!isAuthorized) {
     return <Redirect to={{ pathname: `/` }} />;
   }
 

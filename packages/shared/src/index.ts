@@ -5,6 +5,8 @@ import {
   ObjectKey,
   ObjectType,
   RequestMethod,
+  Role,
+  Roles,
   User,
   UserKey,
   UserObject,
@@ -170,4 +172,6 @@ export type {
   User,
   Users,
   UserKey,
+  Role,
+  Roles,
 };

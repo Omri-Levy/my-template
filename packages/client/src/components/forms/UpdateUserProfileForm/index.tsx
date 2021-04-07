@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import {
   emailAlreadyInUseMessage,
+  terminateUserAccountMessage,
   unauthorizedMessage,
   updateUserProfileSchema,
   Users,
@@ -20,7 +21,7 @@ import setResponseError from '../FormResponseError/setResponseError';
 import fetchUpdateUserProfile from '../../../utils/api/fetchUpdateUserProfile';
 import queryClient from '../../globals/Providers/queryClient';
 import useErrorToast from '../../../hooks/ui/useErrorToast';
-import useIsAdmin from '../../../hooks/useIsAdmin';
+import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
 
 const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const schema = useMemo(() => updateUserProfileSchema, []);
@@ -50,10 +51,10 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     toast: unauthorizedErrorToast,
     toastOptions: unauthorizedErrorToastOptions,
   } = useErrorToast(unauthorizedMessage);
-  const isAdmin = useIsAdmin();
+  const { isAuthorized } = useContext(AuthorizationContext);
   const updateUserProfile: UpdateUserProfile = () => async (data) => {
     try {
-      if (!isAdmin) {
+      if (!isAuthorized) {
         console.error(unauthorizedMessage);
 
         unauthorizedErrorToast(unauthorizedErrorToastOptions);
@@ -71,7 +72,11 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     } catch (error) {
       console.error(error);
 
-      setResponseError(error, setError, [emailAlreadyInUseMessage]);
+      setResponseError(error, setError, [
+        emailAlreadyInUseMessage,
+        terminateUserAccountMessage,
+      ]);
+
       onOpen();
     }
   };

@@ -1,4 +1,4 @@
-import { Roles } from '@my-template/shared/src/utils/types';
+import { Roles } from '@my-template/shared';
 
 type IsAuthorizedRoute = (role: Roles, req: Request, res: Response) => void;
 

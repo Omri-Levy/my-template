@@ -1,6 +1,6 @@
 import { UUIDV4 } from 'sequelize';
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
-import { emailMax, emailMin, isName } from '@my-template/shared';
+import { emailMax, emailMin, isName, Role } from '@my-template/shared';
 
 const { STRING, UUID, CITEXT, ENUM } = DataType;
 
@@ -83,7 +83,7 @@ class User extends Model {
     type: ENUM(`admin`, `manager`, `user`),
     defaultValue: `user`,
   })
-  role: string;
+  role: Role;
 
   @Column({
     type: UUID,

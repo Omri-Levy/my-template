@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { Button, Icon } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/fa';
 import {
@@ -15,9 +15,9 @@ import fetchDeleteUser from '../../../../utils/api/fetchDeleteUser';
 import queryClient from '../../../globals/Providers/queryClient';
 import { Props } from './types';
 import UpdateUserProfileForm from '../../../forms/UpdateUserProfileForm';
-import useIsAdmin from '../../../../hooks/useIsAdmin';
 import UpdateUserPasswordForm from '../../../forms/UpdateUserPasswordForm';
 import useColorModeShade from '../../../../hooks/useColorModeShade';
+import AuthorizationContext from '../../../../context/AuthorizationContext/AuthorizationContext';
 
 /**
  * TODO: refactor to controller pattern
@@ -40,13 +40,13 @@ const AdminActions: FunctionComponent<Props> = ({
     toast: unauthorizedErrorToast,
     toastOptions: unauthorizedErrorToastOptions,
   } = useErrorToast(unauthorizedMessage);
-  const isAdmin = useIsAdmin();
+  const { isAuthorized } = useContext(AuthorizationContext);
   /**
    * TODO: abstract this function
    */
   const deleteSelectedUsers: DeleteUser = async () => {
     try {
-      if (!isAdmin) {
+      if (!isAuthorized) {
         console.error(unauthorizedMessage);
 
         unauthorizedErrorToast(unauthorizedErrorToastOptions);

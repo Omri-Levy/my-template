@@ -1,13 +1,14 @@
 import { authenticate } from 'passport';
 import { Router } from 'express';
 import isAuthorized from '../middleware/isAuthorized';
-import deleteSelectedUsers from '../controllers/admins/deleteSelectedUsers';
-import deleteAllUsers from '../controllers/admins/deleteAllUsers';
-import updateUserProfile from '../controllers/admins/updateUserProfile';
-import getUsers from '../controllers/admins/getUsers';
-import updateUserPassword from '../controllers/admins/updateUserPassword';
+import deleteSelectedUsers from '../controllers/adminsAndManagers/deleteSelectedUsers';
+import deleteAllUsers from '../controllers/adminsAndManagers/deleteAllUsers';
+import updateUserProfile from '../controllers/adminsAndManagers/updateUserProfile';
+import getUsers from '../controllers/adminsAndManagers/getUsers';
+import updateUserPassword from '../controllers/adminsAndManagers/updateUserPassword';
+import getRoles from '../controllers/adminsAndManagers/getRoles';
 
-const admins = Router();
+const adminsAndManagers = Router();
 
 /**
  * @swagger
@@ -38,7 +39,7 @@ const admins = Router();
  *          id: 5fcd854a-51cb-4577-9c3f-9e833337e192
  *          email: example@example.com
  *          password: Example@1
- *          role: admins.ts
+ *          role: adminsAndManagers.ts
  *    parameters:
  *      UserId:
  *       name: id
@@ -95,49 +96,58 @@ const admins = Router();
  *         $ref: '#/components/responses/ServerError'
  *
  */
-admins.get(
+adminsAndManagers.get(
   `/getUsers`,
   authenticate(`jwt`, {
     session: false,
   }),
-  isAuthorized(`admin`),
+  isAuthorized([`admin`, `manager`]),
   getUsers
 );
 
-admins.delete(
+adminsAndManagers.delete(
   `/deleteSelectedUsers`,
   authenticate(`jwt`, {
     session: false,
   }),
-  isAuthorized(`admin`),
+  isAuthorized([`admin`, `manager`]),
   deleteSelectedUsers
 );
 
-admins.delete(
+adminsAndManagers.delete(
   `/deleteAllUsers`,
   authenticate(`jwt`, {
     session: false,
   }),
-  isAuthorized(`admin`),
+  isAuthorized([`admin`, `manager`]),
   deleteAllUsers
 );
 
-admins.post(
+adminsAndManagers.post(
   `/updateUserProfile/:userId`,
   authenticate(`jwt`, {
     session: false,
   }),
-  isAuthorized(`admin`),
+  isAuthorized([`admin`, `manager`]),
   updateUserProfile
 );
 
-admins.post(
+adminsAndManagers.post(
   `/updateUserPassword/:userId`,
   authenticate(`jwt`, {
     session: false,
   }),
-  isAuthorized(`admin`),
+  isAuthorized([`admin`, `manager`]),
   updateUserPassword
 );
 
-export default admins;
+adminsAndManagers.get(
+  `/getRoles`,
+  authenticate(`jwt`, {
+    session: false,
+  }),
+  isAuthorized([`admin`, `manager`]),
+  getRoles
+);
+
+export default adminsAndManagers;

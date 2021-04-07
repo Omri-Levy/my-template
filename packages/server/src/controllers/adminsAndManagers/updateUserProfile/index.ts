@@ -4,16 +4,21 @@ import {
   lowerCaseComparison,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
+  terminateUserAccountMessage,
+  unauthorizedMessage,
   updateUserProfileSchema,
+  UserObject,
 } from '@my-template/shared';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 import emailIsAlreadyInUse from '../../../utils/emailIsAlreadyInUse';
 import refreshUsersCache from '../../../utils/usersCache/refreshUsersCache';
+import isCountOneInUsers from '../../../utils/isCountOneInUsers';
 
 const updateUserProfile: Route = async (req, res) => {
   try {
     const { userId } = req.params;
+    const user = req?.user as UserObject;
 
     if (!isUuidV4.test(userId)) {
       const message = invalidUserIdMessage;
@@ -56,7 +61,34 @@ const updateUserProfile: Route = async (req, res) => {
       return;
     }
 
-    const emailAlreadyInUse = await emailIsAlreadyInUse(email, res);
+    /**
+     * making sure only admins can update everyone and no one can update them.
+     */
+    const currentUserIsAdmin = user?.role === `admin`;
+
+    if (!currentUserIsAdmin && !unchangedRole) {
+      console.error(unauthorizedMessage);
+
+      res.status(401).send({ message: unauthorizedMessage });
+
+      return;
+    }
+
+    const isOnlyAdmin = await isCountOneInUsers(`role`, `admin`);
+
+    if (isOnlyAdmin && userToUpdate?.role === `admin` && !unchangedRole) {
+      console.error(terminateUserAccountMessage);
+
+      res.status(400).send({ message: terminateUserAccountMessage });
+
+      return;
+    }
+
+    const emailAlreadyInUse = await emailIsAlreadyInUse(
+      email,
+      res,
+      userToUpdate as UserObject
+    );
 
     if (emailAlreadyInUse) {
       return;

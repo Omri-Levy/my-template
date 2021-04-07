@@ -19,20 +19,22 @@ type Endpoint =
   | `updateProfile`
   | `updateUserProfile`
   | `updatePassword`
-  | `updateUserPassword`;
+  | `updateUserPassword`
+  | `getRoles`;
+type Role = `admin` | `manager` | `user`;
+type Roles = Role[];
 
 interface UserObject {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
+  role: Role;
 }
 type User = UserObject | `unauthenticated` | null;
 type UserKey = `id` | `firstName` | `lastName` | `email` | `role`;
-type Users = UserObject[];
 
-type Roles = `admin` | `manager` | `user`;
+type Users = UserObject[];
 
 export {
   ObjectKey,
@@ -44,5 +46,6 @@ export {
   User,
   Users,
   UserKey,
+  Role,
   Roles,
 };

@@ -7,7 +7,7 @@ import users from './routes/users';
 import docs from './routes/docs';
 import authentication from './routes/authentication';
 import authorization from './routes/authorization';
-import admins from './routes/admins';
+import adminsAndManagers from './routes/adminsAndManagers';
 
 dotenv.config();
 const { CORS_ORIGIN } = process.env;
@@ -25,7 +25,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.use(`/api`, [admins, users, authentication, authorization]);
+app.use(`/api`, [adminsAndManagers, users, authentication, authorization]);
 app.use(`/api/signIn`, cookieParser());
 app.use(`/api-docs`, docs);
 

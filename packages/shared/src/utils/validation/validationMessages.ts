@@ -121,7 +121,7 @@ const terminateUserAccountMessage =
   `one more admin user in existence before trying again.`;
 const deleteSelectedUsersMessage = `Please select one or more users to delete.`;
 
-// admins.ts actions
+// adminsAndManagers.ts actions
 const deleteAdminsIsRequiredMessage = `${deleteAdmins} ${requiredFieldMessage}`;
 
 const noChangesWereMadeMessage = `No changes were made.`;

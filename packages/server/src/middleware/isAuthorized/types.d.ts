@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { Roles } from '@my-template/shared/src/utils/types';
+import { Roles } from '@my-template/shared';
 
 type IsAuthorizedMiddleware = (
-  role: Roles
+  roles: Roles
 ) => (req: Request, res: Response, next: NextFunction) => void;
 
 export { IsAuthorizedMiddleware };
