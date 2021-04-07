@@ -1,2 +1,4 @@
 git add .
-git commit --no-verify
+echo Please insert the commit message:
+read -r MSG
+git commit -m "$MSG" --no-verify
