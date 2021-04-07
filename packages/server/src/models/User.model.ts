@@ -80,7 +80,7 @@ class User extends Model {
   password: string;
 
   @Column({
-    type: ENUM(`user`, `admin`),
+    type: ENUM(`admin`, `manager`, `user`),
     defaultValue: `user`,
   })
   role: string;

@@ -9,7 +9,7 @@ const terminateUserAccount: Route = async (req, res) => {
     const user = req.user as UserObject;
     const { id, role } = user;
 
-    const isOnlyAdmin = isCountOneInUsers(role, `admin`);
+    const isOnlyAdmin = isCountOneInUsers(`role`, `admin`);
 
     if (isOnlyAdmin && role === `admin`) {
       console.log(terminateUserAccountMessage);

@@ -21,6 +21,11 @@ const Header: FunctionComponent = () => {
       p={5}
       mb={20}
       alignItems={`center`}
+      position={`sticky`}
+      css={{
+        position: `-webkit-sticky`,
+      }}
+      top={0}
     >
       <Flex flexDirection={`column`}>
         <Logo text={`My Template`} />

@@ -29,10 +29,10 @@ const updatePassword: Route = async (req, res) => {
       res.status(404).send({ message });
     }
 
-    await updatePasswordSchema.validate(req.body);
+    await updatePasswordSchema.validate(req?.body);
 
-    const { oldPassword, newPassword } = req.body;
     const verify = verifyIfVerifiable(userToUpdate);
+    const { oldPassword, newPassword } = req?.body;
     const unchangedPassword = await verify(userToUpdate?.password, newPassword);
     const oldPasswordMatches = await verify(
       userToUpdate?.password,

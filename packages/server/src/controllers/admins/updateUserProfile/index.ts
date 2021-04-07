@@ -23,9 +23,7 @@ const updateUserProfile: Route = async (req, res) => {
       res.status(400).send({ message });
     }
 
-    const { email, fname: firstName, lname: lastName, role } = req.body;
-
-    await updateUserProfileSchema.validate(req.body);
+    await updateUserProfileSchema.validate(req?.body);
 
     const userToUpdate = await User.findOne({
       attributes: [`id`, `email`, `firstName`, `lastName`, `role`],
@@ -34,12 +32,12 @@ const updateUserProfile: Route = async (req, res) => {
 
     if (!userToUpdate) {
       const message = noUserWasFoundMessage;
-
       console.error(message);
 
       res.status(404).send({ message });
     }
 
+    const { email, fname: firstName, lname: lastName, role } = req?.body;
     const unchangedEmail = userToUpdate?.email === email;
     const unchangedFirstName = userToUpdate?.firstName === firstName;
     const unchangedLastName = userToUpdate?.lastName === lastName;
@@ -58,13 +56,9 @@ const updateUserProfile: Route = async (req, res) => {
       return;
     }
 
-    const emailAlreadyInUser = await emailIsAlreadyInUse(
-      email,
-      userToUpdate,
-      res
-    );
+    const emailAlreadyInUse = await emailIsAlreadyInUse(email, res);
 
-    if (emailAlreadyInUser) {
+    if (emailAlreadyInUse) {
       return;
     }
 

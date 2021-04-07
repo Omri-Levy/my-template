@@ -83,6 +83,7 @@ import secondsToHours from './utils/functions/secondsToHours';
 import capitalize from './utils/functions/capitalize';
 import { roles } from './utils/validation/validationReferences';
 import lowerCaseComparison from './utils/functions/lowerCaseComparison';
+import calculateSeconds from './utils/functions/calculateSeconds';
 
 export {
   apiUrl,
@@ -151,6 +152,7 @@ export {
   updateUserPasswordSchema,
   roles,
   axiosRequest,
+  calculateSeconds,
   calculateMinutes,
   calculateHours,
   secondsToHours,

@@ -32,7 +32,7 @@ type User = UserObject | `unauthenticated` | null;
 type UserKey = `id` | `firstName` | `lastName` | `email` | `role`;
 type Users = UserObject[];
 
-type Roles = `admin` | `user`;
+type Roles = `admin` | `manager` | `user`;
 
 export {
   ObjectKey,

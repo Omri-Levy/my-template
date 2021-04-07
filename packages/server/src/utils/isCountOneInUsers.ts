@@ -12,7 +12,7 @@ const isCountOneInUsers = async (
     };
   }
 
-  return (await User.count(where)) === 1;
+  return (await User.count({ where })) === 1;
 };
 
 export default isCountOneInUsers;

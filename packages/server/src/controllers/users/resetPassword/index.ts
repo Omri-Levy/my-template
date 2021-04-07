@@ -23,7 +23,7 @@ const resetPassword: Route = async (req, res) => {
     await resetPasswordSchema.validate(req.body);
 
     const verify = verifyIfVerifiable(user);
-    const { securityQuestion, securityAnswer, newPassword } = req.body;
+    const { securityQuestion, securityAnswer, newPassword } = req?.body;
     const securityQuestionMatches = await verify(
       user?.securityQuestion,
       securityQuestion

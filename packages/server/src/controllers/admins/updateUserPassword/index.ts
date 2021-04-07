@@ -24,7 +24,7 @@ const updateUserPassword: Route = async (req, res) => {
       res.status(400).send({ message });
     }
 
-    await updateUserPasswordSchema.validate(req.body);
+    await updateUserPasswordSchema.validate(req?.body);
 
     const userToUpdate = await User.findOne({
       where: { id: userId },
@@ -39,8 +39,8 @@ const updateUserPassword: Route = async (req, res) => {
       res.status(404).send({ message });
     }
 
-    const { newPassword } = req.body;
     const verify = verifyIfVerifiable(userToUpdate);
+    const { newPassword } = req?.body;
     const unchangedPassword = await verify(userToUpdate?.password, newPassword);
 
     if (unchangedPassword) {

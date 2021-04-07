@@ -4,6 +4,7 @@ import Page from '../../Page';
 import NavButton from '../../../NavBox/NavButton';
 import NavBox from '../../../NavBox';
 import useRenderToast from '../../../../hooks/ui/useRenderToast';
+import useColorModeShade from '../../../../hooks/useColorModeShade';
 
 const UnauthenticatedHome: FunctionComponent = () => {
   const toastRef = useRef();
@@ -15,6 +16,8 @@ const UnauthenticatedHome: FunctionComponent = () => {
     display: `grid`,
     placeContent: `center`,
   };
+  const { colorModeShadeInverted } = useColorModeShade(`purple`);
+  const border = `2px solid`;
 
   return (
     <Page title={`Home`} icon={FaHome} display={`grid`}>
@@ -25,14 +28,16 @@ const UnauthenticatedHome: FunctionComponent = () => {
           text={`Sign Up`}
           {...navLinksProps}
           icon={FaUserPlus}
-          colorScheme={`purple`}
+          border={border}
+          borderColor={colorModeShadeInverted}
         />
         <NavButton
           to={`/signIn`}
           text={`Sign In`}
           {...navLinksProps}
           icon={FaSignInAlt}
-          colorScheme={`purple`}
+          border={border}
+          borderColor={colorModeShadeInverted}
         />
       </NavBox>
     </Page>

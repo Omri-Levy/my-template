@@ -1,4 +1,4 @@
-import { Box, Heading, Icon } from '@chakra-ui/react';
+import { Box, Fade, Heading, Icon } from '@chakra-ui/react';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
 
@@ -15,13 +15,15 @@ const Page: FunctionComponent<Props> = ({
   children,
   ...props
 }) => (
-  <Box as={`section`} {...props}>
-    <Heading as={`h1`} mb={5}>
-      {icon && <Icon as={icon} mr={5} mb={2} {...iconProps} />}
-      {title}
-    </Heading>
-    {children}
-  </Box>
+  <Fade in>
+    <Box as={`section`} {...props}>
+      <Heading as={`h1`} mb={5}>
+        {icon && <Icon as={icon} mr={5} mb={2} {...iconProps} />}
+        {title}
+      </Heading>
+      {children}
+    </Box>
+  </Fade>
 );
 
 export default Page;

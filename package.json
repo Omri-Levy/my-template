@@ -11,24 +11,6 @@
     "singleQuote": true,
     "printWidth": 80
   },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix"
-    ],
-    "*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
-      "prettier --write",
-      "yarn ci",
-      "yarn cy:run"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lerna run precommit --parallel --stream",
-      "post-commit": "git push"
-    }
-  },
   "scripts": {
     "story": "lerna run story --stream",
     "release": "standard-version --parallel --stream",
@@ -40,22 +22,12 @@
     "format": "lerna run format --parallel --stream",
     "prepare": "husky install"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
   "devDependencies": {
     "@babel/preset-env": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.16",
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
     "@types/axios": "^0.14.0",
     "@types/dotenv-safe": "^8.1.1",
     "@types/jest": "^26.0.20",

@@ -1,20 +1,16 @@
 import { emailAlreadyInUseMessage } from '@my-template/shared';
 import { Response } from 'express';
 import isCountOneInUsers from './isCountOneInUsers';
-import User from '../models/User.model';
 
 const emailIsAlreadyInUse = async (
   email: string,
-  user: User | null,
   res: Response
 ): Promise<boolean> => {
-  let emailAlreadyInUse = false;
+  const emailAlreadyInUse = email
+    ? await isCountOneInUsers(`email`, email)
+    : false;
 
-  if (email) {
-    emailAlreadyInUse = await isCountOneInUsers(email);
-  }
-
-  if (emailAlreadyInUse && user?.email !== email) {
+  if (emailAlreadyInUse) {
     console.error(emailAlreadyInUseMessage);
 
     res.status(400).send({ message: emailAlreadyInUseMessage });

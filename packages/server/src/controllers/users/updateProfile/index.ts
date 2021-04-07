@@ -13,20 +13,18 @@ const updateProfile: Route = async (req, res) => {
   try {
     const user = req.user as UserObject;
     const { id } = user;
-    const { email, fname: firstName, lname: lastName } = req.body;
-
-    await updateProfileSchema.validate(req.body);
+    await updateProfileSchema.validate(req?.body);
 
     const userToUpdate = await User.findOne({ where: { id } });
 
     if (!userToUpdate) {
       const message = noUserWasFoundMessage;
-
       console.error(message);
 
       res.status(404).send({ message });
     }
 
+    const { email, fname: firstName, lname: lastName } = req?.body;
     const unchangedEmail = userToUpdate?.email === email;
     const unchangedFirstName = userToUpdate?.firstName === firstName;
     const unchangedLastName = userToUpdate?.lastName === lastName;
@@ -39,13 +37,9 @@ const updateProfile: Route = async (req, res) => {
       return;
     }
 
-    const emailAlreadyInUser = await emailIsAlreadyInUse(
-      email,
-      userToUpdate,
-      res
-    );
+    const emailAlreadyInUse = await emailIsAlreadyInUse(email, res);
 
-    if (emailAlreadyInUser) {
+    if (emailAlreadyInUse) {
       return;
     }
 

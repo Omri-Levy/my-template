@@ -1,13 +1,18 @@
 import { hash } from 'argon2';
-import { emailAlreadyInUseMessage, signUpSchema } from '@my-template/shared';
+import { signUpSchema } from '@my-template/shared';
 
 import User from '../../../models/User.model';
 import { Route } from '../../../utils/types';
 import isCountOneInUsers from '../../../utils/isCountOneInUsers';
 import isCountZeroInUsers from '../../../utils/isCountZeroInUsers';
+import emailIsAlreadyInUse from '../../../utils/emailIsAlreadyInUse';
 
 const signUp: Route = async (req, res) => {
   try {
+    await signUpSchema.validate(req?.body, {
+      abortEarly: false,
+    });
+
     const {
       fname: firstName,
       lname: lastName,
@@ -16,13 +21,7 @@ const signUp: Route = async (req, res) => {
       securityAnswer,
       password,
       role,
-    } = req.body;
-    console.log(req.body);
-
-    await signUpSchema.validate(req.body, {
-      abortEarly: false,
-    });
-
+    } = req?.body;
     const hashedPassword = await hash(password);
     const hashedSecurityQuestion = await hash(securityQuestion);
     const hashedSecurityAnswer = await hash(securityAnswer);
@@ -36,13 +35,9 @@ const signUp: Route = async (req, res) => {
       requiredRole = `admin`;
     }
 
-    const user = await User.findOne({ where: { email } });
+    const emailAlreadyInUse = await emailIsAlreadyInUse(email, res);
 
-    if (user) {
-      console.error(emailAlreadyInUseMessage);
-
-      res.status(400).send({ message: emailAlreadyInUseMessage });
-
+    if (emailAlreadyInUse) {
       return;
     }
 
