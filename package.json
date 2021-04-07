@@ -20,7 +20,8 @@
     "test": "lerna run test --parallel --stream",
     "start": "lerna run start --parallel --stream",
     "format": "lerna run format --parallel --stream",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "setup": "yarn install && lerna bootstrap"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.16",
