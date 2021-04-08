@@ -4,7 +4,7 @@ import { axiosRequest } from '@my-template/shared';
 import { HookReturns, SignOut } from './types';
 import useSuccessToast from '../../ui/useSuccessToast';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
-import useResetSensitiveSessionStorage from '../../useResetSensitiveSessionStorage';
+import useResetSensitiveSessionStorage from '../../caching/useResetSensitiveSessionStorage';
 
 /**
  * a hook that takes all the steps required out order to sign out,

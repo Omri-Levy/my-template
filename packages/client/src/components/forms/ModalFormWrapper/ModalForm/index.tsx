@@ -7,7 +7,7 @@ import Recaptcha from '../../Recaptcha';
 import { Props } from './types';
 import useDisableSubmit from '../../../../hooks/forms/useDisableSubmit';
 import useGRecaptchaResponse from '../../../../hooks/forms/useGRecaptchaResponse';
-import useColorModeShade from '../../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 
 const ModalForm: FunctionComponent<Props> = ({
   icons = true,

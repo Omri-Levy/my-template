@@ -16,7 +16,7 @@ const Page: FunctionComponent<Props> = ({
   ...props
 }) => (
   <Fade in>
-    <Box as={`section`} {...props}>
+    <Box as={`section`} pt={{ base: 10, sm: 0 }} {...props}>
       <Heading as={`h1`} mb={5}>
         {icon && <Icon as={icon} mr={5} mb={2} {...iconProps} />}
         {title}

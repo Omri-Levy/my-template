@@ -2,7 +2,7 @@ import { Box, Icon, Link, ListItem } from '@chakra-ui/react';
 import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 import { Props } from './types';
-import useColorModeShade from '../../../../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../../../../hooks/ui/useColorModeShade';
 
 /**
  * @description a reusable navigation link component with active link styling
@@ -32,7 +32,13 @@ const NavLink: FunctionComponent<Props> = ({
   }
 
   return (
-    <ListItem pl={5} _first={{ paddingLeft: 0 }} minWidth={`70px`} {...props}>
+    <ListItem
+      pl={{ base: 0, sm: 5 }}
+      pt={{ base: 5, sm: 0 }}
+      _first={{ base: { paddingLeft: 0 }, sm: { paddingTop: 0 } }}
+      minWidth={`70px`}
+      {...props}
+    >
       <Link
         display={`flex`}
         exact={exact}

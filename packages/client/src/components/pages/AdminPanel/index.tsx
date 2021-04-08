@@ -12,7 +12,7 @@ import Table from '../../Table';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import NoUserFound from '../../NoUserFound';
 import AdminActions from './AdminActions';
-import useUserIds from '../../../hooks/useUserIds';
+import useUserIds from '../../../hooks/caching/useUserIds';
 import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
 
 /**

@@ -18,7 +18,7 @@ import {
 import { FaTimes, FaTrashAlt } from 'react-icons/fa';
 import { Props } from './types';
 import Alert from '../Alert';
-import useColorModeShade from '../../hooks/useColorModeShade';
+import useColorModeShade from '../../hooks/ui/useColorModeShade';
 
 const Modal: FunctionComponent<Props> = ({
   buttonProps,

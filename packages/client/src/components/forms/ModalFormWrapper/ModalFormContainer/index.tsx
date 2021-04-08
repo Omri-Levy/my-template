@@ -10,7 +10,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import { Props } from './types';
-import useColorModeShade from '../../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 
 const ModalFormContainer: FunctionComponent<Props> = ({
   icons = true,

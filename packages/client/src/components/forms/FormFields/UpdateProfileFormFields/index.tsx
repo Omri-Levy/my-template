@@ -7,7 +7,7 @@ import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
 import AuthenticationContext from '../../../../context/AuthenticationContext/AuthenticationContext';
 import NoUserFound from '../../../NoUserFound';
-import useUserIds from '../../../../hooks/useUserIds';
+import useUserIds from '../../../../hooks/caching/useUserIds';
 import queryClient from '../../../globals/Providers/queryClient';
 import fetchGetRoles from '../../../../utils/api/fetchGetRoles';
 import AuthorizationContext from '../../../../context/AuthorizationContext/AuthorizationContext';

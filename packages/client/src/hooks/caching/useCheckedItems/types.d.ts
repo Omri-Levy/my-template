@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { ColumnsArray, SetState } from '../../utils/types';
+import { ColumnsArray, SetState } from '../../../utils/types';
 
 type CheckCheckbox = (
   ids: string[],

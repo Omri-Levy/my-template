@@ -7,7 +7,7 @@ import {
   FaAngleRight,
 } from 'react-icons/fa';
 import { Props } from './types';
-import useColorModeShade from '../../../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../../../hooks/ui/useColorModeShade';
 
 const PaginationButton: FunctionComponent<Props> = ({
   icons = true,

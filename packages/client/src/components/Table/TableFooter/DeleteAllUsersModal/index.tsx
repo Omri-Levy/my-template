@@ -7,7 +7,7 @@ import Modal from '../../../Modal';
 import { DeleteAllUsers } from './types';
 import queryClient from '../../../globals/Providers/queryClient';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
-import useLoading from '../../../../hooks/useLoading';
+import useLoading from '../../../../hooks/ui/useLoading';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();

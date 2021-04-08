@@ -1,5 +1,5 @@
 import { HookReturns } from './types';
-import useDarkMode from '../ui/useDarkMode';
+import useDarkMode from '../useDarkMode';
 
 /**
  * TODO: Update description

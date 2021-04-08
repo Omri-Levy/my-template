@@ -9,6 +9,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaChevronRight } from 'react-icons/fa';
 import { Props } from './types';
 import handleDisableLinks from './handleDisableLinks';
+import useDarkMode from '../../../../hooks/ui/useDarkMode';
 
 const Breadcrumbs: FunctionComponent<Props> = ({
   breadcrumbs,
@@ -18,6 +19,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({
 }) => {
   const { pathname } = useLocation();
   const disabledBreadcrumbs = handleDisableLinks(breadcrumbs, disableSubmit);
+  const { darkModeColor } = useDarkMode();
 
   return (
     <ChakraBreadcrumb
@@ -58,7 +60,8 @@ const Breadcrumbs: FunctionComponent<Props> = ({
             <BreadcrumbLink
               pointerEvents={disableLink || isCurrentPage ? `none` : undefined}
               _activeLink={{
-                borderBottom: `1px solid white`,
+                borderBottom: `1px solid`,
+                borderColor: darkModeColor,
                 _hover: {
                   textDecoration: `none`,
                 },

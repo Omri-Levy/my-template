@@ -1,9 +1,16 @@
 import { FunctionComponent, memo } from 'react';
-import { Flex } from '@chakra-ui/react';
+import {
+  Flex,
+  Icon,
+  keyframes,
+  useBreakpointValue,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import Nav from './Nav';
+import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import Logo from './Logo';
 import DarkModeSwitch from './DarkModeSwitch';
-import useDarkMode from '../../../../hooks/ui/useDarkMode';
 
 /**
  * a simple header component made using Chakra-UI's Flex component with the
@@ -12,27 +19,69 @@ import useDarkMode from '../../../../hooks/ui/useDarkMode';
  */
 const Header: FunctionComponent = () => {
   const { darkModeColor, darkModeColorInverted } = useDarkMode();
+  const {
+    isOpen: burgerMenuIsOpen,
+    onToggle: toggleBurgerMenu,
+  } = useDisclosure();
+  const burgerDimensions = `35px`;
+  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const opacity = isMobile ? (burgerMenuIsOpen ? 1 : 0) : 1;
+  const spin = keyframes`
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  `;
+  const animationDirection = burgerMenuIsOpen ? `reverse` : `normal`;
+  const animation = `${spin} 300ms ease-in ${animationDirection};`;
 
   return (
-    <Flex
-      as={`header`}
-      backgroundColor={darkModeColor}
-      color={darkModeColorInverted}
-      p={5}
-      mb={20}
-      alignItems={`center`}
-      position={`sticky`}
-      css={{
-        position: `-webkit-sticky`,
-      }}
-      top={0}
-    >
-      <Flex flexDirection={`column`}>
-        <Logo text={`My Template`} />
-        <DarkModeSwitch mt={5} mr={`auto`} />
+    <>
+      <Flex
+        as={`header`}
+        opacity={opacity}
+        backgroundColor={darkModeColor}
+        color={darkModeColorInverted}
+        p={5}
+        mb={20}
+        alignItems={`center`}
+        position={{ base: `fixed`, sm: `sticky` }}
+        css={{
+          position: `-webkit-sticky`,
+        }}
+        top={0}
+        zIndex={{ base: burgerMenuIsOpen ? 1 : -1, sm: `unset` }}
+        left={{ base: 0, sm: `unset` }}
+        right={{ base: 0, sm: `unset` }}
+        height={{ base: `100vh`, sm: `unset` }}
+        flexDirection={{ base: `column`, sm: `row` }}
+        transition={`opacity 300ms ease-in`}
+      >
+        <Flex flexDirection={`column`}>
+          <Logo text={`My Template`} />
+          <DarkModeSwitch
+            mt={5}
+            mr={`auto`}
+            position={{ base: `fixed`, sm: `unset` }}
+            left={{ base: 5, sm: `unset` }}
+            top={{ base: 0, sm: `unset` }}
+          />
+        </Flex>
+        <Nav toggleBurgerMenu={toggleBurgerMenu} />
       </Flex>
-      <Nav />
-    </Flex>
+      {isMobile && (
+        <Icon
+          as={burgerMenuIsOpen ? FaTimes : FaBars}
+          zIndex={2}
+          width={burgerDimensions}
+          height={burgerDimensions}
+          position={`fixed`}
+          left={burgerDimensions}
+          bottom={burgerDimensions}
+          onClick={toggleBurgerMenu}
+          color={burgerMenuIsOpen ? darkModeColorInverted : darkModeColor}
+          animation={animation}
+        />
+      )}
+    </>
   );
 };
 export default memo(Header);

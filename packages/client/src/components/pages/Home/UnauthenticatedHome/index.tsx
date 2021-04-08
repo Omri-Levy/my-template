@@ -4,7 +4,7 @@ import Page from '../../Page';
 import NavButton from '../../../NavBox/NavButton';
 import NavBox from '../../../NavBox';
 import useRenderToast from '../../../../hooks/ui/useRenderToast';
-import useColorModeShade from '../../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 
 const UnauthenticatedHome: FunctionComponent = () => {
   const toastRef = useRef();

@@ -6,7 +6,7 @@ import { Props } from './types';
 import useGRecaptchaResponse from '../../../hooks/forms/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 import Card from '../../Card';
-import useColorModeShade from '../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../hooks/ui/useColorModeShade';
 
 /**
  * TODO: update description

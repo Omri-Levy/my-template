@@ -7,7 +7,7 @@ import {
   Users,
 } from '@my-template/shared';
 import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
-import useLoading from '../../../../hooks/useLoading';
+import useLoading from '../../../../hooks/ui/useLoading';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 import useErrorToast from '../../../../hooks/ui/useErrorToast';
 import { DeleteUser } from '../../../Table/TableFooter/types';
@@ -16,7 +16,7 @@ import queryClient from '../../../globals/Providers/queryClient';
 import { Props } from './types';
 import UpdateUserProfileForm from '../../../forms/UpdateUserProfileForm';
 import UpdateUserPasswordForm from '../../../forms/UpdateUserPasswordForm';
-import useColorModeShade from '../../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 import AuthorizationContext from '../../../../context/AuthorizationContext/AuthorizationContext';
 
 /**

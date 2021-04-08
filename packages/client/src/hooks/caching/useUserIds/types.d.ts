@@ -1,4 +1,4 @@
-import { SetState } from '../../utils/types';
+import { SetState } from '../../../utils/types';
 
 type SetUserIds = (value: string[]) => void;
 type GetUserIds = () => string[];

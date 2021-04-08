@@ -8,7 +8,7 @@ import useGRecaptchaResponse from '../../../hooks/forms/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 import Breadcrumbs from './Breadcrumbs';
 import useFormNavigation from './hooks/useFormNavigation';
-import useColorModeShade from '../../../hooks/useColorModeShade';
+import useColorModeShade from '../../../hooks/ui/useColorModeShade';
 
 /**
  * NOTE: navigation to disabled breadcrumb links changing the browser's url is

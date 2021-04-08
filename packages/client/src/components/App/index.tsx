@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { resetSignUpFormDetails } from '../../redux/reducer';
 import Routes from '../globals/Routes';
 import Loading from '../globals/Loading';
-import useResetSensitiveSessionStorage from '../../hooks/useResetSensitiveSessionStorage';
+import useResetSensitiveSessionStorage from '../../hooks/caching/useResetSensitiveSessionStorage';
 
 const App: FunctionComponent = () => {
   const dispatch = useDispatch();

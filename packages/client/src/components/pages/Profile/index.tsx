@@ -14,7 +14,7 @@ import Modal from '../../Modal';
 import fetchTerminateUserAccount from '../../../utils/api/fetchTerminateUserAccount';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 import UpdateProfileForm from '../../forms/UpdateProfileForm';
-import useLoading from '../../../hooks/useLoading';
+import useLoading from '../../../hooks/ui/useLoading';
 import UpdatePasswordForm from '../../forms/UpdatePasswordForm';
 
 /**

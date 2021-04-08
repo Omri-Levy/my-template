@@ -6,10 +6,10 @@ import {
   useTable,
 } from 'react-table';
 import { useBreakpointValue } from '@chakra-ui/react';
-import useCheckedItems from '../../../hooks/useCheckedItems';
+import useCheckedItems from '../../../hooks/caching/useCheckedItems';
 import fuzzyTextFilter from '../functions/fuzzyTextFilter';
-import useCachedPageSize from '../../../hooks/useCachedPageSize';
-import useUpdatePageSize from '../../../hooks/useUpdatePageSize';
+import useCachedPageSize from '../../../hooks/caching/useCachedPageSize';
+import useUpdatePageSize from '../../../hooks/caching/useUpdatePageSize';
 import TableInstance from '../TableInstance';
 import { Props } from '../types';
 

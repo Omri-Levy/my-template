@@ -1,4 +1,4 @@
-import { ChakraColorScheme } from '../../utils/types';
+import { ChakraColorScheme } from '../../../utils/types';
 
 type HookReturns = (
   color: ChakraColorScheme

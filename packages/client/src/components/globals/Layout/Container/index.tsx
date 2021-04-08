@@ -7,7 +7,9 @@ import { ChildrenProps } from '../../../../utils/types';
  * html "main" tag in the "as" prop.
  */
 const Container: FunctionComponent<ChildrenProps> = ({ children }) => (
-  <MainContainer as={`main`}>{children}</MainContainer>
+  <MainContainer as={`main`} height={{ base: `100%`, sm: `unset` }}>
+    {children}
+  </MainContainer>
 );
 
 export default memo(Container);
