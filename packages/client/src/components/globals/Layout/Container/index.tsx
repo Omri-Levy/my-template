@@ -7,7 +7,11 @@ import { ChildrenProps } from '../../../../utils/types';
  * html "main" tag in the "as" prop.
  */
 const Container: FunctionComponent<ChildrenProps> = ({ children }) => (
-  <MainContainer as={`main`} height={{ base: `100%`, sm: `unset` }}>
+  <MainContainer
+    maxWidth={{ base: `unset`, sm: `60ch` }}
+    as={`main`}
+    height={{ base: `100%`, sm: `unset` }}
+  >
     {children}
   </MainContainer>
 );

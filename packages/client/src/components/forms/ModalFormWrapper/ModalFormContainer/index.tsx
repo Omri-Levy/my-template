@@ -42,7 +42,7 @@ const ModalFormContainer: FunctionComponent<Props> = ({
       </Button>
       <ChakraModal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent boxShadow={`-1px 1px 0.5rem rgba(0, 0, 0, 0.3)`}>
           <ModalHeader>
             {icons && <Icon as={headerIcon} mr={5} mb={0.5} />}
             {headerText}

@@ -55,7 +55,7 @@ const signIn: Route = async (req, res) => {
       return;
     }
 
-    const jwtToken = generateJwtToken(user, `30m`);
+    const jwtToken = generateJwtToken(user, `9h`);
     sendJwtToken(res, jwtToken);
 
     console.log(`Sign in successful.`);

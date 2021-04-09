@@ -1,5 +1,5 @@
 import { FunctionComponent, memo } from 'react';
-import { Divider, Flex, Td, Tr } from '@chakra-ui/react';
+import { Divider, Flex, Td, Tr, useBreakpointValue } from '@chakra-ui/react';
 import { Props } from './types';
 import Card from '../../Card';
 import GoToPage from './GoToPage';
@@ -21,20 +21,23 @@ const Pagination: FunctionComponent<Props> = ({
   ...props
 }) => {
   const displayPagination = pageCount > 1;
+  const isMobile = useBreakpointValue({ base: true, sm: false });
 
   /**
    * TODO: refactor the component into smaller components.
    */
   return (
     <Tr>
-      <Td colSpan={colSpan}>
+      <Td colSpan={colSpan} px={{ base: 4, sm: undefined }}>
         <PageCounter pageCount={pageCount} pageIndex={pageIndex} />
         <Card
           display={`flex`}
-          justifyContent={`center`}
+          justifyContent={{ base: `unset`, sm: `center` }}
+          alignItems={{ base: `center`, sm: `unset` }}
           color={`unset`}
           backgroundColor={`unset`}
           as={`nav`}
+          flexDirection={{ base: `column`, sm: `row` }}
           {...props}
         >
           {displayPagination && (
@@ -48,7 +51,12 @@ const Pagination: FunctionComponent<Props> = ({
                 nextPage={nextPage}
               />
               <Flex>
-                <Divider orientation={`vertical`} mr={10} />
+                <Divider
+                  orientation={!isMobile ? `vertical` : `horizontal`}
+                  mr={{ base: 0, sm: 10 }}
+                  mt={{ base: 5, sm: 0 }}
+                  mb={{ base: 5, sm: 0 }}
+                />
               </Flex>
             </>
           )}
@@ -60,7 +68,12 @@ const Pagination: FunctionComponent<Props> = ({
           {displayPagination && (
             <>
               <Flex>
-                <Divider orientation={`vertical`} mr={10} />
+                <Divider
+                  orientation={!isMobile ? `vertical` : `horizontal`}
+                  mr={{ base: 0, sm: 10 }}
+                  mt={{ base: 5, sm: 0 }}
+                  mb={{ base: 5, sm: 0 }}
+                />
               </Flex>
               <GoToPage
                 pageCount={pageCount}

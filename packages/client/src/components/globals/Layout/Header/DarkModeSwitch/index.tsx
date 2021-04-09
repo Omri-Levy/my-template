@@ -1,10 +1,11 @@
-import { FunctionComponent, memo } from 'react';
+import { Fragment, FunctionComponent, memo } from 'react';
 import {
   DarkMode,
   HStack,
   Icon,
   LightMode,
   Switch,
+  useBreakpointValue,
   useColorMode,
 } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
@@ -16,17 +17,22 @@ import useDarkMode from '../../../../../hooks/ui/useDarkMode';
  * Icon and Switch components - toggles dark mode using Chakra-UI's
  * toggleColorMode/useColorMode in the onChange of the Switch.
  */
-const DarkModeSwitch: FunctionComponent<Props> = (props) => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const icon = colorMode === `dark` ? FaMoon : FaSun;
+const DarkModeSwitch: FunctionComponent<Props> = ({ color, ...props }) => {
+  const { toggleColorMode } = useColorMode();
   const { isDarkMode } = useDarkMode();
-  const Mode = isDarkMode ? LightMode : DarkMode;
+  const icon = isDarkMode ? FaMoon : FaSun;
+  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const Mode = isMobile ? Fragment : isDarkMode ? LightMode : DarkMode;
 
   return (
     <HStack spacing={3} alignItems={`center`} {...props}>
+      <Icon as={icon} mb={`3.5px`} />
       <Mode>
-        <Icon as={icon} mb={`3.5px`} />
-        <Switch onChange={toggleColorMode} />
+        <Switch
+          colorScheme={color || `purple`}
+          onChange={toggleColorMode}
+          isChecked={isDarkMode}
+        />
       </Mode>
     </HStack>
   );

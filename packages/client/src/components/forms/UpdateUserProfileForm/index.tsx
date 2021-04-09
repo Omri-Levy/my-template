@@ -9,7 +9,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { Props, UpdateUserProfile } from './types';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
@@ -99,6 +99,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       !oneUserSelected
     );
   };
+  const isMobile = useBreakpointValue({ base: true, sm: false });
 
   if (!currentUser) {
     return <NoUserFound />;
@@ -115,6 +116,8 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       buttonProps={{
         marginRight: 0,
         disabled: !oneUserSelected,
+        isFullWidth: isMobile,
+        mb: { base: 5, sm: 0 },
         title: !oneUserSelected
           ? `Please make sure a single user is selected.`
           : undefined,

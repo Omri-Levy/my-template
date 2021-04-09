@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { serverErrorMessage, Users } from '@my-template/shared';
 import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
@@ -43,9 +43,13 @@ const DeleteAllUsersModal: FunctionComponent = () => {
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
+  const isMobile = useBreakpointValue({ base: true, sm: false });
 
   return (
     <Modal
+      buttonProps={{
+        isFullWidth: isMobile,
+      }}
       headerIcon={FaTrashAlt}
       toggleButtonText={`Delete All`}
       toggleButtonColor={`red`}

@@ -1,7 +1,7 @@
 import { extendTheme } from '@chakra-ui/react';
 
 type Mode = `light` | `dark` | undefined;
-const mode: Mode = `light`;
+const mode = (localStorage.getItem(`chakra-ui-color-mode`) as Mode) || `light`;
 const config = {
   initialColorMode: mode,
   useSystemColorMode: false,

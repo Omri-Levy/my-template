@@ -18,7 +18,9 @@ const NavLink: FunctionComponent<Props> = ({
   activeColor,
   ...props
 }) => {
-  const { colorModeShade } = useColorModeShade(activeColor || `purple`);
+  const { colorModeShadeInverted, colorModeShade } = useColorModeShade(
+    activeColor || `purple`
+  );
 
   // styles to apply only when an icon is passed in.
   let withIconStyles = {};
@@ -48,7 +50,7 @@ const NavLink: FunctionComponent<Props> = ({
           outline: `none`,
         }}
         _focusVisible={{
-          borderColor: colorModeShade,
+          borderColor: { base: colorModeShadeInverted, sm: colorModeShade },
           borderRadius: `18px`,
         }}
         as={ReactRouterNavLink}
@@ -76,7 +78,7 @@ const NavLink: FunctionComponent<Props> = ({
           width={`40px`}
           borderRadius={`3px`}
           as={`span`}
-          backgroundColor={colorModeShade}
+          backgroundColor={{ base: colorModeShadeInverted, sm: colorModeShade }}
           opacity={0}
           transition={`opacity 300ms ease-in`}
           role={`presentation`}

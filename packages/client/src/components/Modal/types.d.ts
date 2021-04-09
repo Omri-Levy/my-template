@@ -1,4 +1,4 @@
-import { ButtonProps, HeadingProps } from '@chakra-ui/react';
+import { ButtonProps, HeadingProps, ModalContentProps } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 import { ChakraColorScheme, Disclosure } from '../../utils/types';
 
@@ -9,16 +9,17 @@ interface Props {
   headerIcon?: IconType;
   toggleButtonText: string;
   toggleButtonColor?: ChakraColorScheme;
-  headerText: string;
-  headingProps: HeadingProps;
-  bodyHeadingText: string;
-  bodyText: string;
+  headerText?: string;
+  headingProps?: HeadingProps;
+  modalProps?: ModalContentProps;
+  bodyHeadingText?: string;
+  bodyText?: string;
   checkbox?: boolean;
   checkboxText?: string;
   actionIcon?: IconType;
-  onClick: (onClose: OnClose) => () => void | Promise<void>;
+  onClick?: (onClose: OnClose) => () => void | Promise<void>;
   isLoading?: boolean;
-  actionText: string;
+  actionText?: string;
   disclosure: Disclosure;
   alertDisclosure: Disclosure;
   errorMessage?: string;

@@ -14,10 +14,11 @@ interface Props {
   previousPage: () => void;
   nextPage: () => void;
   setPageSize: (number: number) => void;
-  colSpan: number;
+  colSpan?: number;
   checkAllCheckboxes: CheckAllCheckboxes;
   checkedItems: boolean[];
   Actions: JSX.Element;
+  currentColumns: number;
 }
 type DeleteUser = (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
 

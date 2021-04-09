@@ -1,6 +1,11 @@
 import { FunctionComponent, useContext } from 'react';
-import { Button, Icon } from '@chakra-ui/react';
-import { FaTrashAlt } from 'react-icons/fa';
+import {
+  Button,
+  Icon,
+  useBreakpointValue,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { FaTrashAlt, FaUserCog } from 'react-icons/fa';
 import {
   deleteSelectedUsersMessage,
   unauthorizedMessage,
@@ -18,6 +23,7 @@ import UpdateUserProfileForm from '../../../forms/UpdateUserProfileForm';
 import UpdateUserPasswordForm from '../../../forms/UpdateUserPasswordForm';
 import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 import AuthorizationContext from '../../../../context/AuthorizationContext/AuthorizationContext';
+import Modal from '../../../Modal';
 
 /**
  * TODO: refactor to controller pattern
@@ -27,6 +33,7 @@ const AdminActions: FunctionComponent<Props> = ({
   ids: userIds,
   checkedItems,
 }) => {
+  const isMobile = useBreakpointValue({ base: true, sm: false });
   const { isLoading, startLoading, stopLoading } = useLoading();
   const {
     toast: deleteSelectedUsersSuccessToast,
@@ -68,6 +75,45 @@ const AdminActions: FunctionComponent<Props> = ({
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const { colorModeShadeInverted } = useColorModeShade(`red`);
+  const alertDisclosure = useDisclosure();
+  const disclosure = useDisclosure();
+
+  if (isMobile) {
+    return (
+      <Modal
+        actionIcon={FaUserCog}
+        headerIcon={FaUserCog}
+        alertDisclosure={alertDisclosure}
+        disclosure={disclosure}
+        toggleButtonText={`Admin Actions`}
+        headerText={`Admin Actions`}
+        modalProps={{
+          mx: 5,
+        }}
+      >
+        <UpdateUserProfileForm userIds={userIds} />
+        <UpdateUserPasswordForm userIds={userIds} />
+        <Button
+          rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
+          onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
+          disabled={!checkedItems.some(Boolean)}
+          isLoading={isLoading}
+          title={
+            !checkedItems.some(Boolean) ? deleteSelectedUsersMessage : undefined
+          }
+          border={`2px solid`}
+          borderColor={colorModeShadeInverted}
+          mr={5}
+          p={5}
+          isFullWidth={isMobile}
+          mb={{ base: 5, sm: 0 }}
+        >
+          Delete Selected
+        </Button>
+        {users?.length > 1 && <DeleteAllUsersModal />}
+      </Modal>
+    );
+  }
 
   return (
     <>

@@ -5,14 +5,12 @@ import useRoutes from '../../../../../hooks/ui/useRoutes';
 import shouldSkipLink from './shouldSkipLink';
 import useSignOut from '../../../../../hooks/api/useSignOut';
 import AuthenticationContext from '../../../../../context/AuthenticationContext/AuthenticationContext';
-import useDarkMode from '../../../../../hooks/ui/useDarkMode';
 import { Props } from './types';
 
 const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu }) => {
   const { memoizedRoutes } = useRoutes();
   const signOut = useSignOut();
   const { currentUser } = useContext(AuthenticationContext);
-  const { darkModeColor } = useDarkMode();
   const closeBurgerMenu = (to: string) => async () => {
     if (to === `/signOut`) {
       await signOut();
@@ -27,7 +25,6 @@ const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu }) => {
         direction={{ base: `column`, sm: `row` }}
         as={List}
         listStyleType={`none`}
-        backgroundColor={darkModeColor}
       >
         {memoizedRoutes.map((memoizedRoute) => {
           const { to, text, icon, exact } = memoizedRoute;

@@ -15,7 +15,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
-import { FaTimes, FaTrashAlt } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import { Props } from './types';
 import Alert from '../Alert';
 import useColorModeShade from '../../hooks/ui/useColorModeShade';
@@ -39,6 +39,8 @@ const Modal: FunctionComponent<Props> = ({
   disclosure,
   alertDisclosure,
   errorMessage,
+  modalProps,
+  children,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isChecked, onOpen: onCheck, onClose: onUncheck } = disclosure;
@@ -49,7 +51,9 @@ const Modal: FunctionComponent<Props> = ({
   return (
     <>
       <Button
-        rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
+        rightIcon={
+          icons && actionIcon ? <Icon as={actionIcon} mb={0.5} /> : undefined
+        }
         onClick={onOpen}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
@@ -59,16 +63,24 @@ const Modal: FunctionComponent<Props> = ({
       </Button>
       <ChakraModal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            {icons && <Icon as={headerIcon} mr={5} mb={0.5} />}
-            {headerText}
-          </ModalHeader>
+        <ModalContent
+          boxShadow={`-1px 1px 0.5rem rgba(0, 0, 0, 0.3)`}
+          {...modalProps}
+        >
+          {headerText && (
+            <ModalHeader>
+              {icons && headerIcon && <Icon as={headerIcon} mr={5} mb={0.5} />}
+              {headerText}
+            </ModalHeader>
+          )}
           <ModalBody>
-            <Heading as={`h2`} {...headingProps}>
-              {bodyHeadingText}
-            </Heading>
-            <Text>{bodyText}</Text>
+            {bodyHeadingText && (
+              <Heading as={`h2`} fontSize={16} {...headingProps}>
+                {bodyHeadingText}
+              </Heading>
+            )}
+            {bodyText && <Text>{bodyText}</Text>}
+            {children}
             {checkbox && (
               <Flex justifyContent={`flex-end`} mr={`65px`}>
                 <Checkbox
@@ -97,19 +109,21 @@ const Modal: FunctionComponent<Props> = ({
               >
                 Cancel
               </Button>
-              <Button
-                rightIcon={
-                  icons && actionIcon ? (
-                    <Icon as={actionIcon} mb={0.5} />
-                  ) : undefined
-                }
-                onClick={onClick(onClose)}
-                isLoading={isLoading}
-                border={`2px solid`}
-                borderColor={colorModeShadeInverted}
-              >
-                {actionText}
-              </Button>
+              {onClick && (
+                <Button
+                  rightIcon={
+                    icons && actionIcon ? (
+                      <Icon as={actionIcon} mb={0.5} />
+                    ) : undefined
+                  }
+                  onClick={onClick(onClose)}
+                  isLoading={isLoading}
+                  border={`2px solid`}
+                  borderColor={colorModeShadeInverted}
+                >
+                  {actionText}
+                </Button>
+              )}
             </ButtonGroup>
           </ModalFooter>
         </ModalContent>

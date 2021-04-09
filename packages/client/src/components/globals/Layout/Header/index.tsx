@@ -1,5 +1,6 @@
 import { FunctionComponent, memo } from 'react';
 import {
+  Box,
   Flex,
   Icon,
   keyframes,
@@ -23,7 +24,7 @@ const Header: FunctionComponent = () => {
     isOpen: burgerMenuIsOpen,
     onToggle: toggleBurgerMenu,
   } = useDisclosure();
-  const burgerDimensions = `35px`;
+  const burgerDimensions = `50px`;
   const isMobile = useBreakpointValue({ base: true, sm: false });
   const opacity = isMobile ? (burgerMenuIsOpen ? 1 : 0) : 1;
   const spin = keyframes`
@@ -38,8 +39,8 @@ const Header: FunctionComponent = () => {
       <Flex
         as={`header`}
         opacity={opacity}
-        backgroundColor={darkModeColor}
-        color={darkModeColorInverted}
+        backgroundColor={{ base: darkModeColorInverted, sm: darkModeColor }}
+        color={{ base: darkModeColor, sm: darkModeColorInverted }}
         p={5}
         mb={20}
         alignItems={`center`}
@@ -68,18 +69,29 @@ const Header: FunctionComponent = () => {
         <Nav toggleBurgerMenu={toggleBurgerMenu} />
       </Flex>
       {isMobile && (
-        <Icon
-          as={burgerMenuIsOpen ? FaTimes : FaBars}
-          zIndex={2}
+        <Box
           width={burgerDimensions}
           height={burgerDimensions}
+          borderRadius={`100vw`}
+          backgroundColor={darkModeColor}
+          cursor={`pointer`}
+          zIndex={2}
           position={`fixed`}
-          left={burgerDimensions}
+          right={burgerDimensions}
           bottom={burgerDimensions}
           onClick={toggleBurgerMenu}
-          color={burgerMenuIsOpen ? darkModeColorInverted : darkModeColor}
-          animation={animation}
-        />
+          p={5}
+          display={`grid`}
+          placeContent={`center`}
+        >
+          <Icon
+            width={`35px`}
+            height={`30px`}
+            as={burgerMenuIsOpen ? FaTimes : FaBars}
+            color={darkModeColorInverted}
+            animation={animation}
+          />
+        </Box>
       )}
     </>
   );

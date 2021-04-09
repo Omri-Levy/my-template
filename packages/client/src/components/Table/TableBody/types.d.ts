@@ -9,6 +9,7 @@ interface Props {
   prepareRow: (row: Row<ColumnType>) => void;
   checkCheckbox: CheckCheckbox;
   checkedItems: boolean[];
+  currentColumns: number;
 }
 
 export { Props };

@@ -1,5 +1,5 @@
 import { ChangeEvent, FunctionComponent, memo, useMemo } from 'react';
-import { FormControl, FormLabel } from '@chakra-ui/react';
+import { FormControl, FormLabel, useBreakpointValue } from '@chakra-ui/react';
 import SelectGroup from '../../../SelectGroup';
 import { Props } from './types';
 
@@ -8,6 +8,7 @@ const RowsPerPage: FunctionComponent<Props> = ({
   setPageSize,
   rowsLength,
 }) => {
+  const isMobile = useBreakpointValue({ base: true, sm: false });
   const selectOptions = useMemo(() => [1, 5, 10, `All`], []);
   const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -34,7 +35,7 @@ const RowsPerPage: FunctionComponent<Props> = ({
       display={`flex`}
       alignItems={`center`}
       id={`rowsPerPage`}
-      pr={displayPagination ? 10 : 0}
+      pr={!isMobile && displayPagination ? 10 : 0}
     >
       <FormLabel mt={1} minWidth={`152px`}>
         Show rows per page:

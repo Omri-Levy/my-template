@@ -1,54 +1,114 @@
-import { FunctionComponent } from 'react';
-import { Flex, Table as ChakraTable, TableCaption } from '@chakra-ui/react';
-import Card from '../../Card';
+import { FunctionComponent, useState } from 'react';
+import {
+  Flex,
+  Table as ChakraTable,
+  TableCaption,
+  useBreakpointValue,
+} from '@chakra-ui/react';
+import { chunk } from 'lodash';
 import TableHead from '../TableHead';
 import TableBody from '../TableBody';
 import TableFooter from '../TableFooter';
 import { Props } from './types';
+import Card from '../../Card';
+import ColumnsTabs from '../ColumnsTabs';
 
 const TableInstance: FunctionComponent<Props> = ({
   Actions,
   tableProps,
   ...props
-}) => (
-  <Flex flexDirection={`column`} alignItems={`center`}>
-    <Card color={`unset`} backgroundColor={`unset`}>
-      <ChakraTable {...props.getTableProps()} {...tableProps}>
-        <TableCaption>{props.caption}</TableCaption>
-        <TableHead headerGroups={props.headerGroups} />
-        <TableBody
-          getTableBodyProps={props.getTableBodyProps}
-          page={props.page}
-          prepareRow={props.prepareRow}
-          checkCheckbox={props.checkCheckboxInstance}
-          checkedItems={props.checkedItems}
-        />
-        <TableFooter
-          footerGroups={props.footerGroups}
-          globalFilter={props.globalFilter}
-          setGlobalFilter={props.setGlobalFilter}
-          pageIndex={props.pageIndex}
-          pageCount={props.pageCount}
-          rowsLength={props.rowsLength}
-          canPreviousPage={props.canPreviousPage}
-          canNextPage={props.canNextPage}
-          gotoPage={props.gotoPage}
-          previousPage={props.previousPage}
-          nextPage={props.nextPage}
-          setPageSize={props.setPageSize}
-          colSpan={props.columns.length + 1}
-          checkAllCheckboxes={props.checkAllCheckboxesInstance}
-          checkedItems={props.checkedItems}
-          Actions={
-            <Actions
-              {...props.actionsProps}
-              checkedItems={props.checkedItems}
-            />
-          }
-        />
-      </ChakraTable>
-    </Card>
-  </Flex>
-);
+}) => {
+  const [currentColumns, setCurrentColumns] = useState(0);
+  const headerGroupsCopy = [...props.headerGroups];
+  const headers = headerGroupsCopy[0]?.headers?.map(
+    (column) => (column?.Header as string) || ``
+  );
+  const headerChunks = chunk(headers, 2);
+  const columns = [
+    ...headerChunks.map((headerChunk) => ({
+      label: `${headerChunk[0]} ${headerChunk[1] ? `&` : ``} ${
+        headerChunk[1] || ``
+      }`,
+    })),
+  ];
+  const isMobile = useBreakpointValue({ base: true, sm: false });
+
+  return (
+    <Flex
+      flexDirection={!isMobile ? `column` : undefined}
+      alignItems={!isMobile ? `center` : undefined}
+    >
+      <Card
+        backgroundColor={`unset`}
+        color={`unset`}
+        padding={{ base: `unset`, sm: 5 }}
+      >
+        <ChakraTable
+          maxWidth={`100%`}
+          {...props.getTableProps()}
+          {...tableProps}
+        >
+          <TableCaption
+            mb={5}
+            fontWeight={`bold`}
+            placement={`top`}
+            maxWidth={`40ch`}
+            mx={`auto`}
+          >
+            {isMobile && (
+              <ColumnsTabs
+                setCurrentColumns={setCurrentColumns}
+                data={columns}
+              />
+            )}
+            {props.caption}
+          </TableCaption>
+          <TableHead
+            headerGroups={props.headerGroups}
+            currentColumns={currentColumns}
+          />
+          <TableBody
+            getTableBodyProps={props.getTableBodyProps}
+            page={props.page}
+            prepareRow={props.prepareRow}
+            checkCheckbox={props.checkCheckboxInstance}
+            checkedItems={props.checkedItems}
+            currentColumns={currentColumns}
+          />
+          <TableFooter
+            footerGroups={props.footerGroups}
+            globalFilter={props.globalFilter}
+            setGlobalFilter={props.setGlobalFilter}
+            pageIndex={props.pageIndex}
+            pageCount={props.pageCount}
+            rowsLength={props.rowsLength}
+            canPreviousPage={props.canPreviousPage}
+            canNextPage={props.canNextPage}
+            gotoPage={props.gotoPage}
+            previousPage={props.previousPage}
+            nextPage={props.nextPage}
+            setPageSize={props.setPageSize}
+            colSpan={
+              isMobile
+                ? headerChunks[currentColumns].length === 1
+                  ? headerChunks[currentColumns].length + 2
+                  : headerChunks[currentColumns].length + 1
+                : props.columns.length + 1
+            }
+            checkAllCheckboxes={props.checkAllCheckboxesInstance}
+            checkedItems={props.checkedItems}
+            Actions={
+              <Actions
+                {...props.actionsProps}
+                checkedItems={props.checkedItems}
+              />
+            }
+            currentColumns={currentColumns}
+          />
+        </ChakraTable>
+      </Card>
+    </Flex>
+  );
+};
 
 export default TableInstance;

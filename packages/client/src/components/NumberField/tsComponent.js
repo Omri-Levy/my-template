@@ -13,7 +13,7 @@ fs.writeFile(
 });`,
   (err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       console.log(`error at ${fileName}.test.tsx`);
     }
 
@@ -24,7 +24,7 @@ fs.writeFile(
 // create types file
 fs.writeFile(`./types.d.ts`, ``, (err) => {
   if (err) {
-    console.log(err);
+    console.error(err);
     console.log(`error at types.d.ts`);
   }
 
@@ -48,7 +48,7 @@ export default ${fileName};
 `,
   (err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       console.log(`error at ${fileName}.tsx`);
     }
 
@@ -79,7 +79,7 @@ ${fileName}Story.decorators = [ContainerDecorator];
 `,
   (err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       console.log(`error at ${fileName}.tsx`);
     }
 

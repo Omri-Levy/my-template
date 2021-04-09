@@ -64,6 +64,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv-safe": "^8.2.0",
+    "lodash": "^4.17.21",
     "luxon": "^1.26.0",
     "uuid": "^8.3.2",
     "yup": "^0.32.8"

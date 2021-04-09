@@ -7,7 +7,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import ModalFormWrapper from '../ModalFormWrapper';
 import ModalForm from '../ModalFormWrapper/ModalForm';
 import FormFields from '../FormFields';
@@ -62,6 +62,7 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
 
     return newPassword === oldPassword || !oneUserSelected;
   };
+  const isMobile = useBreakpointValue({ base: true, sm: false });
 
   return (
     <ModalFormWrapper
@@ -73,6 +74,8 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
       toggleButtonColor={`blue`}
       buttonProps={{
         marginRight: 0,
+        isFullWidth: isMobile,
+        mb: { base: 5, sm: 0 },
         disabled: !oneUserSelected,
         title: !oneUserSelected
           ? `Please make sure a single user is selected.`

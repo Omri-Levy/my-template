@@ -18,10 +18,11 @@ const Loading: FunctionComponent<Props> = ({ suspense }) => {
       color={color}
       fontSize={`1.5rem`}
       position={`fixed`}
-      bottom={5}
+      top={5}
       right={5}
       pointerEvents={`none`}
       transition={`240ms ease`}
+      zIndex={4}
     />
   );
 };
