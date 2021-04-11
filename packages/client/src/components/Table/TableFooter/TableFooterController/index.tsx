@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import { Users } from '@my-template/shared';
 import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import queryClient from '../../../globals/Providers/queryClient';
@@ -17,4 +17,4 @@ const TableFooterController: FunctionComponent<Props> = (props) => {
   return <TableFooterInstance {...controllerProps} {...props} />;
 };
 
-export default memo(TableFooterController);
+export default TableFooterController;

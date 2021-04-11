@@ -4,7 +4,7 @@ import { axiosRequest } from '@my-template/shared';
 import { HookReturns, SignOut } from './types';
 import useSuccessToast from '../../ui/useSuccessToast';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
-import useResetSensitiveSessionStorage from '../../caching/useResetSensitiveSessionStorage';
+import useUserIds from '../../caching/useUserIds';
 
 /**
  * a hook that takes all the steps required out order to sign out,
@@ -17,13 +17,13 @@ const useSignOut: HookReturns = () => {
     toast: signOutToast,
     toastOptions: signOutToastOptions,
   } = useSuccessToast(`Signed out successfully.`);
-  const resetSensitiveSessionStorage = useResetSensitiveSessionStorage();
+  const { resetUserIds } = useUserIds();
 
   const signOut: SignOut = async () => {
     try {
       await axiosRequest(`POST`, undefined, `signOut`);
 
-      resetSensitiveSessionStorage();
+      resetUserIds();
 
       await authenticate();
 

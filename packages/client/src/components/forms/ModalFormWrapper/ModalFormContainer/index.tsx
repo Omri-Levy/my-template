@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Props } from './types';
 import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
+import useDarkMode from '../../../../hooks/ui/useDarkMode';
 
 const ModalFormContainer: FunctionComponent<Props> = ({
   icons = true,
@@ -27,6 +28,14 @@ const ModalFormContainer: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     toggleButtonColor || `purple`
   );
+  const { darkModeTextColorInverted } = useDarkMode();
+  const focusAndHover = !buttonProps?.disabled
+    ? {
+        backgroundColor: colorModeShadeInverted,
+        color: darkModeTextColorInverted,
+        borderColor: colorModeShadeInverted,
+      }
+    : undefined;
 
   return (
     <>
@@ -36,6 +45,8 @@ const ModalFormContainer: FunctionComponent<Props> = ({
         onClick={onOpen}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
+        _hover={focusAndHover}
+        _focusWithin={focusAndHover}
         {...buttonProps}
       >
         {toggleButtonText}

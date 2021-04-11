@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import { v4 } from 'uuid';
 import {
   Checkbox,
@@ -15,15 +15,16 @@ const TableBody: FunctionComponent<Props> = ({
   getTableBodyProps,
   page,
   prepareRow,
-  checkedItems,
+  isChecked,
   checkCheckbox,
   currentColumns,
+  checkboxColor,
 }) => {
   const isMobile = useBreakpointValue({ base: true, sm: false });
 
   return (
     <Tbody {...getTableBodyProps()}>
-      {page?.map((row, index) => {
+      {page?.map((row) => {
         prepareRow(row);
         const rowChunk = chunk(row?.cells, 2);
         const mobileRow = isMobile ? rowChunk[currentColumns] : row?.cells;
@@ -45,8 +46,9 @@ const TableBody: FunctionComponent<Props> = ({
             })}
             <Td>
               <Checkbox
-                isChecked={checkedItems[index] || checkedItems.every(Boolean)}
-                onChange={checkCheckbox(row.values.col1, index)}
+                isChecked={isChecked(row.values.col1)}
+                onChange={checkCheckbox(row.values.col1)}
+                colorScheme={checkboxColor || `purple`}
               />
             </Td>
           </Tr>
@@ -56,4 +58,4 @@ const TableBody: FunctionComponent<Props> = ({
   );
 };
 
-export default memo(TableBody);
+export default TableBody;

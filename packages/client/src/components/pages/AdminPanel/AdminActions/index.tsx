@@ -16,7 +16,6 @@ import useLoading from '../../../../hooks/ui/useLoading';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 import useErrorToast from '../../../../hooks/ui/useErrorToast';
 import { DeleteUser } from '../../../Table/TableFooter/types';
-import fetchDeleteUser from '../../../../utils/api/fetchDeleteUser';
 import queryClient from '../../../globals/Providers/queryClient';
 import { Props } from './types';
 import UpdateUserProfileForm from '../../../forms/UpdateUserProfileForm';
@@ -24,6 +23,8 @@ import UpdateUserPasswordForm from '../../../forms/UpdateUserPasswordForm';
 import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 import AuthorizationContext from '../../../../context/AuthorizationContext/AuthorizationContext';
 import Modal from '../../../Modal';
+import fetchDeleteSelectedUsers from '../../../../utils/api/fetchDeleteUser';
+import useDarkMode from '../../../../hooks/ui/useDarkMode';
 
 /**
  * TODO: refactor to controller pattern
@@ -31,7 +32,6 @@ import Modal from '../../../Modal';
 const AdminActions: FunctionComponent<Props> = ({
   icons = true,
   ids: userIds,
-  checkedItems,
 }) => {
   const isMobile = useBreakpointValue({ base: true, sm: false });
   const { isLoading, startLoading, stopLoading } = useLoading();
@@ -62,7 +62,7 @@ const AdminActions: FunctionComponent<Props> = ({
       }
 
       startLoading();
-      await fetchDeleteUser(userIds);
+      await fetchDeleteSelectedUsers(userIds);
 
       deleteSelectedUsersSuccessToast(deleteSelectedUsersSuccessToastOptions);
     } catch (error) {
@@ -77,6 +77,16 @@ const AdminActions: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(`red`);
   const alertDisclosure = useDisclosure();
   const disclosure = useDisclosure();
+  const { darkModeTextColorInverted } = useDarkMode();
+  const noUsersSelected = userIds.length <= 0;
+  const oneOrMoreUsersSelected = userIds.length > 0;
+  const focusAndHover = !noUsersSelected
+    ? {
+        backgroundColor: colorModeShadeInverted,
+        color: darkModeTextColorInverted,
+        borderColor: colorModeShadeInverted,
+      }
+    : undefined;
 
   if (isMobile) {
     return (
@@ -95,18 +105,18 @@ const AdminActions: FunctionComponent<Props> = ({
         <UpdateUserPasswordForm userIds={userIds} />
         <Button
           rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
-          onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
-          disabled={!checkedItems.some(Boolean)}
+          onClick={oneOrMoreUsersSelected ? deleteSelectedUsers : undefined}
+          disabled={noUsersSelected}
           isLoading={isLoading}
-          title={
-            !checkedItems.some(Boolean) ? deleteSelectedUsersMessage : undefined
-          }
+          title={noUsersSelected ? deleteSelectedUsersMessage : undefined}
           border={`2px solid`}
           borderColor={colorModeShadeInverted}
           mr={5}
           p={5}
           isFullWidth={isMobile}
           mb={{ base: 5, sm: 0 }}
+          _hover={focusAndHover}
+          _focusWithin={focusAndHover}
         >
           Delete Selected
         </Button>
@@ -121,14 +131,14 @@ const AdminActions: FunctionComponent<Props> = ({
       <UpdateUserPasswordForm userIds={userIds} />
       <Button
         rightIcon={icons ? <Icon as={FaTrashAlt} mb={0.5} /> : undefined}
-        onClick={userIds.length > 0 ? deleteSelectedUsers : undefined}
-        disabled={!checkedItems.some(Boolean)}
+        onClick={oneOrMoreUsersSelected ? deleteSelectedUsers : undefined}
+        disabled={noUsersSelected}
         isLoading={isLoading}
-        title={
-          !checkedItems.some(Boolean) ? deleteSelectedUsersMessage : undefined
-        }
+        title={noUsersSelected ? deleteSelectedUsersMessage : undefined}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
+        _hover={focusAndHover}
+        _focusWithin={focusAndHover}
       >
         Delete Selected
       </Button>

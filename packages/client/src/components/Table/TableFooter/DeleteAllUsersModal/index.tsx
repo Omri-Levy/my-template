@@ -8,6 +8,7 @@ import { DeleteAllUsers } from './types';
 import queryClient from '../../../globals/Providers/queryClient';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 import useLoading from '../../../../hooks/ui/useLoading';
+import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
@@ -44,6 +45,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
   const isMobile = useBreakpointValue({ base: true, sm: false });
+  const { colorModeShadeInverted } = useColorModeShade(`red`);
 
   return (
     <Modal
@@ -55,7 +57,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
       toggleButtonColor={`red`}
       headerText={`Delete all users`}
       bodyHeadingText={`Warning!`}
-      headingProps={{ color: `red.300`, fontSize: 16 }}
+      headingProps={{ color: colorModeShadeInverted, fontSize: 16 }}
       bodyText={
         `This action will delete all users with no way ` +
         `of reverting.. Are you sure?`

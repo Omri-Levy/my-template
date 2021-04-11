@@ -1,5 +1,6 @@
 import { Row, TableBodyPropGetter, TableBodyProps } from 'react-table';
 import { CheckCheckbox, ColumnType } from '../types';
+import { ChakraColorScheme } from '../../../utils/types';
 
 interface Props {
   getTableBodyProps: (
@@ -8,8 +9,9 @@ interface Props {
   page: Row<ColumnType>[];
   prepareRow: (row: Row<ColumnType>) => void;
   checkCheckbox: CheckCheckbox;
-  checkedItems: boolean[];
   currentColumns: number;
+  isChecked: (id: string) => boolean;
+  checkboxColor?: ChakraColorScheme;
 }
 
 export { Props };

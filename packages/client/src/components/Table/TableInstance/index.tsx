@@ -52,8 +52,9 @@ const TableInstance: FunctionComponent<Props> = ({
             mb={5}
             fontWeight={`bold`}
             placement={`top`}
-            maxWidth={`40ch`}
+            maxWidth={`34ch`}
             mx={`auto`}
+            fontSize={19}
           >
             {isMobile && (
               <ColumnsTabs
@@ -71,8 +72,8 @@ const TableInstance: FunctionComponent<Props> = ({
             getTableBodyProps={props.getTableBodyProps}
             page={props.page}
             prepareRow={props.prepareRow}
-            checkCheckbox={props.checkCheckboxInstance}
-            checkedItems={props.checkedItems}
+            checkCheckbox={props.checkCheckbox}
+            isChecked={props.isChecked}
             currentColumns={currentColumns}
           />
           <TableFooter
@@ -95,15 +96,11 @@ const TableInstance: FunctionComponent<Props> = ({
                   : headerChunks[currentColumns].length + 1
                 : props.columns.length + 1
             }
-            checkAllCheckboxes={props.checkAllCheckboxesInstance}
-            checkedItems={props.checkedItems}
-            Actions={
-              <Actions
-                {...props.actionsProps}
-                checkedItems={props.checkedItems}
-              />
-            }
+            checkAllCheckboxes={props.checkAllCheckboxes}
+            allCheckboxesChecked={props.allCheckboxesChecked}
+            Actions={<Actions {...props.actionsProps} />}
             currentColumns={currentColumns}
+            pageSize={props.pageSize}
           />
         </ChakraTable>
       </Card>

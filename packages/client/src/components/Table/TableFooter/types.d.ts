@@ -8,6 +8,7 @@ interface Props {
   rowsLength: number;
   pageCount: number;
   pageIndex: number;
+  pageSize: number;
   gotoPage: (number: number) => void;
   canPreviousPage: boolean;
   canNextPage: boolean;
@@ -16,7 +17,7 @@ interface Props {
   setPageSize: (number: number) => void;
   colSpan?: number;
   checkAllCheckboxes: CheckAllCheckboxes;
-  checkedItems: boolean[];
+  allCheckboxesChecked: boolean;
   Actions: JSX.Element;
   currentColumns: number;
 }

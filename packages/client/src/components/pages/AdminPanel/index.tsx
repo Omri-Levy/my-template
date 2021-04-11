@@ -1,11 +1,10 @@
 import { FunctionComponent, useContext } from 'react';
 import { FaUserCog } from 'react-icons/fa';
-import { useQuery } from 'react-query';
 import { Redirect } from 'react-router-dom';
 import { Heading } from '@chakra-ui/react';
 import { UserObject } from '@my-template/shared';
+import { useQuery } from 'react-query';
 import Page from '../Page';
-import fetchGetUsers from '../../../utils/api/fetchGetUsers';
 import useTableColumns from './hooks/useTableColumns';
 import useTableData from './hooks/useTableData';
 import Table from '../../Table';
@@ -14,6 +13,7 @@ import NoUserFound from '../../NoUserFound';
 import AdminActions from './AdminActions';
 import useUserIds from '../../../hooks/caching/useUserIds';
 import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
+import fetchGetUsers from '../../../utils/api/fetchGetUsers';
 
 /**
  * TODO: update description
@@ -25,6 +25,7 @@ const AdminPanel: FunctionComponent = () => {
   const filteredUsers = users?.filter(
     (user) => user?.id !== authenticatedUser?.id
   );
+  const allUserIds = filteredUsers?.map((user) => user?.id) as string[];
   const columns = useTableColumns();
   const data = useTableData(filteredUsers);
   const { isAuthorized } = useContext(AuthorizationContext);
@@ -58,6 +59,7 @@ const AdminPanel: FunctionComponent = () => {
           Actions={AdminActions}
           actionsProps={actionsProps}
           ids={userIds}
+          allIds={allUserIds}
           setIds={_setUserIds}
           setSessionStorageIds={setSessionStorageUserIds}
         />

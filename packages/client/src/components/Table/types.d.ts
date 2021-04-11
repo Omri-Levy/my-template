@@ -16,23 +16,20 @@ interface ActionsProps {
   icons?: boolean;
   ids: string[];
 }
-interface ActionsPropsPlusCheckedItems extends ActionsProps {
-  checkedItems: boolean[];
-}
 interface Props {
   caption: string;
   data: Columns;
   columns: Column<ColumnType>[];
   ids: string[];
+  allIds: string[];
   setIds: SetState<string[]>;
-  Actions: FunctionComponent<ActionsPropsPlusCheckedItems>;
+  Actions: FunctionComponent<ActionsProps>;
   actionsProps: ActionsProps;
   setSessionStorageIds: (ids: string[]) => void;
   tableProps?: TableProps;
 }
 type CheckCheckbox = (
-  id: string,
-  index: number
+  id: string
 ) => (event: ChangeEvent<HTMLInputElement>) => void;
 type CheckAllCheckboxes = (event: ChangeEvent<HTMLInputElement>) => void;
 

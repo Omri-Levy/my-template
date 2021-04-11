@@ -8,13 +8,21 @@ import useSessionStorage from '../useSessionStorage';
 const useUserIds: HookReturns = () => {
   const { getSessionStorage, setSessionStorage } = useSessionStorage(`userIds`);
   const setUserIds: SetUserIds = useCallback(
-    (value: string[]) => setSessionStorage(value),
+    (value: string[]) => {
+      const uniqueValues = new Set(value);
+
+      return setSessionStorage(Array.from(uniqueValues));
+    },
     [setSessionStorage]
   );
-  const getUserIds: GetUserIds = () => getSessionStorage([false])();
-  const resetUserIds: ResetUserIds = () => {
+  const getUserIds: GetUserIds = useCallback(() => {
+    const uniqueUserIds = new Set(getSessionStorage([])() as string[]);
+
+    return Array.from(uniqueUserIds);
+  }, [getSessionStorage]);
+  const resetUserIds: ResetUserIds = useCallback(() => {
     setUserIds([]);
-  };
+  }, [setUserIds]);
   const [userIds, _setUserIds] = useState(() => getUserIds());
 
   useEffect(() => {

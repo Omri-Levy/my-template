@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { HookReturns, SetPageSize } from './types';
 import useLocalStorage from '../useLocalStorage';
 
@@ -8,9 +9,12 @@ const useCachedPageSize: HookReturns = () => {
   const { setLocalStorage, getLocalStorage } = useLocalStorage(`pageSize`);
   const getLocalStoragePageSize = getLocalStorage(10);
   const cachedPageSize = getLocalStoragePageSize() as number;
-  const setPageSize: SetPageSize = (pageSize) => {
-    setLocalStorage(pageSize);
-  };
+  const setPageSize: SetPageSize = useCallback(
+    (pageSize) => {
+      setLocalStorage(pageSize);
+    },
+    [setLocalStorage]
+  );
 
   return {
     setPageSize,

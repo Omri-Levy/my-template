@@ -15,6 +15,7 @@ const InputGroup: FunctionComponent<Props> = ({
   icon,
   iconColor,
   inputProps,
+  checkboxColor,
   ...props
 }) => {
   const { name, type } = inputProps;
@@ -48,6 +49,7 @@ const InputGroup: FunctionComponent<Props> = ({
           mt={1}
           title={passwordVisibilityTitle}
           onChange={setPasswordVisibility}
+          colorScheme={checkboxColor || `purple`}
         >
           <Text mt={0.5}>Show Password</Text>
         </Checkbox>

@@ -1,84 +1,67 @@
 import { useCallback, useEffect, useState } from 'react';
+import { isEqual } from 'lodash';
 import {
   CheckAllCheckboxes,
   CheckCheckbox,
-  GetCheckedItems,
   HookReturns,
   ResetCheckedItems,
-  SetCheckedItems,
 } from './types';
-import useSessionStorage from '../useSessionStorage';
 
 /**
  * TODO: Update description
  */
-const useCheckedItems: HookReturns = (setIds) => {
-  const { setSessionStorage, getSessionStorage } = useSessionStorage(
-    `checkedItems`
+const useCheckedItems: HookReturns = (allIds, cachedIds, setIds) => {
+  const idsAreEqual = useCallback(
+    () => isEqual(allIds.sort(), cachedIds.sort()),
+    [allIds, cachedIds]
   );
-  const setCheckedItems: SetCheckedItems = useCallback(
-    (value: boolean[]) => setSessionStorage(value),
-    [setSessionStorage]
+  const [allCheckboxesChecked, setAllCheckboxesChecked] = useState(
+    idsAreEqual()
   );
-  const getCheckedItems: GetCheckedItems = () => getSessionStorage([false])();
-  const resetCheckedItems: ResetCheckedItems = () => {
-    setCheckedItems([false]);
-  };
-  const [checkedItems, _setCheckedItems] = useState(() => getCheckedItems());
-  const conditionalSetIds = (value: string[]) => {
-    if (setIds) {
-      setIds(value);
-    }
-  };
-  const checkCheckbox: CheckCheckbox = (ids) => (id, index) => (event) => {
-    const newState = [...checkedItems];
-    newState[index] = event.target.checked;
+  const conditionalSetIds = useCallback(
+    (value: string[]) => {
+      if (setIds) {
+        setIds(value);
+      }
+    },
+    [setIds]
+  );
+  const checkCheckbox: CheckCheckbox = useCallback(
+    (id) => () => {
+      if (cachedIds.includes(id)) {
+        const newIds = cachedIds.filter((singleId) => singleId !== id);
+        console.log(id);
 
-    _setCheckedItems(newState);
-
-    if (checkedItems[index]) {
-      const newIds = ids.filter((singleId) => singleId !== id);
-
-      conditionalSetIds(newIds);
+        conditionalSetIds(newIds);
+      } else {
+        conditionalSetIds([...cachedIds, id]);
+      }
+    },
+    [cachedIds, conditionalSetIds]
+  );
+  const resetCheckedItems: ResetCheckedItems = useCallback(
+    () => conditionalSetIds([]),
+    [conditionalSetIds]
+  );
+  const checkAllCheckboxes: CheckAllCheckboxes = useCallback(() => {
+    if (allCheckboxesChecked) {
+      resetCheckedItems();
     } else {
-      conditionalSetIds([...ids, id]);
+      conditionalSetIds(allIds);
     }
-  };
-  const resetIds = () => conditionalSetIds([]);
-  const checkAllCheckboxes: CheckAllCheckboxes = (data) => () => {
-    let newState: boolean[] = [];
-
-    checkedItems.forEach(() => {
-      newState = [...newState, !checkedItems.every(Boolean)];
-    });
-
-    _setCheckedItems(newState);
-
-    if (checkedItems.every(Boolean)) {
-      resetIds();
-    } else {
-      let newIds: string[] = [];
-
-      data.forEach((item) => {
-        newIds = [...newIds, item.col1];
-      });
-
-      conditionalSetIds(newIds);
-    }
-  };
+  }, [allCheckboxesChecked, allIds, conditionalSetIds, resetCheckedItems]);
+  const isChecked = (id: string) => cachedIds.includes(id);
 
   useEffect(() => {
-    setCheckedItems(checkedItems);
-  }, [checkedItems, setCheckedItems]);
+    setAllCheckboxesChecked(idsAreEqual());
+  }, [allIds, cachedIds, idsAreEqual]);
 
   return {
-    setCheckedItems,
-    getCheckedItems,
     resetCheckedItems,
-    resetIds,
-    checkedItems,
     checkCheckbox,
     checkAllCheckboxes,
+    allCheckboxesChecked,
+    isChecked,
   };
 };
 

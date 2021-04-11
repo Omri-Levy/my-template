@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import {
   ButtonGroup,
   Checkbox,
@@ -36,14 +36,17 @@ const TableFooterInstance: FunctionComponent<Props> = ({
                 {column?.render(`Footer`)}
               </Td>
             ))}
+            {mobileChunk?.length === 1 && (
+              <Td role={`presentation`} aria-label={`whitespace`} />
+            )}
             {props.users?.length > 1 && (
               <Td>
                 <Checkbox
-                  mb={1}
-                  isChecked={props.checkedItems.every(Boolean)}
+                  isChecked={props.allCheckboxesChecked}
                   onChange={props.checkAllCheckboxes}
+                  colorScheme={props.checkboxColor || `purple`}
                 >
-                  <Text mt={1}>Select All</Text>
+                  <Text mt={0.5}>Select All</Text>
                 </Checkbox>
               </Td>
             )}
@@ -69,6 +72,7 @@ const TableFooterInstance: FunctionComponent<Props> = ({
         colSpan={props.colSpan}
         pageIndex={props.pageIndex}
         pageCount={props.pageCount}
+        pageSize={props.pageSize}
         rowsLength={props.rowsLength}
         gotoPage={props.gotoPage}
         canPreviousPage={props.canPreviousPage}
@@ -81,4 +85,4 @@ const TableFooterInstance: FunctionComponent<Props> = ({
   );
 };
 
-export default memo(TableFooterInstance);
+export default TableFooterInstance;

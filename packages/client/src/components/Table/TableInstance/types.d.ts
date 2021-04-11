@@ -21,12 +21,13 @@ interface Props extends TableProps {
   ) => TableBodyProps;
   page: Row<ColumnType>[];
   prepareRow: (row: Row<ColumnType>) => void;
-  checkCheckboxInstance: CheckCheckbox;
-  checkedItems: boolean[];
+  checkCheckbox: CheckCheckbox;
+  isChecked: (id: string) => boolean;
   globalFilter: string;
   setGlobalFilter: (filterValue: any) => void;
   pageIndex: number;
   pageCount: number;
+  pageSize: number;
   rowsLength: number;
   canPreviousPage: boolean;
   canNextPage: boolean;
@@ -34,7 +35,8 @@ interface Props extends TableProps {
   previousPage: () => void;
   nextPage: () => void;
   setPageSize: (number) => void;
-  checkAllCheckboxesInstance: CheckAllCheckboxes;
+  checkAllCheckboxes: CheckAllCheckboxes;
+  allCheckboxesChecked: boolean;
   footerGroups: FooterGroups;
   tableProps?: ChakraTableProps;
 }

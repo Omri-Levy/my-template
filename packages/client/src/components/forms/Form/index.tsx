@@ -7,6 +7,7 @@ import useGRecaptchaResponse from '../../../hooks/forms/useGRecaptchaResponse';
 import FormResponseError from '../FormResponseError';
 import Card from '../../Card';
 import useColorModeShade from '../../../hooks/ui/useColorModeShade';
+import useDarkMode from '../../../hooks/ui/useDarkMode';
 
 /**
  * TODO: update description
@@ -30,6 +31,14 @@ const Form: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     submitButtonColor || `green`
   );
+  const { darkModeTextColorInverted } = useDarkMode();
+  const focusAndHover = !disableSubmit
+    ? {
+        backgroundColor: colorModeShadeInverted,
+        color: darkModeTextColorInverted,
+        borderColor: colorModeShadeInverted,
+      }
+    : undefined;
 
   return (
     <Card color={`unset`} backgroundColor={`unset`}>
@@ -58,6 +67,8 @@ const Form: FunctionComponent<Props> = ({
             disabled={disableSubmit}
             border={`2px solid`}
             borderColor={colorModeShadeInverted}
+            _hover={focusAndHover}
+            _focusWithin={focusAndHover}
           >
             {submitButtonText}
           </Button>

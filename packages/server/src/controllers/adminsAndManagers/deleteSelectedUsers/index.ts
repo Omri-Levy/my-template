@@ -6,19 +6,20 @@ import refreshUsersCache from '../../../utils/usersCache/refreshUsersCache';
 const deleteSelectedUsers: Route = async (req, res) => {
   try {
     const { userIds } = req.body;
+    const uniqueUserIds = Array.from(new Set(userIds));
     let isAnArrayOfUuidV4 = true;
 
-    if (!Array.isArray(userIds)) {
+    if (!Array.isArray(uniqueUserIds)) {
       isAnArrayOfUuidV4 = false;
     } else {
-      userIds.forEach((userId: string) => {
+      uniqueUserIds.forEach((userId: string) => {
         if (!isUuidV4.test(userId)) {
           isAnArrayOfUuidV4 = false;
         }
       });
     }
 
-    if (userIds.length === 0 || !isAnArrayOfUuidV4) {
+    if (uniqueUserIds.length === 0 || !isAnArrayOfUuidV4) {
       console.error(deleteSelectedUsersMessage);
 
       res.status(400).send({ message: deleteSelectedUsersMessage });
@@ -26,7 +27,7 @@ const deleteSelectedUsers: Route = async (req, res) => {
       return;
     }
 
-    await User.destroy({ where: { id: userIds } });
+    await User.destroy({ where: { id: uniqueUserIds } });
 
     await refreshUsersCache();
 

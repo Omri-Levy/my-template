@@ -8,6 +8,7 @@ import {
 } from 'react-icons/fa';
 import { Props } from './types';
 import useColorModeShade from '../../../../../hooks/ui/useColorModeShade';
+import useDarkMode from '../../../../../hooks/ui/useDarkMode';
 
 const PaginationButton: FunctionComponent<Props> = ({
   icons = true,
@@ -22,6 +23,7 @@ const PaginationButton: FunctionComponent<Props> = ({
 }) => {
   const color = buttonColor || `purple`;
   const { colorModeShadeInverted } = useColorModeShade(color);
+  const { darkModeTextColorInverted } = useDarkMode();
   const firstPage = () => gotoPage(0);
   const lastPage = () => gotoPage(pageCount - 1);
 
@@ -63,6 +65,13 @@ const PaginationButton: FunctionComponent<Props> = ({
       text = `Next Page`;
       break;
   }
+  const focusAndHover = !disabled
+    ? {
+        backgroundColor: colorModeShadeInverted,
+        color: darkModeTextColorInverted,
+        borderColor: colorModeShadeInverted,
+      }
+    : undefined;
 
   return (
     <ListItem>
@@ -78,6 +87,8 @@ const PaginationButton: FunctionComponent<Props> = ({
         disabled={disabled}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
+        _hover={focusAndHover}
+        _focusWithin={focusAndHover}
       >
         {text}
       </Button>

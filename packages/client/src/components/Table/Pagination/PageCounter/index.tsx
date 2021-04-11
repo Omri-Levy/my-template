@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import { Flex, Heading } from '@chakra-ui/react';
 import { Props } from './types';
 
@@ -18,4 +18,4 @@ const PageCounter: FunctionComponent<Props> = ({ pageCount, pageIndex }) => {
   );
 };
 
-export default memo(PageCounter);
+export default PageCounter;

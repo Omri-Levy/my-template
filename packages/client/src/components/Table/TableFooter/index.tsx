@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import { Props } from './types';
 import TableFooterController from './TableFooterController';
 
@@ -6,4 +6,4 @@ const TableFooter: FunctionComponent<Props> = (props) => (
   <TableFooterController {...props} />
 );
 
-export default memo(TableFooter);
+export default TableFooter;

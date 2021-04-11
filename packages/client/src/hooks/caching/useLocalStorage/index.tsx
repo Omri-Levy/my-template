@@ -1,6 +1,7 @@
 /**
  * TODO: update description
  */
+import { useCallback } from 'react';
 import { GetLocalStorage, HookReturns, SetLocalStorage } from './types';
 
 /**
@@ -9,11 +10,17 @@ import { GetLocalStorage, HookReturns, SetLocalStorage } from './types';
  * stopLoading function to set the state to false.
  */
 const useLocalStorage: HookReturns = (key) => {
-  const setLocalStorage: SetLocalStorage = (value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
-  const getLocalStorage: GetLocalStorage = (defaultValue) => () =>
-    JSON.parse(localStorage.getItem(key) as string) || defaultValue;
+  const setLocalStorage: SetLocalStorage = useCallback(
+    (value) => {
+      localStorage.setItem(key, JSON.stringify(value));
+    },
+    [key]
+  );
+  const getLocalStorage: GetLocalStorage = useCallback(
+    (defaultValue) => () =>
+      JSON.parse(localStorage.getItem(key) as string) || defaultValue,
+    [key]
+  );
 
   return {
     setLocalStorage,

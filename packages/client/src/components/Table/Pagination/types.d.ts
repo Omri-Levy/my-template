@@ -4,6 +4,7 @@ interface PaginationObject extends BoxProps {
   rowsLength: number;
   pageCount: number;
   pageIndex: number;
+  pageSize: number;
   gotoPage: (number: number) => void;
   canPreviousPage: boolean;
   canNextPage: boolean;

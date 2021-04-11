@@ -1,6 +1,7 @@
 /**
  * TODO: update description
  */
+import { useCallback } from 'react';
 import { GetSessionStorage, HookReturns, SetSessionStorage } from './types';
 
 /**
@@ -9,11 +10,17 @@ import { GetSessionStorage, HookReturns, SetSessionStorage } from './types';
  * stopLoading function to set the state to false.
  */
 const useSessionStorage: HookReturns = (key) => {
-  const setSessionStorage: SetSessionStorage = (value) => {
-    sessionStorage.setItem(key, JSON.stringify(value));
-  };
-  const getSessionStorage: GetSessionStorage = (defaultValue) => () =>
-    JSON.parse(sessionStorage.getItem(key) as string) || defaultValue;
+  const setSessionStorage: SetSessionStorage = useCallback(
+    (value) => {
+      sessionStorage.setItem(key, JSON.stringify(value));
+    },
+    [key]
+  );
+  const getSessionStorage: GetSessionStorage = useCallback(
+    (defaultValue) => () =>
+      JSON.parse(sessionStorage.getItem(key) as string) || defaultValue,
+    [key]
+  );
 
   return {
     setSessionStorage,

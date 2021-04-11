@@ -18,6 +18,8 @@ const useDarkMode: HookReturns = () => {
   );
   const staticDarkColor = `gray.800`;
   const staticLightColor = `white`;
+  const darkModeTextColor = useColorModeValue(`black`, `white`);
+  const darkModeTextColorInverted = useColorModeValue(`white`, `black`);
 
   return {
     isDarkMode,
@@ -27,6 +29,8 @@ const useDarkMode: HookReturns = () => {
     darkModeColorOrDefaultInverted,
     staticDarkColor,
     staticLightColor,
+    darkModeTextColor,
+    darkModeTextColorInverted,
   };
 };
 

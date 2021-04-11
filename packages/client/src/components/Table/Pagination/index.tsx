@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent } from 'react';
 import { Divider, Flex, Td, Tr, useBreakpointValue } from '@chakra-ui/react';
 import { Props } from './types';
 import Card from '../../Card';
@@ -10,6 +10,7 @@ import RowsPerPage from './RowsPerPage';
 const Pagination: FunctionComponent<Props> = ({
   pageCount,
   pageIndex,
+  pageSize,
   rowsLength,
   gotoPage,
   canPreviousPage,
@@ -64,6 +65,7 @@ const Pagination: FunctionComponent<Props> = ({
             setPageSize={setPageSize}
             displayPagination={displayPagination}
             rowsLength={rowsLength}
+            pageSize={pageSize}
           />
           {displayPagination && (
             <>
@@ -88,4 +90,4 @@ const Pagination: FunctionComponent<Props> = ({
   );
 };
 
-export default memo(Pagination);
+export default Pagination;

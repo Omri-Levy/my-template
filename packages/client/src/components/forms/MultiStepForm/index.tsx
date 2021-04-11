@@ -9,6 +9,7 @@ import FormResponseError from '../FormResponseError';
 import Breadcrumbs from './Breadcrumbs';
 import useFormNavigation from './hooks/useFormNavigation';
 import useColorModeShade from '../../../hooks/ui/useColorModeShade';
+import useDarkMode from '../../../hooks/ui/useDarkMode';
 
 /**
  * NOTE: navigation to disabled breadcrumb links changing the browser's url is
@@ -44,9 +45,23 @@ const MultiStepForm: FunctionComponent<Props> = ({
   const { colorModeShadeInverted: submitBorderColor } = useColorModeShade(
     onSubmit ? submitButtonColor || `green` : submitButtonColor || `purple`
   );
-  const { colorModeShadeInverted: previousFormBorderColor } = useColorModeShade(
+  const { colorModeShadeInverted: formNavBorderColor } = useColorModeShade(
     `purple`
   );
+  const { darkModeTextColorInverted } = useDarkMode();
+  const focusAndHoverSubmit = !disableSubmit
+    ? {
+        backgroundColor: submitBorderColor,
+        color: darkModeTextColorInverted,
+        borderColor: submitBorderColor,
+      }
+    : undefined;
+  const focusAndHoverFormNav = !isSubmitting
+    ? {
+        backgroundColor: formNavBorderColor,
+        color: darkModeTextColorInverted,
+      }
+    : undefined;
 
   return (
     <>
@@ -78,7 +93,9 @@ const MultiStepForm: FunctionComponent<Props> = ({
               mt={4}
               disabled={isSubmitting}
               border={`2px solid`}
-              borderColor={previousFormBorderColor}
+              borderColor={formNavBorderColor}
+              _hover={focusAndHoverFormNav}
+              _focusWithin={focusAndHoverFormNav}
             >
               Previous
             </Button>
@@ -98,6 +115,8 @@ const MultiStepForm: FunctionComponent<Props> = ({
             disabled={disableSubmit}
             border={`2px solid`}
             borderColor={submitBorderColor}
+            _hover={focusAndHoverSubmit}
+            _focusWithin={focusAndHoverSubmit}
           >
             {onSubmit ? submitButtonText : `Next`}
           </Button>

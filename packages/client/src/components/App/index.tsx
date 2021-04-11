@@ -4,12 +4,12 @@ import { useLocation } from 'react-router-dom';
 import { resetSignUpFormDetails } from '../../redux/reducer';
 import Routes from '../globals/Routes';
 import Loading from '../globals/Loading';
-import useResetSensitiveSessionStorage from '../../hooks/caching/useResetSensitiveSessionStorage';
+import useUserIds from '../../hooks/caching/useUserIds';
 
 const App: FunctionComponent = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const resetSensitiveSessionStorage = useResetSensitiveSessionStorage();
+  const { resetUserIds } = useUserIds();
   /**
    * resets the sign up form when leaving sign up.
    */
@@ -20,9 +20,9 @@ const App: FunctionComponent = () => {
   }, [dispatch, pathname]);
   useEffect(() => {
     if (!pathname.match(/adminPanel*/)) {
-      resetSensitiveSessionStorage();
+      resetUserIds();
     }
-  }, [pathname, resetSensitiveSessionStorage]);
+  }, [pathname, resetUserIds]);
 
   return (
     <Suspense fallback={<Loading suspense />}>

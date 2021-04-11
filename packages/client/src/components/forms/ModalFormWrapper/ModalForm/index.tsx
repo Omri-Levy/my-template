@@ -8,6 +8,7 @@ import { Props } from './types';
 import useDisableSubmit from '../../../../hooks/forms/useDisableSubmit';
 import useGRecaptchaResponse from '../../../../hooks/forms/useGRecaptchaResponse';
 import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
+import useDarkMode from '../../../../hooks/ui/useDarkMode';
 
 const ModalForm: FunctionComponent<Props> = ({
   icons = true,
@@ -48,6 +49,21 @@ const ModalForm: FunctionComponent<Props> = ({
   } else if (submitButtonTitle) {
     conditionalSubmitButtonTitle = submitButtonTitle;
   }
+  const { darkModeTextColorInverted } = useDarkMode();
+  const focusAndHoverSubmit = !disableSubmit
+    ? {
+        backgroundColor: submitBorderColor,
+        color: darkModeTextColorInverted,
+        borderColor: submitBorderColor,
+      }
+    : undefined;
+  const focusAndHoverCancel = !isSubmitting
+    ? {
+        backgroundColor: cancelBorderColor,
+        color: darkModeTextColorInverted,
+        borderColor: cancelBorderColor,
+      }
+    : undefined;
 
   return (
     <>
@@ -72,6 +88,9 @@ const ModalForm: FunctionComponent<Props> = ({
               rightIcon={icons ? <Icon as={FaTimes} /> : undefined}
               border={`2px solid`}
               borderColor={cancelBorderColor}
+              disabled={isSubmitting}
+              _hover={focusAndHoverCancel}
+              _focusWithin={focusAndHoverCancel}
             >
               Cancel
             </Button>
@@ -86,6 +105,8 @@ const ModalForm: FunctionComponent<Props> = ({
               title={conditionalSubmitButtonTitle}
               border={`2px solid`}
               borderColor={submitBorderColor}
+              _hover={focusAndHoverSubmit}
+              _focusWithin={focusAndHoverSubmit}
             >
               {submitButtonText}
             </Button>

@@ -1,4 +1,4 @@
-import { FunctionComponent, memo, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup, List, Stack, useBreakpointValue } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import PaginationButton from './PaginationButton';
@@ -88,4 +88,4 @@ const PageNavigation: FunctionComponent<Props> = ({
   );
 };
 
-export default memo(PageNavigation);
+export default PageNavigation;

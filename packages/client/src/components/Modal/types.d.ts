@@ -16,6 +16,7 @@ interface Props {
   bodyText?: string;
   checkbox?: boolean;
   checkboxText?: string;
+  checkboxColor?: ChakraColorScheme;
   actionIcon?: IconType;
   onClick?: (onClose: OnClose) => () => void | Promise<void>;
   isLoading?: boolean;

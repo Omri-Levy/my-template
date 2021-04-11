@@ -1,34 +1,26 @@
 import { ChangeEvent } from 'react';
-import { ColumnsArray, SetState } from '../../../utils/types';
+import { SetState } from '../../../utils/types';
 
 type CheckCheckbox = (
-  ids: string[],
-  setIds: SetState<string[]>
-) => (
-  id: string,
-  index: number
+  id: string
 ) => (event: ChangeEvent<HTMLInputElement>) => void;
-type CheckAllCheckboxes = (
-  data: ColumnsArray
-) => (event: ChangeEvent<HTMLInputElement>) => void;
-type SetCheckedItems = (value: boolean[]) => void;
+type CheckAllCheckboxes = (event: ChangeEvent<HTMLInputElement>) => void;
 type GetCheckedItems = () => boolean[];
 type ResetCheckedItems = () => void;
 type HookReturns = (
+  allIds: string[],
+  cachedIds: string[],
   setIds?: SetState<string[]>
 ) => {
-  setCheckedItems: SetCheckedItems;
-  getCheckedItems: GetCheckedItems;
   resetCheckedItems: ResetCheckedItems;
-  resetIds: () => void;
-  checkedItems: boolean[];
   checkCheckbox: CheckCheckbox;
   checkAllCheckboxes: CheckAllCheckboxes;
+  allCheckboxesChecked: boolean;
+  isChecked: (id: string) => boolean;
 };
 
 export {
   HookReturns,
-  SetCheckedItems,
   GetCheckedItems,
   ResetCheckedItems,
   CheckCheckbox,

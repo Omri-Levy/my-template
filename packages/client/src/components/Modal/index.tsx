@@ -19,6 +19,7 @@ import { FaTimes } from 'react-icons/fa';
 import { Props } from './types';
 import Alert from '../Alert';
 import useColorModeShade from '../../hooks/ui/useColorModeShade';
+import useDarkMode from '../../hooks/ui/useDarkMode';
 
 const Modal: FunctionComponent<Props> = ({
   buttonProps,
@@ -32,6 +33,7 @@ const Modal: FunctionComponent<Props> = ({
   bodyText,
   checkbox,
   checkboxText,
+  checkboxColor,
   actionIcon,
   onClick,
   isLoading,
@@ -47,6 +49,14 @@ const Modal: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     toggleButtonColor || `purple`
   );
+  const { darkModeTextColorInverted } = useDarkMode();
+  const focusAndHover = !buttonProps?.disabled
+    ? {
+        backgroundColor: colorModeShadeInverted,
+        color: darkModeTextColorInverted,
+        borderColor: colorModeShadeInverted,
+      }
+    : undefined;
 
   return (
     <>
@@ -57,6 +67,8 @@ const Modal: FunctionComponent<Props> = ({
         onClick={onOpen}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
+        _hover={focusAndHover}
+        _focusWithin={focusAndHover}
         {...buttonProps}
       >
         {toggleButtonText}
@@ -86,6 +98,7 @@ const Modal: FunctionComponent<Props> = ({
                 <Checkbox
                   isChecked={isChecked}
                   onChange={isChecked ? onUncheck : onCheck}
+                  colorScheme={checkboxColor || `purple`}
                 >
                   {checkboxText}
                 </Checkbox>
@@ -106,6 +119,8 @@ const Modal: FunctionComponent<Props> = ({
                 rightIcon={icons ? <Icon as={FaTimes} mb={0.5} /> : undefined}
                 border={`2px solid`}
                 borderColor={colorModeShadeInverted}
+                _hover={focusAndHover}
+                _focusWithin={focusAndHover}
               >
                 Cancel
               </Button>
@@ -120,6 +135,8 @@ const Modal: FunctionComponent<Props> = ({
                   isLoading={isLoading}
                   border={`2px solid`}
                   borderColor={colorModeShadeInverted}
+                  _hover={focusAndHover}
+                  _focusWithin={focusAndHover}
                 >
                   {actionText}
                 </Button>

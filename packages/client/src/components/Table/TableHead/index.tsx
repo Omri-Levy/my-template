@@ -12,13 +12,18 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/all';
 import { v4 } from 'uuid';
 import { chunk } from 'lodash';
 import { Props } from './types';
+import useColorModeShade from '../../../hooks/ui/useColorModeShade';
 
 const TableHead: FunctionComponent<Props> = ({
   headerGroups,
   currentColumns,
+  sortedByColor,
 }) => {
   const marginLeft = 10;
   const isMobile = useBreakpointValue({ base: true, sm: false });
+  const { colorModeShadeInverted } = useColorModeShade(
+    sortedByColor || `purple`
+  );
 
   return (
     <>
@@ -35,6 +40,8 @@ const TableHead: FunctionComponent<Props> = ({
                 <Th
                   {...column?.getHeaderProps(column?.getSortByToggleProps())}
                   colSpan={mobileHeaders.length === 1 ? 2 : undefined}
+                  fontSize={14}
+                  color={column?.isSorted ? colorModeShadeInverted : undefined}
                   key={v4()}
                 >
                   <Flex>
@@ -42,12 +49,14 @@ const TableHead: FunctionComponent<Props> = ({
                     {column?.isSorted ? (
                       column?.isSortedDesc ? (
                         <Icon
+                          color={colorModeShadeInverted}
                           as={FaChevronDown}
                           marginLeft={marginLeft}
                           aria-label={`sorted descending`}
                         />
                       ) : (
                         <Icon
+                          color={colorModeShadeInverted}
                           as={FaChevronUp}
                           marginLeft={marginLeft}
                           aria-label={`sorted ascending`}
