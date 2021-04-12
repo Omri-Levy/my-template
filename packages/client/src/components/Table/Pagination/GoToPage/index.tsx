@@ -6,6 +6,7 @@ const GoToPage: FunctionComponent<Props> = ({
   gotoPage,
   pageCount,
   pageIndex,
+  activeColor,
 }) => {
   const labelProps = {
     mt: 1,
@@ -35,6 +36,7 @@ const GoToPage: FunctionComponent<Props> = ({
     width: `100px`,
     min: 0,
     max: pageCount + 1,
+    activeColor,
   };
 
   useEffect(() => {

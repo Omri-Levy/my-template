@@ -20,6 +20,13 @@ const TableFooterInstance: FunctionComponent<Props> = ({
   ...props
 }) => {
   const isMobile = useBreakpointValue({ base: true, sm: false });
+  const checkboxHoverAndFocus = {
+    '.chakra-checkbox__control': {
+      transform: `scale(1.2)`,
+      transition: `scale 240ms ease-in-out`,
+      boxShadow: `none`,
+    },
+  };
 
   return (
     <Tfoot>
@@ -45,6 +52,8 @@ const TableFooterInstance: FunctionComponent<Props> = ({
                   isChecked={props.allCheckboxesChecked}
                   onChange={props.checkAllCheckboxes}
                   colorScheme={props.checkboxColor || `purple`}
+                  _focusWithin={checkboxHoverAndFocus}
+                  _hover={checkboxHoverAndFocus}
                 >
                   <Text mt={0.5}>Select All</Text>
                 </Checkbox>

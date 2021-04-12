@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import {
   emailAlreadyInUseMessage,
+  formValuesChanged,
   terminateUserAccountMessage,
   unauthorizedMessage,
   updateUserProfileSchema,
@@ -85,19 +86,14 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const users = queryClient.getQueryData(`users`) as Users;
   const userToUpdate = users.filter((user) => user.id === userIds[0])[0];
   const disableSubmitCondition = () => {
-    const formValues = watch();
-    const unchangedEmail = formValues?.email === userToUpdate?.email;
-    const unchangedFirstName = formValues?.fname === userToUpdate?.firstName;
-    const unchangedLastName = formValues?.lname === userToUpdate?.lastName;
-    const unchangedRole = formValues?.role === userToUpdate?.role;
+    const currentValues = {
+      email: userToUpdate?.email,
+      fname: userToUpdate?.firstName,
+      lname: userToUpdate?.lastName,
+      role: userToUpdate?.role,
+    };
 
-    return (
-      (unchangedEmail &&
-        unchangedFirstName &&
-        unchangedLastName &&
-        unchangedRole) ||
-      !oneUserSelected
-    );
+    return formValuesChanged(currentValues, watch) || !oneUserSelected;
   };
   const isMobile = useBreakpointValue({ base: true, sm: false });
 

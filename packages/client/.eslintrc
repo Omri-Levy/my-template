@@ -17,6 +17,7 @@
         "props": "always"
       }
     ],
+    "no-useless-return": "off",
     "no-nested-ternary": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",

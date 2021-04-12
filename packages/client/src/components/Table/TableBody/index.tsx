@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { v4 } from 'uuid';
 import {
   Checkbox,
@@ -21,6 +21,13 @@ const TableBody: FunctionComponent<Props> = ({
   checkboxColor,
 }) => {
   const isMobile = useBreakpointValue({ base: true, sm: false });
+  const checkboxHoverAndFocus = {
+    '.chakra-checkbox__control': {
+      transform: `scale(1.2)`,
+      transition: `scale 240ms ease-in-out`,
+      boxShadow: `none`,
+    },
+  };
 
   return (
     <Tbody {...getTableBodyProps()}>
@@ -49,6 +56,8 @@ const TableBody: FunctionComponent<Props> = ({
                 isChecked={isChecked(row.values.col1)}
                 onChange={checkCheckbox(row.values.col1)}
                 colorScheme={checkboxColor || `purple`}
+                _hover={checkboxHoverAndFocus}
+                _focusWithin={checkboxHoverAndFocus}
               />
             </Td>
           </Tr>
@@ -58,4 +67,4 @@ const TableBody: FunctionComponent<Props> = ({
   );
 };
 
-export default TableBody;
+export default memo(TableBody);

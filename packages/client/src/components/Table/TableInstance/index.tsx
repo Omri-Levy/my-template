@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, memo, useState } from 'react';
 import {
   Flex,
   Table as ChakraTable,
@@ -108,4 +108,4 @@ const TableInstance: FunctionComponent<Props> = ({
   );
 };
 
-export default TableInstance;
+export default memo(TableInstance);

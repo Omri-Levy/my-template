@@ -7,7 +7,7 @@ import useSignOut from '../../../../../hooks/api/useSignOut';
 import AuthenticationContext from '../../../../../context/AuthenticationContext/AuthenticationContext';
 import { Props } from './types';
 
-const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu }) => {
+const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu, ...props }) => {
   const { memoizedRoutes } = useRoutes();
   const signOut = useSignOut();
   const { currentUser } = useContext(AuthenticationContext);
@@ -20,7 +20,7 @@ const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu }) => {
   };
 
   return (
-    <Grid as={`nav`} flexGrow={1} placeContent={`center`}>
+    <Grid as={`nav`} flexGrow={1} placeContent={`center`} {...props}>
       <Stack
         direction={{ base: `column`, sm: `row` }}
         as={List}

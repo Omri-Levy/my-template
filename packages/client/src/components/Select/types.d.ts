@@ -8,6 +8,7 @@ interface SelectProps extends ChakraSelectProps {
 interface Props extends SelectProps {
   options: GenericArray | undefined;
   optionsProps?: OptionComponent;
+  activeColor?: string;
 }
 
 export { Props };

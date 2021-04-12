@@ -2,12 +2,15 @@ import { FunctionComponent } from 'react';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { Props } from './types';
+import useColorModeShade from '../../hooks/ui/useColorModeShade';
 
 const DataTabs: FunctionComponent<Props> = ({
   color,
   data,
   setCurrentColumns,
 }) => {
+  const { colorModeShadeInverted } = useColorModeShade(color || `purple`);
+
   return (
     <Tabs
       colorScheme={color || `purple`}
@@ -15,7 +18,14 @@ const DataTabs: FunctionComponent<Props> = ({
     >
       <TabList>
         {data?.map((tab) => (
-          <Tab key={v4()}>{tab?.label}</Tab>
+          <Tab
+            _hover={{
+              color: colorModeShadeInverted,
+            }}
+            key={v4()}
+          >
+            {tab?.label}
+          </Tab>
         ))}
       </TabList>
       <TabPanels>

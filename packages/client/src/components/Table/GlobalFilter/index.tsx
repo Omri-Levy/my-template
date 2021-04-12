@@ -14,6 +14,7 @@ import { FaSearch } from 'react-icons/fa';
 import { useAsyncDebounce } from 'react-table';
 import { Props } from './types';
 import Modal from '../../Modal';
+import useColorModeShade from '../../../hooks/ui/useColorModeShade';
 
 /**
  * TODO: refactor to be more generic and reusable.
@@ -22,6 +23,7 @@ const GlobalFilter: FunctionComponent<Props> = ({
   globalFilter,
   setGlobalFilter,
   colSpan,
+  activeColor,
 }) => {
   const [filterValue, setFilterValue] = useState(globalFilter);
   const globalFilterFn = useAsyncDebounce((value) =>
@@ -35,6 +37,10 @@ const GlobalFilter: FunctionComponent<Props> = ({
   const disclosure = useDisclosure();
   const alertDisclosure = useDisclosure();
   const isMobile = useBreakpointValue({ base: true, sm: false });
+  const { colorModeShadeInverted } = useColorModeShade(activeColor || `purple`);
+  const focusAndHover = {
+    borderColor: colorModeShadeInverted,
+  };
 
   if (isMobile) {
     return (
@@ -62,6 +68,8 @@ const GlobalFilter: FunctionComponent<Props> = ({
                 onChange={onChange}
                 name={`filter`}
                 maxLength={320}
+                _focus={focusAndHover}
+                _hover={focusAndHover}
               />
             </InputGroup>
           </FormControl>
@@ -85,6 +93,8 @@ const GlobalFilter: FunctionComponent<Props> = ({
             onChange={onChange}
             name={`filter`}
             maxLength={320}
+            _focus={focusAndHover}
+            _hover={focusAndHover}
           />
         </InputGroup>
       </FormControl>

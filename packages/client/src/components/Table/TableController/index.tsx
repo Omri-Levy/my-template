@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useMemo } from 'react';
+import { FunctionComponent, memo, useEffect, useMemo } from 'react';
 import {
   useGlobalFilter,
   usePagination,
@@ -132,4 +132,4 @@ const TableController: FunctionComponent<Props> = (props) => {
   return <TableInstance {...controllerProps} {...props} />;
 };
 
-export default TableController;
+export default memo(TableController);

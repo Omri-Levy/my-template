@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext, useMemo } from 'react';
 import {
   emailAlreadyInUseMessage,
+  formValuesChanged,
   updateProfileSchema,
   UserObject,
 } from '@my-template/shared';
@@ -62,13 +63,13 @@ const UpdateProfileForm: FunctionComponent = () => {
   const { currentUser } = useContext(AuthenticationContext);
   const authenticatedUser = currentUser as UserObject;
   const disableSubmitCondition = () => {
-    const formValues = watch();
-    const unchangedEmail = formValues?.email === authenticatedUser?.email;
-    const unchangedFirstName =
-      formValues?.fname === authenticatedUser?.firstName;
-    const unchangedLastName = formValues?.lname === authenticatedUser?.lastName;
+    const currentValues = {
+      email: authenticatedUser?.email,
+      fname: authenticatedUser?.firstName,
+      lname: authenticatedUser?.lastName,
+    };
 
-    return unchangedEmail && unchangedFirstName && unchangedLastName;
+    return formValuesChanged(currentValues, watch);
   };
 
   if (!currentUser) {

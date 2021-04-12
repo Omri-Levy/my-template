@@ -46,9 +46,7 @@ const NavLink: FunctionComponent<Props> = ({
         exact={exact}
         p={`5px`}
         border={`2px solid transparent`}
-        _focus={{
-          outline: `none`,
-        }}
+        _focus={{ outline: `none` }}
         _focusVisible={{
           borderColor: { base: colorModeShadeInverted, sm: colorModeShade },
           borderRadius: `18px`,

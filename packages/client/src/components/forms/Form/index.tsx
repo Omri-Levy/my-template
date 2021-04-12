@@ -37,6 +37,7 @@ const Form: FunctionComponent<Props> = ({
         backgroundColor: colorModeShadeInverted,
         color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
+        boxShadow: `none`,
       }
     : undefined;
 
@@ -68,7 +69,7 @@ const Form: FunctionComponent<Props> = ({
             border={`2px solid`}
             borderColor={colorModeShadeInverted}
             _hover={focusAndHover}
-            _focusWithin={focusAndHover}
+            _focus={focusAndHover}
           >
             {submitButtonText}
           </Button>

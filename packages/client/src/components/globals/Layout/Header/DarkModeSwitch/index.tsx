@@ -7,8 +7,10 @@ import {
   Switch,
   useBreakpointValue,
   useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import Color from 'color';
 import { Props } from './types';
 import useDarkMode from '../../../../../hooks/ui/useDarkMode';
 
@@ -23,6 +25,15 @@ const DarkModeSwitch: FunctionComponent<Props> = ({ color, ...props }) => {
   const icon = isDarkMode ? FaMoon : FaSun;
   const isMobile = useBreakpointValue({ base: true, sm: false });
   const Mode = isMobile ? Fragment : isDarkMode ? LightMode : DarkMode;
+  const purple = useColorModeValue(isMobile ? `#6B46C1` : `#D6BCFA`, `#808080`);
+  const defaultColor = color
+    ? Color(color).rgb().alpha(0.6)
+    : Color(purple).rgb().alpha(0.6);
+  const focusAndHover = {
+    '.chakra-switch__track': {
+      boxShadow: `0 0 0 3px ${defaultColor} !important`,
+    },
+  };
 
   return (
     <HStack spacing={3} alignItems={`center`} {...props}>
@@ -32,6 +43,8 @@ const DarkModeSwitch: FunctionComponent<Props> = ({ color, ...props }) => {
           colorScheme={color || `purple`}
           onChange={toggleColorMode}
           isChecked={isDarkMode}
+          _focusWithin={focusAndHover}
+          _hover={focusAndHover}
         />
       </Mode>
     </HStack>

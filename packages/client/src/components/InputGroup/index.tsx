@@ -28,6 +28,13 @@ const InputGroup: FunctionComponent<Props> = ({
   const passwordVisibilityTitle = hidePassword
     ? `Show Password`
     : `Hide Password`;
+  const checkboxHoverAndFocus = {
+    '.chakra-checkbox__control': {
+      transform: `scale(1.2)`,
+      transition: `scale 240ms ease-in-out`,
+      boxShadow: `none`,
+    },
+  };
 
   return (
     <>
@@ -50,6 +57,8 @@ const InputGroup: FunctionComponent<Props> = ({
           title={passwordVisibilityTitle}
           onChange={setPasswordVisibility}
           colorScheme={checkboxColor || `purple`}
+          _focusWithin={checkboxHoverAndFocus}
+          _hover={checkboxHoverAndFocus}
         >
           <Text mt={0.5}>Show Password</Text>
         </Checkbox>

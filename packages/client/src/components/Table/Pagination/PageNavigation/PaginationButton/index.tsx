@@ -70,6 +70,7 @@ const PaginationButton: FunctionComponent<Props> = ({
         backgroundColor: colorModeShadeInverted,
         color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
+        boxShadow: `none`,
       }
     : undefined;
 
@@ -88,7 +89,7 @@ const PaginationButton: FunctionComponent<Props> = ({
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
         _hover={focusAndHover}
-        _focusWithin={focusAndHover}
+        _focus={focusAndHover}
       >
         {text}
       </Button>

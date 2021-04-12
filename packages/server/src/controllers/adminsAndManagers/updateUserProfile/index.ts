@@ -66,7 +66,7 @@ const updateUserProfile: Route = async (req, res) => {
      */
     const currentUserIsAdmin = user?.role === `admin`;
 
-    if (!currentUserIsAdmin && !unchangedRole) {
+    if (!currentUserIsAdmin && role && !unchangedRole) {
       console.error(unauthorizedMessage);
 
       res.status(401).send({ message: unauthorizedMessage });

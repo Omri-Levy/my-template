@@ -86,6 +86,7 @@ import capitalize from './utils/functions/capitalize';
 import { roles } from './utils/validation/validationReferences';
 import lowerCaseComparison from './utils/functions/lowerCaseComparison';
 import calculateSeconds from './utils/functions/calculateSeconds';
+import formValuesChanged from './utils/functions/formValuesChanged';
 
 export {
   apiUrl,
@@ -160,6 +161,7 @@ export {
   secondsToHours,
   capitalize,
   lowerCaseComparison,
+  formValuesChanged,
 };
 
 export type {

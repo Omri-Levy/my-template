@@ -1,5 +1,7 @@
 import { NumberInputProps } from '@chakra-ui/react';
 
-type Props = NumberInputProps;
+interface Props extends NumberInputProps {
+  activeColor?: string;
+}
 
 export { Props };

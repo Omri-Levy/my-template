@@ -55,8 +55,16 @@ const Modal: FunctionComponent<Props> = ({
         backgroundColor: colorModeShadeInverted,
         color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
+        boxShadow: `none`,
       }
     : undefined;
+  const checkboxHoverAndFocus = {
+    '.chakra-checkbox__control': {
+      transform: `scale(1.2)`,
+      transition: `scale 240ms ease-in-out`,
+      boxShadow: `none`,
+    },
+  };
 
   return (
     <>
@@ -68,7 +76,7 @@ const Modal: FunctionComponent<Props> = ({
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
         _hover={focusAndHover}
-        _focusWithin={focusAndHover}
+        _focus={focusAndHover}
         {...buttonProps}
       >
         {toggleButtonText}
@@ -99,6 +107,8 @@ const Modal: FunctionComponent<Props> = ({
                   isChecked={isChecked}
                   onChange={isChecked ? onUncheck : onCheck}
                   colorScheme={checkboxColor || `purple`}
+                  _focusWithin={checkboxHoverAndFocus}
+                  _hover={checkboxHoverAndFocus}
                 >
                   {checkboxText}
                 </Checkbox>
@@ -120,7 +130,7 @@ const Modal: FunctionComponent<Props> = ({
                 border={`2px solid`}
                 borderColor={colorModeShadeInverted}
                 _hover={focusAndHover}
-                _focusWithin={focusAndHover}
+                _focus={focusAndHover}
               >
                 Cancel
               </Button>
@@ -136,7 +146,7 @@ const Modal: FunctionComponent<Props> = ({
                   border={`2px solid`}
                   borderColor={colorModeShadeInverted}
                   _hover={focusAndHover}
-                  _focusWithin={focusAndHover}
+                  _focus={focusAndHover}
                 >
                   {actionText}
                 </Button>

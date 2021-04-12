@@ -3,5 +3,6 @@ interface PersonalInformationFormFields {
   lastName: string;
   email: string;
 }
+type InputKeyboardEvent = KeyboardEvent<HTMLInputElement>;
 
-export { PersonalInformationFormFields };
+export { PersonalInformationFormFields, InputKeyboardEvent };

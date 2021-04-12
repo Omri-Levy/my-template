@@ -42,6 +42,9 @@ const TableHead: FunctionComponent<Props> = ({
                   colSpan={mobileHeaders.length === 1 ? 2 : undefined}
                   fontSize={14}
                   color={column?.isSorted ? colorModeShadeInverted : undefined}
+                  _hover={{
+                    color: colorModeShadeInverted,
+                  }}
                   key={v4()}
                 >
                   <Flex>

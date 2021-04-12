@@ -11,7 +11,6 @@ import {
   unauthorizedMessage,
   Users,
 } from '@my-template/shared';
-import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
 import useLoading from '../../../../hooks/ui/useLoading';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 import useErrorToast from '../../../../hooks/ui/useErrorToast';
@@ -25,6 +24,7 @@ import AuthorizationContext from '../../../../context/AuthorizationContext/Autho
 import Modal from '../../../Modal';
 import fetchDeleteSelectedUsers from '../../../../utils/api/fetchDeleteUser';
 import useDarkMode from '../../../../hooks/ui/useDarkMode';
+import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
 
 /**
  * TODO: refactor to controller pattern
@@ -85,6 +85,7 @@ const AdminActions: FunctionComponent<Props> = ({
         backgroundColor: colorModeShadeInverted,
         color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
+        boxShadow: `none`,
       }
     : undefined;
 
@@ -116,7 +117,7 @@ const AdminActions: FunctionComponent<Props> = ({
           isFullWidth={isMobile}
           mb={{ base: 5, sm: 0 }}
           _hover={focusAndHover}
-          _focusWithin={focusAndHover}
+          _focus={focusAndHover}
         >
           Delete Selected
         </Button>
@@ -138,7 +139,7 @@ const AdminActions: FunctionComponent<Props> = ({
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
         _hover={focusAndHover}
-        _focusWithin={focusAndHover}
+        _focus={focusAndHover}
       >
         Delete Selected
       </Button>

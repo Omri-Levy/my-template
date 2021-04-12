@@ -1,5 +1,5 @@
 type ObjectKey = string | number | symbol;
-type ObjectType = Record<ObjectKey, unknown>;
+type ObjectType<T> = Record<ObjectKey, T>;
 type Data<T> = Record<ObjectKey, T>;
 type RequestMethod = `GET` | `POST` | `PATCH` | `DELETE`;
 type Endpoint =

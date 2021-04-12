@@ -49,17 +49,21 @@ const MultiStepForm: FunctionComponent<Props> = ({
     `purple`
   );
   const { darkModeTextColorInverted } = useDarkMode();
+  const sharedProps = {
+    color: darkModeTextColorInverted,
+    boxShadow: `none`,
+  };
   const focusAndHoverSubmit = !disableSubmit
     ? {
         backgroundColor: submitBorderColor,
-        color: darkModeTextColorInverted,
         borderColor: submitBorderColor,
+        ...sharedProps,
       }
     : undefined;
   const focusAndHoverFormNav = !isSubmitting
     ? {
         backgroundColor: formNavBorderColor,
-        color: darkModeTextColorInverted,
+        ...sharedProps,
       }
     : undefined;
 
@@ -95,7 +99,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
               border={`2px solid`}
               borderColor={formNavBorderColor}
               _hover={focusAndHoverFormNav}
-              _focusWithin={focusAndHoverFormNav}
+              _focus={focusAndHoverFormNav}
             >
               Previous
             </Button>
@@ -116,7 +120,7 @@ const MultiStepForm: FunctionComponent<Props> = ({
             border={`2px solid`}
             borderColor={submitBorderColor}
             _hover={focusAndHoverSubmit}
-            _focusWithin={focusAndHoverSubmit}
+            _focus={focusAndHoverSubmit}
           >
             {onSubmit ? submitButtonText : `Next`}
           </Button>

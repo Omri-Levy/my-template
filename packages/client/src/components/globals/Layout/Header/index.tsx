@@ -1,24 +1,27 @@
 import { FunctionComponent, memo } from 'react';
 import {
-  Box,
+  Button,
   Flex,
   Icon,
   keyframes,
   useBreakpointValue,
+  useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import Color from 'color';
 import Nav from './Nav';
 import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import Logo from './Logo';
 import DarkModeSwitch from './DarkModeSwitch';
+import { Props } from './types';
 
 /**
  * a simple header component made using Chakra-UI's Flex component with the
  * html "header" tag passed to the "as" prop, wrapping the Nav, Logo and
  * DarkModeSwitch.
  */
-const Header: FunctionComponent = () => {
+const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
   const { darkModeColor, darkModeColorInverted } = useDarkMode();
   const {
     isOpen: burgerMenuIsOpen,
@@ -33,6 +36,10 @@ const Header: FunctionComponent = () => {
   `;
   const animationDirection = burgerMenuIsOpen ? `reverse` : `normal`;
   const animation = `${spin} 300ms ease-in ${animationDirection};`;
+  const purple = useColorModeValue(`#6B46C1`, `#D6BCFA`);
+  const defaultColor = burgerFocusColor
+    ? Color(burgerFocusColor).rgb().alpha(0.6)
+    : Color(purple).rgb().alpha(0.6);
 
   return (
     <>
@@ -64,17 +71,20 @@ const Header: FunctionComponent = () => {
             position={{ base: `fixed`, sm: `unset` }}
             left={{ base: 5, sm: `unset` }}
             top={{ base: 0, sm: `unset` }}
+            display={isMobile && !burgerMenuIsOpen ? `none` : undefined}
           />
         </Flex>
-        <Nav toggleBurgerMenu={toggleBurgerMenu} />
+        <Nav
+          toggleBurgerMenu={toggleBurgerMenu}
+          display={isMobile && !burgerMenuIsOpen ? `none` : `grid`}
+        />
       </Flex>
       {isMobile && (
-        <Box
+        <Button
           width={burgerDimensions}
           height={burgerDimensions}
           borderRadius={`100vw`}
           backgroundColor={darkModeColor}
-          cursor={`pointer`}
           zIndex={2}
           position={`fixed`}
           right={burgerDimensions}
@@ -83,15 +93,23 @@ const Header: FunctionComponent = () => {
           p={5}
           display={`grid`}
           placeContent={`center`}
+          _focus={{ boxShadow: `none` }}
+          _focusVisible={{
+            boxShadow: `0 0 0 3px ${defaultColor} !important`,
+            borderColor: `${defaultColor} !important`,
+            animation,
+          }}
+          _hover={{
+            animation,
+          }}
         >
           <Icon
             width={`35px`}
             height={`30px`}
             as={burgerMenuIsOpen ? FaTimes : FaBars}
             color={darkModeColorInverted}
-            animation={animation}
           />
-        </Box>
+        </Button>
       )}
     </>
   );
