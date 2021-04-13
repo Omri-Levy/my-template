@@ -11,11 +11,12 @@ const Select: FunctionComponent<Props> = ({
   options,
   register,
   optionsProps,
+  activeColor,
   ...props
 }) => {
   const purple = useColorModeValue(`#6B46C1`, `#D6BCFA`);
-  const defaultColor = props?.activeColor
-    ? Color(props?.activeColor).rgb().alpha(0.6)
+  const defaultColor = activeColor
+    ? Color(activeColor).rgb().alpha(0.6)
     : Color(purple).rgb().alpha(0.6);
   const focusAndHover = {
     boxShadow: `0 0 0 1px ${defaultColor} !important`,

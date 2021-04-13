@@ -3,6 +3,7 @@ interface Props {
   setPageSize: (number: number) => void;
   rowsLength: number;
   pageSize: number;
+  activeColor?: string;
 }
 
 export { Props };

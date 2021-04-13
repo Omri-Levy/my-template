@@ -13,6 +13,7 @@ interface Props extends InputGroupProps {
   optionsProps?: OptionComponent;
   register?: Register;
   selectProps: ExtendedSelectProps;
+  activeColor?: string;
 }
 
 export { Props };

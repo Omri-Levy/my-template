@@ -12,6 +12,7 @@ interface PaginationObject extends BoxProps {
   nextPage: () => void;
   setPageSize: (number: number) => void;
   colSpan?: number;
+  activeColor?: string;
 }
 
 type Props = PaginationObject;

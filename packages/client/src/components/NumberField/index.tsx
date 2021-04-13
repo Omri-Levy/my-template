@@ -7,12 +7,13 @@ const NumberField: FunctionComponent<Props> = ({
   labelTitle,
   labelProps,
   inputProps,
+  activeColor,
   ...props
 }) => {
   return (
     <FormControl {...props}>
       <FormLabel {...labelProps}>{labelTitle}</FormLabel>
-      <NumberInput {...inputProps} />
+      <NumberInput activeColor={activeColor} {...inputProps} />
     </FormControl>
   );
 };

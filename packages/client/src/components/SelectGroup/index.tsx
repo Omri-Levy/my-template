@@ -10,6 +10,7 @@ const SelectGroup: FunctionComponent<Props> = ({
   register,
   selectProps,
   optionsProps,
+  activeColor,
   ...props
 }) => {
   return (
@@ -23,6 +24,7 @@ const SelectGroup: FunctionComponent<Props> = ({
         options={selectOptions}
         optionsProps={optionsProps}
         register={register}
+        activeColor={activeColor}
         {...selectProps}
       />
     </InputGroup>
