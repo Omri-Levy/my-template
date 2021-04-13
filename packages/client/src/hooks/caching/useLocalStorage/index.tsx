@@ -17,9 +17,18 @@ const useLocalStorage: HookReturns = (key) => {
     [key]
   );
   const getLocalStorage: GetLocalStorage = useCallback(
-    (defaultValue) => () =>
-      JSON.parse(localStorage.getItem(key) as string) || defaultValue,
-    [key]
+    (defaultValue) => () => {
+      const cachedItem = JSON.parse(localStorage.getItem(key) as string);
+
+      if (!cachedItem) {
+        setLocalStorage(defaultValue);
+
+        return defaultValue;
+      }
+
+      return cachedItem;
+    },
+    [key, setLocalStorage]
   );
 
   return {

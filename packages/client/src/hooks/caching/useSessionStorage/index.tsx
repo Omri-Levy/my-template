@@ -17,9 +17,18 @@ const useSessionStorage: HookReturns = (key) => {
     [key]
   );
   const getSessionStorage: GetSessionStorage = useCallback(
-    (defaultValue) => () =>
-      JSON.parse(sessionStorage.getItem(key) as string) || defaultValue,
-    [key]
+    (defaultValue) => () => {
+      const cachedItem = JSON.parse(sessionStorage.getItem(key) as string);
+
+      if (!cachedItem) {
+        setSessionStorage(defaultValue);
+
+        return defaultValue;
+      }
+
+      return cachedItem;
+    },
+    [key, setSessionStorage]
   );
 
   return {

@@ -21,7 +21,7 @@ const App: FunctionComponent = () => {
    */
   const adminPanelAction = () => resetUserIds();
   const isNotSignUp = /^(?!\/signUp).*/;
-  const isNotAdminPanel = /^(?!\/adminPanel.*)/;
+  const isNotAdminPanel = /^(?!\/adminPanel).*/;
 
   usePathBasedAction(isNotSignUp, signUpAction);
   usePathBasedAction(isNotAdminPanel, adminPanelAction);
