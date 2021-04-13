@@ -9,7 +9,7 @@ const setResponseError: SetResponseError = (
   let errorMessage = error.response?.data.message;
   const isExpectedErrorMessage = expectedErrorMessages?.includes(errorMessage);
   const isExpectingErrorMessage =
-    expectedErrorMessages && expectedErrorMessages.length > 0;
+    expectedErrorMessages && expectedErrorMessages?.length > 0;
   const isStatus429 = error.response?.status === 429;
 
   if (

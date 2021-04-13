@@ -7,7 +7,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
-import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import ModalFormWrapper from '../ModalFormWrapper';
 import ModalForm from '../ModalFormWrapper/ModalForm';
 import FormFields from '../FormFields';
@@ -16,6 +16,7 @@ import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 import { UpdateUserPassword } from '../../pages/Profile/types';
 import { Props } from './types';
 import fetchUpdateUserPassword from '../../../utils/api/fetchUpdateUserPassword';
+import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
 
 /**
  * TODO: refactor to the controller pattern
@@ -56,13 +57,13 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
       setResponseError(error, setError, [invalidOldPasswordMessage]);
     }
   };
-  const oneUserSelected = userIds.length === 1;
+  const oneUserSelected = userIds?.length === 1;
   const disableSubmitCondition = () => {
     const { newPassword, oldPassword } = watch([`newPassword`, `oldPassword`]);
 
     return newPassword === oldPassword || !oneUserSelected;
   };
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
 
   return (
     <ModalFormWrapper

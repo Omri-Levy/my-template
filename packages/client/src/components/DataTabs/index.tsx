@@ -8,13 +8,19 @@ const DataTabs: FunctionComponent<Props> = ({
   color,
   data,
   setCurrentColumns,
+  currentColumns,
 }) => {
   const { colorModeShadeInverted } = useColorModeShade(color || `purple`);
 
   return (
     <Tabs
+      align={`start`}
+      variant={`enclosed-colored`}
       colorScheme={color || `purple`}
-      onChange={(index) => setCurrentColumns(index)}
+      defaultIndex={currentColumns}
+      onChange={(index) => {
+        setCurrentColumns(index);
+      }}
     >
       <TabList>
         {data?.map((tab) => (

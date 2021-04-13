@@ -10,7 +10,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
-import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { Props, UpdateUserProfile } from './types';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
@@ -23,6 +23,7 @@ import fetchUpdateUserProfile from '../../../utils/api/fetchUpdateUserProfile';
 import queryClient from '../../globals/Providers/queryClient';
 import useErrorToast from '../../../hooks/ui/useErrorToast';
 import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
+import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
 
 const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const schema = useMemo(() => updateUserProfileSchema, []);
@@ -82,7 +83,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     }
   };
   const { currentUser } = useContext(AuthenticationContext);
-  const oneUserSelected = userIds.length === 1;
+  const oneUserSelected = userIds?.length === 1;
   const users = queryClient.getQueryData(`users`) as Users;
   const userToUpdate = users.filter((user) => user.id === userIds[0])[0];
   const disableSubmitCondition = () => {
@@ -95,7 +96,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
 
     return formValuesChanged(currentValues, watch) || !oneUserSelected;
   };
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
 
   if (!currentUser) {
     return <NoUserFound />;

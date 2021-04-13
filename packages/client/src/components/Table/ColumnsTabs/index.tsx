@@ -7,12 +7,18 @@ const ColumnsTabs: FunctionComponent<Props> = ({
   color,
   data,
   setCurrentColumns,
+  currentColumns,
 }) => (
   <>
-    <Heading as={`h3`} fontSize={`0.9rem`}>
+    <Heading as={`h3`} fontSize={`0.9rem`} mb={5}>
       Navigate Columns
     </Heading>
-    <DataTabs color={color} setCurrentColumns={setCurrentColumns} data={data} />
+    <DataTabs
+      color={color}
+      setCurrentColumns={setCurrentColumns}
+      currentColumns={currentColumns}
+      data={data}
+    />
   </>
 );
 

@@ -8,7 +8,7 @@ type SetLocalStorage = <T>(value: T) => void;
  * JSON.parse on the returned value. Returns the passed in defaultValue if
  * the item does not exist in session storage.
  */
-type GetLocalStorage = <T>(defaultValue: T) => <K>() => K;
+type GetLocalStorage = <T>(defaultValue: T) => <K>() => K | T;
 type HookReturns = (
   key: string
 ) => {

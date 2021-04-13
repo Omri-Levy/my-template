@@ -11,6 +11,7 @@ import {
   ColumnType,
   Props as TableProps,
 } from '../types';
+import { SetState } from '../../../utils/types';
 
 type FooterGroups<D> = HeaderGroup<D>[];
 interface Props extends TableProps {
@@ -39,6 +40,11 @@ interface Props extends TableProps {
   allCheckboxesChecked: boolean;
   footerGroups: FooterGroups;
   tableProps?: ChakraTableProps;
+  isMobile: boolean | undefined;
+  columnsChunks: { label: string }[];
+  headerChunks: string[][];
+  currentColumns: number;
+  setCurrentColumns: SetState<number>;
 }
 
 export { Props, FooterGroups };

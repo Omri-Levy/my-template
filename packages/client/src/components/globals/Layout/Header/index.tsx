@@ -1,12 +1,10 @@
-import { FunctionComponent, memo } from 'react';
+import { FunctionComponent, memo, useEffect, useState } from 'react';
 import {
   Button,
   Flex,
   Icon,
   keyframes,
-  useBreakpointValue,
   useColorModeValue,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Color from 'color';
@@ -15,6 +13,8 @@ import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import Logo from './Logo';
 import DarkModeSwitch from './DarkModeSwitch';
 import { Props } from './types';
+import useLocalStorage from '../../../../hooks/caching/useLocalStorage';
+import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 /**
  * a simple header component made using Chakra-UI's Flex component with the
@@ -23,12 +23,16 @@ import { Props } from './types';
  */
 const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
   const { darkModeColor, darkModeColorInverted } = useDarkMode();
-  const {
-    isOpen: burgerMenuIsOpen,
-    onToggle: toggleBurgerMenu,
-  } = useDisclosure();
+  const { getLocalStorage, setLocalStorage } = useLocalStorage(
+    `burgerMenuIsOpen`
+  );
+  const cachedBurgerState = getLocalStorage(false)() as boolean;
+  const [burgerMenuIsOpen, setBurgerMenuIsOpen] = useState(
+    () => cachedBurgerState
+  );
+  const toggleBurgerMenu = () => setBurgerMenuIsOpen((prevState) => !prevState);
   const burgerDimensions = `50px`;
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
   const opacity = isMobile ? (burgerMenuIsOpen ? 1 : 0) : 1;
   const spin = keyframes`
     from { transform: rotate(0deg); }
@@ -40,6 +44,10 @@ const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
   const defaultColor = burgerFocusColor
     ? Color(burgerFocusColor).rgb().alpha(0.6)
     : Color(purple).rgb().alpha(0.6);
+
+  useEffect(() => {
+    setLocalStorage(burgerMenuIsOpen);
+  }, [burgerMenuIsOpen]);
 
   return (
     <>

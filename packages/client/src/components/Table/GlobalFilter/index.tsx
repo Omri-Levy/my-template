@@ -15,6 +15,7 @@ import { Props } from './types';
 import Modal from '../../Modal';
 import useColorModeShade from '../../../hooks/ui/useColorModeShade';
 import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
+import useLocalStorage from '../../../hooks/caching/useLocalStorage';
 
 /**
  * TODO: refactor to be more generic and reusable.
@@ -25,14 +26,20 @@ const GlobalFilter: FunctionComponent<Props> = ({
   colSpan,
   activeColor,
 }) => {
-  const [filterValue, setFilterValue] = useState(globalFilter);
+  const {
+    getLocalStorage: getCachedGlobalFilter,
+    setLocalStorage: setCachedGlobalFilter,
+  } = useLocalStorage(`filterBy`);
+  const cachedFilter = getCachedGlobalFilter(globalFilter)() as string;
+  const [filterValue, setFilterValue] = useState(cachedFilter);
   const globalFilterFn = useAsyncDebounce((value) =>
     setGlobalFilter(value || undefined)
   );
   const filter = (value: string) => setFilterValue(value);
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    filter(event.target.value);
-    globalFilterFn(event.target.value);
+    filter(event?.target?.value);
+    globalFilterFn(event?.target?.value);
+    setCachedGlobalFilter(event?.target?.value);
   };
   const disclosure = useDisclosure();
   const alertDisclosure = useDisclosure();

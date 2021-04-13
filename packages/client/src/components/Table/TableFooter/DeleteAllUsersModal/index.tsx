@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { serverErrorMessage, Users } from '@my-template/shared';
 import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
@@ -9,6 +9,7 @@ import queryClient from '../../../globals/Providers/queryClient';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 import useLoading from '../../../../hooks/ui/useLoading';
 import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
+import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
@@ -44,7 +45,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
   const { colorModeShadeInverted } = useColorModeShade(`red`);
 
   return (
@@ -62,7 +63,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
         `This action will delete all users with no way ` +
         `of reverting.. Are you sure?`
       }
-      checkbox={admins.length > 1}
+      checkbox={admins?.length > 1}
       checkboxText={`Delete other admins`}
       actionText={`Delete`}
       actionIcon={FaTrashAlt}

@@ -13,7 +13,7 @@ const CurrentUserDetails: FunctionComponent = () => {
     <List variant={`filled`}>
       {memoizedDetails.map((memoizedDetail, index) => {
         const { objectKey, icon, text } = memoizedDetail;
-        const isLastChild = index === memoizedDetails.length + 1;
+        const isLastChild = index === memoizedDetails?.length + 1;
         const isFirstChild = index === 0;
 
         return (

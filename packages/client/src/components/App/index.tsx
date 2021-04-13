@@ -13,7 +13,6 @@ const App: FunctionComponent = () => {
    * resets the sign up form when leaving sign up.
    */
   const signUpAction = () => {
-    console.log(`yeet`);
     dispatch(resetSignUpFormDetails());
   };
   /**

@@ -10,7 +10,6 @@ const usePathBasedAction: HookReturns = (regex, action) => {
 
   useEffect(() => {
     if (regex.test(pathname)) {
-      console.log({ pathname, regex });
       action();
     }
   }, [pathname, action, regex]);

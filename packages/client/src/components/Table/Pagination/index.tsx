@@ -6,7 +6,7 @@ import GoToPage from './GoToPage';
 import PageNavigation from './PageNavigation';
 import PageCounter from './PageCounter';
 import RowsPerPage from './RowsPerPage';
-import useIsTablet from '../../../hooks/responsiveness/useIsTablet';
+import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
 
 const Pagination: FunctionComponent<Props> = ({
   pageCount,
@@ -24,7 +24,7 @@ const Pagination: FunctionComponent<Props> = ({
   ...props
 }) => {
   const displayPagination = pageCount > 1;
-  const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
 
   return (
     <Tr>
@@ -52,7 +52,7 @@ const Pagination: FunctionComponent<Props> = ({
               />
               <Flex>
                 <Divider
-                  orientation={!isTablet ? `vertical` : `horizontal`}
+                  orientation={!isMobile ? `vertical` : `horizontal`}
                   mr={{ base: 0, md: 10 }}
                   mt={{ base: 5, md: 0 }}
                   mb={{ base: 5, md: 0 }}
@@ -71,7 +71,7 @@ const Pagination: FunctionComponent<Props> = ({
             <>
               <Flex>
                 <Divider
-                  orientation={!isTablet ? `vertical` : `horizontal`}
+                  orientation={!isMobile ? `vertical` : `horizontal`}
                   mr={{ base: 0, md: 10 }}
                   mt={{ base: 5, md: 0 }}
                   mb={{ base: 5, md: 0 }}

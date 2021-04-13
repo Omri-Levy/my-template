@@ -1,36 +1,17 @@
-import { FunctionComponent, memo, useState } from 'react';
+import { FunctionComponent, memo } from 'react';
 import { Flex, Table as ChakraTable, TableCaption } from '@chakra-ui/react';
-import { chunk } from 'lodash';
 import TableHead from '../TableHead';
 import TableBody from '../TableBody';
 import TableFooter from '../TableFooter';
 import { Props } from './types';
 import Card from '../../Card';
 import ColumnsTabs from '../ColumnsTabs';
-import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
-import useColumnsAmount from '../../../hooks/responsiveness/useColumnsAmount';
 
 const TableInstance: FunctionComponent<Props> = ({
   Actions,
   tableProps,
   ...props
 }) => {
-  const [currentColumns, setCurrentColumns] = useState(0);
-  const headerGroupsCopy = [...props.headerGroups];
-  const headers = headerGroupsCopy[0]?.headers?.map(
-    (column) => (column?.Header as string) || ``
-  );
-  const columnsAmount = useColumnsAmount();
-  const headerChunks = chunk(headers, columnsAmount);
-  const columns = [
-    ...headerChunks.map((headerChunk) => ({
-      label: `${headerChunk[0]} ${headerChunk[1] ? `&` : ``} ${
-        headerChunk[1] || ``
-      }`,
-    })),
-  ];
-  const isMobile = useIsMobile();
-
   return (
     <Flex flexDirection={{ md: `column` }} alignItems={{ md: `center` }}>
       <Card
@@ -38,65 +19,66 @@ const TableInstance: FunctionComponent<Props> = ({
         color={`unset`}
         padding={{ base: `unset`, md: 5 }}
         minWidth={{ sm: `100%`, md: `unset` }}
+        mb={5}
       >
         <ChakraTable
           maxWidth={`100%`}
-          {...props.getTableProps()}
+          {...props?.getTableProps()}
           {...tableProps}
         >
           <TableCaption
             mb={5}
             fontWeight={`bold`}
             placement={`top`}
-            maxWidth={`34ch`}
-            mx={`auto`}
+            width={`100%`}
             fontSize={19}
           >
-            {isMobile && (
+            {props?.isMobile && (
               <ColumnsTabs
-                setCurrentColumns={setCurrentColumns}
-                data={columns}
+                setCurrentColumns={props?.setCurrentColumns}
+                data={props?.columnsChunks}
+                currentColumns={props?.currentColumns}
               />
             )}
-            {props.caption}
+            {props?.caption}
           </TableCaption>
           <TableHead
-            headerGroups={props.headerGroups}
-            currentColumns={currentColumns}
+            headerGroups={props?.headerGroups}
+            currentColumns={props?.currentColumns}
           />
           <TableBody
-            getTableBodyProps={props.getTableBodyProps}
-            page={props.page}
-            prepareRow={props.prepareRow}
-            checkCheckbox={props.checkCheckbox}
-            isChecked={props.isChecked}
-            currentColumns={currentColumns}
+            getTableBodyProps={props?.getTableBodyProps}
+            page={props?.page}
+            prepareRow={props?.prepareRow}
+            checkCheckbox={props?.checkCheckbox}
+            isChecked={props?.isChecked}
+            currentColumns={props?.currentColumns}
           />
           <TableFooter
-            footerGroups={props.footerGroups}
-            globalFilter={props.globalFilter}
-            setGlobalFilter={props.setGlobalFilter}
-            pageIndex={props.pageIndex}
-            pageCount={props.pageCount}
-            rowsLength={props.rowsLength}
-            canPreviousPage={props.canPreviousPage}
-            canNextPage={props.canNextPage}
-            gotoPage={props.gotoPage}
-            previousPage={props.previousPage}
-            nextPage={props.nextPage}
-            setPageSize={props.setPageSize}
+            footerGroups={props?.footerGroups}
+            globalFilter={props?.globalFilter}
+            setGlobalFilter={props?.setGlobalFilter}
+            pageIndex={props?.pageIndex}
+            pageCount={props?.pageCount}
+            rowsLength={props?.rowsLength}
+            canPreviousPage={props?.canPreviousPage}
+            canNextPage={props?.canNextPage}
+            gotoPage={props?.gotoPage}
+            previousPage={props?.previousPage}
+            nextPage={props?.nextPage}
+            setPageSize={props?.setPageSize}
             colSpan={
-              isMobile
-                ? headerChunks[currentColumns].length === 1
-                  ? headerChunks[currentColumns].length + 2
-                  : headerChunks[currentColumns].length + 1
-                : props.columns.length + 1
+              props?.isMobile
+                ? props?.headerChunks[props?.currentColumns]?.length === 1
+                  ? props?.headerChunks[props?.currentColumns]?.length + 2
+                  : props?.headerChunks[props?.currentColumns]?.length + 1
+                : props?.columns?.length + 1
             }
-            checkAllCheckboxes={props.checkAllCheckboxes}
-            allCheckboxesChecked={props.allCheckboxesChecked}
-            Actions={<Actions {...props.actionsProps} />}
-            currentColumns={currentColumns}
-            pageSize={props.pageSize}
+            checkAllCheckboxes={props?.checkAllCheckboxes}
+            allCheckboxesChecked={props?.allCheckboxesChecked}
+            Actions={<Actions {...props?.actionsProps} />}
+            currentColumns={props?.currentColumns}
+            pageSize={props?.pageSize}
           />
         </ChakraTable>
       </Card>

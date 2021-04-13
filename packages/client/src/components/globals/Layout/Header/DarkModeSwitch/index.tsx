@@ -5,7 +5,6 @@ import {
   Icon,
   LightMode,
   Switch,
-  useBreakpointValue,
   useColorMode,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -13,6 +12,7 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import Color from 'color';
 import { Props } from './types';
 import useDarkMode from '../../../../../hooks/ui/useDarkMode';
+import useIsMobile from '../../../../../hooks/responsiveness/useIsMobile';
 
 /**
  * @description a simple dark mode switch made using Chakra-UI's HStack,
@@ -23,7 +23,7 @@ const DarkModeSwitch: FunctionComponent<Props> = ({ color, ...props }) => {
   const { toggleColorMode } = useColorMode();
   const { isDarkMode } = useDarkMode();
   const icon = isDarkMode ? FaMoon : FaSun;
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
   const Mode = isMobile ? Fragment : isDarkMode ? LightMode : DarkMode;
   const purple = useColorModeValue(isMobile ? `#6B46C1` : `#D6BCFA`, `#808080`);
   const defaultColor = color

@@ -19,7 +19,7 @@ const deleteSelectedUsers: Route = async (req, res) => {
       });
     }
 
-    if (uniqueUserIds.length === 0 || !isAnArrayOfUuidV4) {
+    if (uniqueUserIds?.length === 0 || !isAnArrayOfUuidV4) {
       console.error(deleteSelectedUsersMessage);
 
       res.status(400).send({ message: deleteSelectedUsersMessage });

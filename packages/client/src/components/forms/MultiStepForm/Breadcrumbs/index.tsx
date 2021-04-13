@@ -32,7 +32,7 @@ const Breadcrumbs: FunctionComponent<Props> = ({
     >
       {disabledBreadcrumbs?.map((breadcrumb, index) => {
         const { to, text } = breadcrumb;
-        const isLastChild = index === breadcrumbs.length + 1;
+        const isLastChild = index === breadcrumbs?.length + 1;
         const isCurrentPage = pathname === to;
         const disableLink = !isCurrentPage && breadcrumb.disabled;
         let disabledLinkStyles;

@@ -48,7 +48,7 @@ const AdminPanel: FunctionComponent = () => {
 
   return (
     <Page title={`Admin Panel`} icon={FaUserCog}>
-      {data.length > 0 ? (
+      {data?.length > 0 ? (
         <Table
           data={data}
           columns={columns}

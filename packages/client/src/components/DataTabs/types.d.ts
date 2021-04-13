@@ -5,6 +5,7 @@ interface Props {
   data: Record<ObjectKey, string>[];
   setCurrentColumns: SetState<number>;
   color?: ChakraColorScheme;
+  currentColumns: number;
 }
 
 export { Props };

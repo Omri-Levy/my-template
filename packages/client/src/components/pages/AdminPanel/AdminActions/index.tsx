@@ -20,7 +20,7 @@ import Modal from '../../../Modal';
 import fetchDeleteSelectedUsers from '../../../../utils/api/fetchDeleteUser';
 import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
-import useIsTablet from '../../../../hooks/responsiveness/useIsTablet';
+import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 /**
  * TODO: refactor to controller pattern
@@ -29,7 +29,7 @@ const AdminActions: FunctionComponent<Props> = ({
   icons = true,
   ids: userIds,
 }) => {
-  const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
   const { isLoading, startLoading, stopLoading } = useLoading();
   const {
     toast: deleteSelectedUsersSuccessToast,
@@ -74,8 +74,8 @@ const AdminActions: FunctionComponent<Props> = ({
   const alertDisclosure = useDisclosure();
   const disclosure = useDisclosure();
   const { darkModeTextColorInverted } = useDarkMode();
-  const noUsersSelected = userIds.length <= 0;
-  const oneOrMoreUsersSelected = userIds.length > 0;
+  const noUsersSelected = userIds?.length <= 0;
+  const oneOrMoreUsersSelected = userIds?.length > 0;
   const focusAndHover = !noUsersSelected
     ? {
         backgroundColor: colorModeShadeInverted,
@@ -85,7 +85,7 @@ const AdminActions: FunctionComponent<Props> = ({
       }
     : undefined;
 
-  if (isTablet) {
+  if (isMobile) {
     return (
       <Modal
         actionIcon={FaUserCog}
@@ -110,7 +110,7 @@ const AdminActions: FunctionComponent<Props> = ({
           borderColor={colorModeShadeInverted}
           mr={5}
           p={5}
-          isFullWidth={isTablet}
+          isFullWidth={isMobile}
           mb={{ base: 5, md: 0 }}
           _hover={focusAndHover}
           _focus={focusAndHover}

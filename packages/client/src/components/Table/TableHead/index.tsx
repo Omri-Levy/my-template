@@ -30,7 +30,7 @@ const TableHead: FunctionComponent<Props> = ({
               {columns?.map((column) => (
                 <Th
                   {...column?.getHeaderProps(column?.getSortByToggleProps())}
-                  colSpan={columns.length === 1 ? 2 : undefined}
+                  colSpan={columns?.length === 1 ? 2 : undefined}
                   fontSize={14}
                   color={column?.isSorted ? colorModeShadeInverted : undefined}
                   _hover={{

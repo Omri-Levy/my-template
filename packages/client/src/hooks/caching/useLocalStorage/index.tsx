@@ -12,21 +12,29 @@ import { GetLocalStorage, HookReturns, SetLocalStorage } from './types';
 const useLocalStorage: HookReturns = (key) => {
   const setLocalStorage: SetLocalStorage = useCallback(
     (value) => {
-      localStorage.setItem(key, JSON.stringify(value));
+      const controlledValue = typeof value === `undefined` ? null : value;
+
+      localStorage.setItem(key, JSON.stringify(controlledValue));
     },
     [key]
   );
   const getLocalStorage: GetLocalStorage = useCallback(
     (defaultValue) => () => {
-      const cachedItem = JSON.parse(localStorage.getItem(key) as string);
+      try {
+        const cachedItem = JSON.parse(localStorage.getItem(key) as string);
 
-      if (!cachedItem) {
-        setLocalStorage(defaultValue);
+        if (!cachedItem) {
+          setLocalStorage(defaultValue);
+
+          return defaultValue;
+        }
+
+        return cachedItem;
+      } catch (err) {
+        console.error(err);
 
         return defaultValue;
       }
-
-      return cachedItem;
     },
     [key, setLocalStorage]
   );

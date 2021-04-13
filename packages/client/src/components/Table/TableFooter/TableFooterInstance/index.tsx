@@ -30,9 +30,9 @@ const TableFooterInstance: FunctionComponent<Props> = ({
 
   return (
     <Tfoot>
-      {props.footerGroups?.map((group) => {
+      {props?.footerGroups?.map((group) => {
         const headersChunk = chunk(group?.headers, columnsAmount);
-        const columns = headersChunk[props.currentColumns];
+        const columns = headersChunk[props?.currentColumns];
 
         return (
           <Tr {...group?.getFooterGroupProps()} key={v4()}>
@@ -44,12 +44,12 @@ const TableFooterInstance: FunctionComponent<Props> = ({
             {columns?.length === 1 && (
               <Td role={`presentation`} aria-label={`whitespace`} />
             )}
-            {props.users?.length > 1 && (
+            {props?.users?.length > 1 && (
               <Td>
                 <Checkbox
-                  isChecked={props.allCheckboxesChecked}
-                  onChange={props.checkAllCheckboxes}
-                  colorScheme={props.checkboxColor || `purple`}
+                  isChecked={props?.allCheckboxesChecked}
+                  onChange={props?.checkAllCheckboxes}
+                  colorScheme={props?.checkboxColor || `purple`}
                   _focusWithin={checkboxHoverAndFocus}
                   _hover={checkboxHoverAndFocus}
                 >
@@ -62,13 +62,13 @@ const TableFooterInstance: FunctionComponent<Props> = ({
       })}
       <Tr>
         <GlobalFilter
-          globalFilter={props.globalFilter}
-          setGlobalFilter={props.setGlobalFilter}
+          globalFilter={props?.globalFilter}
+          setGlobalFilter={props?.setGlobalFilter}
         />
         <Td
           borderLeft={`1px solid`}
-          borderLeftColor={props.borderColor}
-          colSpan={props.colSpan}
+          borderLeftColor={props?.borderColor}
+          colSpan={props?.colSpan}
         >
           <Flex justifyContent={`flex-end`}>
             <ButtonGroup spacing={5}>{Actions}</ButtonGroup>
@@ -76,17 +76,17 @@ const TableFooterInstance: FunctionComponent<Props> = ({
         </Td>
       </Tr>
       <Pagination
-        colSpan={props.colSpan}
-        pageIndex={props.pageIndex}
-        pageCount={props.pageCount}
-        pageSize={props.pageSize}
-        rowsLength={props.rowsLength}
-        gotoPage={props.gotoPage}
-        canPreviousPage={props.canPreviousPage}
-        canNextPage={props.canNextPage}
-        previousPage={props.previousPage}
-        nextPage={props.nextPage}
-        setPageSize={props.setPageSize}
+        colSpan={props?.colSpan}
+        pageIndex={props?.pageIndex}
+        pageCount={props?.pageCount}
+        pageSize={props?.pageSize}
+        rowsLength={props?.rowsLength}
+        gotoPage={props?.gotoPage}
+        canPreviousPage={props?.canPreviousPage}
+        canNextPage={props?.canNextPage}
+        previousPage={props?.previousPage}
+        nextPage={props?.nextPage}
+        setPageSize={props?.setPageSize}
       />
     </Tfoot>
   );
