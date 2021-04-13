@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { FaAt } from 'react-icons/fa';
 import FormField from '../../FormField';
-import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
+import clearIfResponseError from '../../../../utils/clearIfResponseError';
 
 /**
  * TODO: update description
@@ -13,9 +13,7 @@ const ForgotPasswordFormFields: FunctionComponent<Props> = ({
   register,
   ...props
 }) => {
-  const onChange = errors?.responseError?.message
-    ? clearResponseError(clearErrors)
-    : undefined;
+  const onChange = clearIfResponseError(errors, clearErrors);
 
   return (
     <FormField

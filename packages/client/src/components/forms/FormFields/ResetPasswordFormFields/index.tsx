@@ -5,9 +5,9 @@ import {
   securityQuestions,
 } from '@my-template/shared';
 import FormField from '../../FormField';
-import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
 import { securityQuestionPlaceholder } from '../../../../utils/constants';
+import clearIfResponseError from '../../../../utils/clearIfResponseError';
 
 /**
  * TODO: update description
@@ -18,9 +18,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
   register,
   ...props
 }) => {
-  const onChange = errors?.responseError?.message
-    ? clearResponseError(clearErrors)
-    : undefined;
+  const onChange = clearIfResponseError(errors, clearErrors);
 
   return (
     <>

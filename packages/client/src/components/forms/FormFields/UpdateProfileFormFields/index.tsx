@@ -3,7 +3,6 @@ import { FaAt, FaSignature } from 'react-icons/fa';
 import { Role, Roles, UserObject, Users } from '@my-template/shared';
 import { useQuery } from 'react-query';
 import FormField from '../../FormField';
-import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
 import AuthenticationContext from '../../../../context/AuthenticationContext/AuthenticationContext';
 import NoUserFound from '../../../NoUserFound';
@@ -11,6 +10,7 @@ import useUserIds from '../../../../hooks/caching/useUserIds';
 import queryClient from '../../../globals/Providers/queryClient';
 import fetchGetRoles from '../../../../utils/api/fetchGetRoles';
 import AuthorizationContext from '../../../../context/AuthorizationContext/AuthorizationContext';
+import clearIfResponseError from '../../../../utils/clearIfResponseError';
 
 /**
  * TODO: update description
@@ -22,9 +22,7 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
   isAdminAction,
   ...props
 }) => {
-  const onChange = errors?.responseError?.message
-    ? clearResponseError(clearErrors)
-    : undefined;
+  const onChange = clearIfResponseError(errors, clearErrors);
   const { currentUser } = useContext(AuthenticationContext);
   const { userIds } = useUserIds();
   const users = queryClient.getQueryData(`users`) as Users;

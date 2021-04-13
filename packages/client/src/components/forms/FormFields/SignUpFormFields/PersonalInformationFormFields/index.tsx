@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 import { FaAt, FaSignature } from 'react-icons/fa';
 import FormField from '../../../FormField';
-import clearResponseError from '../../../FormResponseError/clearResponseError';
 import { Props } from '../../types';
 import {
   emailHelperText,
   firstNameHelperText,
   lastNameHelperText,
 } from '../../../../../utils/constants';
+import clearIfResponseError from '../../../../../utils/clearIfResponseError';
 
 /**
  * TODO: update description
@@ -18,9 +18,7 @@ const PersonalInformationFormFields: FunctionComponent<Props> = ({
   register,
   ...props
 }) => {
-  const onChange = errors?.responseError?.message
-    ? clearResponseError(clearErrors)
-    : undefined;
+  const onChange = clearIfResponseError(errors, clearErrors);
 
   return (
     <>

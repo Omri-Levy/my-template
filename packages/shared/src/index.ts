@@ -87,6 +87,7 @@ import { roles } from './utils/validation/validationReferences';
 import lowerCaseComparison from './utils/functions/lowerCaseComparison';
 import calculateSeconds from './utils/functions/calculateSeconds';
 import formValuesChanged from './utils/functions/formValuesChanged';
+import conditionalFunction from './utils/functions/conditionalFunction';
 
 export {
   apiUrl,
@@ -162,6 +163,7 @@ export {
   capitalize,
   lowerCaseComparison,
   formValuesChanged,
+  conditionalFunction,
 };
 
 export type {
