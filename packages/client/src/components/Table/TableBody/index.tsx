@@ -39,7 +39,14 @@ const TableBody: FunctionComponent<Props> = ({
                   colSpan={rows?.length === 1 ? 2 : undefined}
                   key={v4()}
                 >
-                  <Text isTruncated maxWidth={{ base: `10ch`, md: `unset` }}>
+                  <Text
+                    isTruncated
+                    maxWidth={{
+                      base: `10ch`,
+                      md: `20ch`,
+                      lg: `unset`,
+                    }}
+                  >
                     {cell?.render(`Cell`)}
                   </Text>
                 </Td>

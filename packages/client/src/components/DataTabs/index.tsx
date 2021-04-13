@@ -14,6 +14,7 @@ const DataTabs: FunctionComponent<Props> = ({
 
   return (
     <Tabs
+      maxWidth={{ base: `29ch`, sm: `unset` }}
       align={`start`}
       variant={`enclosed-colored`}
       colorScheme={color || `purple`}

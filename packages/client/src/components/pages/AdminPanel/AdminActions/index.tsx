@@ -1,5 +1,10 @@
 import { FunctionComponent, useContext } from 'react';
-import { Button, Icon, useDisclosure } from '@chakra-ui/react';
+import {
+  Button,
+  Icon,
+  useBreakpointValue,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { FaTrashAlt, FaUserCog } from 'react-icons/fa';
 import {
   deleteSelectedUsersMessage,
@@ -20,7 +25,6 @@ import Modal from '../../../Modal';
 import fetchDeleteSelectedUsers from '../../../../utils/api/fetchDeleteUser';
 import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
-import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 /**
  * TODO: refactor to controller pattern
@@ -29,7 +33,7 @@ const AdminActions: FunctionComponent<Props> = ({
   icons = true,
   ids: userIds,
 }) => {
-  const isMobile = useIsMobile();
+  const isMobile = useBreakpointValue({ base: true, xl: false });
   const { isLoading, startLoading, stopLoading } = useLoading();
   const {
     toast: deleteSelectedUsersSuccessToast,
