@@ -1,12 +1,5 @@
 import { ChangeEvent, FunctionComponent, useMemo } from 'react';
-import {
-  Box,
-  FormControl,
-  FormLabel,
-  Icon,
-  Tooltip,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Icon, Tooltip } from '@chakra-ui/react';
 import { FaQuestionCircle } from 'react-icons/fa';
 import SelectGroup from '../../../SelectGroup';
 import { Props } from './types';
@@ -16,8 +9,8 @@ const RowsPerPage: FunctionComponent<Props> = ({
   setPageSize,
   rowsLength,
   pageSize,
+  activeColor,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, sm: false });
   const selectOptions = useMemo(() => [1, 5, 10, `All`], []);
   const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
@@ -46,7 +39,7 @@ const RowsPerPage: FunctionComponent<Props> = ({
       display={`flex`}
       alignItems={`center`}
       id={`rowsPerPage`}
-      pr={!isMobile && displayPagination ? 10 : 0}
+      pr={{ base: 0, md: displayPagination ? 10 : 0 }}
     >
       <FormLabel mt={1} minWidth={`177px`}>
         Select rows per page:
@@ -59,7 +52,11 @@ const RowsPerPage: FunctionComponent<Props> = ({
         </Tooltip>
         {` `}
       </FormLabel>
-      <SelectGroup selectOptions={selectOptions} selectProps={selectProps} />
+      <SelectGroup
+        selectOptions={selectOptions}
+        selectProps={selectProps}
+        activeColor={activeColor}
+      />
     </FormControl>
   );
 };

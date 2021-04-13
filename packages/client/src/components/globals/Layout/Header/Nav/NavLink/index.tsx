@@ -35,9 +35,9 @@ const NavLink: FunctionComponent<Props> = ({
 
   return (
     <ListItem
-      pl={{ base: 0, sm: 5 }}
-      pt={{ base: 5, sm: 0 }}
-      _first={{ base: { paddingLeft: 0 }, sm: { paddingTop: 0 } }}
+      pl={{ base: 0, md: 5 }}
+      pt={{ base: 5, md: 0 }}
+      _first={{ base: { paddingLeft: 0 }, md: { paddingTop: 0 } }}
       minWidth={`70px`}
       {...props}
     >
@@ -48,7 +48,7 @@ const NavLink: FunctionComponent<Props> = ({
         border={`2px solid transparent`}
         _focus={{ outline: `none` }}
         _focusVisible={{
-          borderColor: { base: colorModeShadeInverted, sm: colorModeShade },
+          borderColor: { base: colorModeShadeInverted, md: colorModeShade },
           borderRadius: `18px`,
         }}
         as={ReactRouterNavLink}
@@ -76,7 +76,7 @@ const NavLink: FunctionComponent<Props> = ({
           width={`40px`}
           borderRadius={`3px`}
           as={`span`}
-          backgroundColor={{ base: colorModeShadeInverted, sm: colorModeShade }}
+          backgroundColor={{ base: colorModeShadeInverted, md: colorModeShade }}
           opacity={0}
           transition={`opacity 300ms ease-in`}
           role={`presentation`}

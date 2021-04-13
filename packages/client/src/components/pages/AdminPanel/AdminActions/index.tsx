@@ -1,10 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
-import {
-  Button,
-  Icon,
-  useBreakpointValue,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Button, Icon, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt, FaUserCog } from 'react-icons/fa';
 import {
   deleteSelectedUsersMessage,
@@ -25,6 +20,7 @@ import Modal from '../../../Modal';
 import fetchDeleteSelectedUsers from '../../../../utils/api/fetchDeleteUser';
 import useDarkMode from '../../../../hooks/ui/useDarkMode';
 import DeleteAllUsersModal from '../../../Table/TableFooter/DeleteAllUsersModal';
+import useIsTablet from '../../../../hooks/responsiveness/useIsTablet';
 
 /**
  * TODO: refactor to controller pattern
@@ -33,7 +29,7 @@ const AdminActions: FunctionComponent<Props> = ({
   icons = true,
   ids: userIds,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isTablet = useIsTablet();
   const { isLoading, startLoading, stopLoading } = useLoading();
   const {
     toast: deleteSelectedUsersSuccessToast,
@@ -89,7 +85,7 @@ const AdminActions: FunctionComponent<Props> = ({
       }
     : undefined;
 
-  if (isMobile) {
+  if (isTablet) {
     return (
       <Modal
         actionIcon={FaUserCog}
@@ -114,8 +110,8 @@ const AdminActions: FunctionComponent<Props> = ({
           borderColor={colorModeShadeInverted}
           mr={5}
           p={5}
-          isFullWidth={isMobile}
-          mb={{ base: 5, sm: 0 }}
+          isFullWidth={isTablet}
+          mb={{ base: 5, md: 0 }}
           _hover={focusAndHover}
           _focus={focusAndHover}
         >

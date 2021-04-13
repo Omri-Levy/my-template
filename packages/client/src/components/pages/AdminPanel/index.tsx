@@ -53,7 +53,7 @@ const AdminPanel: FunctionComponent = () => {
           data={data}
           columns={columns}
           tableProps={{
-            minWidth: { base: `unset`, sm: `80vw` },
+            minWidth: { base: `unset`, md: `80vw` },
           }}
           caption={`Manage Users`}
           Actions={AdminActions}

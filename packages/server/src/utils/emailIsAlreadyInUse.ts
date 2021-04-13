@@ -11,6 +11,7 @@ const emailIsAlreadyInUse = async (
     ? await isCountOneInUsers(`email`, email)
     : false;
   const currentUserEmail = user?.email === email;
+  console.log(currentUserEmail);
 
   if (emailAlreadyInUse && !currentUserEmail) {
     console.error(emailAlreadyInUseMessage);

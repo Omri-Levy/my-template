@@ -1,18 +1,11 @@
 import { FunctionComponent } from 'react';
-import {
-  Flex,
-  Icon,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { Flex, Icon, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/all';
 import { v4 } from 'uuid';
 import { chunk } from 'lodash';
 import { Props } from './types';
 import useColorModeShade from '../../../hooks/ui/useColorModeShade';
+import useColumnsAmount from '../../../hooks/responsiveness/useColumnsAmount';
 
 const TableHead: FunctionComponent<Props> = ({
   headerGroups,
@@ -20,26 +13,24 @@ const TableHead: FunctionComponent<Props> = ({
   sortedByColor,
 }) => {
   const marginLeft = 10;
-  const isMobile = useBreakpointValue({ base: true, sm: false });
   const { colorModeShadeInverted } = useColorModeShade(
     sortedByColor || `purple`
   );
+  const columnsAmount = useColumnsAmount();
 
   return (
     <>
       <Thead>
         {headerGroups?.map((headerGroup) => {
-          const headersChunk = chunk(headerGroup?.headers, 2);
-          const mobileHeaders = isMobile
-            ? headersChunk[currentColumns]
-            : headerGroup?.headers;
+          const headersChunk = chunk(headerGroup?.headers, columnsAmount);
+          const columns = headersChunk[currentColumns];
 
           return (
             <Tr {...headerGroup?.getHeaderGroupProps()} key={v4()}>
-              {mobileHeaders?.map((column) => (
+              {columns?.map((column) => (
                 <Th
                   {...column?.getHeaderProps(column?.getSortByToggleProps())}
-                  colSpan={mobileHeaders.length === 1 ? 2 : undefined}
+                  colSpan={columns.length === 1 ? 2 : undefined}
                   fontSize={14}
                   color={column?.isSorted ? colorModeShadeInverted : undefined}
                   _hover={{

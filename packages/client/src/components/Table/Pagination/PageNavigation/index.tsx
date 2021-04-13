@@ -1,9 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
-import { ButtonGroup, List, Stack, useBreakpointValue } from '@chakra-ui/react';
+import { ButtonGroup, List, Stack } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import PaginationButton from './PaginationButton';
 import { Props } from './types';
 import { ButtonType } from './PaginationButton/types';
+import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 const PageNavigation: FunctionComponent<Props> = ({
   gotoPage,
@@ -17,7 +18,7 @@ const PageNavigation: FunctionComponent<Props> = ({
     () => [`firstPage`, `previousPage`, `nextPage`, `lastPage`],
     []
   );
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
 
   if (isMobile) {
     return (

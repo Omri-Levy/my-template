@@ -1,13 +1,16 @@
 import {
+  formValuesChanged,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
+  ObjectKey,
   updateProfileSchema,
-  UserObject,
+  UserObject
 } from '@my-template/shared';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 import emailIsAlreadyInUse from '../../../utils/emailIsAlreadyInUse';
-import setCurrentUserCache from '../../../utils/currentUserCache/setCurrentUserCache';
+import setCurrentUserCache
+  from '../../../utils/currentUserCache/setCurrentUserCache';
 
 const updateProfile: Route = async (req, res) => {
   try {
@@ -25,11 +28,23 @@ const updateProfile: Route = async (req, res) => {
     }
 
     const { email, fname: firstName, lname: lastName } = req?.body;
-    const unchangedEmail = userToUpdate?.email === email;
-    const unchangedFirstName = userToUpdate?.firstName === firstName;
-    const unchangedLastName = userToUpdate?.lastName === lastName;
+    const currentValues = {
+      email: userToUpdate?.email,
+      firstName: userToUpdate?.firstName,
+      lastName: userToUpdate?.lastName,
+    } as Record<ObjectKey, string>;
+    const newValues = {
+      email,
+      firstName,
+      lastName,
+    };
+    const unchangedValues = formValuesChanged(
+      currentValues,
+      undefined,
+      newValues
+    );
 
-    if (unchangedEmail && unchangedFirstName && unchangedLastName) {
+    if (unchangedValues) {
       console.error(noChangesWereMadeMessage);
 
       res.status(400).send({ message: noChangesWereMadeMessage });
@@ -37,7 +52,11 @@ const updateProfile: Route = async (req, res) => {
       return;
     }
 
-    const emailAlreadyInUse = await emailIsAlreadyInUse(email, res);
+    const emailAlreadyInUse = await emailIsAlreadyInUse(
+      email,
+      res,
+      userToUpdate as UserObject
+    );
 
     if (emailAlreadyInUse) {
       return;

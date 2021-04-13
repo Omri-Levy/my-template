@@ -1,9 +1,11 @@
 import {
+  formValuesChanged,
   invalidUserIdMessage,
   isUuidV4,
   lowerCaseComparison,
   noChangesWereMadeMessage,
   noUserWasFoundMessage,
+  ObjectKey,
   terminateUserAccountMessage,
   unauthorizedMessage,
   updateUserProfileSchema,
@@ -43,17 +45,26 @@ const updateUserProfile: Route = async (req, res) => {
     }
 
     const { email, fname: firstName, lname: lastName, role } = req?.body;
-    const unchangedEmail = userToUpdate?.email === email;
-    const unchangedFirstName = userToUpdate?.firstName === firstName;
-    const unchangedLastName = userToUpdate?.lastName === lastName;
+    const currentValues = {
+      email: userToUpdate?.email,
+      firstName: userToUpdate?.firstName,
+      lastName: userToUpdate?.lastName,
+      role: userToUpdate?.role,
+    } as Record<ObjectKey, string>;
+    const newValues = {
+      email,
+      firstName,
+      lastName,
+      role: role?.toLowerCase(),
+    };
+    const unchangedValues = formValuesChanged(
+      currentValues,
+      undefined,
+      newValues
+    );
     const unchangedRole = lowerCaseComparison(userToUpdate?.role, role);
 
-    if (
-      unchangedEmail &&
-      unchangedFirstName &&
-      unchangedLastName &&
-      unchangedRole
-    ) {
+    if (unchangedValues) {
       console.error(noChangesWereMadeMessage);
 
       res.status(400).send({ message: noChangesWereMadeMessage });

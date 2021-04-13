@@ -30,7 +30,6 @@ const useCheckedItems: HookReturns = (allIds, cachedIds, setIds) => {
     (id) => () => {
       if (cachedIds.includes(id)) {
         const newIds = cachedIds.filter((singleId) => singleId !== id);
-        console.log(id);
 
         conditionalSetIds(newIds);
       } else {

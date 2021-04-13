@@ -7,7 +7,6 @@ import {
   InputGroup,
   InputLeftAddon,
   Td,
-  useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
@@ -15,6 +14,7 @@ import { useAsyncDebounce } from 'react-table';
 import { Props } from './types';
 import Modal from '../../Modal';
 import useColorModeShade from '../../../hooks/ui/useColorModeShade';
+import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
 
 /**
  * TODO: refactor to be more generic and reusable.
@@ -36,7 +36,7 @@ const GlobalFilter: FunctionComponent<Props> = ({
   };
   const disclosure = useDisclosure();
   const alertDisclosure = useDisclosure();
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
   const { colorModeShadeInverted } = useColorModeShade(activeColor || `purple`);
   const focusAndHover = {
     borderColor: colorModeShadeInverted,

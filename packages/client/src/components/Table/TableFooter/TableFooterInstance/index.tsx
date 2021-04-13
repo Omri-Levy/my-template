@@ -7,19 +7,18 @@ import {
   Text,
   Tfoot,
   Tr,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { v4 } from 'uuid';
 import { chunk } from 'lodash';
 import { Props } from './types';
 import GlobalFilter from '../../GlobalFilter';
 import Pagination from '../../Pagination';
+import useColumnsAmount from '../../../../hooks/responsiveness/useColumnsAmount';
 
 const TableFooterInstance: FunctionComponent<Props> = ({
   Actions,
   ...props
 }) => {
-  const isMobile = useBreakpointValue({ base: true, sm: false });
   const checkboxHoverAndFocus = {
     '.chakra-checkbox__control': {
       transform: `scale(1.2)`,
@@ -27,23 +26,22 @@ const TableFooterInstance: FunctionComponent<Props> = ({
       boxShadow: `none`,
     },
   };
+  const columnsAmount = useColumnsAmount();
 
   return (
     <Tfoot>
       {props.footerGroups?.map((group) => {
-        const headersChunk = chunk(group?.headers, 2);
-        const mobileChunk = isMobile
-          ? headersChunk[props.currentColumns]
-          : group?.headers;
+        const headersChunk = chunk(group?.headers, columnsAmount);
+        const columns = headersChunk[props.currentColumns];
 
         return (
           <Tr {...group?.getFooterGroupProps()} key={v4()}>
-            {mobileChunk?.map((column) => (
+            {columns?.map((column) => (
               <Td {...column?.getFooterProps()} key={v4()}>
                 {column?.render(`Footer`)}
               </Td>
             ))}
-            {mobileChunk?.length === 1 && (
+            {columns?.length === 1 && (
               <Td role={`presentation`} aria-label={`whitespace`} />
             )}
             {props.users?.length > 1 && (

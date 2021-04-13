@@ -1,10 +1,5 @@
 import { FunctionComponent, memo, useState } from 'react';
-import {
-  Flex,
-  Table as ChakraTable,
-  TableCaption,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { Flex, Table as ChakraTable, TableCaption } from '@chakra-ui/react';
 import { chunk } from 'lodash';
 import TableHead from '../TableHead';
 import TableBody from '../TableBody';
@@ -12,6 +7,8 @@ import TableFooter from '../TableFooter';
 import { Props } from './types';
 import Card from '../../Card';
 import ColumnsTabs from '../ColumnsTabs';
+import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
+import useColumnsAmount from '../../../hooks/responsiveness/useColumnsAmount';
 
 const TableInstance: FunctionComponent<Props> = ({
   Actions,
@@ -23,7 +20,8 @@ const TableInstance: FunctionComponent<Props> = ({
   const headers = headerGroupsCopy[0]?.headers?.map(
     (column) => (column?.Header as string) || ``
   );
-  const headerChunks = chunk(headers, 2);
+  const columnsAmount = useColumnsAmount();
+  const headerChunks = chunk(headers, columnsAmount);
   const columns = [
     ...headerChunks.map((headerChunk) => ({
       label: `${headerChunk[0]} ${headerChunk[1] ? `&` : ``} ${
@@ -31,17 +29,15 @@ const TableInstance: FunctionComponent<Props> = ({
       }`,
     })),
   ];
-  const isMobile = useBreakpointValue({ base: true, sm: false });
+  const isMobile = useIsMobile();
 
   return (
-    <Flex
-      flexDirection={!isMobile ? `column` : undefined}
-      alignItems={!isMobile ? `center` : undefined}
-    >
+    <Flex flexDirection={{ md: `column` }} alignItems={{ md: `center` }}>
       <Card
         backgroundColor={`unset`}
         color={`unset`}
-        padding={{ base: `unset`, sm: 5 }}
+        padding={{ base: `unset`, md: 5 }}
+        minWidth={{ sm: `100%`, md: `unset` }}
       >
         <ChakraTable
           maxWidth={`100%`}

@@ -36,7 +36,6 @@ const GoToPage: FunctionComponent<Props> = ({
     width: `100px`,
     min: 0,
     max: pageCount + 1,
-    activeColor,
   };
 
   useEffect(() => {
@@ -50,6 +49,7 @@ const GoToPage: FunctionComponent<Props> = ({
       id={`goToPage`}
       labelTitle={`Go to page:`}
       labelProps={labelProps}
+      activeColor={activeColor}
       inputProps={inputProps}
     />
   );

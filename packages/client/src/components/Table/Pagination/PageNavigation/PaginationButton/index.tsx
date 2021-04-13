@@ -83,7 +83,7 @@ const PaginationButton: FunctionComponent<Props> = ({
         rightIcon={
           icons && rightIcon ? <Icon as={rightIcon} mb={0.5} /> : undefined
         }
-        minWidth={{ base: `169.867px`, sm: `unset` }}
+        minWidth={{ base: `169.867px`, md: `unset` }}
         onClick={onClick}
         disabled={disabled}
         border={`2px solid`}
