@@ -1,6 +1,6 @@
 import { FunctionComponent, memo } from 'react';
 import { v4 } from 'uuid';
-import { Checkbox, Tbody, Td, Text, Tr } from '@chakra-ui/react';
+import { Checkbox, Tbody, Td, Tr } from '@chakra-ui/react';
 import { chunk } from 'lodash';
 import { Props } from './types';
 import useColumnsAmount from '../../../hooks/responsiveness/useColumnsAmount';
@@ -39,16 +39,7 @@ const TableBody: FunctionComponent<Props> = ({
                   colSpan={rows?.length === 1 ? 2 : undefined}
                   key={v4()}
                 >
-                  <Text
-                    isTruncated
-                    maxWidth={{
-                      base: `10ch`,
-                      md: `20ch`,
-                      lg: `unset`,
-                    }}
-                  >
-                    {cell?.render(`Cell`)}
-                  </Text>
+                  {cell?.render(`Cell`)}
                 </Td>
               );
             })}
