@@ -4,6 +4,7 @@ import {
   Icon,
   useBreakpointValue,
   useDisclosure,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { FaTrashAlt, FaUserCog } from 'react-icons/fa';
 import {
@@ -33,7 +34,8 @@ const AdminActions: FunctionComponent<Props> = ({
   icons = true,
   ids: userIds,
 }) => {
-  const isMobile = useBreakpointValue({ base: true, xl: false });
+  const noSpaceForActions = useBreakpointValue({ base: true, xl: false });
+  const [noSpaceForText] = useMediaQuery(`(max-width: 26em)`);
   const { isLoading, startLoading, stopLoading } = useLoading();
   const {
     toast: deleteSelectedUsersSuccessToast,
@@ -89,14 +91,14 @@ const AdminActions: FunctionComponent<Props> = ({
       }
     : undefined;
 
-  if (isMobile) {
+  if (noSpaceForActions) {
     return (
       <Modal
         actionIcon={FaUserCog}
         headerIcon={FaUserCog}
         alertDisclosure={alertDisclosure}
         disclosure={disclosure}
-        toggleButtonText={`Admin Actions`}
+        toggleButtonText={noSpaceForText ? `Actions` : `Admin Actions`}
         headerText={`Admin Actions`}
         modalProps={{
           mx: 5,
@@ -114,7 +116,7 @@ const AdminActions: FunctionComponent<Props> = ({
           borderColor={colorModeShadeInverted}
           mr={5}
           p={5}
-          isFullWidth={isMobile}
+          isFullWidth={noSpaceForActions}
           mb={{ base: 5, md: 0 }}
           _hover={focusAndHover}
           _focus={focusAndHover}

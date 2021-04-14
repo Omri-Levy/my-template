@@ -6,6 +6,7 @@ interface Props {
   setCurrentColumns: SetState<number>;
   color?: ChakraColorScheme;
   currentColumns: number;
+  isLazy?: boolean;
 }
 
 export { Props };

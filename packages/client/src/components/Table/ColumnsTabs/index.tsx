@@ -14,6 +14,7 @@ const ColumnsTabs: FunctionComponent<Props> = ({
       Navigate Columns
     </Heading>
     <DataTabs
+      isLazy
       color={color}
       setCurrentColumns={setCurrentColumns}
       currentColumns={currentColumns}

@@ -41,7 +41,7 @@ const RowsPerPage: FunctionComponent<Props> = ({
       id={`rowsPerPage`}
       pr={{ base: 0, md: displayPagination ? 10 : 0 }}
     >
-      <FormLabel mt={1} minWidth={`177px`}>
+      <FormLabel mt={1} minWidth={{ base: `unset`, sm: `177px` }}>
         Select rows per page:
         <Tooltip
           label={`Decides on how many table rows to display per table page.`}

@@ -47,7 +47,7 @@ const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
 
   useEffect(() => {
     setLocalStorage(burgerMenuIsOpen);
-  }, [burgerMenuIsOpen]);
+  }, [burgerMenuIsOpen, setLocalStorage]);
 
   return (
     <>
@@ -95,8 +95,8 @@ const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
           backgroundColor={darkModeColor}
           zIndex={2}
           position={`fixed`}
-          right={burgerDimensions}
-          bottom={burgerDimensions}
+          right={`20px`}
+          bottom={`10px`}
           onClick={toggleBurgerMenu}
           p={5}
           display={`grid`}

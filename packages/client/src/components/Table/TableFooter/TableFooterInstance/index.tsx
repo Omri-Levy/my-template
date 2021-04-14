@@ -14,6 +14,7 @@ import { Props } from './types';
 import GlobalFilter from '../../GlobalFilter';
 import Pagination from '../../Pagination';
 import useColumnsAmount from '../../../../hooks/responsiveness/useColumnsAmount';
+import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 const TableFooterInstance: FunctionComponent<Props> = ({
   Actions,
@@ -27,6 +28,7 @@ const TableFooterInstance: FunctionComponent<Props> = ({
     },
   };
   const columnsAmount = useColumnsAmount();
+  const isMobile = useIsMobile();
 
   return (
     <Tfoot>
@@ -71,7 +73,8 @@ const TableFooterInstance: FunctionComponent<Props> = ({
           colSpan={props?.colSpan}
         >
           <Flex justifyContent={`flex-end`}>
-            <ButtonGroup spacing={5}>{Actions}</ButtonGroup>
+            {!isMobile && <ButtonGroup spacing={5}>{Actions}</ButtonGroup>}
+            {isMobile && Actions}
           </Flex>
         </Td>
       </Tr>
