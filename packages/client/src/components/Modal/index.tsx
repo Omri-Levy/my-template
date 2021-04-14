@@ -14,6 +14,7 @@ import {
   ModalOverlay,
   Text,
   useDisclosure,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { FaTimes } from 'react-icons/fa';
 import { Props } from './types';
@@ -44,6 +45,7 @@ const Modal: FunctionComponent<Props> = ({
   modalProps,
   children,
 }) => {
+  const [noSpaceForText] = useMediaQuery(`(max-width: 26em)`);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isChecked, onOpen: onCheck, onClose: onUncheck } = disclosure;
   const { colorModeShadeInverted } = useColorModeShade(
@@ -75,6 +77,7 @@ const Modal: FunctionComponent<Props> = ({
         onClick={onOpen}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
+        size={noSpaceForText ? `sm` : undefined}
         _hover={focusAndHover}
         _focus={focusAndHover}
         {...buttonProps}

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button, Icon, ListItem } from '@chakra-ui/react';
+import { Button, Icon, ListItem, useMediaQuery } from '@chakra-ui/react';
 import {
   FaAngleDoubleLeft,
   FaAngleDoubleRight,
@@ -21,6 +21,7 @@ const PaginationButton: FunctionComponent<Props> = ({
   nextPage,
   buttonColor,
 }) => {
+  const [noSpaceForText] = useMediaQuery(`(max-width: 26em)`);
   const color = buttonColor || `purple`;
   const { colorModeShadeInverted } = useColorModeShade(color);
   const { darkModeTextColorInverted } = useDarkMode();
@@ -38,31 +39,31 @@ const PaginationButton: FunctionComponent<Props> = ({
       leftIcon = FaAngleDoubleLeft;
       onClick = firstPage;
       disabled = !canPreviousPage;
-      text = `First Page`;
+      text = noSpaceForText ? `First` : `First Page`;
       break;
     case `lastPage`:
       rightIcon = FaAngleDoubleRight;
       onClick = lastPage;
       disabled = !canNextPage;
-      text = `Last Page`;
+      text = noSpaceForText ? `Last` : `Last Page`;
       break;
     case `previousPage`:
       leftIcon = FaAngleLeft;
       onClick = previousPage;
       disabled = !canPreviousPage;
-      text = `Previous Page`;
+      text = noSpaceForText ? `Previous` : `Previous Page`;
       break;
     case `nextPage`:
       rightIcon = FaAngleRight;
       onClick = nextPage;
       disabled = !canNextPage;
-      text = `Next Page`;
+      text = noSpaceForText ? `Next` : `Next Page`;
       break;
     default:
       rightIcon = FaAngleRight;
       onClick = nextPage;
       disabled = !canNextPage;
-      text = `Next Page`;
+      text = noSpaceForText ? `Next` : `Next Page`;
       break;
   }
   const focusAndHover = !disabled
@@ -83,7 +84,11 @@ const PaginationButton: FunctionComponent<Props> = ({
         rightIcon={
           icons && rightIcon ? <Icon as={rightIcon} mb={0.5} /> : undefined
         }
-        minWidth={{ base: `169.867px`, md: `unset` }}
+        minWidth={{
+          base: noSpaceForText ? `124px` : `169.867px`,
+          md: `unset`,
+        }}
+        size={noSpaceForText ? `sm` : undefined}
         onClick={onClick}
         disabled={disabled}
         border={`2px solid`}

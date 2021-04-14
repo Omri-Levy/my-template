@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import PaginationButton from './PaginationButton';
 import { Props } from './types';
 import { ButtonType } from './PaginationButton/types';
-import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
+import useIsTablet from '../../../../hooks/responsiveness/useIsTablet';
 
 const PageNavigation: FunctionComponent<Props> = ({
   gotoPage,
@@ -18,9 +18,9 @@ const PageNavigation: FunctionComponent<Props> = ({
     () => [`firstPage`, `previousPage`, `nextPage`, `lastPage`],
     []
   );
-  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
-  if (isMobile) {
+  if (isTablet) {
     return (
       <Stack direction={`column`} as={List} pr={0}>
         <ButtonGroup>

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Divider, Flex, Td, Tr } from '@chakra-ui/react';
+import { Divider, Flex, Td, Tr, useMediaQuery } from '@chakra-ui/react';
 import { Props } from './types';
 import Card from '../../Card';
 import GoToPage from './GoToPage';
@@ -25,19 +25,29 @@ const Pagination: FunctionComponent<Props> = ({
 }) => {
   const displayPagination = pageCount > 1;
   const isMobile = useIsMobile();
+  const [notEnoughSpace] = useMediaQuery(`(max-width: 90em)`);
 
   return (
     <Tr>
-      <Td colSpan={colSpan} px={{ base: 4, md: undefined }}>
+      <Td colSpan={colSpan} px={{ base: 4, xl: undefined }}>
         <PageCounter pageCount={pageCount} pageIndex={pageIndex} />
         <Card
           display={`flex`}
-          justifyContent={{ base: `unset`, md: `center` }}
-          alignItems={{ base: `center`, md: `unset` }}
+          justifyContent={{
+            base: `unset`,
+            xl: `center`,
+          }}
+          alignItems={{
+            base: `center`,
+            xl: `unset`,
+          }}
           color={`unset`}
           backgroundColor={`unset`}
           as={`nav`}
-          flexDirection={{ base: `column`, md: `row` }}
+          flexDirection={{
+            base: `column`,
+            xl: notEnoughSpace ? `column` : `row`,
+          }}
           {...props}
         >
           {displayPagination && (
@@ -52,10 +62,12 @@ const Pagination: FunctionComponent<Props> = ({
               />
               <Flex>
                 <Divider
-                  orientation={!isMobile ? `vertical` : `horizontal`}
-                  mr={{ base: 0, md: 10 }}
-                  mt={{ base: 5, md: 0 }}
-                  mb={{ base: 5, md: 0 }}
+                  orientation={
+                    !isMobile || notEnoughSpace ? `vertical` : `horizontal`
+                  }
+                  mr={{ base: 0, xl: notEnoughSpace ? 0 : 10 }}
+                  mt={{ base: 5, xl: notEnoughSpace ? 5 : 0 }}
+                  mb={{ base: 5, xl: notEnoughSpace ? 5 : 0 }}
                 />
               </Flex>
             </>
@@ -71,10 +83,12 @@ const Pagination: FunctionComponent<Props> = ({
             <>
               <Flex>
                 <Divider
-                  orientation={!isMobile ? `vertical` : `horizontal`}
-                  mr={{ base: 0, md: 10 }}
-                  mt={{ base: 5, md: 0 }}
-                  mb={{ base: 5, md: 0 }}
+                  orientation={
+                    !isMobile || notEnoughSpace ? `vertical` : `horizontal`
+                  }
+                  mr={{ base: 0, xl: notEnoughSpace ? 0 : 10 }}
+                  mt={{ base: 5, xl: notEnoughSpace ? 5 : 0 }}
+                  mb={{ base: 5, xl: notEnoughSpace ? 5 : 0 }}
                 />
               </Flex>
               <GoToPage
