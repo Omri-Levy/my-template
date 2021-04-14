@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FaAt, FaLock } from 'react-icons/fa';
+import { FaAt, FaKey } from 'react-icons/fa';
 import FormField from '../../FormField';
 import { Props } from '../types';
 import ForgotPasswordLink from '../../../pages/SignIn/ForgotPasswordLink';
@@ -39,7 +39,7 @@ const SignInFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`password`}
         maxLength={128}
-        icon={FaLock}
+        icon={FaKey}
         mb={1}
         {...props}
       />

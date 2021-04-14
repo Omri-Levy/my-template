@@ -2,6 +2,8 @@ import { FunctionComponent } from 'react';
 import { Button, Flex, Icon, ListItem } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { Props } from './types';
+import useDarkMode from '../../../hooks/ui/useDarkMode';
+import useColorModeShade from '../../../hooks/ui/useColorModeShade';
 
 /**
  * a simple navigation button made using Chakra-UI's ListItem and Button
@@ -14,16 +16,31 @@ const NavButton: FunctionComponent<Props> = ({
   text,
   icon,
   iconProps,
+  activeColor,
   ...props
-}) => (
-  <ListItem>
-    <Button as={NavLink} to={to} {...props}>
-      <Flex>
-        {text}
-        {icon && <Icon as={icon} ml={3} mt={0.5} {...iconProps} />}
-      </Flex>
-    </Button>
-  </ListItem>
-);
+}) => {
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
+  const { colorModeShadeInverted } = useColorModeShade(activeColor || `purple`);
+
+  return (
+    <ListItem>
+      <Button
+        as={NavLink}
+        to={to}
+        backgroundColor={darkModeColor}
+        color={darkModeTextColorInverted}
+        _hover={{
+          backgroundColor: colorModeShadeInverted,
+        }}
+        {...props}
+      >
+        <Flex>
+          {text}
+          {icon && <Icon as={icon} ml={3} mt={0.5} {...iconProps} />}
+        </Flex>
+      </Button>
+    </ListItem>
+  );
+};
 
 export default NavButton;

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FaLock, FaShieldAlt } from 'react-icons/fa';
+import { FaKey, FaShieldAlt } from 'react-icons/fa';
 import {
   emailAlreadyInUseMessage,
   invalidPasswordPolicyMessage,
@@ -62,7 +62,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`password`}
         maxLength={128}
-        icon={FaLock}
+        icon={FaKey}
         helperText={invalidPasswordPolicyMessage}
         {...props}
       />
@@ -74,7 +74,7 @@ const SecurityInformationFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`password`}
         maxLength={128}
-        icon={FaLock}
+        icon={FaKey}
         mb={10}
         inputProps={{
           autoComplete: `off`,

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { FaLock, FaShieldAlt } from 'react-icons/fa';
+import { FaKey, FaShieldAlt } from 'react-icons/fa';
 import {
   invalidPasswordPolicyMessage,
   securityQuestions,
@@ -54,7 +54,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
         labelTitle={`New Password:`}
         type={`password`}
         name={`newPassword`}
-        icon={FaLock}
+        icon={FaKey}
         register={register}
         helperText={invalidPasswordPolicyMessage}
         {...props}
@@ -66,7 +66,7 @@ const ResetPasswordFormFields: FunctionComponent<Props> = ({
         labelTitle={`New Password Confirmation:`}
         type={`password`}
         name={`newPasswordConfirmation`}
-        icon={FaLock}
+        icon={FaKey}
         register={register}
         inputProps={{
           autoComplete: `off`,

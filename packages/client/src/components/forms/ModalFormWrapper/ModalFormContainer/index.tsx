@@ -28,7 +28,7 @@ const ModalFormContainer: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     toggleButtonColor || `purple`
   );
-  const { darkModeTextColorInverted } = useDarkMode();
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
   const focusAndHover = !buttonProps?.disabled
     ? {
         backgroundColor: colorModeShadeInverted,
@@ -48,6 +48,8 @@ const ModalFormContainer: FunctionComponent<Props> = ({
         borderColor={colorModeShadeInverted}
         _hover={focusAndHover}
         _focus={focusAndHover}
+        backgroundColor={darkModeColor}
+        color={darkModeTextColorInverted}
         {...buttonProps}
       >
         {toggleButtonText}

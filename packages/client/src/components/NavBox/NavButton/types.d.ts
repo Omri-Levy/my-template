@@ -1,11 +1,12 @@
-import { ButtonProps } from '@chakra-ui/react';
-import { Icon } from '../../../utils/types';
+import { ButtonProps, ComponentWithAs, IconProps } from '@chakra-ui/react';
+import { ChakraColorScheme, Icon } from '../../../utils/types';
 
 interface Props extends ButtonProps {
   to: string;
   text: string;
   icon?: Icon;
-  iconProps?: IconProps;
+  iconProps?: ComponentWithAs<`svg`, IconProps>;
+  activeColor?: ChakraColorScheme;
 }
 
 export { Props };

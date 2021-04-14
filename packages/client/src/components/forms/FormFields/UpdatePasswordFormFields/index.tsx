@@ -1,5 +1,5 @@
 import { FunctionComponent, useContext } from 'react';
-import { FaLock } from 'react-icons/fa';
+import { FaKey } from 'react-icons/fa';
 import { invalidOldPasswordMessage } from '@my-template/shared';
 import FormField from '../../FormField';
 import clearResponseError from '../../FormResponseError/clearResponseError';
@@ -47,7 +47,7 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
           register={register}
           type={`password`}
           maxLength={128}
-          icon={FaLock}
+          icon={FaKey}
           inputProps={{
             autoComplete: `off`,
           }}
@@ -62,7 +62,7 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`password`}
         maxLength={128}
-        icon={FaLock}
+        icon={FaKey}
         inputProps={{
           autoComplete: `new-password`,
         }}
@@ -76,7 +76,7 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
         register={register}
         type={`password`}
         maxLength={128}
-        icon={FaLock}
+        icon={FaKey}
         mb={10}
         inputProps={{
           autoComplete: `off`,

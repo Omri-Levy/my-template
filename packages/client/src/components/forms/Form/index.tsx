@@ -31,7 +31,7 @@ const Form: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     submitButtonColor || `green`
   );
-  const { darkModeTextColorInverted } = useDarkMode();
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
   const focusAndHover = !disableSubmit
     ? {
         backgroundColor: colorModeShadeInverted,
@@ -70,6 +70,8 @@ const Form: FunctionComponent<Props> = ({
             borderColor={colorModeShadeInverted}
             _hover={focusAndHover}
             _focus={focusAndHover}
+            backgroundColor={darkModeColor}
+            color={darkModeTextColorInverted}
           >
             {submitButtonText}
           </Button>
