@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Column } from 'react-table';
 import { Text, Tooltip, useBreakpointValue } from '@chakra-ui/react';
 import { HookReturns } from './types';
@@ -8,9 +8,6 @@ import { HookReturns } from './types';
  */
 const useTableColumns: HookReturns = () => {
   const isTruncated = useBreakpointValue({ base: true, lg: false });
-  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-  const onMouseEnter = useCallback(() => setIsTooltipOpen(true), []);
-  const onMouseLeave = useCallback(() => setIsTooltipOpen(false), []);
   const TdChild = useCallback(
     (cell) => (
       <Text
@@ -21,15 +18,7 @@ const useTableColumns: HookReturns = () => {
         }}
         isTruncated
       >
-        {isTruncated && (
-          <Tooltip
-            isOpen={isTooltipOpen}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-          >
-            {cell?.value}
-          </Tooltip>
-        )}
+        {isTruncated && <Tooltip label={cell?.value}>{cell?.value}</Tooltip>}
         {!isTruncated && cell?.value}
       </Text>
     ),
