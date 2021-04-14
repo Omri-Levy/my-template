@@ -79,13 +79,12 @@ const AdminActions: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(`red`);
   const alertDisclosure = useDisclosure();
   const disclosure = useDisclosure();
-  const { darkModeTextColorInverted } = useDarkMode();
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
   const noUsersSelected = userIds?.length <= 0;
   const oneOrMoreUsersSelected = userIds?.length > 0;
   const focusAndHover = !noUsersSelected
     ? {
         backgroundColor: colorModeShadeInverted,
-        color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
         boxShadow: `none`,
       }
@@ -117,9 +116,11 @@ const AdminActions: FunctionComponent<Props> = ({
           mr={5}
           p={5}
           isFullWidth={noSpaceForActions}
-          mb={{ base: 5, md: 0 }}
+          mb={{ base: 5, xl: 0 }}
           _hover={focusAndHover}
           _focus={focusAndHover}
+          backgroundColor={darkModeColor}
+          color={darkModeTextColorInverted}
         >
           Delete Selected
         </Button>
@@ -142,6 +143,8 @@ const AdminActions: FunctionComponent<Props> = ({
         borderColor={colorModeShadeInverted}
         _hover={focusAndHover}
         _focus={focusAndHover}
+        backgroundColor={darkModeColor}
+        color={darkModeTextColorInverted}
       >
         Delete Selected
       </Button>

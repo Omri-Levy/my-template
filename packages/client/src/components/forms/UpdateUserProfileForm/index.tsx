@@ -10,7 +10,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { Props, UpdateUserProfile } from './types';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import useSuccessToast from '../../../hooks/ui/useSuccessToast';
@@ -23,7 +23,7 @@ import fetchUpdateUserProfile from '../../../utils/api/fetchUpdateUserProfile';
 import queryClient from '../../globals/Providers/queryClient';
 import useErrorToast from '../../../hooks/ui/useErrorToast';
 import AuthorizationContext from '../../../context/AuthorizationContext/AuthorizationContext';
-import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
+import useDarkMode from '../../../hooks/ui/useDarkMode';
 
 const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const schema = useMemo(() => updateUserProfileSchema, []);
@@ -96,7 +96,8 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
 
     return formValuesChanged(currentValues, watch) || !oneUserSelected;
   };
-  const isMobile = useIsMobile();
+  const noSpaceForActions = useBreakpointValue({ base: true, xl: false });
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
 
   if (!currentUser) {
     return <NoUserFound />;
@@ -113,11 +114,13 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       buttonProps={{
         marginRight: 0,
         disabled: !oneUserSelected,
-        isFullWidth: isMobile,
-        mb: { base: 5, sm: 0 },
+        isFullWidth: noSpaceForActions,
+        mb: { base: 5, xl: 0 },
         title: !oneUserSelected
           ? `Please make sure a single user is selected.`
           : undefined,
+        backgroundColor: darkModeColor,
+        color: darkModeTextColorInverted,
       }}
     >
       <ModalForm

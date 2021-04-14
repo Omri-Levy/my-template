@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from 'react';
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { serverErrorMessage, Users } from '@my-template/shared';
 import fetchDeleteAllUsers from '../../../../utils/api/fetchDeleteAllUsers';
@@ -9,7 +9,6 @@ import queryClient from '../../../globals/Providers/queryClient';
 import useSuccessToast from '../../../../hooks/ui/useSuccessToast';
 import useLoading from '../../../../hooks/ui/useLoading';
 import useColorModeShade from '../../../../hooks/ui/useColorModeShade';
-import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
 
 const DeleteAllUsersModal: FunctionComponent = () => {
   const disclosure = useDisclosure();
@@ -45,13 +44,16 @@ const DeleteAllUsersModal: FunctionComponent = () => {
   };
   const users = queryClient.getQueryData(`users`) as Users;
   const admins = users.filter((user) => user.role === `admin`);
-  const isMobile = useIsMobile();
+  const noSpaceForActions = useBreakpointValue({
+    base: true,
+    xl: false,
+  });
   const { colorModeShadeInverted } = useColorModeShade(`red`);
 
   return (
     <Modal
       buttonProps={{
-        isFullWidth: isMobile,
+        isFullWidth: noSpaceForActions,
       }}
       headerIcon={FaTrashAlt}
       toggleButtonText={`Delete All`}

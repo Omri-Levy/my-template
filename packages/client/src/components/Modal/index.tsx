@@ -51,11 +51,10 @@ const Modal: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     toggleButtonColor || `purple`
   );
-  const { darkModeTextColorInverted } = useDarkMode();
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
   const focusAndHover = !buttonProps?.disabled
     ? {
         backgroundColor: colorModeShadeInverted,
-        color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
         boxShadow: `none`,
       }
@@ -80,6 +79,8 @@ const Modal: FunctionComponent<Props> = ({
         size={noSpaceForText ? `sm` : undefined}
         _hover={focusAndHover}
         _focus={focusAndHover}
+        backgroundColor={darkModeColor}
+        color={darkModeTextColorInverted}
         {...buttonProps}
       >
         {toggleButtonText}

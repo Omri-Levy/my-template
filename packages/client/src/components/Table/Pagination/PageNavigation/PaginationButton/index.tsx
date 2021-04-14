@@ -24,7 +24,7 @@ const PaginationButton: FunctionComponent<Props> = ({
   const [noSpaceForText] = useMediaQuery(`(max-width: 26em)`);
   const color = buttonColor || `purple`;
   const { colorModeShadeInverted } = useColorModeShade(color);
-  const { darkModeTextColorInverted } = useDarkMode();
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
   const firstPage = () => gotoPage(0);
   const lastPage = () => gotoPage(pageCount - 1);
 
@@ -69,7 +69,6 @@ const PaginationButton: FunctionComponent<Props> = ({
   const focusAndHover = !disabled
     ? {
         backgroundColor: colorModeShadeInverted,
-        color: darkModeTextColorInverted,
         borderColor: colorModeShadeInverted,
         boxShadow: `none`,
       }
@@ -93,6 +92,8 @@ const PaginationButton: FunctionComponent<Props> = ({
         disabled={disabled}
         border={`2px solid`}
         borderColor={colorModeShadeInverted}
+        backgroundColor={darkModeColor}
+        color={darkModeTextColorInverted}
         _hover={focusAndHover}
         _focus={focusAndHover}
       >

@@ -7,7 +7,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaUserEdit } from 'react-icons/fa';
-import { useDisclosure } from '@chakra-ui/react';
+import { useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import ModalFormWrapper from '../ModalFormWrapper';
 import ModalForm from '../ModalFormWrapper/ModalForm';
 import FormFields from '../FormFields';
@@ -16,7 +16,7 @@ import useSuccessToast from '../../../hooks/ui/useSuccessToast';
 import { UpdateUserPassword } from '../../pages/Profile/types';
 import { Props } from './types';
 import fetchUpdateUserPassword from '../../../utils/api/fetchUpdateUserPassword';
-import useIsMobile from '../../../hooks/responsiveness/useIsMobile';
+import useDarkMode from '../../../hooks/ui/useDarkMode';
 
 /**
  * TODO: refactor to the controller pattern
@@ -63,7 +63,11 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
 
     return newPassword === oldPassword || !oneUserSelected;
   };
-  const isMobile = useIsMobile();
+  const noSpaceForActions = useBreakpointValue({
+    base: true,
+    xl: false,
+  });
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
 
   return (
     <ModalFormWrapper
@@ -75,12 +79,14 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
       toggleButtonColor={`blue`}
       buttonProps={{
         marginRight: 0,
-        isFullWidth: isMobile,
-        mb: { base: 5, sm: 0 },
+        isFullWidth: noSpaceForActions,
+        mb: { base: 5, xl: 0 },
         disabled: !oneUserSelected,
         title: !oneUserSelected
           ? `Please make sure a single user is selected.`
           : undefined,
+        backgroundColor: darkModeColor,
+        color: darkModeTextColorInverted,
       }}
     >
       <ModalForm
