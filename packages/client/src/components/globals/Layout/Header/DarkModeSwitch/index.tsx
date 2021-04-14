@@ -12,7 +12,7 @@ import { FaMoon, FaSun } from 'react-icons/fa';
 import Color from 'color';
 import { Props } from './types';
 import useDarkMode from '../../../../../hooks/ui/useDarkMode';
-import useIsMobile from '../../../../../hooks/responsiveness/useIsMobile';
+import useIsTablet from '../../../../../hooks/responsiveness/useIsTablet';
 
 /**
  * @description a simple dark mode switch made using Chakra-UI's HStack,
@@ -23,9 +23,9 @@ const DarkModeSwitch: FunctionComponent<Props> = ({ color, ...props }) => {
   const { toggleColorMode } = useColorMode();
   const { isDarkMode } = useDarkMode();
   const icon = isDarkMode ? FaMoon : FaSun;
-  const isMobile = useIsMobile();
-  const Mode = isMobile ? Fragment : isDarkMode ? LightMode : DarkMode;
-  const purple = useColorModeValue(isMobile ? `#6B46C1` : `#D6BCFA`, `#808080`);
+  const isTablet = useIsTablet();
+  const Mode = isTablet ? Fragment : isDarkMode ? LightMode : DarkMode;
+  const purple = useColorModeValue(isTablet ? `#6B46C1` : `#D6BCFA`, `#808080`);
   const defaultColor = color
     ? Color(color).rgb().alpha(0.6)
     : Color(purple).rgb().alpha(0.6);

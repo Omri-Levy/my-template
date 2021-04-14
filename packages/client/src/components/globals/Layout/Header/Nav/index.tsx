@@ -22,7 +22,7 @@ const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu, ...props }) => {
   return (
     <Grid as={`nav`} flexGrow={1} placeContent={`center`} {...props}>
       <Stack
-        direction={{ base: `column`, sm: `row` }}
+        direction={{ base: `column`, md: `row` }}
         as={List}
         listStyleType={`none`}
       >

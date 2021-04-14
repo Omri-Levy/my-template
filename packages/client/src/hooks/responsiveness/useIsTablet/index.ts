@@ -5,6 +5,6 @@ import { HookReturns } from './types';
  * TODO: Update description
  */
 const useIsTablet: HookReturns = () =>
-  useBreakpointValue({ base: false, md: true });
+  useBreakpointValue({ base: true, md: false });
 
 export default useIsTablet;

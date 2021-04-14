@@ -14,7 +14,7 @@ import Logo from './Logo';
 import DarkModeSwitch from './DarkModeSwitch';
 import { Props } from './types';
 import useLocalStorage from '../../../../hooks/caching/useLocalStorage';
-import useIsMobile from '../../../../hooks/responsiveness/useIsMobile';
+import useIsTablet from '../../../../hooks/responsiveness/useIsTablet';
 
 /**
  * a simple header component made using Chakra-UI's Flex component with the
@@ -32,8 +32,8 @@ const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
   );
   const toggleBurgerMenu = () => setBurgerMenuIsOpen((prevState) => !prevState);
   const burgerDimensions = `50px`;
-  const isMobile = useIsMobile();
-  const opacity = isMobile ? (burgerMenuIsOpen ? 1 : 0) : 1;
+  const isTablet = useIsTablet();
+  const opacity = isTablet ? (burgerMenuIsOpen ? 1 : 0) : 1;
   const spin = keyframes`
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -54,21 +54,21 @@ const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
       <Flex
         as={`header`}
         opacity={opacity}
-        backgroundColor={{ base: darkModeColorInverted, sm: darkModeColor }}
-        color={{ base: darkModeColor, sm: darkModeColorInverted }}
+        backgroundColor={{ base: darkModeColorInverted, md: darkModeColor }}
+        color={{ base: darkModeColor, md: darkModeColorInverted }}
         p={5}
         mb={20}
         alignItems={`center`}
-        position={{ base: `fixed`, sm: `sticky` }}
+        position={{ base: `fixed`, md: `sticky` }}
         css={{
           position: `-webkit-sticky`,
         }}
         top={0}
-        zIndex={{ base: burgerMenuIsOpen ? 1 : -1, sm: `unset` }}
-        left={{ base: 0, sm: `unset` }}
-        right={{ base: 0, sm: `unset` }}
-        height={{ base: `100vh`, sm: `unset` }}
-        flexDirection={{ base: `column`, sm: `row` }}
+        zIndex={{ base: burgerMenuIsOpen ? 1 : -1, md: `unset` }}
+        left={{ base: 0, md: `unset` }}
+        right={{ base: 0, md: `unset` }}
+        height={{ base: `100vh`, md: `unset` }}
+        flexDirection={{ base: `column`, md: `row` }}
         transition={`opacity 300ms ease-in`}
       >
         <Flex flexDirection={`column`}>
@@ -76,18 +76,18 @@ const Header: FunctionComponent<Props> = ({ burgerFocusColor }) => {
           <DarkModeSwitch
             mt={5}
             mr={`auto`}
-            position={{ base: `fixed`, sm: `unset` }}
-            left={{ base: 5, sm: `unset` }}
-            top={{ base: 0, sm: `unset` }}
-            display={isMobile && !burgerMenuIsOpen ? `none` : undefined}
+            position={{ base: `fixed`, md: `unset` }}
+            left={{ base: 5, md: `unset` }}
+            top={{ base: 0, md: `unset` }}
+            display={isTablet && !burgerMenuIsOpen ? `none` : undefined}
           />
         </Flex>
         <Nav
           toggleBurgerMenu={toggleBurgerMenu}
-          display={isMobile && !burgerMenuIsOpen ? `none` : `grid`}
+          display={isTablet && !burgerMenuIsOpen ? `none` : `grid`}
         />
       </Flex>
-      {isMobile && (
+      {isTablet && (
         <Button
           width={burgerDimensions}
           height={burgerDimensions}
