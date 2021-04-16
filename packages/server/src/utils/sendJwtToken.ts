@@ -7,7 +7,7 @@ const sendJwtToken = (res: Response, jwtToken: JwtToken): void => {
 
   res?.cookie(`qid`, jwtToken, {
     httpOnly: true,
-    path: `/authenticate`,
+    path: `/`,
     domain: isProduction ? apiUrl : undefined,
     sameSite: true,
     secure: isProduction,

@@ -6,8 +6,7 @@ type AxiosRequest = (
   url?: string,
   endpoint: Endpoint,
   data?: Data,
-  params?: string,
-  authorization?: string
+  params?: string
 ) => Promise<AxiosResponse<Data | unknown>>;
 
 export { AxiosRequest };
