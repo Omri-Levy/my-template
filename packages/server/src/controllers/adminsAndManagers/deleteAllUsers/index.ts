@@ -3,15 +3,17 @@ import { Op } from 'sequelize';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 import refreshUsersCache from '../../../utils/usersCache/refreshUsersCache';
+import isCountOneInUsers from '../../../utils/isCountOneInUsers';
 
 const deleteAllUsers: Route = async (req, res) => {
   try {
-    const user = req.user as UserObject;
-    const { deleteAdmins } = req.body;
+    const user = req?.user as UserObject;
+    const { deleteAdmins } = req?.body;
 
     await deleteAllUsersSchema.validate({ deleteAdmins });
+    const isOnlyAdmin = await isCountOneInUsers(`role`, `admin`);
 
-    if (deleteAdmins) {
+    if (deleteAdmins && !isOnlyAdmin) {
       await User.destroy({
         where: {
           id: {
@@ -34,21 +36,21 @@ const deleteAllUsers: Route = async (req, res) => {
 
     await refreshUsersCache();
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     const { name, errors } = error;
 
     if (name === `ValidationError`) {
       console.error(errors);
 
-      res.status(400).send({ message: errors });
+      res?.status(400)?.send({ message: errors });
 
       return;
     }
 
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

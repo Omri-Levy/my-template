@@ -5,6 +5,7 @@ type Position = `top`;
 type Title = `Error`;
 type Status = `error`;
 interface ToastOptions {
+  id: string;
   duration: null;
   isClosable: boolean;
   variant: Variant;
@@ -14,10 +15,12 @@ interface ToastOptions {
   status: Status;
 }
 type HookReturns = (
+  id: string,
   description: string
 ) => {
   toast: useToast;
   toastOptions: ToastOptions;
+  activateToast: () => unknown;
 };
 
 export { HookReturns, ToastOptions };

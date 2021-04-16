@@ -6,7 +6,13 @@ const fetchDeleteSelectedUsers: FetchDeleteUser = async (userIds) => {
   const data = {
     userIds,
   };
-  await axiosRequest(`DELETE`, undefined, `deleteSelectedUsers`, data);
+  await axiosRequest(
+    `DELETE`,
+    undefined,
+    `deleteSelectedUsers`,
+    data,
+    undefined
+  );
 
   await queryClient.invalidateQueries(`users`);
 };

@@ -49,7 +49,7 @@ const ModalForm: FunctionComponent<Props> = ({
   } else if (submitButtonTitle) {
     conditionalSubmitButtonTitle = submitButtonTitle;
   }
-  const { darkModeTextColorInverted } = useDarkMode();
+  const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
   const sharedProps = {
     color: darkModeTextColorInverted,
     boxShadow: `none`,
@@ -95,6 +95,8 @@ const ModalForm: FunctionComponent<Props> = ({
               disabled={isSubmitting}
               _hover={focusAndHoverCancel}
               _focus={focusAndHoverCancel}
+              backgroundColor={darkModeColor}
+              color={darkModeTextColorInverted}
             >
               Cancel
             </Button>
@@ -111,6 +113,8 @@ const ModalForm: FunctionComponent<Props> = ({
               borderColor={submitBorderColor}
               _hover={focusAndHoverSubmit}
               _focus={focusAndHoverSubmit}
+              backgroundColor={darkModeColor}
+              color={darkModeTextColorInverted}
             >
               {submitButtonText}
             </Button>

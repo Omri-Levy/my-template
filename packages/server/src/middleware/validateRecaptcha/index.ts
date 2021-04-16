@@ -4,7 +4,7 @@ import { Middleware } from '../../utils/types';
 
 const validateRecaptcha: Middleware = async (req, res, next) => {
   const { RECAPTCHA_SECRET_KEY } = process.env;
-  const { gRecaptchaResponse } = req.body;
+  const { gRecaptchaResponse } = req?.body;
   const verifyRecaptchaUrl =
     `https://www.google.com/recaptcha/api/` +
     `siteverify?secret=${RECAPTCHA_SECRET_KEY}&response` +
@@ -17,7 +17,7 @@ const validateRecaptcha: Middleware = async (req, res, next) => {
   if (!isRobot.data.success) {
     console.error(invalidIsRobotMessage);
 
-    res.status(400).send({ message: invalidIsRobotMessage });
+    res?.status(400)?.send({ message: invalidIsRobotMessage });
 
     return;
   }

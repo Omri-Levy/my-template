@@ -3,12 +3,7 @@ import { FetchGetUsers } from './types';
 
 const fetchGetUsers: FetchGetUsers = async () => {
   try {
-    const { data } = await axiosRequest(
-      `GET`,
-      undefined,
-      `getUsers`,
-      undefined
-    );
+    const { data } = await axiosRequest(`GET`, undefined, `getUsers`);
 
     return data?.users;
   } catch (error) {

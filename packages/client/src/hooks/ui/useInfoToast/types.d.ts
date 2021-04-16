@@ -2,8 +2,8 @@ import useToast from '../useToast';
 
 type Variant = `subtle`;
 type Position = `top`;
-type Title = `Success`;
-type Status = `success`;
+type Title = `Info`;
+type Status = `info`;
 interface ToastOptions {
   id: string;
   duration: null;

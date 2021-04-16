@@ -3,8 +3,9 @@ import { JwtToken, JwtTokenExtractor } from './types';
 const jwtTokenExtractor: JwtTokenExtractor = (req) => {
   let jwtToken: JwtToken = null;
 
-  if (req && req.headers.cookie) {
-    const { cookie } = req.headers;
+  if (req && req?.headers?.cookie) {
+    const { cookie } = req?.headers;
+
     jwtToken = cookie?.split(`qid=`)[1];
   }
 

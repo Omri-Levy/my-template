@@ -5,11 +5,11 @@ const getUsers: Route = async (_req, res) => {
   try {
     const users = await getUsersCache();
 
-    res.status(200).send({ status: `success`, users });
+    res?.status(200)?.send({ status: `success`, users });
   } catch (error) {
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

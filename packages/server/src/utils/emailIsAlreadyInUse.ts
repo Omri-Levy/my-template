@@ -16,7 +16,7 @@ const emailIsAlreadyInUse = async (
   if (emailAlreadyInUse && !currentUserEmail) {
     console.error(emailAlreadyInUseMessage);
 
-    res.status(400).send({ message: emailAlreadyInUseMessage });
+    res?.status(400)?.send({ message: emailAlreadyInUseMessage });
 
     return true;
   }

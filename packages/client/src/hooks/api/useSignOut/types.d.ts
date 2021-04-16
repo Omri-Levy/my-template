@@ -1,4 +1,7 @@
 type SignOut = () => Promise<void>;
-type HookReturns = () => SignOut;
+type HookReturns = () => {
+  signOut: SignOut;
+  inactivitySignOut: SignOut;
+};
 
 export { SignOut, HookReturns };

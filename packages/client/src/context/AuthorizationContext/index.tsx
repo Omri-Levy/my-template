@@ -12,6 +12,7 @@ import fetchAuthorize from '../../utils/api/fetchAuthorize';
 const AuthorizationProvider: FunctionComponent = ({ children }) => {
   const [isAuthorized, setIsAuthorized] = useState<boolean | undefined>();
   const { isAuthenticated } = useContext(AuthenticationContext);
+
   const authorize = useCallback(async () => {
     setIsAuthorized(isAuthenticated && (await fetchAuthorize()));
   }, [isAuthenticated]);

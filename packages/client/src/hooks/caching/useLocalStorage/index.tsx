@@ -30,8 +30,8 @@ const useLocalStorage: HookReturns = (key) => {
         }
 
         return cachedItem;
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
 
         return defaultValue;
       }

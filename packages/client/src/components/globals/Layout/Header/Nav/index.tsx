@@ -9,7 +9,7 @@ import { Props } from './types';
 
 const Nav: FunctionComponent<Props> = ({ toggleBurgerMenu, ...props }) => {
   const { memoizedRoutes } = useRoutes();
-  const signOut = useSignOut();
+  const { signOut } = useSignOut();
   const { currentUser } = useContext(AuthenticationContext);
   const closeBurgerMenu = (to: string) => async () => {
     if (to === `/signOut`) {

@@ -4,17 +4,16 @@ import {
   noUserWasFoundMessage,
   ObjectKey,
   updateProfileSchema,
-  UserObject
+  UserObject,
 } from '@my-template/shared';
 import { Route } from '../../../utils/types';
 import User from '../../../models/User.model';
 import emailIsAlreadyInUse from '../../../utils/emailIsAlreadyInUse';
-import setCurrentUserCache
-  from '../../../utils/currentUserCache/setCurrentUserCache';
+import setCurrentUserCache from '../../../utils/currentUserCache/setCurrentUserCache';
 
 const updateProfile: Route = async (req, res) => {
   try {
-    const user = req.user as UserObject;
+    const user = req?.user as UserObject;
     const { id } = user;
     await updateProfileSchema.validate(req?.body);
 
@@ -24,7 +23,7 @@ const updateProfile: Route = async (req, res) => {
       const message = noUserWasFoundMessage;
       console.error(message);
 
-      res.status(404).send({ message });
+      res?.status(404)?.send({ message });
     }
 
     const { email, fname: firstName, lname: lastName } = req?.body;
@@ -47,7 +46,7 @@ const updateProfile: Route = async (req, res) => {
     if (unchangedValues) {
       console.error(noChangesWereMadeMessage);
 
-      res.status(400).send({ message: noChangesWereMadeMessage });
+      res?.status(400)?.send({ message: noChangesWereMadeMessage });
 
       return;
     }
@@ -70,21 +69,21 @@ const updateProfile: Route = async (req, res) => {
 
     await setCurrentUserCache(userToUpdate);
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     const { name, errors } = error;
 
     if (name === `ValidationError`) {
       console.error(errors);
 
-      res.status(400).send({ message: errors });
+      res?.status(400)?.send({ message: errors });
 
       return;
     }
 
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

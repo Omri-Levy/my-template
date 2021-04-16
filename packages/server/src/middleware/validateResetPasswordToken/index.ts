@@ -5,12 +5,12 @@ import { JwtTokenPayload, Middleware } from '../../utils/types';
 
 const validateResetPasswordToken: Middleware = async (req, res, next) => {
   const { JWT_SECRET } = process.env;
-  const { token } = req.params;
+  const { token } = req?.params;
 
   if (!token) {
     console.error(invalidTokenMessage);
 
-    res.status(500).send({ message: invalidTokenMessage });
+    res?.status(500)?.send({ message: invalidTokenMessage });
 
     return;
   }
@@ -21,7 +21,7 @@ const validateResetPasswordToken: Middleware = async (req, res, next) => {
   } catch {
     console.error(invalidTokenMessage);
 
-    res.status(500).send({ message: invalidTokenMessage });
+    res?.status(500)?.send({ message: invalidTokenMessage });
 
     return;
   }
@@ -29,7 +29,7 @@ const validateResetPasswordToken: Middleware = async (req, res, next) => {
   if (!verifiedToken) {
     console.error(invalidTokenMessage);
 
-    res.status(500).send({ message: invalidTokenMessage });
+    res?.status(500)?.send({ message: invalidTokenMessage });
 
     return;
   }
@@ -43,7 +43,7 @@ const validateResetPasswordToken: Middleware = async (req, res, next) => {
   if (!user) {
     console.error(serverErrorMessage);
 
-    res.status(500).send({ message: serverErrorMessage });
+    res?.status(500)?.send({ message: serverErrorMessage });
 
     return;
   }
@@ -51,7 +51,7 @@ const validateResetPasswordToken: Middleware = async (req, res, next) => {
   if (user.tokenVersion !== tokenVersion) {
     console.error(invalidTokenMessage);
 
-    res.status(400).send({ message: invalidTokenMessage });
+    res?.status(400)?.send({ message: invalidTokenMessage });
 
     return;
   }

@@ -34,12 +34,13 @@ const ResetPasswordForm: FunctionComponent = () => {
   const params: Params = useParams();
   const { token } = params;
   const { push } = useHistory();
-  const { toast, toastOptions } = useSuccessToast(
+  const { activateToast } = useSuccessToast(
+    `passwordUpdated`,
     `Your password has been updated successfully.`
   );
   const callback = () => {
     push(`/signIn`, {
-      toast: toast(toastOptions),
+      toast: activateToast(),
     });
   };
   const submitFn = onSubmit(

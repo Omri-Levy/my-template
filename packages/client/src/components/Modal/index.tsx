@@ -51,21 +51,35 @@ const Modal: FunctionComponent<Props> = ({
   const { colorModeShadeInverted } = useColorModeShade(
     toggleButtonColor || `purple`
   );
+  const { colorModeShadeInverted: cancelBorderColor } = useColorModeShade(
+    `red`
+  );
   const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
+  const sharedProps = {
+    color: darkModeTextColorInverted,
+    boxShadow: `none`,
+  };
   const focusAndHover = !buttonProps?.disabled
     ? {
         backgroundColor: colorModeShadeInverted,
         borderColor: colorModeShadeInverted,
-        boxShadow: `none`,
+        ...sharedProps,
       }
     : undefined;
   const checkboxHoverAndFocus = {
     '.chakra-checkbox__control': {
       transform: `scale(1.2)`,
       transition: `scale 240ms ease-in-out`,
-      boxShadow: `none`,
+      boxShadow: sharedProps.boxShadow,
     },
   };
+  const focusAndHoverCancel = !isLoading
+    ? {
+        backgroundColor: cancelBorderColor,
+        borderColor: cancelBorderColor,
+        ...sharedProps,
+      }
+    : undefined;
 
   return (
     <>
@@ -133,8 +147,11 @@ const Modal: FunctionComponent<Props> = ({
                 rightIcon={icons ? <Icon as={FaTimes} mb={0.5} /> : undefined}
                 border={`2px solid`}
                 borderColor={colorModeShadeInverted}
-                _hover={focusAndHover}
-                _focus={focusAndHover}
+                _hover={focusAndHoverCancel}
+                _focus={focusAndHoverCancel}
+                isDisabled={isLoading}
+                backgroundColor={darkModeColor}
+                color={darkModeTextColorInverted}
               >
                 Cancel
               </Button>
@@ -151,6 +168,8 @@ const Modal: FunctionComponent<Props> = ({
                   borderColor={colorModeShadeInverted}
                   _hover={focusAndHover}
                   _focus={focusAndHover}
+                  backgroundColor={darkModeColor}
+                  color={darkModeTextColorInverted}
                 >
                   {actionText}
                 </Button>

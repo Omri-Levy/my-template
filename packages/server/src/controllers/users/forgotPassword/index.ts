@@ -1,12 +1,12 @@
 import { forgotPasswordMessage } from '@my-template/shared';
 import User from '../../../models/User.model';
 import sendEmail from '../../../utils/sendEmail';
-import generateJwtToken from '../../../utils/generateJwtToken';
+import generateJwtToken from '../../../utils/generateToken';
 import { Route } from '../../../utils/types';
 
 const forgotPassword: Route = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req?.body;
     const { EMAIL_USER } = process.env;
 
     const user = await User.findOne({
@@ -48,11 +48,11 @@ const forgotPassword: Route = async (req, res) => {
       sendEmail(from, to, subject, undefined, html);
     }
 
-    res.status(200).send({ message: forgotPasswordMessage });
+    res?.status(200)?.send({ message: forgotPasswordMessage });
   } catch (error) {
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

@@ -37,10 +37,10 @@ const UpdatePasswordForm: FunctionComponent = () => {
   const disclosure = useDisclosure();
   const { authenticate } = useContext(AuthenticationContext);
   const { onClose } = disclosure;
-  const {
-    toast: updatePasswordSuccessToast,
-    toastOptions: updatePasswordSuccessToastOptions,
-  } = useSuccessToast(`Updated password successfully.`);
+  const { activateToast } = useSuccessToast(
+    `updatedPassword`,
+    `Updated password successfully.`
+  );
   const { replace } = useHistory();
   const updatePassword: UpdatePassword = () => async (data) => {
     try {
@@ -49,7 +49,7 @@ const UpdatePasswordForm: FunctionComponent = () => {
       await authenticate();
 
       replace(`/signIn`, {
-        toast: updatePasswordSuccessToast(updatePasswordSuccessToastOptions),
+        toast: activateToast(),
       });
     } catch (error) {
       console.error(error);

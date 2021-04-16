@@ -13,10 +13,10 @@ import AuthenticationContext from '../../../context/AuthenticationContext/Authen
 const useSignIn: HookReturns = (setError) => {
   const { authenticate } = useContext(AuthenticationContext);
   const { replace } = useHistory();
-  const {
-    toast: signInToast,
-    toastOptions: signInToastOptions,
-  } = useSuccessToast(`Signed in successfully.`);
+  const { activateToast } = useSuccessToast(
+    `signIn`,
+    `Signed in successfully.`
+  );
 
   const signIn: SignIn = (gRecaptchaResponse) => async (data) => {
     try {
@@ -24,11 +24,10 @@ const useSignIn: HookReturns = (setError) => {
         ...data,
         gRecaptchaResponse,
       });
-
       await authenticate();
 
       replace(`/`, {
-        toast: signInToast(signInToastOptions),
+        toast: activateToast(),
       });
     } catch (error) {
       console.error(error);

@@ -1,12 +1,12 @@
 import { HookReturns, ToastOptions } from './types';
 import useToast from '../useToast';
 
-const useErrorToast: HookReturns = (id, description) => {
+const useInfoToast: HookReturns = (id, description) => {
   const toast = useToast();
   const toastOptions: ToastOptions = {
     id,
-    status: `error`,
-    title: `Error`,
+    status: `info`,
+    title: `Info`,
     description,
     isClosable: true,
     duration: null,
@@ -22,4 +22,4 @@ const useErrorToast: HookReturns = (id, description) => {
   return { toast, toastOptions, activateToast };
 };
 
-export default useErrorToast;
+export default useInfoToast;

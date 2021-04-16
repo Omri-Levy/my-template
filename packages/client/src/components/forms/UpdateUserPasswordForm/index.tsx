@@ -1,8 +1,10 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, useContext, useMemo } from 'react';
 import {
   invalidNewPasswordMessage,
   invalidOldPasswordMessage,
   updateUserPasswordSchema,
+  UserObject,
+  Users,
 } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,6 +19,8 @@ import { UpdateUserPassword } from '../../pages/Profile/types';
 import { Props } from './types';
 import fetchUpdateUserPassword from '../../../utils/api/fetchUpdateUserPassword';
 import useDarkMode from '../../../hooks/ui/useDarkMode';
+import queryClient from '../../globals/Providers/queryClient';
+import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 
 /**
  * TODO: refactor to the controller pattern
@@ -40,17 +44,17 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
   const { isSubmitting } = formState;
   const disclosure = useDisclosure();
   const { onClose } = disclosure;
-  const {
-    toast: updateUserPasswordSuccessToast,
-    toastOptions: updateUserPasswordSuccessToastOptions,
-  } = useSuccessToast(`Updated user password successfully.`);
+  const { activateToast } = useSuccessToast(
+    `updatedUserPassword`,
+    `Updated user password successfully.`
+  );
   const updateUserPassword: UpdateUserPassword = () => async (data) => {
     try {
       await fetchUpdateUserPassword(userIds[0], data);
 
       onClose();
 
-      updateUserPasswordSuccessToast(updateUserPasswordSuccessToastOptions);
+      activateToast();
     } catch (error) {
       console.error(error);
 
@@ -58,16 +62,23 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
     }
   };
   const oneUserSelected = userIds?.length === 1;
+  const { currentUser } = useContext(AuthenticationContext);
+  const { role: currentUserRole } = currentUser as UserObject;
+  const users = queryClient.getQueryData(`users`) as Users;
+  const userToUpdate = users?.filter((user) => user?.id === userIds[0])[0];
+  const userToUpdateRole = userToUpdate?.role;
   const disableSubmitCondition = () => {
     const { newPassword, oldPassword } = watch([`newPassword`, `oldPassword`]);
 
-    return newPassword === oldPassword || !oneUserSelected;
+    return unauthorized || newPassword === oldPassword || !oneUserSelected;
   };
   const noSpaceForActions = useBreakpointValue({
     base: true,
     xl: false,
   });
   const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
+  const unauthorized =
+    currentUserRole !== `admin` && userToUpdateRole === `admin`;
 
   return (
     <ModalFormWrapper
@@ -81,8 +92,10 @@ const UpdateUserPasswordForm: FunctionComponent<Props> = ({ userIds }) => {
         marginRight: 0,
         isFullWidth: noSpaceForActions,
         mb: { base: 5, xl: 0 },
-        disabled: !oneUserSelected,
-        title: !oneUserSelected
+        disabled: unauthorized || !oneUserSelected,
+        title: unauthorized
+          ? `Only admins may update other admins.`
+          : !oneUserSelected
           ? `Please make sure a single user is selected.`
           : undefined,
         backgroundColor: darkModeColor,

@@ -7,6 +7,7 @@ const fetchAuthenticate: FetchAuthenticate = async () => {
       `GET`,
       undefined,
       `authenticate`,
+      undefined,
       undefined
     );
 

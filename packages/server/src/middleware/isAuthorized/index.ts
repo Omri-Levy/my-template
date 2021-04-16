@@ -6,12 +6,12 @@ const isAuthorized: IsAuthorizedMiddleware = (roles) => async (
   res,
   next
 ) => {
-  const user = req.user as UserObject;
+  const user = req?.user as UserObject;
 
   if (!roles.includes(user?.role)) {
     console.error(unauthorizedMessage);
 
-    res.status(401).send({ message: unauthorizedMessage });
+    res?.status(401)?.send({ message: unauthorizedMessage });
 
     return;
   }

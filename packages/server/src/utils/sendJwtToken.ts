@@ -3,15 +3,15 @@ import { apiUrl, calculateHours } from '@my-template/shared';
 import { JwtToken } from './types';
 
 const sendJwtToken = (res: Response, jwtToken: JwtToken): void => {
-  res.cookie(`qid`, jwtToken, {
-    // 9 hours
-    maxAge: calculateHours(9),
+  const isProduction = process.env.NODE_ENV === `production`;
+
+  res?.cookie(`qid`, jwtToken, {
     httpOnly: true,
-    sameSite: `lax`,
-    path: `/`,
-    secure: process.env.NODE_ENV === `production`,
+    path: `/authenticate`,
+    domain: isProduction ? apiUrl : undefined,
+    sameSite: true,
+    secure: isProduction,
     expires: new Date(Date.now() + calculateHours(9)),
-    domain: process.env.NODE_ENV === `production` ? apiUrl : undefined,
   });
 };
 

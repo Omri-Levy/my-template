@@ -3,7 +3,7 @@ import { FetchAuthorize } from './types';
 
 const fetchAuthorize: FetchAuthorize = async () => {
   try {
-    await axiosRequest(`GET`, undefined, `authorize`, undefined);
+    await axiosRequest(`GET`, undefined, `authorize`);
 
     return true;
   } catch (error) {

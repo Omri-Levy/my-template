@@ -5,6 +5,7 @@ import {
   terminateUserAccountMessage,
   unauthorizedMessage,
   updateUserProfileSchema,
+  UserObject,
   Users,
 } from '@my-template/shared';
 import { useForm } from 'react-hook-form';
@@ -45,21 +46,21 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
   const { onOpen } = alertDisclosure;
   const disclosure = useDisclosure();
   const { onClose } = disclosure;
-  const {
-    toast: updateUserProfileSuccessToast,
-    toastOptions: updateUserProfileSuccessToastOptions,
-  } = useSuccessToast(`Updated user profile successfully.`);
-  const {
-    toast: unauthorizedErrorToast,
-    toastOptions: unauthorizedErrorToastOptions,
-  } = useErrorToast(unauthorizedMessage);
+  const { activateToast: activateUpdatedUserProfileToast } = useSuccessToast(
+    `updatedUserProfile`,
+    `Updated user profile successfully.`
+  );
+  const { activateToast: activateUnauthorizedToast } = useErrorToast(
+    `unauthorized`,
+    unauthorizedMessage
+  );
   const { isAuthorized } = useContext(AuthorizationContext);
   const updateUserProfile: UpdateUserProfile = () => async (data) => {
     try {
       if (!isAuthorized) {
         console.error(unauthorizedMessage);
 
-        unauthorizedErrorToast(unauthorizedErrorToastOptions);
+        activateUnauthorizedToast();
 
         return;
       }
@@ -68,7 +69,7 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
 
       onClose();
 
-      updateUserProfileSuccessToast(updateUserProfileSuccessToastOptions);
+      activateUpdatedUserProfileToast();
 
       await queryClient.invalidateQueries(`users`);
     } catch (error) {
@@ -83,9 +84,12 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
     }
   };
   const { currentUser } = useContext(AuthenticationContext);
+  const { role: currentUserRole } = currentUser as UserObject;
   const oneUserSelected = userIds?.length === 1;
   const users = queryClient.getQueryData(`users`) as Users;
   const userToUpdate = users.filter((user) => user.id === userIds[0])[0];
+  const unauthorized =
+    currentUserRole !== `admin` && userToUpdate?.role === `admin`;
   const disableSubmitCondition = () => {
     const currentValues = {
       email: userToUpdate?.email,
@@ -94,7 +98,11 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       role: userToUpdate?.role,
     };
 
-    return formValuesChanged(currentValues, watch) || !oneUserSelected;
+    return (
+      unauthorized ||
+      formValuesChanged(currentValues, watch) ||
+      !oneUserSelected
+    );
   };
   const noSpaceForActions = useBreakpointValue({ base: true, xl: false });
   const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
@@ -113,10 +121,12 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
       toggleButtonColor={`blue`}
       buttonProps={{
         marginRight: 0,
-        disabled: !oneUserSelected,
+        disabled: unauthorized || !oneUserSelected,
         isFullWidth: noSpaceForActions,
         mb: { base: 5, xl: 0 },
-        title: !oneUserSelected
+        title: unauthorized
+          ? `Only admins may update other admins.`
+          : !oneUserSelected
           ? `Please make sure a single user is selected.`
           : undefined,
         backgroundColor: darkModeColor,
@@ -135,7 +145,11 @@ const UpdateUserProfileForm: FunctionComponent<Props> = ({ userIds }) => {
         getValues={getValues}
         onClose={onClose}
         disableSubmitCondition={disableSubmitCondition}
-        submitButtonDisabledTitle={`Please update at least one field.`}
+        submitButtonDisabledTitle={
+          unauthorized
+            ? `Only admins may update other admins.`
+            : `Please update at least one field.`
+        }
       >
         <FormFields
           formType={`updateUserProfile`}

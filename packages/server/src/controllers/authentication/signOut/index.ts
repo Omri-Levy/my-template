@@ -10,11 +10,11 @@ const signOut: Route = async (_req, res): Promise<void> => {
 
     await resetCurrentUserAndUsersCache();
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

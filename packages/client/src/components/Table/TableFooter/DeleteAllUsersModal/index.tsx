@@ -17,10 +17,10 @@ const DeleteAllUsersModal: FunctionComponent = () => {
   const { isOpen } = disclosure;
   const { isLoading, stopLoading, startLoading } = useLoading();
   const [errorMessage, setErrorMessage] = useState(``);
-  const {
-    toast: deleteAllUsersSuccessToast,
-    toastOptions: deleteAllUsersSuccessToastOptions,
-  } = useSuccessToast(`Deleted all users successfully.`);
+  const { activateToast } = useSuccessToast(
+    `deletedAllUsers`,
+    `Deleted all users successfully.`
+  );
   /**
    * TODO: abstract this function
    */
@@ -31,7 +31,7 @@ const DeleteAllUsersModal: FunctionComponent = () => {
 
       onClose();
 
-      deleteAllUsersSuccessToast(deleteAllUsersSuccessToastOptions);
+      activateToast();
     } catch (error) {
       console.error(error);
 

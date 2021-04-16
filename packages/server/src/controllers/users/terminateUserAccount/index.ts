@@ -6,7 +6,7 @@ import resetCurrentUserAndUsersCache from '../../../utils/resetCurrentUserAndUse
 
 const terminateUserAccount: Route = async (req, res) => {
   try {
-    const user = req.user as UserObject;
+    const user = req?.user as UserObject;
     const { id, role } = user;
 
     const isOnlyAdmin = await isCountOneInUsers(`role`, `admin`);
@@ -14,7 +14,7 @@ const terminateUserAccount: Route = async (req, res) => {
     if (isOnlyAdmin && role === `admin`) {
       console.log(terminateUserAccountMessage);
 
-      res.status(400).send({ message: terminateUserAccountMessage });
+      res?.status(400)?.send({ message: terminateUserAccountMessage });
 
       return;
     }
@@ -23,11 +23,11 @@ const terminateUserAccount: Route = async (req, res) => {
 
     await resetCurrentUserAndUsersCache();
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

@@ -19,7 +19,7 @@ import isCountOneInUsers from '../../../utils/isCountOneInUsers';
 
 const updateUserProfile: Route = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req?.params;
     const user = req?.user as UserObject;
 
     if (!isUuidV4.test(userId)) {
@@ -27,7 +27,7 @@ const updateUserProfile: Route = async (req, res) => {
 
       console.error(message);
 
-      res.status(400).send({ message });
+      res?.status(400)?.send({ message });
     }
 
     await updateUserProfileSchema.validate(req?.body);
@@ -41,7 +41,7 @@ const updateUserProfile: Route = async (req, res) => {
       const message = noUserWasFoundMessage;
       console.error(message);
 
-      res.status(404).send({ message });
+      res?.status(404)?.send({ message });
     }
 
     const { email, fname: firstName, lname: lastName, role } = req?.body;
@@ -67,7 +67,7 @@ const updateUserProfile: Route = async (req, res) => {
     if (unchangedValues) {
       console.error(noChangesWereMadeMessage);
 
-      res.status(400).send({ message: noChangesWereMadeMessage });
+      res?.status(400)?.send({ message: noChangesWereMadeMessage });
 
       return;
     }
@@ -77,20 +77,25 @@ const updateUserProfile: Route = async (req, res) => {
      */
     const currentUserIsAdmin = user?.role === `admin`;
 
-    if (!currentUserIsAdmin && role && !unchangedRole) {
+    if (!currentUserIsAdmin && userToUpdate?.role === `admin`) {
       console.error(unauthorizedMessage);
 
-      res.status(401).send({ message: unauthorizedMessage });
+      res?.status(401)?.send({ message: unauthorizedMessage });
 
       return;
     }
 
     const isOnlyAdmin = await isCountOneInUsers(`role`, `admin`);
 
-    if (isOnlyAdmin && userToUpdate?.role === `admin` && !unchangedRole) {
+    if (
+      isOnlyAdmin &&
+      userToUpdate?.role === `admin` &&
+      role &&
+      !unchangedRole
+    ) {
       console.error(terminateUserAccountMessage);
 
-      res.status(400).send({ message: terminateUserAccountMessage });
+      res?.status(400)?.send({ message: terminateUserAccountMessage });
 
       return;
     }
@@ -114,21 +119,21 @@ const updateUserProfile: Route = async (req, res) => {
 
     await refreshUsersCache();
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     const { name, errors } = error;
 
     if (name === `ValidationError`) {
       console.error(errors);
 
-      res.status(400).send({ message: errors });
+      res?.status(400)?.send({ message: errors });
 
       return;
     }
 
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

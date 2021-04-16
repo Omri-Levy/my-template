@@ -5,22 +5,30 @@ import { HookReturns, SignOut } from './types';
 import useSuccessToast from '../../ui/useSuccessToast';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
 import useUserIds from '../../caching/useUserIds';
+import useInfoToast from '../../ui/useInfoToast';
 
 /**
  * a hook that takes all the steps required out order to sign out,
  * redirect and display the sign out toast.
  */
 const useSignOut: HookReturns = () => {
-  const { authenticate } = useContext(AuthenticationContext);
+  const { authenticate, isAuthenticated } = useContext(AuthenticationContext);
   const { replace } = useHistory();
-  const {
-    toast: signOutToast,
-    toastOptions: signOutToastOptions,
-  } = useSuccessToast(`Signed out successfully.`);
+  const { activateToast: activateSignOutToast } = useSuccessToast(
+    `signOut`,
+    `Signed out successfully.`
+  );
+  const { activateToast: activateInactiveSignOutToast } = useInfoToast(
+    `signOut`,
+    `Signed out automatically due to inactivity.`
+  );
   const { resetUserIds } = useUserIds();
-
-  const signOut: SignOut = async () => {
+  const sharedSignOutLogic = async (inactivity?: boolean) => {
     try {
+      if (!isAuthenticated) {
+        return;
+      }
+
       await axiosRequest(`POST`, undefined, `signOut`);
 
       resetUserIds();
@@ -28,14 +36,24 @@ const useSignOut: HookReturns = () => {
       await authenticate();
 
       replace(`/signIn`, {
-        toast: signOutToast(signOutToastOptions),
+        toast: inactivity
+          ? activateInactiveSignOutToast()
+          : activateSignOutToast(),
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-  return signOut;
+  const signOut: SignOut = async () => {
+    await sharedSignOutLogic();
+  };
+
+  const inactivitySignOut: SignOut = async () => {
+    await sharedSignOutLogic(true);
+  };
+
+  return { signOut, inactivitySignOut };
 };
 
 export default useSignOut;

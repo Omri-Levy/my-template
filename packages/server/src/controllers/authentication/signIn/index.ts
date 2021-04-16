@@ -1,6 +1,6 @@
 import { signInSchema, wrongCredentialsMessage } from '@my-template/shared';
 import User from '../../../models/User.model';
-import generateJwtToken from '../../../utils/generateJwtToken';
+import generateJwtToken from '../../../utils/generateToken';
 import sendJwtToken from '../../../utils/sendJwtToken';
 import { Route } from '../../../utils/types';
 import verifyIfVerifiable from '../../../utils/verifyIfVerifiable';
@@ -9,9 +9,9 @@ import { redisClient } from '../../../redis';
 
 const signIn: Route = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req?.body;
 
-    await signInSchema.validate(req.body, {
+    await signInSchema.validate(req?.body, {
       abortEarly: false,
     });
 
@@ -47,7 +47,7 @@ const signIn: Route = async (req, res) => {
 
       console.error(wrongCredentialsMessage(attemptsLeft));
 
-      res.status(401).send({
+      res?.status(401)?.send({
         message: wrongCredentialsMessage(attemptsLeft),
         attemptsLeft,
       });
@@ -55,13 +55,12 @@ const signIn: Route = async (req, res) => {
       return;
     }
 
-    const jwtToken = generateJwtToken(user, `9h`);
-    sendJwtToken(res, jwtToken);
+    sendJwtToken(res, generateJwtToken(user, `9h`));
 
     console.log(`Sign in successful.`);
 
     if (req?.brute?.reset) {
-      req.brute.reset();
+      req?.brute.reset();
 
       console.log(`reset brute force`);
     }
@@ -77,12 +76,12 @@ const signIn: Route = async (req, res) => {
     if (name === `ValidationError`) {
       console.error(errors);
 
-      res.status(400).send({ message: errors });
+      res?.status(400)?.send({ message: errors });
     }
 
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

@@ -3,12 +3,7 @@ import { FetchGetRoles } from './types';
 
 const fetchGetRoles: FetchGetRoles = async () => {
   try {
-    const { data } = await axiosRequest(
-      `GET`,
-      undefined,
-      `getRoles`,
-      undefined
-    );
+    const { data } = await axiosRequest(`GET`, undefined, `getRoles`);
 
     return data?.roles;
   } catch (error) {

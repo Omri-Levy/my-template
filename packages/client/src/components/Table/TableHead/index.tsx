@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Flex, Icon, Text, Th, Thead, Tr } from '@chakra-ui/react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/all';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { v4 } from 'uuid';
 import { chunk } from 'lodash';
 import { Props } from './types';

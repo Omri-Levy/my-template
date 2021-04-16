@@ -12,7 +12,7 @@ const failCallback: FailCallback = (_req, res, _next, nextValidRequestDate) => {
   const retryIn = DateTime.fromJSDate(nextValidRequestDate).toRelative();
   const message = `${lockoutMessage} ${retryIn}.`;
 
-  res.status(429).send({ message });
+  res?.status(429)?.send({ message });
 };
 const store = new RedisStore({
   host: `127.0.0.1`,

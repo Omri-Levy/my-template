@@ -4,12 +4,14 @@ import Header from './Header';
 import Container from './Container';
 import Loading from '../Loading';
 import AuthenticationContext from '../../../context/AuthenticationContext/AuthenticationContext';
+import IdleTimer from '../IdleTimer';
 
 const Layout: FunctionComponent = ({ children }) => {
-  const { currentUser } = useContext(AuthenticationContext);
+  const { currentUser, isAuthenticated } = useContext(AuthenticationContext);
 
   return (
     <>
+      {isAuthenticated && <IdleTimer />}
       <Loading suspense={!currentUser} />
       <Head />
       <Header />

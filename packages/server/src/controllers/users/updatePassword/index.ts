@@ -26,7 +26,7 @@ const updatePassword: Route = async (req, res) => {
 
       console.error(message);
 
-      res.status(404).send({ message });
+      res?.status(404)?.send({ message });
     }
 
     await updatePasswordSchema.validate(req?.body);
@@ -42,7 +42,7 @@ const updatePassword: Route = async (req, res) => {
     if (unchangedPassword) {
       console.error(noChangesWereMadeMessage);
 
-      res.status(400).send({ message: noChangesWereMadeMessage });
+      res?.status(400)?.send({ message: noChangesWereMadeMessage });
 
       return;
     }
@@ -50,7 +50,7 @@ const updatePassword: Route = async (req, res) => {
     if (!oldPasswordMatches) {
       console.error(invalidOldPasswordMessage);
 
-      res.status(400).send({ message: invalidOldPasswordMessage });
+      res?.status(400)?.send({ message: invalidOldPasswordMessage });
 
       return;
     }
@@ -66,21 +66,21 @@ const updatePassword: Route = async (req, res) => {
 
     await setCurrentUserCache(userToUpdate);
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     const { name, errors } = error;
 
     if (name === `ValidationError`) {
       console.error(errors);
 
-      res.status(400).send({ message: errors });
+      res?.status(400)?.send({ message: errors });
 
       return;
     }
 
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

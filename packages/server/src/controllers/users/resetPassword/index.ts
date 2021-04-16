@@ -10,17 +10,17 @@ import verifyIfVerifiable from '../../../utils/verifyIfVerifiable';
 
 const resetPassword: Route = async (req, res) => {
   try {
-    const { user } = res.locals;
+    const { user } = res?.locals;
 
     if (!user) {
       const message = noUserWasFoundMessage;
 
       console.error(message);
 
-      res.status(404).send({ message });
+      res?.status(404)?.send({ message });
     }
 
-    await resetPasswordSchema.validate(req.body);
+    await resetPasswordSchema.validate(req?.body);
 
     const verify = verifyIfVerifiable(user);
     const { securityQuestion, securityAnswer, newPassword } = req?.body;
@@ -36,7 +36,7 @@ const resetPassword: Route = async (req, res) => {
     if (!securityQuestionMatches || !securityAnswerMatches) {
       console.error(invalidSecurityInformationMessage);
 
-      res.status(400).send({ message: invalidSecurityInformationMessage });
+      res?.status(400)?.send({ message: invalidSecurityInformationMessage });
 
       return;
     }
@@ -47,21 +47,21 @@ const resetPassword: Route = async (req, res) => {
 
     console.log(`user password reset successfully`);
 
-    res.status(200).send({ status: `success` });
+    res?.status(200)?.send({ status: `success` });
   } catch (error) {
     const { name, errors } = error;
 
     if (name === `ValidationError`) {
       console.error(errors);
 
-      res.status(400).send({ message: errors });
+      res?.status(400)?.send({ message: errors });
 
       return;
     }
 
     console.error(error);
 
-    res.status(500).send({ error });
+    res?.status(500)?.send({ error });
   }
 };
 

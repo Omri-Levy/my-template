@@ -40,17 +40,17 @@ const UpdateProfileForm: FunctionComponent = () => {
   const disclosure = useDisclosure();
   const { onClose } = disclosure;
   const { authenticate } = useContext(AuthenticationContext);
-  const {
-    toast: updateProfileSuccessToast,
-    toastOptions: updateProfileSuccessToastOptions,
-  } = useSuccessToast(`Updated profile successfully.`);
+  const { activateToast } = useSuccessToast(
+    `updatedProfile`,
+    `Updated profile successfully.`
+  );
   const updateProfile: UpdateProfile = () => async (data) => {
     try {
       await fetchUpdateProfile(data);
 
       onClose();
 
-      updateProfileSuccessToast(updateProfileSuccessToastOptions);
+      activateToast();
 
       await authenticate();
     } catch (error) {

@@ -1,11 +1,18 @@
-import { FunctionComponent, useContext } from 'react';
+import { Fragment, FunctionComponent, useContext } from 'react';
 import { FaKey } from 'react-icons/fa';
-import { invalidOldPasswordMessage } from '@my-template/shared';
+import {
+  invalidOldPasswordMessage,
+  UserObject,
+  Users,
+} from '@my-template/shared';
+import { Box } from '@chakra-ui/react';
 import FormField from '../../FormField';
 import clearResponseError from '../../FormResponseError/clearResponseError';
 import { Props } from '../types';
 import AuthenticationContext from '../../../../context/AuthenticationContext/AuthenticationContext';
 import NoUserFound from '../../../NoUserFound';
+import useUserIds from '../../../../hooks/caching/useUserIds';
+import queryClient from '../../../globals/Providers/queryClient';
 
 /**
  * TODO: update description
@@ -18,6 +25,19 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
   ...props
 }) => {
   const { currentUser } = useContext(AuthenticationContext);
+  const { userIds } = useUserIds();
+  const users = queryClient.getQueryData(`users`) as Users;
+  const { role: currentUserRole } = currentUser as UserObject;
+  const userToUpdate = users?.filter((user) => user?.id === userIds[0])[0];
+  const unauthorized =
+    currentUserRole !== `admin` && userToUpdate?.role === `admin`;
+  const ConditionalWrapper = unauthorized ? Box : Fragment;
+  const conditionalProps = unauthorized
+    ? {
+        cursor: `not-allowed`,
+        title: `Only admins may update other admins.`,
+      }
+    : undefined;
 
   if (!currentUser) {
     return <NoUserFound />;
@@ -36,7 +56,7 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
   }
 
   return (
-    <>
+    <ConditionalWrapper {...conditionalProps}>
       {!isAdminAction && (
         <FormField
           isRequired
@@ -66,6 +86,8 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
         inputProps={{
           autoComplete: `new-password`,
         }}
+        isDisabled={unauthorized}
+        pointerEvents={unauthorized ? `none` : undefined}
         {...props}
       />
       <FormField
@@ -81,9 +103,11 @@ const UpdatePasswordFormFields: FunctionComponent<Props> = ({
         inputProps={{
           autoComplete: `off`,
         }}
+        isDisabled={unauthorized}
+        pointerEvents={unauthorized ? `none` : undefined}
         {...props}
       />
-    </>
+    </ConditionalWrapper>
   );
 };
 

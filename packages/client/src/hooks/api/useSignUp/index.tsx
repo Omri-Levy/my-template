@@ -17,10 +17,10 @@ const useSignUp: HookReturns = (setError) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
   const { push } = useHistory();
-  const {
-    toast: signUpToast,
-    toastOptions: signUpToastOptions,
-  } = useSuccessToast(`Your new account has been created successfully.`);
+  const { activateToast } = useSuccessToast(
+    `signUp`,
+    `Your new account has been created successfully.`
+  );
 
   const signUp: SignUp = (gRecaptchaResponse) => async (data) => {
     try {
@@ -35,7 +35,7 @@ const useSignUp: HookReturns = (setError) => {
       dispatch(resetSignUpFormDetails());
 
       push(`/signIn`, {
-        toast: signUpToast(signUpToastOptions),
+        toast: activateToast(),
       });
     } catch (error) {
       console.error(error);

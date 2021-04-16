@@ -29,10 +29,10 @@ const Profile: FunctionComponent = () => {
   const { onOpen } = alertDisclosure;
   const { isLoading, startLoading, stopLoading } = useLoading();
   const { replace } = useHistory();
-  const {
-    toast: userAccountTerminatedToast,
-    toastOptions: userAccountTerminatedToastOptions,
-  } = useSuccessToast(`Account terminated successfully.`);
+  const { activateToast } = useSuccessToast(
+    `accountTerminated`,
+    `Account terminated successfully.`
+  );
   /**
    * TODO: abstract this function
    */
@@ -46,7 +46,7 @@ const Profile: FunctionComponent = () => {
       await authenticate();
 
       replace(`/`, {
-        toast: userAccountTerminatedToast(userAccountTerminatedToastOptions),
+        toast: activateToast(),
       });
     } catch (error) {
       console.error(error);

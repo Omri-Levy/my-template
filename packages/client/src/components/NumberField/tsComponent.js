@@ -11,9 +11,9 @@ fs.writeFile(
 		expect(true).toBe(true);
 	});
 });`,
-  (err) => {
-    if (err) {
-      console.error(err);
+  (error) => {
+    if (error) {
+      console.error(error);
       console.log(`error at ${fileName}.test.tsx`);
     }
 
@@ -22,9 +22,9 @@ fs.writeFile(
 );
 
 // create types file
-fs.writeFile(`./types.d.ts`, ``, (err) => {
-  if (err) {
-    console.error(err);
+fs.writeFile(`./types.d.ts`, ``, (error) => {
+  if (error) {
+    console.error(error);
     console.log(`error at types.d.ts`);
   }
 
@@ -46,9 +46,9 @@ const ${fileName}: FunctionComponent = () => {
 
 export default ${fileName};
 `,
-  (err) => {
-    if (err) {
-      console.error(err);
+  (error) => {
+    if (error) {
+      console.error(error);
       console.log(`error at ${fileName}.tsx`);
     }
 
@@ -77,9 +77,9 @@ export const ${fileName}Story = Template.bind({});
 ${fileName}Story.args = {};
 ${fileName}Story.decorators = [ContainerDecorator];
 `,
-  (err) => {
-    if (err) {
-      console.error(err);
+  (error) => {
+    if (error) {
+      console.error(error);
       console.log(`error at ${fileName}.tsx`);
     }
 

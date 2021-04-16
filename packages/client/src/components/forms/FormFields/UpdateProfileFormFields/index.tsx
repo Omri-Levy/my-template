@@ -1,7 +1,8 @@
-import { FunctionComponent, useContext } from 'react';
+import { Fragment, FunctionComponent, useContext } from 'react';
 import { FaAt, FaSignature } from 'react-icons/fa';
-import { Role, Roles, UserObject, Users } from '@my-template/shared';
+import { Roles, UserObject, Users } from '@my-template/shared';
 import { useQuery } from 'react-query';
+import { Box } from '@chakra-ui/react';
 import FormField from '../../FormField';
 import { Props } from '../types';
 import AuthenticationContext from '../../../../context/AuthenticationContext/AuthenticationContext';
@@ -40,6 +41,7 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
   let lastName = userToUpdate?.lastName;
   let selectOptions;
   let currentUserIsAdmin = false;
+  let unauthorized;
 
   /**
    * client side barrier to stop updating other users's role with the same
@@ -49,27 +51,34 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
     userToUpdate = users.filter(
       (user) => user.id === userIds[0]
     )[0] as UserObject;
-    const role = userToUpdate?.role as Role;
-
     currentUserIsAdmin = typesafeCurrentUser?.role === `admin`;
+    unauthorized = !currentUserIsAdmin && userToUpdate?.role === `admin`;
+    console.log({ userToUpdate });
 
     const restOfRoles = roles?.filter(
-      (otherRole) => otherRole !== role
+      (otherRole) => otherRole !== userToUpdate?.role
     ) as Roles;
 
-    if (!currentUserIsAdmin) {
-      selectOptions = [role];
+    if (unauthorized) {
+      selectOptions = [userToUpdate?.role];
     } else {
-      selectOptions = restOfRoles && [role, ...restOfRoles];
+      selectOptions = restOfRoles && [userToUpdate?.role, ...restOfRoles];
     }
 
     email = userToUpdate?.email;
     firstName = userToUpdate?.firstName;
     lastName = userToUpdate?.lastName;
   }
+  const ConditionalWrapper = unauthorized ? Box : Fragment;
+  const conditionalProps = unauthorized
+    ? {
+        cursor: `not-allowed`,
+        title: `Only admins may update other admins.`,
+      }
+    : undefined;
 
   return (
-    <>
+    <ConditionalWrapper {...conditionalProps}>
       <FormField
         onChange={onChange}
         labelTitle={`Email:`}
@@ -80,6 +89,8 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         maxLength={320}
         icon={FaAt}
         inputProps={{ defaultValue: email }}
+        isDisabled={unauthorized}
+        pointerEvents={unauthorized ? `none` : undefined}
         {...props}
       />
       <FormField
@@ -91,6 +102,8 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         maxLength={35}
         icon={FaSignature}
         inputProps={{ defaultValue: firstName }}
+        isDisabled={unauthorized}
+        pointerEvents={unauthorized ? `none` : undefined}
         {...props}
       />
       <FormField
@@ -102,16 +115,14 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
         maxLength={35}
         icon={FaSignature}
         inputProps={{ defaultValue: lastName }}
+        isDisabled={unauthorized}
+        pointerEvents={unauthorized ? `none` : undefined}
         {...props}
       />
       {isAdminAction && (
         <FormField
-          isDisabled={!currentUserIsAdmin}
-          title={
-            !currentUserIsAdmin
-              ? `Only admins may promote and demote role.`
-              : undefined
-          }
+          pointerEvents={unauthorized ? `none` : undefined}
+          isDisabled={unauthorized}
           isSelectField
           selectOptions={selectOptions}
           labelTitle={`Role:`}
@@ -121,13 +132,18 @@ const UpdateProfileFormFields: FunctionComponent<Props> = ({
           type={`text`}
           maxLength={35}
           icon={FaSignature}
-          selectProps={{ textTransform: `capitalize` }}
+          selectProps={{
+            textTransform: `capitalize`,
+          }}
           optionsProps={{ textTransform: `capitalize` }}
-          inputProps={{ defaultValue: lastName, textTransform: `capitalize` }}
+          inputProps={{
+            defaultValue: lastName,
+            textTransform: `capitalize`,
+          }}
           {...props}
         />
       )}
-    </>
+    </ConditionalWrapper>
   );
 };
 
