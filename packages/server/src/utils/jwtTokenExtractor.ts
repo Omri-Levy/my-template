@@ -7,7 +7,6 @@ const jwtTokenExtractor: JwtTokenExtractor = (req) => {
     const { cookie } = req?.headers;
 
     jwtToken = cookie?.split(`qid=`)[1];
-    console.log(jwtToken);
   }
 
   return jwtToken;

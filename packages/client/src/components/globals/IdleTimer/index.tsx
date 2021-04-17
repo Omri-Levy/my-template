@@ -59,9 +59,11 @@ const IdleTimer: FunctionComponent<Props> = ({ icons = true }) => {
   const cancelRef = useRef();
   const handleOnIdle = useCallback(() => {
     onOpen();
-    intervalRef.current = setInterval(() => {
-      setTimer((prevState) => prevState - 1);
-    }, 1000);
+    if (!intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        setTimer((prevState) => prevState - 1);
+      }, 1000);
+    }
   }, [onOpen]);
   const { colorModeShadeInverted } = useColorModeShade(`red`);
   const { darkModeTextColorInverted, darkModeColor } = useDarkMode();
@@ -83,7 +85,7 @@ const IdleTimer: FunctionComponent<Props> = ({ icons = true }) => {
 
   useEffect(() => {
     (async () => {
-      if (timer === 0) {
+      if (timer <= 0) {
         clearInterval(intervalRef.current as NodeJS.Timeout);
         await inactivitySignOut();
       }

@@ -14,7 +14,7 @@ const AuthenticationProvider: FunctionComponent = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const isMounted = useRef(true);
   const authenticate = useCallback(async () => {
-    const user = await fetchAuthenticate();
+    const user: User = await fetchAuthenticate();
 
     if (isMounted.current) {
       setCurrentUser(user);
