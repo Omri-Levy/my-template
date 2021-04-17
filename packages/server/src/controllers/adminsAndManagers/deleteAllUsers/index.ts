@@ -8,12 +8,13 @@ import isCountOneInUsers from '../../../utils/isCountOneInUsers';
 const deleteAllUsers: Route = async (req, res) => {
   try {
     const user = req?.user as UserObject;
+    const currentUserIsAdmin = user?.role === `admin`;
     const { deleteAdmins } = req?.body;
 
     await deleteAllUsersSchema.validate({ deleteAdmins });
     const isOnlyAdmin = await isCountOneInUsers(`role`, `admin`);
 
-    if (deleteAdmins && !isOnlyAdmin) {
+    if (currentUserIsAdmin && deleteAdmins && !isOnlyAdmin) {
       await User.destroy({
         where: {
           id: {
